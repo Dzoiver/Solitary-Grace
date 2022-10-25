@@ -6,6 +6,9 @@ public class PlayerScript : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
     [SerializeField] GameObject useTrigger;
+    [SerializeField] LayerMask layer;
+
+    float maxUseDistance = 1.5f;
     public float speed = 1f;
 
     public float gravity = -9.81f;
@@ -51,12 +54,14 @@ public class PlayerScript : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 1.5f, layer.value))
             {
-                Transform objectHit = hit.transform;
-                useTrigger.SetActive(true);
-                useTrigger.transform.position = hit.transform.position;
-                // Do something with the object that was hit by the raycast.
+                if (Vector3.Distance(hit.transform.position, transform.position) < maxUseDistance)
+                {
+                    Transform objectHit = hit.transform;
+                    useTrigger.SetActive(true);
+                    useTrigger.transform.position = hit.transform.position;
+                }
             }
         }
 
