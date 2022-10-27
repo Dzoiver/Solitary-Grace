@@ -7,6 +7,7 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity = 100f;
 
     public Transform playerBody;
+    public bool AllowMove = true;
 
     float xRotation = 0f;
     // Start is called before the first frame update
@@ -18,6 +19,8 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!AllowMove)
+            return;
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 

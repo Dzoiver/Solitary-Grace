@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] GameObject useTrigger;
     [SerializeField] LayerMask layer;
+    [SerializeField] MouseLook mouse;
 
     float maxUseDistance = 1.5f;
     public float speed = 1f;
@@ -18,10 +19,25 @@ public class PlayerScript : MonoBehaviour
     public float groundDistance = 0.1f;
     public LayerMask groundMask;
 
+    bool allowMovement = true;
+
     Vector3 velocity;
     bool isGrounded;
     // Start is called before the first frame update
 
+    public void AllowControl(bool allow)
+    {
+        if (allow)
+        {
+            allowMovement = true;
+            mouse.AllowMove = true;
+        }
+        else
+        {
+            allowMovement = false;
+            mouse.AllowMove = false;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -36,6 +52,7 @@ public class PlayerScript : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
+        if (allowMovement)
         controller.Move(move * speed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
