@@ -13,12 +13,6 @@ public class DoorOpen : MonoBehaviour
     [SerializeField] Image blackImage;
     Sequence seq;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         seq = DOTween.Sequence();
@@ -34,11 +28,5 @@ public class DoorOpen : MonoBehaviour
         playercont.enabled = true;
         seq.Append(blackImage.DOColor(new Color(0, 0, 0, 0), 1f));
         pScript.AllowControl(true);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

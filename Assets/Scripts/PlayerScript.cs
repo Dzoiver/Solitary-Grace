@@ -70,15 +70,13 @@ public class PlayerScript : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin, ray.direction, Color.white, 5f);
 
             if (Physics.Raycast(ray, out hit, 1.5f, layer.value))
             {
-                if (Vector3.Distance(hit.transform.position, transform.position) < maxUseDistance)
-                {
-                    Transform objectHit = hit.transform;
-                    useTrigger.SetActive(true);
-                    useTrigger.transform.position = hit.transform.position;
-                }
+                Transform objectHit = hit.transform;
+                useTrigger.SetActive(true);
+                useTrigger.transform.position = hit.transform.position;
             }
         }
 
