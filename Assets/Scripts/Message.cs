@@ -10,13 +10,9 @@ public class Message : MonoBehaviour
     [SerializeField] bool isConfirm = false;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] ScriptableMes mes;
+
     Sequence seq;
     bool playing = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -37,11 +33,5 @@ public class Message : MonoBehaviour
         text.enabled = false;
         text.DOFade(1, 0f);
         playing = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
