@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RedDoor
   m_EditorClassIdentifier: 
   MessageText:
-  - Can't open it for some weird reason
+  - No reason to go outside
