@@ -13,5 +13,10 @@ namespace GM
                 lights[i].color = endColor;
             }
         }
+
+        static public void TeleportPlayer()
+        {
+
+        }
     }
 }
