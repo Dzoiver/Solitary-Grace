@@ -8,11 +8,13 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject useTrigger;
     [SerializeField] LayerMask layer;
     [SerializeField] MouseLook mouse;
+    [SerializeField] GameObject cyllinder;
 
     float maxUseDistance = 1.5f;
     public float speed = 1f;
+    public bool allowJump = false;
 
-    public float gravity = -9.81f;
+    public float gravity = -1f;
     public float jumpHeight = 3f;
 
     public Transform groundCheck;
@@ -38,6 +40,13 @@ public class PlayerScript : MonoBehaviour
             mouse.AllowMove = false;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "GunCyllinder")
+        {
+            cyllinder.SetActive(true);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -55,16 +64,14 @@ public class PlayerScript : MonoBehaviour
         if (allowMovement)
         controller.Move(move * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && allowJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += Physics.gravity.y * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
-
-
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

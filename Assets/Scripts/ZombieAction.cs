@@ -32,6 +32,7 @@ public class ZombieAction : MonoBehaviour
         playercont.enabled = false;
         player.transform.position = dp.transform.position;
         playercont.enabled = true;
+        pScript.allowJump = true;
         pScript.AllowControl(true);
     }
 }

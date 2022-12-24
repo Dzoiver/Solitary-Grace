@@ -15,10 +15,13 @@ public class DoorOpen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        seq = DOTween.Sequence();
-        seq.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 1f));
-        seq.onComplete = TeleportPlayer;
-        pScript.AllowControl(false);
+        if (other.gameObject.name == "UseCube")
+        {
+            seq = DOTween.Sequence();
+            seq.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 1f));
+            seq.onComplete = TeleportPlayer;
+            pScript.AllowControl(false);
+        }
     }
 
     private void TeleportPlayer()

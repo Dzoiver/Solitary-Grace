@@ -16,7 +16,7 @@ public class Message : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!playing)
+        if (!playing && other.gameObject.name == "UseCube")
         {
             playing = true;
             text.text = mes.MessageText[0];
