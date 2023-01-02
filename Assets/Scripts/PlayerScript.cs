@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] LayerMask layer;
     [SerializeField] MouseLook mouse;
     [SerializeField] GameObject cyllinder;
+    [SerializeField] GameObject warpTool;
 
     float maxUseDistance = 1.5f;
     public float speed = 1f;
@@ -26,6 +27,13 @@ public class PlayerScript : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
     // Start is called before the first frame update
+    public void Warping(bool value)
+    {
+        if (value == true)
+            warpTool.SetActive(true);
+        else
+            warpTool.SetActive(false);
+    }
 
     public void AllowControl(bool allow)
     {
