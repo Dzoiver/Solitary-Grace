@@ -6,6 +6,7 @@ public class WarpTool : MonoBehaviour
 {
     [SerializeField] GameObject radiant;
     [SerializeField] GameObject dire;
+    [SerializeField] ParticleSystem particles;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,8 @@ public class WarpTool : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            particles.Play();
+            Debug.Log(particles.isPlaying);
             if (radiant.activeSelf)
             {
                 radiant.SetActive(false);
