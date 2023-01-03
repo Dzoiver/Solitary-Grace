@@ -22,6 +22,12 @@ public class DoorOpen : MonoBehaviour
             seq.onComplete = TeleportPlayer;
             pScript.AllowControl(false);
         }
+
+        if (gameObject.name == "Teleport")
+        {
+            TeleportPlayer();
+            pScript.Warping(true);
+        }
     }
 
     private void TeleportPlayer()

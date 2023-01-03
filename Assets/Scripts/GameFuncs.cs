@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace GM
 {
@@ -17,6 +18,11 @@ namespace GM
         static public void TeleportPlayer()
         {
 
+        }
+
+        static public void LowerObject(GameObject object1, Vector3 endValue)
+        {
+            
         }
     }
 }

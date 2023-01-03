@@ -54,6 +54,17 @@ public class PlayerScript : MonoBehaviour
         {
             cyllinder.SetActive(true);
         }
+        if (other.gameObject.name == "JumpPad")
+        {
+            LiftPlayer(8f);
+            Debug.Log("Touched JumpPad");
+
+        }
+    }
+
+    public void LiftPlayer(float amount)
+    {
+        velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
     // Update is called once per frame
     void Update()
@@ -81,7 +92,7 @@ public class PlayerScript : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

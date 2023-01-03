@@ -19,7 +19,6 @@ public class WarpTool : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             particles.Play();
-            Debug.Log(particles.isPlaying);
             if (radiant.activeSelf)
             {
                 radiant.SetActive(false);
