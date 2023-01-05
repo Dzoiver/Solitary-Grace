@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunBullet : MonoBehaviour
+public class GunBullet : Projectile
 {
     float speed = 40f;
     bool launched = false;
