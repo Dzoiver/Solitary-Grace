@@ -1,4 +1,9 @@
 # Solitary-Grace
 Horror first person game
 
-Press Space to interact
+## Controls:
+E to interact
+
+F to change dimension
+
+Space to Jump
