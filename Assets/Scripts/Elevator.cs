@@ -10,8 +10,8 @@ public class Elevator : MonoBehaviour
     Vector3 initPosition;
     bool isMoving = false;
     bool isLifted = false;
-    float delayTime = 3f;
-    float currentTime = 3f;
+    float delayTime = 2f;
+    float currentTime = 2f;
     private void Start()
     {
         initPosition = platformToLift.transform.position;
@@ -29,7 +29,7 @@ public class Elevator : MonoBehaviour
     private void GoUp()
     {
         isMoving = true;
-        platformToLift.transform.DOMove(refHeight.transform.position, 5f).onComplete = () =>
+        platformToLift.transform.DOMove(refHeight.transform.position, 5f).SetUpdate(UpdateType.Normal, false).onComplete = () =>
         {
             isLifted = true;
             isMoving = false;

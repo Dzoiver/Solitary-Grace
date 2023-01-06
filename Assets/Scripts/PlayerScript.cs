@@ -89,9 +89,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         velocity.y += Physics.gravity.y * Time.deltaTime;
-
         controller.Move(velocity * Time.deltaTime);
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
@@ -105,7 +103,8 @@ public class PlayerScript : MonoBehaviour
                 useTrigger.transform.position = hit.transform.position;
             }
         }
-
-
+    }
+    private void FixedUpdate()
+    {
     }
 }
