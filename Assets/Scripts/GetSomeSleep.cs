@@ -24,7 +24,7 @@ public class GetSomeSleep : MonoBehaviour
         if (other.gameObject.name == "UseCube")
         {
             seq = DOTween.Sequence();
-            seq.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 3f));
+            seq.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 3f)).AppendInterval(2f);
             seq.onComplete = TeleportPlayer;
             pScript.AllowControl(false);
         }
@@ -44,11 +44,5 @@ public class GetSomeSleep : MonoBehaviour
         seq.Append(blackImage.DOColor(new Color(0, 0, 0, 0), 0.5f));
         sound.Play();
         pScript.AllowControl(true);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
