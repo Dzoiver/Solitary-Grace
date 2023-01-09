@@ -8,6 +8,7 @@ public class GetSomeSleep : MonoBehaviour
 {
     [SerializeField] Image blackImage;
     [SerializeField] GameObject destinationPoint;
+    [SerializeField] AudioSource sound;
     Sequence seq;
     GameObject player;
     PlayerScript pScript;
@@ -23,7 +24,7 @@ public class GetSomeSleep : MonoBehaviour
         if (other.gameObject.name == "UseCube")
         {
             seq = DOTween.Sequence();
-            seq.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 1f));
+            seq.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 3f));
             seq.onComplete = TeleportPlayer;
             pScript.AllowControl(false);
         }
@@ -40,7 +41,8 @@ public class GetSomeSleep : MonoBehaviour
         pScript.cControl.enabled = false;
         player.transform.position = destinationPoint.transform.position;
         pScript.cControl.enabled = true;
-        seq.Append(blackImage.DOColor(new Color(0, 0, 0, 0), 1f));
+        seq.Append(blackImage.DOColor(new Color(0, 0, 0, 0), 0.5f));
+        sound.Play();
         pScript.AllowControl(true);
     }
 
