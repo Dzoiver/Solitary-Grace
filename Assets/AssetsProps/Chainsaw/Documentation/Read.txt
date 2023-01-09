@@ -1,0 +1,11 @@
+Thank you for using "Dirty Chainsaw"!
+
+For more great assets, search for Game Splotch on the Unity store or go to...
+https://gamesplotch.com
+
+
+To use "Dirty Chainsaw", simply drag the prefab into your scene.
+
+
+Thank you,
+Game Splotch

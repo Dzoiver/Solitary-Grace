@@ -7,12 +7,18 @@ using UnityEngine.UI;
 public class DoorOpen : MonoBehaviour
 {
     [SerializeField] GameObject destinationPoint;
-    [SerializeField] GameObject player;
-    [SerializeField] PlayerScript pScript;
-    [SerializeField] CharacterController playercont;
     [SerializeField] Image blackImage;
+    CharacterController playercont;
+    GameObject player;
+    PlayerScript pScript;
     Sequence seq;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        pScript = player.GetComponent<PlayerScript>();
+        playercont = pScript.cControl;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "UseCube")

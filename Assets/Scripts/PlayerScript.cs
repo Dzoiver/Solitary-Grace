@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     float maxUseDistance = 1.5f;
     public float speed = 1f;
     public bool allowJump = false;
+    public CharacterController cControl;
 
     public float gravity = -1f;
     public float jumpHeight = 3f;
@@ -26,6 +27,11 @@ public class PlayerScript : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
+
+    private void Start()
+    {
+        
+    }
     // Start is called before the first frame update
     public void Warping(bool value)
     {
