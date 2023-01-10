@@ -3,45 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using GM;
 
 public class DoorOpen : MonoBehaviour
 {
     [SerializeField] GameObject destinationPoint;
     [SerializeField] Image blackImage;
-    CharacterController playercont;
-    GameObject player;
-    PlayerScript pScript;
-    Sequence seq;
 
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        pScript = player.GetComponent<PlayerScript>();
-        playercont = pScript.cControl;
-    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "UseCube")
+        if (other.gameObject.name == "UseCube") // If a player presses E button on the door
         {
-            seq = DOTween.Sequence();
-            seq.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 1f));
-            seq.onComplete = TeleportPlayer;
-            pScript.AllowControl(false);
+            GameFuncs.PlayerScript.AllowControl(false);
+            blackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
+            {
+                GameFuncs.TeleportPlayer(destinationPoint);
+                blackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
+                GameFuncs.PlayerScript.AllowControl(true);
+            };
         }
-
-        if (gameObject.name == "Teleport")
-        {
-            TeleportPlayer();
-            pScript.Warping(true);
-        }
-    }
-
-    private void TeleportPlayer()
-    {
-        playercont.enabled = false;
-        player.transform.position = destinationPoint.transform.position;
-        playercont.enabled = true;
-        seq.Append(blackImage.DOColor(new Color(0, 0, 0, 0), 1f));
-        pScript.AllowControl(true);
     }
 }

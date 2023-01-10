@@ -16,16 +16,11 @@ public class GunBullet : Projectile
         gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (launched)
         {
             transform.position += Direction * speed * Time.deltaTime;
-            // transform.Translate(Direction * speed * Time.deltaTime);
-            /*            Vector3 vect = transform.position;
-                        vect.x = speed * Direction.x * Time.deltaTime;
-                        transform.position = vect;*/
         }
     }
 }

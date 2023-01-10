@@ -12,18 +12,19 @@ public class Message : MonoBehaviour
     [SerializeField] ScriptableMes mes;
 
     Sequence seq;
-    bool playing = false;
-
+    bool isTextDisplayed = false;
+    private void Start()
+    {
+        seq = DOTween.Sequence();
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (!playing && other.gameObject.name == "UseCube")
+        if (!isTextDisplayed && other.gameObject.name == "UseCube")
         {
-            playing = true;
+            isTextDisplayed = true;
             text.text = mes.MessageText[0];
             text.enabled = true;
-            seq = DOTween.Sequence();
-            seq.PrependInterval(2f);
-            seq.Append(text.DOFade(0, 0.5f));
+            seq.PrependInterval(2f).Append(text.DOFade(0, 0.5f));
             seq.onComplete = ResetText;
         }
     }
@@ -32,6 +33,6 @@ public class Message : MonoBehaviour
     {
         text.enabled = false;
         text.DOFade(1, 0f);
-        playing = false;
+        isTextDisplayed = false;
     }
 }

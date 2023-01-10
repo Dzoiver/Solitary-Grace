@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GM;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject cyllinder;
     [SerializeField] GameObject warpTool;
 
-    float maxUseDistance = 1.5f;
+    // float maxUseDistance = 1.5f;
     public float speed = 1f;
     public bool allowJump = false;
     public CharacterController cControl;
@@ -30,7 +31,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Start()
     {
-        
+        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
     }
     // Start is called before the first frame update
     public void Warping(bool value)
@@ -72,7 +73,6 @@ public class PlayerScript : MonoBehaviour
     {
         velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
-    // Update is called once per frame
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -109,8 +109,5 @@ public class PlayerScript : MonoBehaviour
                 useTrigger.transform.position = hit.transform.position;
             }
         }
-    }
-    private void FixedUpdate()
-    {
     }
 }

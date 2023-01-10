@@ -4,32 +4,29 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
-    bool fire = false;
-    float bulletRate = 0.15f;
-    float currentTime = 0f;
     [SerializeField] ProjectilesManager bulletManager;
     [SerializeField] PlayerScript player;
+    bool isFire = false;
+    float bulletRate = 0.15f;
+    float currentTime = 0f;
     Vector3 direction;
     Vector3 rotationBullet;
 
     private void Shoot()
     {
         currentTime = 0f;
-        GunBullet bullet = bulletManager.GetNewBullet();
+        var bullet = bulletManager.GetNewBullet();
         bullet.transform.position = transform.position;
-        //direction.x = player.;
-        direction.y = Camera.main.transform.rotation.x;
         direction.x = player.transform.rotation.y;
-        //direction.y = pCamera.MouseY;
-        rotationBullet.y = player.transform.rotation.eulerAngles.y;
+        direction.y = Camera.main.transform.rotation.x;
         rotationBullet.x = Camera.main.transform.rotation.eulerAngles.x;
-        // rotationBullet = Quaternion.ToEulerAngles(Quaternion.Euler(rotationBullet));
+        rotationBullet.y = player.transform.rotation.eulerAngles.y;
         bullet.Launch(transform.up, rotationBullet);
     }
     void Update()
     {
-        fire = Input.GetKey(KeyCode.Mouse0);
-        if (fire && currentTime > bulletRate)
+        isFire = Input.GetKey(KeyCode.Mouse0);
+        if (isFire && currentTime > bulletRate)
         {
             Shoot();
         }
