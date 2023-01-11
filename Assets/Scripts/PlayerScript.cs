@@ -5,29 +5,28 @@ using GM;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField] CharacterController controller;
     [SerializeField] GameObject useTrigger;
-    [SerializeField] LayerMask layer;
-    [SerializeField] MouseLook mouse;
     [SerializeField] GameObject cyllinder;
     [SerializeField] GameObject warpTool;
+    [SerializeField] CharacterController controller;
+    [SerializeField] LayerMask layer;
+    [SerializeField] MouseLook mouse;
 
     // float maxUseDistance = 1.5f;
     public float speed = 1f;
-    public bool allowJump = false;
-    public CharacterController cControl;
-
     public float gravity = -1f;
     public float jumpHeight = 3f;
-
-    public Transform groundCheck;
     public float groundDistance = 0.1f;
+
+    public bool allowJump = false;
+    private bool allowMovement = true;
+    private bool isGrounded;
+
+    public CharacterController cControl;
+    public Transform groundCheck;
     public LayerMask groundMask;
 
-    bool allowMovement = true;
-
     Vector3 velocity;
-    bool isGrounded;
 
     private void Start()
     {
@@ -42,7 +41,7 @@ public class PlayerScript : MonoBehaviour
             warpTool.SetActive(false);
     }
 
-    public void AllowControl(bool allow)
+    public void SetControl(bool allow)
     {
         if (allow)
         {
@@ -73,7 +72,8 @@ public class PlayerScript : MonoBehaviour
     {
         velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
-    void Update()
+
+    private void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 

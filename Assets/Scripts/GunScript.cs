@@ -23,6 +23,7 @@ public class GunScript : MonoBehaviour
         rotationBullet.y = player.transform.rotation.eulerAngles.y;
         bullet.Launch(transform.up, rotationBullet);
     }
+
     void Update()
     {
         isFire = Input.GetKey(KeyCode.Mouse0);

@@ -12,6 +12,7 @@ public class ZombieAction : MonoBehaviour
     [SerializeField] Image blackImage;
     [SerializeField] GameObject audio;
     [SerializeField] GameObject dp;
+    [SerializeField] GameObject quakeWorld;
     public void HeadMoveScary()
     {
         audio.SetActive(true);
@@ -26,9 +27,10 @@ public class ZombieAction : MonoBehaviour
 
     private void MovePlayer()
     {
+        quakeWorld.SetActive(true);
         blackImage.DOColor(new Color(0, 0, 0, 0), 5f); // Fadein
         GameFuncs.TeleportPlayer(dp);
         GameFuncs.PlayerScript.allowJump = true;
-        GameFuncs.PlayerScript.AllowControl(true);
+        GameFuncs.PlayerScript.SetControl(true);
     }
 }

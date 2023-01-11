@@ -5,11 +5,6 @@ using UnityEngine;
 public class BallEnemy : MonoBehaviour
 {
     float health = 1f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     void TakeDamage(float damage)
     {
@@ -27,11 +22,5 @@ public class BallEnemy : MonoBehaviour
         {
             TakeDamage(project.damage);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

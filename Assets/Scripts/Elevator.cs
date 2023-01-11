@@ -6,15 +6,16 @@ using DG.Tweening;
 public class Elevator : MonoBehaviour
 {
     [SerializeField] GameObject platformToLift;
-    [SerializeField] GameObject refHeight;
-    Vector3 initPosition;
+    [SerializeField] GameObject refferenceObject;
+    Vector3 initialPosition;
     bool isMoving = false;
     bool isLifted = false;
     float delayTime = 2f;
     float currentTime = 2f;
+
     private void Start()
     {
-        initPosition = platformToLift.transform.position;
+        initialPosition = platformToLift.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,7 +30,7 @@ public class Elevator : MonoBehaviour
     private void GoUp()
     {
         isMoving = true;
-        platformToLift.transform.DOMove(refHeight.transform.position, 5f).SetUpdate(UpdateType.Normal, false).onComplete = () =>
+        platformToLift.transform.DOMove(refferenceObject.transform.position, 5f).SetUpdate(UpdateType.Normal, false).onComplete = () =>
         {
             isLifted = true;
             isMoving = false;
@@ -40,7 +41,7 @@ public class Elevator : MonoBehaviour
     private void GoDown()
     {
         isMoving = true;
-        platformToLift.transform.DOMove(initPosition, 5f).onComplete = () =>
+        platformToLift.transform.DOMove(initialPosition, 5f).onComplete = () =>
         {
             isLifted = false;
             isMoving = false;
