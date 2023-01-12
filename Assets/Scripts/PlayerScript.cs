@@ -96,6 +96,7 @@ public class PlayerScript : MonoBehaviour
 
         velocity.y += Physics.gravity.y * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
@@ -104,9 +105,8 @@ public class PlayerScript : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 1.5f, layer.value))
             {
-                Transform objectHit = hit.transform;
                 useTrigger.SetActive(true);
-                useTrigger.transform.position = hit.transform.position;
+                useTrigger.transform.position = hit.point;
             }
         }
     }

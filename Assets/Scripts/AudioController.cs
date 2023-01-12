@@ -3,11 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class AudioController : MonoBehaviour
+namespace SolitaryAudio
 {
-    AudioSource source;
-    void Start()
+    public class AudioController : MonoBehaviour
     {
-        source = GetComponent<AudioSource>();
+        static public AudioClip doorClose;
+        static public AudioClip doorOpen;
+        static private AudioSource audioSource;
+
+        private void Start()
+        {
+            audioSource = GetComponent<AudioSource>();
+            doorClose = Resources.Load<AudioClip>("Sounds/door-5-close");
+            doorOpen = Resources.Load<AudioClip>("Sounds/door-14-open");
+        }
+
+        static public void Play(string audioName)
+        {
+            switch (audioName)
+            {
+                case "doorOpen":
+                    audioSource.clip = doorOpen;
+                    break;
+                case "doorClose":
+                    audioSource.clip = doorClose;
+                    break;
+            }
+            audioSource.Play();
+        }
     }
 }

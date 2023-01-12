@@ -7,7 +7,6 @@ using TMPro;
 
 public class Message : MonoBehaviour
 {
-    [SerializeField] bool isConfirm = false;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] ScriptableMes mes;
 

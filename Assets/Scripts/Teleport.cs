@@ -11,6 +11,7 @@ public class Teleport : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         warpWorld.SetActive(true);
+        GameFuncs.PlayerScript.Warping(true);
         GameFuncs.TeleportPlayer(destination);
     }
 }
