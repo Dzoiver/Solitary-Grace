@@ -9,6 +9,8 @@ namespace SolitaryAudio
     {
         static public AudioClip doorClose;
         static public AudioClip doorOpen;
+        static public AudioClip switchSound;
+
         static private AudioSource audioSource;
 
         private void Start()
@@ -16,6 +18,7 @@ namespace SolitaryAudio
             audioSource = GetComponent<AudioSource>();
             doorClose = Resources.Load<AudioClip>("Sounds/door-5-close");
             doorOpen = Resources.Load<AudioClip>("Sounds/door-14-open");
+            switchSound = Resources.Load<AudioClip>("Sounds/switch-1");
         }
 
         static public void Play(string audioName)
@@ -27,6 +30,9 @@ namespace SolitaryAudio
                     break;
                 case "doorClose":
                     audioSource.clip = doorClose;
+                    break;
+                case "switch":
+                    audioSource.clip = switchSound;
                     break;
             }
             audioSource.Play();

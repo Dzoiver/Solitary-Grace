@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
 
     public bool allowJump = false;
     private bool allowMovement = true;
+    private bool allowControl = true;
     private bool isGrounded;
 
     public CharacterController cControl;
@@ -32,7 +33,7 @@ public class PlayerScript : MonoBehaviour
     {
         GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
     }
-    // Start is called before the first frame update
+
     public void Warping(bool value)
     {
         if (value == true)
@@ -47,11 +48,13 @@ public class PlayerScript : MonoBehaviour
         {
             allowMovement = true;
             mouse.AllowMove = true;
+            allowControl = true;
         }
         else
         {
             allowMovement = false;
             mouse.AllowMove = false;
+            allowControl = false;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -88,6 +91,9 @@ public class PlayerScript : MonoBehaviour
 
         if (allowMovement)
         controller.Move(move * speed * Time.deltaTime);
+
+        if (!allowControl)
+            return;
 
         if (Input.GetButtonDown("Jump") && isGrounded && allowJump)
         {
