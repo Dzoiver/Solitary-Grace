@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 namespace GM
 {
     public class GameFuncs : MonoBehaviour
     {
         static public PlayerScript PlayerScript;
+        static public Image BlackImage;
         static public void LampsChangeColor(Light[] lights, Color endColor)
         {
             for (int i = 0; i < lights.Length; i++)

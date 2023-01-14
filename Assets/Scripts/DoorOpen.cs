@@ -10,7 +10,6 @@ public class DoorOpen : MonoBehaviour
 {
     [SerializeField] static AudioClip openSound;
     [SerializeField] GameObject destinationPoint;
-    [SerializeField] Image blackImage;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,11 +17,11 @@ public class DoorOpen : MonoBehaviour
         {
             GameFuncs.PlayerScript.SetControl(false);
             AudioController.Play("doorOpen");
-            blackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
+            GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
             {
                 AudioController.Play("doorClose");
                 GameFuncs.TeleportPlayer(destinationPoint);
-                blackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
+                GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
                 GameFuncs.PlayerScript.SetControl(true);
             };
         }
