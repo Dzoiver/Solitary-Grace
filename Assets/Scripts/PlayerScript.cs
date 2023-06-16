@@ -44,8 +44,13 @@ public class PlayerScript : MonoBehaviour
             warpTool.SetActive(false);
     }
 
+    /// <summary>
+    /// Allowing or disabling player's movement
+    /// </summary>
+    /// <param name="allow"></param>
     public void SetControl(bool allow)
     {
+        // Need to allow player to continue falling
         if (allow)
         {
             allowMovement = true;
@@ -73,7 +78,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void LiftPlayer(float amount)
+    private void LiftPlayer(float amount)
     {
         velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
