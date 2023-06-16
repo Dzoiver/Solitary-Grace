@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GM;
+using Zenject;
 
 public class PlayerScript : MonoBehaviour
 {
+    
     [SerializeField] GameObject useTrigger;
     [SerializeField] GameObject cyllinder;
     [SerializeField] GameObject warpTool;
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask layer;
-    [SerializeField] MouseLook mouse;
+    [Inject] private MouseLook _mouse;
 
     // float maxUseDistance = 1.5f;
     public float speed = 1f;
@@ -47,13 +49,13 @@ public class PlayerScript : MonoBehaviour
         if (allow)
         {
             allowMovement = true;
-            mouse.AllowMove = true;
+            _mouse.AllowMove = true;
             allowControl = true;
         }
         else
         {
             allowMovement = false;
-            mouse.AllowMove = false;
+            _mouse.AllowMove = false;
             allowControl = false;
         }
     }

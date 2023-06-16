@@ -7,6 +7,7 @@ public class TrashPickup : MonoBehaviour
 {
     [SerializeField] GameObject outTrigger;
     [SerializeField] GameObject doorMessage;
+
     private void OnTriggerEnter(Collider other)
     {
         outTrigger.SetActive(true);
