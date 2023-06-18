@@ -1,9 +1,7 @@
 # Solitary-Grace
-Horror first person game
+Horror first person game.
+Explore your nightmares. Solve mystery of the place in your dreams but be cautious of things you fear the most. You'll wake up if you die in a dream. But is the reality truly safe?
 
 ## Controls:
 E to interact
-
-F to change dimension
-
 Space to Jump
