@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Prison : MonoBehaviour
 {
+    public bool isLoaded = false;
     void Awake()
     {
+        if (!isLoaded)
         gameObject.SetActive(false);
     }
 }

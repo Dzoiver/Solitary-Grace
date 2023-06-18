@@ -1,0 +1,77 @@
+Low Poly Girl
+
+Created and animated by Manoel de Oliveira (ManNeko)
+
+
+
+License ___________________________________________________________________________________________________
+This character is distributed to the end user for free as is. 
+However, please check the license provided by Unity and use the template within the terms contained therein.
+
+
+Animations__________________________________________________________________________________________________
+this model contains animations that are compatible with the Unity Humanoid format. (all free to use)
+However, not all animations are compatible with all character types due to differences in model shapes.
+Example: making use of the girl's animations in a "Giant Ogre" might work, but mistakes will probably happen. 
+So the recommendation is to use animations with characters of similar "body shape". Otherwise, do it at your own risk.
+
+
+
+Support_____________________________________________________________________________________________________________
+
+Support due to bugs in the model will be answered via requests. 
+"How to use" support will not be provided other than this document. 
+
+
+
+____________________________________________________________________________________________________________________
+
+Contents
+
+Inside the "Low Poly Girl" Folder you will find:
+
+
+Animations folder ______________________________________________________________
+
+It contains a folder called "humanoid" with common animations that can be reused in other models.
+It contains a folder called "girl character exclusive" with animations that only work with that specific model.
+It contains a folder called "sample scene" that contains animations related only to the accompanying example scene.
+
+Animator_Controllers folder ____________________________________________________
+
+It contains an example animation controller used in the example scene with the Low Poly Girl model.
+
+
+Avatar_Masks folder _____________________________________________________________
+It contains an example avatar mask used in the example scene with the Low Poly Girl model. (inside Sample_AC)
+
+
+FBX folder _______________________________________________________________________
+
+
+Contains the FBX file of the original model that is being made available for free.
+
+
+Materias folder (this one is obvious)
+
+
+Prefab folder _______________________________________________________________________
+
+
+This folder contains a version of the girl model asset configured with capsule collision. (standard shader)
+is folder contains a version of the girl model asset configured with capsule collision. (unlit shader)
+is folder contains a version of the girl model asset configured with capsule collision. (diffuse - specular shader)
+
+
+Sample_Scene  folder __________________________________________________________________
+
+
+It only contains an example scene showing the model running the animations available.
+
+
+
+Textures folder ________________________________________________________________________
+
+
+Contains the textures of the model. Girl Albedo (represents the model's color), girl_normal (represents the model's "relief")
+ and girl_spec (represents the model's reflection index)
