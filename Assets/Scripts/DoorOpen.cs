@@ -8,7 +8,6 @@ using SolitaryAudio;
 
 public class DoorOpen : MonoBehaviour
 {
-    [SerializeField] static AudioClip openSound;
     [SerializeField] GameObject destinationPoint;
 
     private void OnTriggerEnter(Collider other)

@@ -6,34 +6,35 @@ using Zenject;
 
 public class PlayerScript : MonoBehaviour
 {
-    
     [SerializeField] GameObject useTrigger;
     [SerializeField] GameObject cyllinder;
     [SerializeField] GameObject warpTool;
-    [SerializeField] CharacterController controller;
     [SerializeField] LayerMask layer;
+
     [Inject] private MouseLook _mouse;
+    private CharacterController controller;
 
-    // float maxUseDistance = 1.5f;
-    public float speed = 1f;
-    public float gravity = -1f;
-    public float jumpHeight = 3f;
-    public float groundDistance = 0.1f;
+    private float speed = 5f;
+    private float gravity = -1f;
+    private float jumpHeight = 3f;
+    private float groundDistance = 0.1f;
 
-    public bool allowJump = false;
     private bool allowMovement = true;
     private bool allowControl = true;
     private bool isGrounded;
 
+    private Vector3 velocity;
+
+    public bool allowJump = false;
     public CharacterController cControl;
     public Transform groundCheck;
     public LayerMask groundMask;
 
-    Vector3 velocity;
 
     private void Start()
     {
         GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
+        controller = GetComponent<CharacterController>();
     }
 
     public void Warping(bool value)
@@ -73,8 +74,6 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.name == "JumpPad")
         {
             LiftPlayer(8f);
-            Debug.Log("Touched JumpPad");
-
         }
     }
 
