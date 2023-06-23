@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GM;
 using Zenject;
@@ -12,10 +10,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] LayerMask layer;
 
     [Inject] private MouseLook _mouse;
-    private CharacterController controller;
 
     private float speed = 5f;
-    private float gravity = -1f;
+    private float gravity = -9f;
     private float jumpHeight = 3f;
     private float groundDistance = 0.1f;
 
@@ -25,17 +22,10 @@ public class PlayerScript : MonoBehaviour
 
     private Vector3 velocity;
 
-    public bool allowJump = false;
-    public CharacterController cControl;
-    public Transform groundCheck;
-    public LayerMask groundMask;
-
-
-    private void Start()
-    {
-        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
-        controller = GetComponent<CharacterController>();
-    }
+    public bool AllowJump = false;
+    public CharacterController controller;
+    public Transform GroundCheck;
+    public LayerMask GroundMask;
 
     public void Warping(bool value)
     {
@@ -65,6 +55,13 @@ public class PlayerScript : MonoBehaviour
             allowControl = false;
         }
     }
+
+    private void Start()
+    {
+        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
+        controller = GetComponent<CharacterController>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "GunCyllinder")
@@ -84,8 +81,8 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
+        isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
+        Debug.Log(isGrounded);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -101,7 +98,7 @@ public class PlayerScript : MonoBehaviour
         if (!allowControl)
             return;
 
-        if (Input.GetButtonDown("Jump") && isGrounded && allowJump)
+        if (Input.GetButtonDown("Jump") && isGrounded && AllowJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }

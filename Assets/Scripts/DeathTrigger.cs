@@ -1,25 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using Zenject;
 
 public class DeathTrigger : MonoBehaviour
 {
-    [Inject]
-    GameOver gameover;
-
-    
-
+    [Inject] GameOver gameover;
     [SerializeField] AudioSource source;
-    // [SerializeField] GameOver gameover;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            source.Play();
-            // Gameover Screen
+            source.Play(); // Scream sound
             gameover.gameObject.SetActive(true);
             gameover.ShowGameOver();
         }

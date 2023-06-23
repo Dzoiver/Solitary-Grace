@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TextPrint;
+using Zenject;
 
 public class SmellTrigger : MonoBehaviour
 {
+    [Inject] TextShow text;
     [SerializeField] ScriptableMes message;
     private bool triggeredOnce = false;
 
@@ -14,8 +13,6 @@ public class SmellTrigger : MonoBehaviour
             return;
         triggeredOnce = true;
 
-        TextDisplay.DisplayText(message);
+        text.DisplayText(message);
     }
-
-
 }

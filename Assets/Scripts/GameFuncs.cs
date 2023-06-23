@@ -20,9 +20,9 @@ namespace GM
 
         static public void TeleportPlayer(GameObject destination)
         {
-            PlayerScript.cControl.enabled = false;
+            PlayerScript.controller.enabled = false;
             PlayerScript.gameObject.transform.position = destination.transform.position;
-            PlayerScript.cControl.enabled = true;
+            PlayerScript.controller.enabled = true;
         }
 
         static public void LowerObject(GameObject object1, Vector3 endValue)

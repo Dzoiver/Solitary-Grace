@@ -30,7 +30,7 @@ public class ZombieAction : MonoBehaviour
         quakeWorld.SetActive(true);
         blackImage.DOColor(new Color(0, 0, 0, 0), 5f); // Fadein
         GameFuncs.TeleportPlayer(dp);
-        GameFuncs.PlayerScript.allowJump = true;
+        GameFuncs.PlayerScript.AllowJump = true;
         GameFuncs.PlayerScript.SetControl(true);
     }
 }
