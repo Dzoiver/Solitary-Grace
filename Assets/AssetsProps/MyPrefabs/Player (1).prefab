@@ -266,20 +266,15 @@ MonoBehaviour:
   useTrigger: {fileID: 0}
   cyllinder: {fileID: 6571139212024969652}
   warpTool: {fileID: 5691854609005576906}
-  controller: {fileID: 6571139211426620345}
   layer:
     serializedVersion: 2
     m_Bits: 8
-  speed: 4
-  gravity: -4.07
-  jumpHeight: 3
-  groundDistance: 0.4
-  allowJump: 0
-  cControl: {fileID: 6571139211426620345}
-  groundCheck: {fileID: 6571139211166708972}
-  groundMask:
+  AllowJump: 0
+  controller: {fileID: 6571139211426620345}
+  GroundCheck: {fileID: 6571139211166708972}
+  GroundMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
 --- !u!65 &472942420
 BoxCollider:
   m_ObjectHideFlags: 0

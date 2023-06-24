@@ -8,23 +8,21 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject cyllinder;
     [SerializeField] GameObject warpTool;
     [SerializeField] LayerMask layer;
+    [SerializeField] Transform GroundCheck;
 
     [Inject] private MouseLook _mouse;
 
     private float speed = 5f;
-    private float gravity = -9f;
+    private float gravity = 15f;
     private float jumpHeight = 3f;
-    private float groundDistance = 0.1f;
-
+    private float groundDistance = 0.35f;
     private bool allowMovement = true;
     private bool allowControl = true;
     private bool isGrounded;
-
     private Vector3 velocity;
 
     public bool AllowJump = false;
-    public CharacterController controller;
-    public Transform GroundCheck;
+    [HideInInspector] public CharacterController controller;
     public LayerMask GroundMask;
 
     public void Warping(bool value)
@@ -82,7 +80,6 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
-        Debug.Log(isGrounded);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -93,7 +90,7 @@ public class PlayerScript : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
 
         if (allowMovement)
-        controller.Move(move * speed * Time.deltaTime);
+            controller.Move(move * speed * Time.deltaTime);
 
         if (!allowControl)
             return;
