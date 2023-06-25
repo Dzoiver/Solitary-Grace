@@ -16,7 +16,7 @@ public class TrashPickup : MonoBehaviour
         grabSFX.Play();
         outTrigger.SetActive(true);
         doorMessage.SetActive(false);
-        gameObject.transform.Translate(0f, 0f, 5f);
+        gameObject.transform.Translate(0f, 5f, 0f);
         // gameObject.SetActive(false);
     }
 }

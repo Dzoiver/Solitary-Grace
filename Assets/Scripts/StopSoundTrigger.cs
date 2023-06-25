@@ -7,14 +7,11 @@ public class StopSoundTrigger : MonoBehaviour
 {
     [SerializeField] AudioSource source;
     [SerializeField] AudioSource source2;
-    private void SlowlyStop()
-    {
-        source.DOFade(0f, 6f);
-        source2.DOFade(0.08f, 6f);
-    }
-
+    [SerializeField] GameObject doorTrigger;
     private void OnTriggerEnter(Collider other)
     {
-        SlowlyStop();
+        doorTrigger.SetActive(false);
+        source.DOFade(0f, 6f); // Stop room music
+        source2.DOFade(0.08f, 6f); // Play creepy music
     }
 }
