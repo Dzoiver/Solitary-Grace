@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public Transform PlayerBody;
+    [SerializeField] Transform PlayerBody;
     public bool AllowMove = true;
 
-    public float MouseSensitivity = 200f;
-    public float MouseX = 0f;
-    public float MouseY = 0f;
+    private float MouseSensitivity = 200f;
 
     float xRotation = 0f;
     void Start()
@@ -26,8 +22,6 @@ public class MouseLook : MonoBehaviour
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        MouseX = xRotation;
-        MouseY = mouseY;
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         PlayerBody.Rotate(Vector3.up * mouseX);

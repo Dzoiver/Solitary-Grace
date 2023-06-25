@@ -16,7 +16,7 @@ TagManager:
   - Enemy
   - NotCastingShadow
   - LightObject
-  - 
+  - CameraIgnore
   - 
   - 
   - 

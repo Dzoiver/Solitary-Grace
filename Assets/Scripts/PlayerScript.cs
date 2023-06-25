@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     [Inject] private MouseLook _mouse;
 
     private float speed = 5f;
-    private float gravity = 15f;
+    private float gravity = 10f;
     private float jumpHeight = 3f;
     private float groundDistance = 0.35f;
     private bool allowMovement = true;
