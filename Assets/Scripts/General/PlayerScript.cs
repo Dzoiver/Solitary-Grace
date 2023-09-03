@@ -9,13 +9,12 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject warpTool;
     [SerializeField] LayerMask layer;
     [SerializeField] Transform GroundCheck;
-
-    [Inject] private MouseLook _mouse;
+    [SerializeField] MouseLook _mouse;
 
     private float speed = 5f;
-    private float gravity = 10f;
+    private float gravity = 1f;
     private float jumpHeight = 3f;
-    private float groundDistance = 0.35f;
+    private float groundDistance = 0.5f;
     private bool allowMovement = true;
     private bool allowControl = true;
     private bool isGrounded;
@@ -31,6 +30,19 @@ public class PlayerScript : MonoBehaviour
             warpTool.SetActive(true);
         else
             warpTool.SetActive(false);
+    }
+
+    public bool IsControl()
+    {
+        if (allowControl)
+            return true;
+        else
+            return false;
+    }
+
+    public Transform GetTransform()
+    {
+        return gameObject.transform;
     }
 
     /// <summary>
@@ -82,7 +94,7 @@ public class PlayerScript : MonoBehaviour
         isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f;
+            velocity.y = -6f;
         }
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");

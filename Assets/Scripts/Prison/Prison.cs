@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GM;
 
 public class Prison : MonoBehaviour
 {
-    public bool isLoaded = false;
-    void Awake()
+    private void Start()
     {
-        if (!isLoaded)
-        gameObject.SetActive(false);
+        if (Vector3.Distance(GameFuncs.PlayerScript.GetTransform().position, gameObject.transform.position) > 100f)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

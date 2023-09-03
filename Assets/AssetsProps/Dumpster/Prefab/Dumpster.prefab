@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4312422823920638}
   - component: {fileID: 609009060339671310}
+  - component: {fileID: 5963413329222614025}
   m_Layer: 3
   m_Name: Dumpster
   m_TagString: Untagged
@@ -131,6 +132,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8137896, y: 2.0744033, z: 1}
   m_Center: {x: 0, y: 0.53720134, z: 0}
+--- !u!114 &5963413329222614025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665434738283074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c636a279f1878434bad8ffae114c1678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  house: {fileID: 0}
+  lamps: []
+  zombie: {fileID: 0}
 --- !u!1 &1852114665794428
 GameObject:
   m_ObjectHideFlags: 0
