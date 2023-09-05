@@ -15,6 +15,41 @@ public class Menu : MonoBehaviour
         
     }
 
+    public void OpenMenu()
+    {
+        fading = true;
+        GameFuncs.PlayerScript.SetControl(false);
+        AudioController.Play("openMenu");
+        Cursor.lockState = CursorLockMode.None;
+        GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
+        {
+            menuPanel.SetActive(true);
+            // Fadein
+            GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
+            {
+                fading = false;
+            };
+            GameFuncs.PlayerScript.SetControl(true);
+        };
+    }
+
+    public void CloseMenu()
+    {
+        fading = true;
+        GameFuncs.PlayerScript.SetControl(true);
+        AudioController.Play("closeMenu");
+        Cursor.lockState = CursorLockMode.Locked;
+        GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
+        {
+            menuPanel.SetActive(false);
+            // Fadein
+            GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
+            {
+                fading = false;
+            };
+        };
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -25,37 +60,11 @@ public class Menu : MonoBehaviour
         {
             if (!menuPanel.activeSelf)
             {
-                fading = true;
-                GameFuncs.PlayerScript.SetControl(false);
-                AudioController.Play("openMenu");
-                Cursor.lockState = CursorLockMode.None;
-                GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
-                {
-                    menuPanel.SetActive(true);
-                    // Fadein
-                    GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
-                    {
-                        fading = false;
-                    };
-                    GameFuncs.PlayerScript.SetControl(true);
-                };
+                OpenMenu();
             }
             else
             {
-                fading = true;
-                GameFuncs.PlayerScript.SetControl(true);
-                AudioController.Play("closeMenu");
-                Cursor.lockState = CursorLockMode.Locked;
-                GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
-                {
-                    menuPanel.SetActive(false);
-                    // Fadein
-                    GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () => 
-                    {
-                        fading = false;
-                    }; 
-                };
-                
+                CloseMenu();
             }
         }
     }

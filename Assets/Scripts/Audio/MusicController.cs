@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace SolitaryAudio
 {
@@ -16,6 +17,7 @@ namespace SolitaryAudio
         }
         static public void PlayMusic(string audioName)
         {
+
             switch (audioName)
             {
                 case "Piano":
@@ -27,7 +29,8 @@ namespace SolitaryAudio
 
         static public void StopMusic()
         {
-            music.clip = null;
+            music.DOFade(0f, 1f);
+            // music.clip = null;
         }
     }
 }

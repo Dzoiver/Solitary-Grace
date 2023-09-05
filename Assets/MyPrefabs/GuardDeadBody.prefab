@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6129134206740208582}
   - component: {fileID: 3633941700249247310}
+  - component: {fileID: 3216460126100029050}
   m_Layer: 0
   m_Name: InteractTrigger
   m_TagString: Untagged
@@ -163,8 +164,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2467042, y: 1.0377628, z: 1.1356964}
-  m_Center: {x: 0.20391846, y: 0.25804514, z: -0.19803618}
+  m_Size: {x: 1.2467042, y: 1.0274842, z: 1.1356964}
+  m_Center: {x: 0.20391846, y: 0.25290585, z: -0.19803618}
+--- !u!114 &3216460126100029050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415961240880709184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b83e7774e01bfd740beea60456fe28f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: {fileID: 11400000, guid: 6afd8d1d0c5dd6249b7a9c9aa9cd5e22, type: 2}
 --- !u!1 &4665543360696923440
 GameObject:
   m_ObjectHideFlags: 0

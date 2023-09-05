@@ -3,9 +3,11 @@ using Zenject;
 
 public class PlayerInstaller : MonoInstaller
 {
-    [SerializeField] MouseLook mouseLook;
+    [SerializeField] Menu menu;
+    [SerializeField] Inventory inventory;
     public override void InstallBindings()
     {
-        Container.Bind<MouseLook>().FromInstance(mouseLook).AsSingle();
+        Container.Bind<Menu>().FromInstance(menu).AsSingle();
+        Container.Bind<Inventory>().FromInstance(inventory).AsSingle();
     }
 }
