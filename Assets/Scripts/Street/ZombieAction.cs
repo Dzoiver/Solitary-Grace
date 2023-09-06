@@ -7,12 +7,19 @@ using GM;
 
 public class ZombieAction : MonoBehaviour
 {
+    private Vector3 initialPosition;
     [SerializeField] Vector3 endMove;
     [SerializeField] Vector3 endRotate;
     [SerializeField] Image blackImage;
     [SerializeField] GameObject audio;
     [SerializeField] GameObject dp;
     [SerializeField] GameObject quakeWorld;
+    [SerializeField] GameObject house;
+
+    private void Start()
+    {
+        initialPosition = transform.position;
+    }
     public void HeadMoveScary()
     {
         audio.SetActive(true);
@@ -27,10 +34,12 @@ public class ZombieAction : MonoBehaviour
 
     private void MovePlayer()
     {
-        quakeWorld.SetActive(true);
+        house.SetActive(true);
+        transform.position = initialPosition;
+        // quakeWorld.SetActive(true);
         blackImage.DOColor(new Color(0, 0, 0, 0), 5f); // Fadein
         GameFuncs.TeleportPlayer(dp);
-        GameFuncs.PlayerScript.AllowJump = true;
+        // GameFuncs.PlayerScript.AllowJump = true;
         GameFuncs.PlayerScript.SetControl(true);
     }
 }

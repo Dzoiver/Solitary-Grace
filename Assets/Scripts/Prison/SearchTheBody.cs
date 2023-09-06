@@ -19,7 +19,7 @@ public class SearchTheBody : MonoBehaviour
         if (keyTaken)
             return;
 
-        GameFuncs.PlayerScript.SetControl(false);
+        other.GetComponent<UseCube>().pScript.SetControl(false);
 
         // Do you want to take the key card?
         menu.OpenMenu();

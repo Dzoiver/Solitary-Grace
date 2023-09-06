@@ -65,10 +65,13 @@ public class PlayerScript : MonoBehaviour
             allowControl = false;
         }
     }
+    private void Awake()
+    {
+        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
+    }
 
     private void Start()
     {
-        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
         controller = GetComponent<CharacterController>();
     }
 
