@@ -1,6 +1,5 @@
 using UnityEngine;
 using GM;
-using Zenject;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -92,9 +91,13 @@ public class PlayerScript : MonoBehaviour
         velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
+    }
+
+    private void Update()
+    {
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -6f;
@@ -118,16 +121,24 @@ public class PlayerScript : MonoBehaviour
         velocity.y += Physics.gravity.y * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
+        HandleInteract();
+    }
+
+    private void HandleInteract()
+    {
         if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(ray.origin, ray.direction, Color.white, 5f);
+            // Debug.DrawRay(ray.origin, ray.direction, Color.white, 5f);
 
             if (Physics.Raycast(ray, out hit, 1.5f, layer.value))
             {
-                useTrigger.SetActive(true);
-                useTrigger.transform.position = hit.point;
+                if (hit.collider.gameObject.layer == 3)
+                {
+                    useTrigger.SetActive(true);
+                    useTrigger.transform.position = hit.point;
+                }
             }
         }
     }

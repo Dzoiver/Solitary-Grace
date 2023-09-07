@@ -62,7 +62,7 @@ public class Menu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!menuPanel.activeSelf)
+            if (!menuPanel.activeSelf && GameFuncs.PlayerScript.IsControl())
             {
                 OpenMenu();
             }

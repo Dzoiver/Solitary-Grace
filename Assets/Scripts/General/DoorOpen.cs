@@ -13,9 +13,12 @@ public class DoorOpen : MonoBehaviour
 
     private bool PlayerHasKey()
     {
+        if (key == null)
+            return false;
+
         foreach (InventoryItem item in inventory.ItemsList)
         {
-            if (item.Name == "Camera Key")
+            if (item.Name == key.name)
             {
                 return true;
             }

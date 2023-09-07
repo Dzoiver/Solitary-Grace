@@ -281,7 +281,7 @@ MonoBehaviour:
   warpTool: {fileID: 5691854609005576906}
   layer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 9
   GroundCheck: {fileID: 6571139211166708972}
   _mouse: {fileID: 3855770500859337717}
   AllowJump: 0
