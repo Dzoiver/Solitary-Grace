@@ -7,14 +7,15 @@ Explore your nightmares. Solve mystery of the place in your dreams but be cautio
 ## Controls:
 E to interact
 
-Space to Jump
+Esc to open a menu/inventory
 
-Download demo (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.0.1-alpha)
+Download demo (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.0.2-alpha)
 
-Screenshots:
-![1](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/73c696e5-4555-4f6d-8cc4-fb70fb05ffcc)
-![2](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/30d218e5-0745-4286-85f8-ff7e9e6b612a)
-![3](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/bd4a30ca-e436-46e8-896e-1dad5f4a4f88)
-![4](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/2d34a472-9286-478b-a7d2-9c86671694b0)
-![5](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/5784d796-02dc-404e-bbfe-53818e19082b)
-![6](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/cefd8340-54a2-47c1-9536-26b15ecf4b1e)
+## Screenshots:
+![1](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/281a2de9-e203-4f4c-a5b4-aff6e8d123c0)
+![2](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/50fdae5f-7d1e-4a75-a7f2-3a4425251811)
+![3](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/da413c2e-dc81-434a-a194-6711a6706702)
+![4](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/d0ed2018-8c00-4bd9-bf88-e343580fec2b)
+![5](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/a4b82f86-8e1a-4f25-89bd-e3a322384535)
+![6](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/86332a29-fabe-4700-9b67-8c7d6d7bfd44)
+![7](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/148912c0-0757-4d1f-a971-3e1da93b197f)
