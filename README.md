@@ -7,7 +7,7 @@ Explore your nightmares. Solve mystery of the place in your dreams but be cautio
 ## Controls:
 E to interact
 
-Space to Jump
+Esc to open a menu/inventory
 
 Download demo (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.0.2-alpha)
 
