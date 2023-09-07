@@ -9,7 +9,7 @@ E to interact
 
 Space to Jump
 
-Download demo (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.0.1-alpha)
+Download demo (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.0.2-alpha)
 
 Screenshots:
 ![1](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/281a2de9-e203-4f4c-a5b4-aff6e8d123c0)
