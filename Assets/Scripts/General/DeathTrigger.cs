@@ -11,8 +11,8 @@ public class DeathTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             source.Play(); // Scream sound
-            gameover.gameObject.SetActive(true);
-            gameover.ShowGameOver();
+            // gameover.gameObject.SetActive(true);
+            gameover.NormalDeath(other.gameObject.GetComponent<PlayerScript>());
         }
     }
 }

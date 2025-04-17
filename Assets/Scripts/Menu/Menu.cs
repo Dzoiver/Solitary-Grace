@@ -4,6 +4,7 @@ using UnityEngine;
 using GM;
 using DG.Tweening;
 using SolitaryAudio;
+using UnityEngine.Events;
 
 public class Menu : MonoBehaviour
 {

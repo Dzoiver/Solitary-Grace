@@ -10,13 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 464388}
   - component: {fileID: 6533936}
-  - component: {fileID: 6438210}
   m_Layer: 0
   m_Name: desk_chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &464388
 Transform:
@@ -48,20 +47,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7429289, y: 1.1445217, z: 0.8100981}
   m_Center: {x: 0, y: 0.59585285, z: 0}
---- !u!64 &6438210
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105284}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &137744
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +64,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &457524
 Transform:
@@ -177,7 +162,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &466534
 Transform:
