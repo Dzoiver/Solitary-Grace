@@ -7,9 +7,11 @@ using Zenject;
 public class DoorOpen : MonoBehaviour
 {
     [Inject] Inventory inventory;
+    [Inject] DialogueManager dManager;
     [SerializeField] GameObject destinationPoint;
     public bool Closed = false;
     [SerializeField] ScriptableItem key;
+    [SerializeField] ScriptableMes lines;
 
     private bool PlayerHasKey()
     {
@@ -36,6 +38,8 @@ public class DoorOpen : MonoBehaviour
                 if (!PlayerHasKey())
                 {
                     AudioController.Play("doorOpen");
+                    dManager.SetDialogue(lines);
+                    dManager.PlayDialogue(0);
                     return;
                 }
             }

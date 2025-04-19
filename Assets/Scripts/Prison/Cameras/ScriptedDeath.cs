@@ -6,6 +6,9 @@ using GM;
 public class ScriptedDeath : MonoBehaviour
 {
     [SerializeField] GameObject teleportPoint;
+    [SerializeField] GameObject monster;
+    [SerializeField] GameObject blackImage;
+
     // Start is called before the first frame update
     void Start()
     {

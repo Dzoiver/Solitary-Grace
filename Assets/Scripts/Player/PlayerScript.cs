@@ -14,8 +14,8 @@ public class PlayerScript : MonoBehaviour
     private float gravity = 1f;
     private float jumpHeight = 3f;
     private float groundDistance = 0.5f;
-    private bool allowMovement = true;
-    private bool allowControl = true;
+    [SerializeField] private bool allowMovement = true;
+    [SerializeField] private bool allowControl = true;
     private bool isGrounded;
     private Vector3 velocity;
 
