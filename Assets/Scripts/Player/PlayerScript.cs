@@ -21,7 +21,21 @@ public class PlayerScript : MonoBehaviour
 
     public bool AllowJump = false;
     [HideInInspector] public CharacterController controller;
+    [SerializeField] GameObject playerCam;
     public LayerMask GroundMask;
+
+    public Vector3 GetCamera()
+    {
+        Vector3 temp = new Vector3();
+        temp.x = playerCam.transform.rotation.eulerAngles.x;
+        temp.y = gameObject.transform.rotation.eulerAngles.y;
+        return temp;
+    }
+    public void SetCamera(Vector3 angle)
+    {
+        playerCam.transform.rotation = Quaternion.Euler(angle);
+        gameObject.transform.rotation = Quaternion.Euler(angle);
+    }
 
     public void Warping(bool value)
     {

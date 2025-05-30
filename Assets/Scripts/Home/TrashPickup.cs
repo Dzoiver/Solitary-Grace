@@ -4,6 +4,7 @@ public class TrashPickup : MonoBehaviour
 {
     [SerializeField] GameObject outTrigger;
     [SerializeField] GameObject doorMessage;
+    [SerializeField] DoorOpen exitDoor;
     AudioSource grabSFX;
 
     private void Start()
@@ -15,7 +16,7 @@ public class TrashPickup : MonoBehaviour
     {
         grabSFX.Play();
         outTrigger.SetActive(true);
-        doorMessage.SetActive(false);
+        exitDoor.DoorCanBeOpened(true);
         gameObject.transform.Translate(0f, 5f, 0f);
         // gameObject.SetActive(false);
     }

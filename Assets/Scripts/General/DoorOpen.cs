@@ -12,7 +12,15 @@ public class DoorOpen : MonoBehaviour
     public bool Closed = false;
     [SerializeField] ScriptableItem key;
     [SerializeField] ScriptableMes lines;
+    [SerializeField] bool playLockedSound = true;
 
+    public void DoorCanBeOpened(bool canOpen)
+    {
+        if (canOpen)
+            Closed = false;
+        else
+            Closed = true;
+    }
     private bool PlayerHasKey()
     {
         if (key == null)
@@ -37,7 +45,8 @@ public class DoorOpen : MonoBehaviour
             {
                 if (!PlayerHasKey())
                 {
-                    AudioController.Play("doorOpen");
+                    if (playLockedSound)
+                        AudioController.Play("doorOpen");
                     dManager.SetDialogue(lines);
                     dManager.PlayDialogue(0);
                     return;

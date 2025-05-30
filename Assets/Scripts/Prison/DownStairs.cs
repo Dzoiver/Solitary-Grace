@@ -7,6 +7,7 @@ using SolitaryAudio;
 public class DownStairs : MonoBehaviour
 {
     private bool triggeredOnce;
+    [SerializeField] TeleportPlayer deathtriggerScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class DownStairs : MonoBehaviour
         if (!triggeredOnce)
         {
             AudioController.Play("horrific", 1);
+            deathtriggerScript.enabled = true;
         }
     }
 

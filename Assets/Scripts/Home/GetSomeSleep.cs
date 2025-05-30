@@ -12,6 +12,17 @@ public class GetSomeSleep : MonoBehaviour
     [SerializeField] AudioSource sound;
     [SerializeField] GameObject prison;
     private Sequence sequence;
+    private BoxCollider boxcollider;
+    private DaytimeOutside daytimeScript;
+
+    private void Awake()
+    {
+        daytimeScript = FindObjectOfType<DaytimeOutside>();
+    }
+    private void Start()
+    {
+        boxcollider = GetComponent<BoxCollider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,10 +36,13 @@ public class GetSomeSleep : MonoBehaviour
 
     private void GoToPrison()
     {
+        daytimeScript.SetDay(false);
         prison.SetActive(true);
         GameFuncs.TeleportPlayer(destinationPoint);
         blackImage.DOColor(new Color(0, 0, 0, 0), 0.5f);
         sound.Play();
         GameFuncs.PlayerScript.SetControl(true);
+        this.enabled = false;
+        boxcollider.enabled = false;
     }
 }

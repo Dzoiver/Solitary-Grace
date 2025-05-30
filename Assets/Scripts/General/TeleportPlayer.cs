@@ -6,14 +6,10 @@ public class TeleportPlayer : MonoBehaviour
 {
     PlayerScript player;
     [SerializeField] GameObject destination;
-    private void Awake()
-    {
-        player = FindObjectOfType<PlayerScript>();
-    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = FindObjectOfType<PlayerScript>();
     }
 
     public void TeleportPlayerTo()

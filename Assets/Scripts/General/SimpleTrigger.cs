@@ -30,7 +30,7 @@ public class SimpleTrigger : MonoBehaviour
             onEnter.Invoke();
             if (triggerOnce)
             {
-
+                gameObject.SetActive(false);
             }
         }
     }

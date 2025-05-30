@@ -41,10 +41,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         sequence = DOTween.Sequence();
+        isTextDisplayed = true;
         text.text = dialogue.MessageText[dialogueID];
         text.enabled = true;
-        isTextDisplayed = true;
-
         sequence.PrependInterval(2f).Append(text.DOFade(0, 0.5f));
         sequence.onComplete = ResetText;
 

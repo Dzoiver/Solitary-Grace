@@ -15,6 +15,8 @@ public class ZombieAction : MonoBehaviour
     [SerializeField] GameObject dp;
     [SerializeField] GameObject quakeWorld;
     [SerializeField] GameObject house;
+    [SerializeField] DoorOpen roomexitDoor;
+    [SerializeField] CameraReturnControls wakeupScript;
 
     private void Start()
     {
@@ -41,5 +43,7 @@ public class ZombieAction : MonoBehaviour
         GameFuncs.TeleportPlayer(dp);
         // GameFuncs.PlayerScript.AllowJump = true;
         GameFuncs.PlayerScript.SetControl(true);
+        roomexitDoor.DoorCanBeOpened(false);
+        wakeupScript.PlayWakeUp();
     }
 }
