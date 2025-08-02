@@ -28,4 +28,14 @@ public class GameOver : MonoBehaviour
             player.SetControl(true);
         };
     }
+
+    public void GetDamagedRedScreen()
+    {
+        sequence = DOTween.Sequence();
+        image.gameObject.SetActive(true);
+        sequence.Append(image.DOColor(new Color(1, 0, 0, 0.25f), 0.25f)).AppendInterval(0.25f).onComplete = () =>
+        {
+            image.DOColor(new Color(0, 0, 0, 0), 0.25f);
+        };
+    }
 }

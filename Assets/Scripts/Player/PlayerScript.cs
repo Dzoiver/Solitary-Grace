@@ -1,9 +1,11 @@
 using UnityEngine;
 using GM;
 using UnityEngine.Rendering.UI;
+using Zenject;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Inject] GameOver gameover;
     [SerializeField] GameObject useTrigger;
     [SerializeField] GameObject cyllinder;
     [SerializeField] GameObject warpTool;
@@ -26,6 +28,33 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject playerCam;
     public LayerMask GroundMask;
 
+    private float health = 100f;
+    private float maxHealth = 100f;
+
+    public void GetDamage(float damage)
+    {
+        if (health - damage <= 0)
+        {
+            gameover.GetDamagedRedScreen();
+            //Death();
+        }
+        else
+        {
+            health -= damage;
+            gameover.GetDamagedRedScreen();
+            // redish screen
+        }
+    }
+
+    private void Death()
+    {
+        // Red screen
+        // camera animation
+        // Black screen
+        // Respawn
+        gameover.NormalDeath(this);
+    }
+    
     public Vector3 GetCamera()
     {
         Vector3 temp = new Vector3();
