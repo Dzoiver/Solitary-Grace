@@ -9,10 +9,18 @@ public class SearchTheBody : MonoBehaviour
     [Inject] Menu menu;
     [Inject] Inventory inventory;
     [SerializeField] ScriptableItem key;
+    private InventoryItem item;
     private bool keyTaken = false;
 
+    private void Start()
+    {
+        item = new InventoryItem(key.id, key.maxQuantity, key.name);
+    }
     private void OnTriggerEnter(Collider other)
     {
+        if (inventory.Has(key.id))
+            return;
+
         if (other.gameObject.name != "UseCube")
             return;
 
@@ -22,29 +30,11 @@ public class SearchTheBody : MonoBehaviour
         other.GetComponent<UseCube>().pScript.SetControl(false);
 
         // Do you want to take the key card?
-        menu.OpenMenu();
+        menu.ConfirmBox(key);
 
         // Call dialogue window
 
         // Give it this object ref
-
-        ResultAction(true);
-    }
-
-    public void ResultAction(bool yes)
-    {
-        if (yes)
-        {
-            InventoryItem item = new InventoryItem(key.id, key.maxQuantity, key.name);
-            inventory.AddItem(item);
-            keyTaken = true;
-            // give key
-        }
-        else
-        {
-        }
-
-        GameFuncs.PlayerScript.SetControl(true);
     }
 
     // Update is called once per frame

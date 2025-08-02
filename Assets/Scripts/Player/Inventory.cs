@@ -44,8 +44,10 @@ public class Inventory : MonoBehaviour
     private int capacity = 6;
     public List<InventoryItem> ItemsList = new List<InventoryItem>();
 
-    public void AddItem(InventoryItem item)
+    public void AddItem(ScriptableItem scriptableItem)
     {
+        InventoryItem item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity);
+
         if (ItemsList.Count < capacity)
         {
             ItemsList.Add(item);
@@ -63,5 +65,17 @@ public class Inventory : MonoBehaviour
         }
 
         ItemsList[itemSlot].Quantity -= quantity;
+    }
+
+    public bool Has(int givenID)
+    {
+        foreach (InventoryItem it in ItemsList)
+        {
+            if (it.Id == givenID)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

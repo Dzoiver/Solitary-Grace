@@ -1,5 +1,6 @@
 using UnityEngine;
 using GM;
+using UnityEngine.Rendering.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private bool allowControl = true;
     private bool isGrounded;
     private Vector3 velocity;
+    private bool isNoclip = false;
 
     public bool AllowJump = false;
     [HideInInspector] public CharacterController controller;
@@ -80,11 +82,12 @@ public class PlayerScript : MonoBehaviour
     }
     private void Awake()
     {
-        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
+        
     }
 
     private void Start()
     {
+        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -105,6 +108,22 @@ public class PlayerScript : MonoBehaviour
         velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
 
+    public void ToggleNoclip()
+    {
+        if (isNoclip == false)
+        {
+            isNoclip = true;
+            gameObject.layer = 12; // PlayerNoclip
+            Debug.Log("Noclip on");
+        }
+        else
+        {
+            isNoclip = false;
+            gameObject.layer = 6; // Player
+            Debug.Log("Noclip off");
+        }
+    }
+
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
@@ -112,12 +131,32 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
-        if (isGrounded && velocity.y < 0)
+        if (isNoclip)
+        {
+            isGrounded = false;
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                velocity.y = 10f;
+            }
+            else
+                velocity.y = 0f;
+
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                velocity.y = -10f;
+            }
+        }
+
+        
+
+        if (isGrounded && velocity.y < 0 && !isNoclip) // Gravity even when grounded
         {
             velocity.y = -6f;
         }
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+
 
         Vector3 move = transform.right * x + transform.forward * z;
 
@@ -129,10 +168,13 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded && AllowJump)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravity);
         }
 
-        velocity.y += Physics.gravity.y * Time.deltaTime;
+        if (!isNoclip)
+        {
+            velocity.y += Physics.gravity.y * Time.deltaTime;
+        }
         controller.Move(velocity * Time.deltaTime);
 
         HandleInteract();

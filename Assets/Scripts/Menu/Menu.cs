@@ -5,17 +5,23 @@ using GM;
 using DG.Tweening;
 using SolitaryAudio;
 using UnityEngine.Events;
+using static UnityEditor.Progress;
+using Zenject;
 
 public class Menu : MonoBehaviour
 {
     [SerializeField] GameObject menuPanel;
     [SerializeField] GameObject systemPanel;
     [SerializeField] GameObject confirmPanel;
+    [SerializeField] GameObject confirmPanelItem;
+    [Inject] Inventory inventory;
+    ScriptableItem bufferItem;
     private bool fading = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        menuPanel.SetActive(false);
+        confirmPanelItem.SetActive(false);
     }
 
     public void OpenMenu()
@@ -35,8 +41,29 @@ public class Menu : MonoBehaviour
         };
     }
 
+    public void ConfirmBox(ScriptableItem item)
+    {
+        bufferItem = item; // Buffers item which player decides to take or not
+        OpenMenu();
+        confirmPanelItem.SetActive(true);
+        confirmPanelItem.GetComponent<ConfirmationBox>().ChangeItemName(item.name);
+    }
+
+    public void YesConfirm()
+    {
+        inventory.AddItem(bufferItem);
+        CloseMenu();
+    }
+
+    public void NoConfirm()
+    {
+
+        CloseMenu();
+    }
+
     public void CloseMenu()
     {
+        confirmPanelItem.SetActive(false);
         fading = true;
         AudioController.Play("closeMenu");
         Cursor.lockState = CursorLockMode.Locked;
