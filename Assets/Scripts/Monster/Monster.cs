@@ -21,6 +21,10 @@ public class Monster : MonoBehaviour
     private float currentAttackDelay = 0.3f;
     private float attackCoolDown = 2f;
     private float currentAttackCoolDown = 2f;
+
+    [SerializeField] private bool patrol = true;
+    [SerializeField] private GameObject[] patrolPoints;
+    private int currentPatrolIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +62,25 @@ public class Monster : MonoBehaviour
         }
     }
 
+    private void Patrol()
+    {
+        if (!patrol)
+            return;
+
+        agent.destination = patrolPoints[currentPatrolIndex].transform.position;
+        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < 1.5f)
+        {
+            if (currentPatrolIndex + 1 < patrolPoints.Length)
+            {
+                currentPatrolIndex++;
+            }
+            else
+            {
+                currentPatrolIndex = 0;
+            }
+        }
+    }
+    
 
     private bool PlayerClose()
     {
@@ -75,8 +98,12 @@ public class Monster : MonoBehaviour
         if (PlayerDetected())
         {
             agent.destination = GameFuncs.PlayerScript.transform.position;
+            DamagePlayer();
         }
-
-        DamagePlayer();
+        else
+        {
+            Patrol();
+        }
+        
     }
 }
