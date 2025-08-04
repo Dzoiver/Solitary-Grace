@@ -2,6 +2,7 @@ using UnityEngine;
 using GM;
 using UnityEngine.Rendering.UI;
 using Zenject;
+using Unity.VisualScripting;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PlayerScript : MonoBehaviour
     public bool AllowJump = false;
     [HideInInspector] public CharacterController controller;
     [SerializeField] GameObject playerCam;
+    Vector3 playerCamStartPos;
     public LayerMask GroundMask;
 
     private float health = 100f;
@@ -33,17 +35,26 @@ public class PlayerScript : MonoBehaviour
 
     public void GetDamage(float damage)
     {
-        if (health - damage <= 0)
+        if (health - damage <= 0 && !IsDead())
         {
-            gameover.GetDamagedRedScreen();
-            //Death();
+            health = 0;
+            Death();
         }
-        else
+        else if (!IsDead())
         {
             health -= damage;
             gameover.GetDamagedRedScreen();
             // redish screen
         }
+    }
+
+    public bool IsDead()
+    {
+        if (health <= 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void Death()
@@ -52,9 +63,18 @@ public class PlayerScript : MonoBehaviour
         // camera animation
         // Black screen
         // Respawn
-        gameover.NormalDeath(this);
+        Animator anim = playerCam.GetComponent<Animator>();
+        anim.enabled = true;
+        anim.Play("Deathanim");
+        gameover.DieFromMonster();
     }
-    
+
+    public void CameraRestore()
+    {
+        playerCam.transform.localPosition = playerCamStartPos;
+        playerCam.GetComponent<CameraReturnControls>().SwitchToPlayer(true);
+    }
+
     public Vector3 GetCamera()
     {
         Vector3 temp = new Vector3();
@@ -118,6 +138,7 @@ public class PlayerScript : MonoBehaviour
     {
         GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
         controller = GetComponent<CharacterController>();
+        playerCamStartPos = playerCam.transform.localPosition;
     }
 
     private void OnTriggerEnter(Collider other)

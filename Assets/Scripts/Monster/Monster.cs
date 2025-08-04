@@ -61,7 +61,8 @@ public class Monster : MonoBehaviour
 
     private bool PlayerClose()
     {
-        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < stopDistance)
+        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < stopDistance
+            && !GameFuncs.PlayerScript.IsDead())
         {
             return true;
         }

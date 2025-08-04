@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CameraReturnControls : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     [SerializeField] private bool playWakeUp = true;
+    [SerializeField] private bool returnToPlayer = false;
     Animator anim;
     Vector3 playerStartPos;
     Vector3 cameraAngle;
@@ -15,14 +15,20 @@ public class CameraReturnControls : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        cameraAngle = GameFuncs.PlayerScript.GetCamera();
+        playerStartPos = GameFuncs.PlayerScript.transform.position;
+        if (returnToPlayer)
+        {
+            anim.enabled = false;
+            return;
+        }
         if (!playWakeUp)
         {
+            gameObject.SetActive(false);
             anim.enabled = false;
             SwitchToPlayer();
             return;
         }
-        playerStartPos = player.transform.position;
-        cameraAngle = GameFuncs.PlayerScript.GetCamera();
     }
 
     public void PlayWakeUp()
@@ -31,15 +37,20 @@ public class CameraReturnControls : MonoBehaviour
             return;
         // Fade out
         gameObject.SetActive(true);
-        player.SetActive(false);
+        GameFuncs.PlayerScript.gameObject.SetActive(false);
         anim.Play("WakeupAnim");
     }
 
-    public void SwitchToPlayer()
+    /// <summary>
+    /// Switches animated camera to player camera
+    /// </summary>
+    /// <param name="leaveOn">Should it deactivate the animated camera</param>
+    public void SwitchToPlayer(bool leaveOn = false)
     {
-        gameObject.SetActive(false);
-        player.transform.position = playerStartPos;
-        player.SetActive(true);
+        anim.enabled = false;
+        gameObject.SetActive(leaveOn);
+        GameFuncs.PlayerScript.gameObject.transform.position = playerStartPos;
+        GameFuncs.PlayerScript.gameObject.SetActive(true);
         GameFuncs.PlayerScript.SetControl(true);
         GameFuncs.PlayerScript.SetCamera(cameraAngle);
     }
