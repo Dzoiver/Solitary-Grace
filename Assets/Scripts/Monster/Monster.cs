@@ -4,12 +4,14 @@ using UnityEngine;
 using GM;
 using UnityEngine.AI;
 using UnityEditor.UIElements;
+using System;
+using UnityEditor;
 
 public class Monster : MonoBehaviour
 {
     private NavMeshAgent agent;
     private bool seePlayer = false;
-    private float seeDistance = 10f;
+    [SerializeField] private float detectRadius = 10f;
     private float chaseSpeed = 2f;
     private float stopDistance = 2f;
 
@@ -21,10 +23,16 @@ public class Monster : MonoBehaviour
     private float currentAttackDelay = 0.3f;
     private float attackCoolDown = 2f;
     private float currentAttackCoolDown = 2f;
+    private float playerSearchTime = 5f;
+    private float currentPlayerSearchTime = 0f;
+    private bool chase = false;
+    [SerializeField] LayerMask layerMask;
 
     [SerializeField] private bool patrol = true;
     [SerializeField] private GameObject[] patrolPoints;
     private int currentPatrolIndex = 0;
+    [SerializeField] private float patrolWait = 1f;
+    private float currentPatrolWait = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +40,13 @@ public class Monster : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
     }
 
-    private bool PlayerDetected()
+    private void Awake()
     {
-        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < seeDistance)
+    }
+
+    private bool PlayerTooClose()
+    {
+        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < detectRadius / 4)
         {
             return true;
         }
@@ -62,6 +74,30 @@ public class Monster : MonoBehaviour
         }
     }
 
+    private bool ChasingPlayer()
+    {
+        Vector3 directionNormal = (GameFuncs.PlayerScript.gameObject.transform.position - transform.position).normalized;
+        if (Physics.Raycast(transform.position, directionNormal, out RaycastHit hit, detectRadius, layerMask))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                chase = true;
+                return true;
+            }
+        }
+
+        if (chase)
+        {
+            currentPlayerSearchTime += Time.deltaTime;
+            if (currentPlayerSearchTime > playerSearchTime)
+            {
+                chase = false;
+                currentPlayerSearchTime = 0f;
+            }
+        }
+        return chase;
+    }
+
     private void Patrol()
     {
         if (!patrol)
@@ -70,14 +106,19 @@ public class Monster : MonoBehaviour
         agent.destination = patrolPoints[currentPatrolIndex].transform.position;
         if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < 1.5f)
         {
-            if (currentPatrolIndex + 1 < patrolPoints.Length)
+            if (currentPatrolWait > patrolWait)
             {
-                currentPatrolIndex++;
+                currentPatrolWait = 0f;
+                if (currentPatrolIndex + 1 < patrolPoints.Length)
+                {
+                    currentPatrolIndex++;
+                }
+                else
+                {
+                    currentPatrolIndex = 0;
+                }
             }
-            else
-            {
-                currentPatrolIndex = 0;
-            }
+            currentPatrolWait += Time.deltaTime;
         }
     }
     
@@ -95,15 +136,22 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerDetected())
+        if (PlayerTooClose())
         {
             agent.destination = GameFuncs.PlayerScript.transform.position;
             DamagePlayer();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (ChasingPlayer())
+        {
+            agent.destination = GameFuncs.PlayerScript.transform.position;
         }
         else
         {
             Patrol();
         }
-        
     }
 }
