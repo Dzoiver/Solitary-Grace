@@ -15,7 +15,8 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject confirmPanel;
     [SerializeField] GameObject confirmPanelItem;
     [Inject] Inventory inventory;
-    ScriptableItem bufferItem;
+    private ScriptableItem bufferItem;
+    private GameObject bufferPickupObject;
     private bool fading = false;
     // Start is called before the first frame update
     void Start()
@@ -41,8 +42,10 @@ public class Menu : MonoBehaviour
         };
     }
 
-    public void ConfirmBox(ScriptableItem item)
+    public void ConfirmBox(ScriptableItem item, GameObject itemToDisable = null)
     {
+        if (itemToDisable != null)
+        bufferPickupObject = itemToDisable;
         bufferItem = item; // Buffers item which player decides to take or not
         OpenMenu();
         confirmPanelItem.SetActive(true);
@@ -51,6 +54,11 @@ public class Menu : MonoBehaviour
 
     public void YesConfirm()
     {
+        if (bufferPickupObject != null)
+        {
+            bufferPickupObject.SetActive(false);
+            bufferPickupObject = null;
+        }
         inventory.AddItem(bufferItem);
         CloseMenu();
     }
