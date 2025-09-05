@@ -9,6 +9,7 @@ using UnityEditor;
 
 public class Monster : MonoBehaviour
 {
+    [SerializeField] private bool activeAI = true;
     private NavMeshAgent agent;
     private bool seePlayer = false;
     [SerializeField] private float detectRadius = 10f;
@@ -74,6 +75,23 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void GetDamage(float amount)
+    {
+        if (health - amount < 0)
+        {
+            Death();
+        }
+        else
+        {
+            health -= amount;
+        }
+    }
+
+    private void Death()
+    {
+
+    }
+
     private bool ChasingPlayer()
     {
         Vector3 directionNormal = (GameFuncs.PlayerScript.gameObject.transform.position - transform.position).normalized;
@@ -136,6 +154,9 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!activeAI)
+            return;
+
         if (PlayerTooClose())
         {
             agent.destination = GameFuncs.PlayerScript.transform.position;
@@ -145,6 +166,9 @@ public class Monster : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!activeAI)
+            return;
+
         if (ChasingPlayer())
         {
             agent.destination = GameFuncs.PlayerScript.transform.position;
