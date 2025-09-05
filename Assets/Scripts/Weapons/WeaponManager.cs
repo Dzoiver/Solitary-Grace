@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Zenject;
+
+public class WeaponManager : MonoBehaviour
+{
+    [Inject] Inventory inventory;
+    [SerializeField] GameObject pistol;
+    [SerializeField] GameObject knife;
+    [SerializeField] GameObject shotgun;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    private void HideAll()
+    {
+        pistol.SetActive(false);
+        knife.SetActive(false);
+        shotgun.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && inventory.Has((int)ItemNames.Knife))
+        {
+            if (knife.activeSelf)
+            {
+                HideAll();
+            }
+            else
+            {
+                HideAll();
+                knife.SetActive(true);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && inventory.Has((int)ItemNames.Pistol))
+        {
+            if (pistol.activeSelf)
+            {
+                HideAll();
+            }
+            else
+            {
+                HideAll();
+                pistol.SetActive(true);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) && inventory.Has((int)ItemNames.Shotgun))
+        {
+            if (shotgun.activeSelf)
+            {
+                HideAll();
+            }
+            else
+            {
+                HideAll();
+                shotgun.SetActive(true);
+            }
+        }
+    }
+}

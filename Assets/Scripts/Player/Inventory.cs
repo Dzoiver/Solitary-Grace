@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum ItemNames
+{
+    Nothing,
+    CameraKey,
+    HealthDrink,
+    Knife,
+    Pistol,
+    Shotgun
+}
+
 public class InventoryItem
 {
     private int quantity = 0;
