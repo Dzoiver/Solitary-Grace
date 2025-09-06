@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
-    [SerializeField] private float damage = 35f;
-    [SerializeField] private float attackCoolDown = 0.3f;
+    [SerializeField] private float damage = 20f;
+    [SerializeField] private float attackCoolDown = 0.7f;
     private float currentAttackCoolDown = 0f;
-    private float attackDelay = 0.1f;
+    private float attackDelay = 0.25f;
     private float currentAttackDelay = 0f;
     [SerializeField] private KnifeHitbox hitbox;
     [SerializeField] private Animator knifeAnimator;
@@ -33,9 +33,13 @@ public class Knife : MonoBehaviour
 
     IEnumerator HitWithDelay()
     {
-        knifeAnimator.Play("KnifeHit");
-        yield return new WaitForSeconds(attackDelay);
-        Hit();
+        if (currentAttackCoolDown > attackCoolDown)
+        {
+            currentAttackCoolDown = 0f;
+            knifeAnimator.Play("KnifeHit5", -1, 0f);
+            yield return new WaitForSeconds(attackDelay);
+            hitbox.gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public class Knife : MonoBehaviour
         currentAttackCoolDown += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            HitWithDelay();
+            StartCoroutine(HitWithDelay());
         }
     }
 }
