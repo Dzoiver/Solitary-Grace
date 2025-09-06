@@ -5,28 +5,31 @@ using UnityEngine;
 public class KnifeHitbox : MonoBehaviour
 {
     [SerializeField] Knife knife;
-
-    private void OnEnable()
-    {
-        
-    }
+    private float hitboxLingerTime = 0.1f;
+    private float currentHitboxLingerTime = 0f;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("hit");
             other.gameObject.GetComponent<Monster>().GetDamage(knife.GetDamageValue());
         }
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
+        gameObject.SetActive(false);
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        currentHitboxLingerTime += Time.deltaTime;
+        if (currentHitboxLingerTime > hitboxLingerTime)
+        {
+            gameObject.SetActive(false);
+            currentHitboxLingerTime = 0f;
+        }
     }
 }

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
-    private bool equipped = false;
-    [SerializeField] private float damage = 5f;
+    [SerializeField] private float damage = 35f;
     [SerializeField] private float attackDelay = 0.3f;
     private float currentAttackDelay = 0f;
-    [SerializeField] private GameObject hitbox;
+    [SerializeField] private KnifeHitbox hitbox;
 
     public float GetDamageValue()
     {
@@ -24,7 +23,7 @@ public class Knife : MonoBehaviour
     {
         if (currentAttackDelay > attackDelay)
         {
-            hitbox.SetActive(true);
+            hitbox.gameObject.SetActive(true);
             currentAttackDelay = 0f;
         }
     }
@@ -34,7 +33,7 @@ public class Knife : MonoBehaviour
     void Update()
     {
         currentAttackDelay += Time.deltaTime;
-        if (Input.GetKeyUp(KeyCode.Mouse0) && equipped)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Hit();
         }

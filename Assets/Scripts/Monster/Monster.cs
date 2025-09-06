@@ -77,7 +77,7 @@ public class Monster : MonoBehaviour
 
     public void GetDamage(float amount)
     {
-        if (health - amount < 0)
+        if (health - amount <= 0)
         {
             Death();
         }
@@ -85,11 +85,12 @@ public class Monster : MonoBehaviour
         {
             health -= amount;
         }
+        Debug.Log("Current health: " + health);
     }
 
     private void Death()
     {
-
+        gameObject.SetActive(false);
     }
 
     private bool ChasingPlayer()
