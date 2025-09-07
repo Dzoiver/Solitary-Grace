@@ -12,8 +12,17 @@ public class KnifeHitbox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("hit");
             other.gameObject.GetComponent<Monster>().GetDamage(knife.GetDamageValue());
+        }
+        
+        if (other.gameObject.CompareTag("Tape"))
+        {
+            other.gameObject.GetComponent<Tape>().RemoveTape();
+        }
+
+        if (other.gameObject.CompareTag("Box"))
+        {
+            other.gameObject.GetComponent<DestroyableBox>().DestroyBox();
         }
     }
 

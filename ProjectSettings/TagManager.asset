@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Box
+  - Tape
   layers:
   - Default
   - TransparentFX
