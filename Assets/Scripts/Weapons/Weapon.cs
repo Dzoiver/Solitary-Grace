@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
-    private int clipAmmo = 5;
-    private int currentClip = 5;
-    private int reserveAmmo = 0;
-    private int maxAmmo = 30;
-    private float coolDown = 0.5f;
-    private float currentCoolDown = 0f;
+    public abstract int clipAmmo { get; set; }
+    public abstract int currentClip { get; set; }
+    public abstract int reserveAmmo { get; set; }
+    public abstract int maxAmmo { get;}
+    public abstract float coolDown { get;}
+    public abstract float currentCoolDown { get; set; }
     private Animator weaponAnimator;
+    public abstract string ReloadAnimName { get; set; }
+
+    public abstract string ShootAnimName { get; set; }
 
     private bool reloading = false;
 
     void Start()
     {
-        
+        weaponAnimator = GetComponent<Animator>();
     }
 
     private void Shoot()
     {
         clipAmmo -= 1;
-        weaponAnimator.Play("Shoot");
+        weaponAnimator.Play(ShootAnimName);
     }
 
     private void Reload()
@@ -33,7 +37,7 @@ public class Weapon : MonoBehaviour
         if (currentClip < clipAmmo && reserveAmmo > 0)
         {
             reloading = true;
-            weaponAnimator.Play("Reload");
+            weaponAnimator.Play(ReloadAnimName);
         }
     }
 
