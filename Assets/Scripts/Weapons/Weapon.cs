@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    [SerializeField] public TextMeshProUGUI canvasText;
     public abstract int clipAmmo { get; set; }
     public abstract int currentClip { get; set; }
     public abstract int reserveAmmo { get; set; }
@@ -21,12 +23,14 @@ public abstract class Weapon : MonoBehaviour
     void Start()
     {
         weaponAnimator = GetComponent<Animator>();
+        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
     }
 
     private void Shoot()
     {
-        clipAmmo -= 1;
-        weaponAnimator.Play(ShootAnimName);
+        currentClip -= 1;
+        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
+        weaponAnimator.Play(ShootAnimName, -1, 0f);
     }
 
     private void Reload()
@@ -37,13 +41,18 @@ public abstract class Weapon : MonoBehaviour
         if (currentClip < clipAmmo && reserveAmmo > 0)
         {
             reloading = true;
-            weaponAnimator.Play(ReloadAnimName);
+            weaponAnimator.Play(ReloadAnimName, -1, 0f);
         }
     }
 
-    public void AddAmmo()
+    public void AddAmmo(int value)
     {
-        reserveAmmo += clipAmmo;
+        reserveAmmo += value;
+    }
+
+    public void RemoveAmmo(int value)
+    {
+        reserveAmmo -= value;
     }
     
     public void FinishReloading()
@@ -59,7 +68,7 @@ public abstract class Weapon : MonoBehaviour
             currentClip += reserveAmmo;
             reserveAmmo = 0;
         }
-
+        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
         reloading = false;
     }
 
