@@ -9,4 +9,5 @@ public class ScriptableItem : ScriptableObject
     public string name;
     public int maxQuantity;
     public int quantity;
+    public Sprite sprite;
 }

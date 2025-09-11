@@ -27,6 +27,7 @@ public class Menu : MonoBehaviour
 
     public void OpenMenu()
     {
+        inventory.DisplayItems();
         fading = true;
         GameFuncs.PlayerScript.SetControl(false);
         AudioController.Play("openMenu");

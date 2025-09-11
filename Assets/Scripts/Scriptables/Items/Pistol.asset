@@ -16,3 +16,4 @@ MonoBehaviour:
   name: Pistol
   maxQuantity: 1
   quantity: 1
+  sprite: {fileID: 21300000, guid: 2eaefceb64da0814eb723d54ed2d10b7, type: 3}

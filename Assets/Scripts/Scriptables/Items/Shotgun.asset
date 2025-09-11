@@ -16,3 +16,4 @@ MonoBehaviour:
   name: Shotgun
   maxQuantity: 1
   quantity: 1
+  sprite: {fileID: 21300000, guid: 7e029ad6b6e022c4c9940cef0025d4bb, type: 3}

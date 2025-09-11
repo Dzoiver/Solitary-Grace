@@ -18,7 +18,13 @@ public class InventoryItem
     private int maxQuantity = 0;
     private int id = 0;
     private string name = "";
+    private Sprite itemSprite;
 
+    public Sprite ItemSprite
+    {
+        get { return itemSprite; }
+        set { itemSprite = value; }
+    }
     public int Quantity
     {
         get { return quantity; }
@@ -40,12 +46,13 @@ public class InventoryItem
         get { return name; }
     }
 
-    public InventoryItem(int _id, int _maxQuantity = 1, string _name = "", int _quantity = 1)
+    public InventoryItem(int _id, int _maxQuantity = 1, string _name = "", int _quantity = 1, Sprite _itemSprite = null)
     {
         id = _id;
         maxQuantity = _maxQuantity;
         name = _name;
         quantity = _quantity;
+        itemSprite = _itemSprite;
     }
 }
 
@@ -53,15 +60,17 @@ public class Inventory : MonoBehaviour
 {
     private int capacity = 6;
     public List<InventoryItem> ItemsList = new List<InventoryItem>();
+    [SerializeField] InventorySlotUI[] uiSlots;
 
     public void AddItem(ScriptableItem scriptableItem)
     {
-        InventoryItem item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity);
+        InventoryItem item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite);
 
         if (ItemsList.Count < capacity)
         {
             ItemsList.Add(item);
             Debug.Log("item added: " + item.Name);
+
         }
     }
 
@@ -87,5 +96,15 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void DisplayItems()
+    {
+        int index = 0;
+        foreach (InventoryItem it in ItemsList)
+        {
+            uiSlots[index].UpdateSlot(it);
+            index++;
+        }
     }
 }
