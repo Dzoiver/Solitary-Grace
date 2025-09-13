@@ -6,6 +6,7 @@ using Zenject;
 public class ItemPickup : MonoBehaviour
 {
     private Menu menu;
+    [Inject] Inventory inventory;
     [SerializeField] ScriptableItem item;
     [SerializeField] private bool destroyOnPickUp = true;
 
@@ -18,14 +19,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.gameObject.name == "UseCube")
         {
-            if (destroyOnPickUp)
-            {
-                menu.ConfirmBox(item, gameObject);
-            }
-            else
-            {
-                menu.ConfirmBox(item);
-            }
+            inventory.TryPickup(gameObject, item, destroyOnPickUp);
         }
     }
 }

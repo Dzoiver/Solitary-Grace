@@ -58,19 +58,37 @@ public class InventoryItem
 
 public class Inventory : MonoBehaviour
 {
-    private int capacity = 6;
+    private int capacity = 12;
     public List<InventoryItem> ItemsList = new List<InventoryItem>();
     [SerializeField] InventorySlotUI[] uiSlots;
+    private Menu menu;
+    MessagesUI mesUI;
 
-    public void AddItem(ScriptableItem scriptableItem)
+    private void Start()
+    {
+        menu = FindObjectOfType<Menu>();
+        mesUI = FindObjectOfType<MessagesUI>();
+    }
+
+    private void AddItem(ScriptableItem scriptableItem)
     {
         InventoryItem item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite);
 
+        ItemsList.Add(item);
+        // Debug.Log("item added: " + item.Name);
+    }
+
+    public void TryPickup(GameObject objectItem, ScriptableItem itemInfo, bool destroyOnPickup)
+    {
         if (ItemsList.Count < capacity)
         {
-            ItemsList.Add(item);
-            Debug.Log("item added: " + item.Name);
-
+            objectItem.SetActive(!destroyOnPickup);
+            AddItem(itemInfo);
+            mesUI.ShowPickup(itemInfo.name);
+        }
+        else
+        {
+            mesUI.FullInventory();
         }
     }
 

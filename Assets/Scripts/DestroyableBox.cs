@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DestroyableBox : MonoBehaviour
 {
-    [SerializeField] private ItemPickup itemDrop;
-    [SerializeField] GameObject itemToDrop;
-
     enum items
     {
         HealthDrink,

@@ -46,7 +46,7 @@ public class Menu : MonoBehaviour
     public void ConfirmBox(ScriptableItem item, GameObject itemToDisable = null)
     {
         if (itemToDisable != null)
-        bufferPickupObject = itemToDisable;
+            bufferPickupObject = itemToDisable;
         bufferItem = item; // Buffers item which player decides to take or not
         OpenMenu();
         confirmPanelItem.SetActive(true);
@@ -60,7 +60,7 @@ public class Menu : MonoBehaviour
             bufferPickupObject.SetActive(false);
             bufferPickupObject = null;
         }
-        inventory.AddItem(bufferItem);
+        //inventory.AddItem(bufferItem);
         CloseMenu();
     }
 
