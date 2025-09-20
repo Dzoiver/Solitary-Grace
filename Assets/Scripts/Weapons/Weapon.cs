@@ -13,7 +13,7 @@ public abstract class Weapon : MonoBehaviour
     public abstract int maxAmmo { get;}
     public abstract float coolDown { get;}
     public abstract float currentCoolDown { get; set; }
-    private Animator weaponAnimator;
+    public abstract Animator weaponAnimator { get; set; }
     public abstract string ReloadAnimName { get; set; }
 
     public abstract string ShootAnimName { get; set; }
@@ -22,16 +22,22 @@ public abstract class Weapon : MonoBehaviour
 
     void Start()
     {
-        weaponAnimator = GetComponent<Animator>();
         canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
     }
 
     private void Shoot()
     {
-        currentClip -= 1;
-        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
-        weaponAnimator.Play(ShootAnimName, -1, 0f);
+        if (currentClip > 0)
+        {
+            currentClip -= 1;
+            canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
+            Debug.Log(weaponAnimator);
+            weaponAnimator.Play(ShootAnimName, -1, 0f);
+            SpawnBullets();
+        }
     }
+
+    public abstract void SpawnBullets();
 
     private void Reload()
     {

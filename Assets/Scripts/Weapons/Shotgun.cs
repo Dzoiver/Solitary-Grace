@@ -17,6 +17,8 @@ public class Shotgun : Weapon
         get => shootAnimName;
         set => shootAnimName = value;
     }
+
+    Animator _weaponAnimator;
     public override int clipAmmo { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public override int currentClip { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public override int reserveAmmo { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
@@ -26,4 +28,11 @@ public class Shotgun : Weapon
     public override float coolDown => throw new System.NotImplementedException();
 
     public override float currentCoolDown { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    public override Animator weaponAnimator { get => _weaponAnimator; set => _weaponAnimator = value; }
+
+    public override void SpawnBullets()
+    {
+
+    }
 }
