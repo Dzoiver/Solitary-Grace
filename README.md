@@ -1,5 +1,6 @@
 # Solitary-Grace
-Horror first person game.
+Horror first person game. Just trying to finish the project little by little. Basically working for my own experience in developing a game. Inspired by Silent hill and Resident evil games.
+Currently working on the basic mechanics and the level blockout.
 
 ### Synopsis:
 Explore your nightmares. Solve mystery of the place in your dreams but be cautious of things you fear the most. You'll wake up if you die in a dream. But is the reality truly safe?
