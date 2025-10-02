@@ -1,3 +1,4 @@
+using GM;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,6 +28,9 @@ public abstract class Weapon : MonoBehaviour
 
     private void Shoot()
     {
+        if (!GameFuncs.PlayerScript.IsControl()) // Can't shoot if menu is opened
+            return;
+
         if (currentClip > 0)
         {
             currentClip -= 1;
