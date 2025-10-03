@@ -61,12 +61,10 @@ public class Inventory : MonoBehaviour
     private int capacity = 12;
     public List<InventoryItem> ItemsList = new List<InventoryItem>();
     [SerializeField] InventorySlotUI[] uiSlots;
-    private Menu menu;
     MessagesUI mesUI;
 
     private void Start()
     {
-        menu = FindObjectOfType<Menu>();
         mesUI = FindObjectOfType<MessagesUI>();
     }
 

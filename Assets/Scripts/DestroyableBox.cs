@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DestroyableBox : MonoBehaviour
@@ -18,7 +19,7 @@ public class DestroyableBox : MonoBehaviour
         switch (item)
         {
             case items.HealthDrink:
-                Instantiate(Resources.Load("Pickup/HealthDrink"), gameObject.transform.position, Quaternion.identity);
+                var item = Instantiate(Resources.Load("Pickup/HealthDrink"), gameObject.transform.position, Quaternion.identity);
                 break;
 
             case items.PistolAmmo:

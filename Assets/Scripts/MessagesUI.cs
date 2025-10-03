@@ -62,7 +62,6 @@ public class MessagesUI : MonoBehaviour
         }
 
         freeTextObj.transform.position = defaultTextPos;
-        Debug.Log(freeTextObj.DOKill(false));
         freeTextObj.color = new Color(1f, 1f, 1f, 0f);
         freeTextObj.gameObject.SetActive(true);
         return freeTextObj;

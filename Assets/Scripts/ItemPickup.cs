@@ -7,11 +7,12 @@ public class ItemPickup : MonoBehaviour
 {
     private Menu menu;
     [Inject] Inventory inventory;
-    [SerializeField] ScriptableItem item;
+    public ScriptableItem item;
     [SerializeField] private bool destroyOnPickUp = true;
 
     private void Start()
     {
+        // inventory = FindObjectOfType<Inventory>();
         menu = FindObjectOfType<Menu>();
     }
 

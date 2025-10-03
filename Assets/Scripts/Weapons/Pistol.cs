@@ -7,6 +7,7 @@ public class Pistol : Weapon
 {
     ProjectilesManager pManager;
     Vector3 rotationBullet;
+    [SerializeField] GameObject bulletStart;
     string reloadAnimName = "pistolReload2";
     public override string ReloadAnimName
     {
@@ -53,7 +54,7 @@ public class Pistol : Weapon
         rotationBullet.x = Camera.main.transform.rotation.eulerAngles.x;
         rotationBullet.y = GameFuncs.PlayerScript.transform.rotation.eulerAngles.y;
         var bullet = pManager.GetNewBullet();
-        bullet.transform.position = transform.position;
+        bullet.transform.position = bulletStart.transform.position;
         bullet.Launch(-transform.right, rotationBullet);
     }
 }

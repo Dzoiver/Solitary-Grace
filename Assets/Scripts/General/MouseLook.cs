@@ -4,6 +4,7 @@ public class MouseLook : MonoBehaviour
 {
     [SerializeField] Transform PlayerBody;
     public bool AllowMove = true;
+    [SerializeField] MouseLook otherCamera;
 
     private float MouseSensitivity = 2f;
 
