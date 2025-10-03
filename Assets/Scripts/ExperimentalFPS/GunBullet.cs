@@ -9,13 +9,22 @@ public class GunBullet : Projectile
     Vector3 Direction;
     float timeAlive = 0f;
     float timeToDie = 5f;
+    float randomness = 0.1f;
 
-    public void Launch(Vector3 direction, Vector3 rotation)
+    public void Launch(Vector3 direction, Vector3 rotation, bool random = false)
     {
+        if (random)
+        {
+            direction.x += Random.Range(-randomness, randomness);
+            direction.y += Random.Range(-randomness, randomness);
+            direction.z += Random.Range(-randomness, randomness);
+        }
         Direction = direction;
         transform.rotation = Quaternion.Euler(rotation);
         launched = true;
         gameObject.SetActive(true);
+
+
     }
 
     private void OnTriggerEnter(Collider other)
