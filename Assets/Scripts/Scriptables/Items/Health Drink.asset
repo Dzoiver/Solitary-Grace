@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   name: Health Drink
-  maxQuantity: 99
+  maxQuantity: 1
   quantity: 1
   sprite: {fileID: 21300000, guid: 2a755fd207fd4a047a322ebe8e431a49, type: 3}

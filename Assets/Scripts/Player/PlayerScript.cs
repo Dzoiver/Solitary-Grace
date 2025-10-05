@@ -48,6 +48,18 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void GiveHP(float amount)
+    {
+        if (health + amount < maxHealth)
+        {
+            health += amount;
+        }
+        else
+        {
+            health = maxHealth;
+        }
+    }
+
     public bool IsDead()
     {
         if (health <= 0)
@@ -131,12 +143,11 @@ public class PlayerScript : MonoBehaviour
     }
     private void Awake()
     {
-        
+        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
     }
 
     private void Start()
     {
-        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
         controller = GetComponent<CharacterController>();
         playerCamStartPos = playerCam.transform.localPosition;
     }

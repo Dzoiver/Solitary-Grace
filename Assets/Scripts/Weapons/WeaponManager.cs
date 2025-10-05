@@ -5,14 +5,14 @@ using Zenject;
 
 public class WeaponManager : MonoBehaviour
 {
-    [Inject] Inventory inventory;
+    Inventory inventory;
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject knife;
     [SerializeField] GameObject shotgun;
     // Start is called before the first frame update
     void Start()
     {
-        
+        inventory = FindObjectOfType<Inventory>();
     }
 
     private void HideAll()

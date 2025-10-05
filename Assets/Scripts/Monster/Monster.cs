@@ -119,7 +119,7 @@ public class Monster : MonoBehaviour
 
     private void Patrol()
     {
-        if (!patrol)
+        if (!patrol || patrolPoints.Length == 0)
             return;
 
         agent.destination = patrolPoints[currentPatrolIndex].transform.position;

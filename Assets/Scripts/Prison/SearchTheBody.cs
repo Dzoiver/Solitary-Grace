@@ -7,13 +7,14 @@ using Zenject;
 public class SearchTheBody : MonoBehaviour
 {
     [Inject] Menu menu;
-    [Inject] Inventory inventory;
+    Inventory inventory;
     [SerializeField] ScriptableItem key;
     private InventoryItem item;
     private bool keyTaken = false;
 
     private void Start()
     {
+        inventory = FindObjectOfType<Inventory>();
         item = new InventoryItem(key.id, key.maxQuantity, key.name);
     }
     private void OnTriggerEnter(Collider other)

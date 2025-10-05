@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 enum ItemNames
@@ -19,6 +20,7 @@ public class InventoryItem
     private int id = 0;
     private string name = "";
     private Sprite itemSprite;
+    public int inventorySlotID;
 
     public Sprite ItemSprite
     {
@@ -90,16 +92,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void DeleteItem(int itemSlot, int quantity)
+    public void DeleteItem(int itemSlot, int deleteQuantity)
     {
-
-        if (ItemsList[itemSlot].Quantity < quantity)
+        if (ItemsList[itemSlot].Quantity - deleteQuantity <= 0)
         {
             ItemsList.RemoveAt(itemSlot);
             return;
         }
 
-        ItemsList[itemSlot].Quantity -= quantity;
+        ItemsList[itemSlot].Quantity -= deleteQuantity;
     }
 
     public bool Has(int givenID)
@@ -117,9 +118,22 @@ public class Inventory : MonoBehaviour
     public void DisplayItems()
     {
         int index = 0;
+        foreach (InventorySlotUI slot in uiSlots)
+        {
+            if (index < ItemsList.Count)
+            {
+                uiSlots[index].UpdateSlot(ItemsList[index], index);
+            }
+            else
+            {
+                uiSlots[index].UpdateSlot(null, index);
+            }
+            index++;
+        }
+        return;
         foreach (InventoryItem it in ItemsList)
         {
-            uiSlots[index].UpdateSlot(it);
+            uiSlots[index].UpdateSlot(it, index);
             index++;
         }
     }

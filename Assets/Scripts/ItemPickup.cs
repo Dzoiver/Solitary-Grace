@@ -5,15 +5,15 @@ using Zenject;
 
 public class ItemPickup : MonoBehaviour
 {
-    private Menu menu;
-    [Inject] Inventory inventory;
+    // private Menu menu;
+    Inventory inventory;
     public ScriptableItem item;
     [SerializeField] private bool destroyOnPickUp = true;
 
     private void Start()
     {
-        // inventory = FindObjectOfType<Inventory>();
-        menu = FindObjectOfType<Menu>();
+        inventory = FindObjectOfType<Inventory>();
+        // menu = FindObjectOfType<Menu>();
     }
 
     private void OnTriggerEnter(Collider other)

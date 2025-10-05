@@ -6,13 +6,18 @@ using Zenject;
 
 public class DoorOpen : MonoBehaviour
 {
-    [Inject] Inventory inventory;
+    Inventory inventory;
     [Inject] DialogueManager dManager;
     [SerializeField] GameObject destinationPoint;
     public bool Closed = false;
     [SerializeField] ScriptableItem key;
     [SerializeField] ScriptableMes lines;
     [SerializeField] bool playLockedSound = true;
+
+    private void Start()
+    {
+        inventory = FindObjectOfType<Inventory>();
+    }
 
     public void DoorCanBeOpened(bool canOpen)
     {

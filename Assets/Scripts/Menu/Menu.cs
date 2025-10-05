@@ -7,6 +7,7 @@ using SolitaryAudio;
 using UnityEngine.Events;
 using static UnityEditor.Progress;
 using Zenject;
+using UnityEditor.Rendering.LookDev;
 
 public class Menu : MonoBehaviour
 {
@@ -14,13 +15,20 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject systemPanel;
     [SerializeField] GameObject confirmPanel;
     [SerializeField] GameObject confirmPanelItem;
-    [Inject] Inventory inventory;
+    Inventory inventory;
+    ContextMenuItem context;
     private ScriptableItem bufferItem;
     private GameObject bufferPickupObject;
     private bool fading = false;
+
+    private void Awake()
+    {
+        context = FindObjectOfType<ContextMenuItem>();
+    }
     // Start is called before the first frame update
     void Start()
     {
+        inventory = FindObjectOfType<Inventory>();
         menuPanel.SetActive(false);
         confirmPanelItem.SetActive(false);
     }
@@ -72,6 +80,7 @@ public class Menu : MonoBehaviour
 
     public void CloseMenu()
     {
+        context.gameObject.SetActive(false);
         confirmPanelItem.SetActive(false);
         fading = true;
         AudioController.Play("closeMenu");

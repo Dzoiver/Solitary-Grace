@@ -9,9 +9,16 @@ public class InventorySlotUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI itemname;
     [SerializeField] Sprite defaultSprite;
     [SerializeField] Image itemIcon;
-    public InventoryItem item;
+    ContextMenuItem context;
+    
+    public InventoryItem item = null;
 
-    public void UpdateSlot(InventoryItem it)
+    private void Awake()
+    {
+        context = FindObjectOfType<ContextMenuItem>();
+    }
+
+    public void UpdateSlot(InventoryItem it, int index)
     {
         if (it == null)
         {
@@ -21,6 +28,7 @@ public class InventorySlotUI : MonoBehaviour
         }
         itemIcon.enabled = true;
         item = it;
+        item.inventorySlotID = index;
         if (item.ItemSprite == null)
         {
             itemIcon.sprite = defaultSprite;
@@ -35,6 +43,12 @@ public class InventorySlotUI : MonoBehaviour
     {
         if (item != null)
             itemname.text = item.Name;
+    }
+
+    public void TryOpenContext()
+    {
+        if (item != null)
+        context.CallContextMenu(item);
     }
 
     // Update is called once per frame
