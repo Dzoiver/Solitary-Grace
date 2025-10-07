@@ -5,6 +5,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField] Transform PlayerBody;
     public bool AllowMove = true;
     [SerializeField] MouseLook otherCamera;
+    public float preferenceSens = 1f;
 
     private float MouseSensitivity = 2f;
 
@@ -21,8 +22,8 @@ public class MouseLook : MonoBehaviour
     {
         if (!AllowMove || PlayerBody == null)
             return;
-        float mouseX = Input.GetAxis(xAxis) * MouseSensitivity;
-        float mouseY = Input.GetAxis(yAxis) * MouseSensitivity;
+        float mouseX = Input.GetAxis(xAxis) * MouseSensitivity * preferenceSens;
+        float mouseY = Input.GetAxis(yAxis) * MouseSensitivity * preferenceSens;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);

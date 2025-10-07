@@ -31,6 +31,7 @@ public class Menu : MonoBehaviour
         inventory = FindObjectOfType<Inventory>();
         menuPanel.SetActive(false);
         confirmPanelItem.SetActive(false);
+        systemPanel.SetActive(false);
     }
 
     public void OpenMenu()

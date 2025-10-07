@@ -29,7 +29,7 @@ public class TextShow : MonoBehaviour
             text.text = mes.MessageText[0];
             text.enabled = true;
 
-            sequence.PrependInterval(2f).Append(text.DOFade(0, 0.5f));
+            sequence.PrependInterval(3f).Append(text.DOFade(0, 0.5f));
             sequence.onComplete = ResetText;
         }
     }
