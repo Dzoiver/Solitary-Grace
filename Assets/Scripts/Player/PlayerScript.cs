@@ -192,6 +192,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
+
         if (isNoclip)
         {
             isGrounded = false;
@@ -218,7 +219,6 @@ public class PlayerScript : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-
         Vector3 move = transform.right * x + transform.forward * z;
 
         if (allowMovement)
@@ -237,8 +237,12 @@ public class PlayerScript : MonoBehaviour
             velocity.y += Physics.gravity.y * Time.deltaTime;
         }
         controller.Move(velocity * Time.deltaTime);
-
         HandleInteract();
+    }
+
+    private void LateUpdate()
+    {
+        
     }
 
     private void HandleInteract()

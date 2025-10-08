@@ -31,4 +31,9 @@ public class MouseLook : MonoBehaviour
 
         PlayerBody.Rotate(Vector3.up * mouseX); // X rotation
     }
+
+    private void LateUpdate()
+    {
+        
+    }
 }
