@@ -72,6 +72,13 @@ public class Inventory : MonoBehaviour
 
     private void AddItem(ScriptableItem scriptableItem)
     {
+        if (scriptableItem == null)
+        {
+            scriptableItem.id = 999;
+            scriptableItem.name = "unknown";
+            scriptableItem.quantity = 1;
+            scriptableItem.maxQuantity = 1;
+        }
         InventoryItem item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite);
 
         ItemsList.Add(item);

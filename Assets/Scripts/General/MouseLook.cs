@@ -1,3 +1,6 @@
+using DG.Tweening;
+using GM;
+using System.Threading;
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour
@@ -12,7 +15,15 @@ public class MouseLook : MonoBehaviour
     float xRotation = 0f;
     void Start()
     {
+        GameFuncs.mouseLook = gameObject.GetComponent<MouseLook>();
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void CenterView()
+    {
+        //xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Y rotation
+        xRotation = 0f; // Centering view
     }
 
     const string xAxis = "Mouse X";
@@ -24,16 +35,10 @@ public class MouseLook : MonoBehaviour
             return;
         float mouseX = Input.GetAxis(xAxis) * MouseSensitivity * preferenceSens;
         float mouseY = Input.GetAxis(yAxis) * MouseSensitivity * preferenceSens;
-
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Y rotation
 
         PlayerBody.Rotate(Vector3.up * mouseX); // X rotation
-    }
-
-    private void LateUpdate()
-    {
-        
     }
 }

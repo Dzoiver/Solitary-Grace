@@ -46,6 +46,7 @@ public class Pistol : Weapon
 
     private void Start()
     {
+        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
         WeaponAnimator = GetComponent<Animator>();
         pManager = FindObjectOfType<ProjectilesManager>();
     }

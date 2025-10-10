@@ -5,12 +5,14 @@ using DG.Tweening;
 using UnityEngine.UI;
 using System;
 using System.Runtime.CompilerServices;
+using UnityEditor.Rendering.LookDev;
 
 namespace GM
 {
     public class GameFuncs : MonoBehaviour
     {
         static public PlayerScript PlayerScript;
+        static public MouseLook mouseLook;
         static public Image BlackImage;
         static public void LampsChangeColor(Light[] lights, Color endColor)
         {
@@ -23,7 +25,9 @@ namespace GM
         static public void TeleportPlayer(GameObject destination)
         {
             PlayerScript.controller.enabled = false;
+            mouseLook.CenterView();
             PlayerScript.gameObject.transform.position = destination.transform.position;
+            PlayerScript.gameObject.transform.rotation = destination.transform.rotation;
             PlayerScript.controller.enabled = true;
         }
 

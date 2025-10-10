@@ -15,7 +15,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] MouseLook _mouse;
 
     private float speed = 5f;
-    private float gravity = 1f;
+    private float gravity = -9.81f;
+    public float gravityMultiplier = 1.0f;
+    public bool gravityAllowed = true;
     private float jumpHeight = 3f;
     private float groundDistance = 0.5f;
     [SerializeField] private bool allowMovement = true;
@@ -185,6 +187,18 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void ApplyGravity()
+    {
+        if (isGrounded && velocity.y < 0 && !isNoclip) // Gravity even when grounded
+        {
+            velocity.y = -2f;
+        }
+        if (!isNoclip)
+            velocity.y += gravity * gravityMultiplier * Time.deltaTime;
+        if (allowMovement)
+            controller.Move(velocity * Time.deltaTime);
+    }
+
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
@@ -210,19 +224,13 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        
-
-        if (isGrounded && velocity.y < 0 && !isNoclip) // Gravity even when grounded
-        {
-            velocity.y = -6f;
-        }
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
-
         if (allowMovement)
             controller.Move(move * speed * Time.deltaTime);
+        
 
         if (!allowControl)
             return;
@@ -231,12 +239,7 @@ public class PlayerScript : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravity);
         }
-
-        if (!isNoclip)
-        {
-            velocity.y += Physics.gravity.y * Time.deltaTime;
-        }
-        controller.Move(velocity * Time.deltaTime);
+        ApplyGravity();
         HandleInteract();
     }
 

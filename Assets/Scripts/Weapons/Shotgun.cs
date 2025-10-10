@@ -1,6 +1,7 @@
 using GM;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Shotgun : Weapon
@@ -44,8 +45,10 @@ public class Shotgun : Weapon
 
     private void Start()
     {
+        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
         _weaponAnimator = GetComponent<Animator>();
         pManager = FindObjectOfType<ProjectilesManager>();
+
     }
     public override void SpawnBullets()
     {

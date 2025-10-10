@@ -31,7 +31,6 @@ public class VolumeController : MonoBehaviour
     {
         // Convert linear slider value to logarithmic for the Audio Mixer
         float volume = Mathf.Log10(volumeSlider.value) * 20;
-        Debug.Log(volume);
         masterMixer.SetFloat(MasterVolumeParam, volume);
 
         // Optional: Save volume to PlayerPrefs

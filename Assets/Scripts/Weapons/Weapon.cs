@@ -1,4 +1,4 @@
-using GM;
+﻿using GM;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,7 +23,8 @@ public abstract class Weapon : MonoBehaviour
 
     void Start()
     {
-        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
+        Debug.Log("Start");
+        // canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString(); // не работает
     }
 
     private void Shoot()
