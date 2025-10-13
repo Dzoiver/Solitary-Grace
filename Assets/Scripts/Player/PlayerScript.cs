@@ -1,8 +1,6 @@
 using UnityEngine;
 using GM;
-using UnityEngine.Rendering.UI;
 using Zenject;
-using Unity.VisualScripting;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -14,8 +12,14 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] Transform GroundCheck;
     [SerializeField] MouseLook _mouse;
 
-    private float speed = 5f;
-    private float gravity = -9.81f;
+    private const float BASE_SPEED = 5f;
+    private const float BASE_GRAVITY = -9.81f;
+    private const float GROUND_DISTANCE = 0.5f;
+    private const float GROUNDED_VELOCITY_Y = -4f;
+    private const float INTERACT_DISTANCE = 1.5f;
+
+    private float speed = BASE_SPEED;
+    private float gravity = BASE_GRAVITY;
     public float gravityMultiplier = 1.0f;
     public bool gravityAllowed = true;
     private float jumpHeight = 3f;
@@ -25,61 +29,73 @@ public class PlayerScript : MonoBehaviour
     private bool isGrounded;
     private Vector3 velocity;
     private bool isNoclip = false;
-
+    public bool inElevator = false;
     public bool AllowJump = false;
+
     [HideInInspector] public CharacterController controller;
     [SerializeField] GameObject playerCam;
     Vector3 playerCamStartPos;
     public LayerMask GroundMask;
 
+    Vector3 move;
+
+    public Elevator currentElevator;
+
     private float health = 100f;
     private float maxHealth = 100f;
 
+    private Animator cameraAnimator;
+    private float gravityEffect;
+
+    public float GravityMultiplier
+    {
+        get => gravityMultiplier;
+        set
+        {
+            gravityMultiplier = value;
+            UpdateGravityCalculations();
+        }
+    }
+
+    private void Awake()
+    {
+        GameFuncs.PlayerScript = this;
+        cameraAnimator = playerCam.GetComponent<Animator>();
+        UpdateGravityCalculations();
+    }
+
+    private void UpdateGravityCalculations()
+    {
+        gravityEffect = gravity * gravityMultiplier * Time.fixedDeltaTime;
+    }
+
     public void GetDamage(float damage)
     {
-        if (health - damage <= 0 && !IsDead())
+        if (health <= 0) return;
+
+        health = Mathf.Max(0, health - damage);
+
+        if (health <= 0)
         {
-            health = 0;
             Death();
         }
-        else if (!IsDead())
+        else
         {
-            health -= damage;
             gameover.GetDamagedRedScreen();
-            // redish screen
         }
     }
 
     public void GiveHP(float amount)
     {
-        if (health + amount < maxHealth)
-        {
-            health += amount;
-        }
-        else
-        {
-            health = maxHealth;
-        }
+        health = Mathf.Min(maxHealth, health + amount);
     }
 
-    public bool IsDead()
-    {
-        if (health <= 0)
-        {
-            return true;
-        }
-        return false;
-    }
+    public bool IsDead() => health <= 0;
 
     private void Death()
     {
-        // Red screen
-        // camera animation
-        // Black screen
-        // Respawn
-        Animator anim = playerCam.GetComponent<Animator>();
-        anim.enabled = true;
-        anim.Play("Deathanim");
+        cameraAnimator.enabled = true;
+        cameraAnimator.Play("Deathanim");
         gameover.DieFromMonster();
     }
 
@@ -118,11 +134,6 @@ public class PlayerScript : MonoBehaviour
             return false;
     }
 
-    public Transform GetTransform()
-    {
-        return gameObject.transform;
-    }
-
     /// <summary>
     /// Allowing or disabling player's movement
     /// </summary>
@@ -142,10 +153,6 @@ public class PlayerScript : MonoBehaviour
             _mouse.AllowMove = false;
             allowControl = false;
         }
-    }
-    private void Awake()
-    {
-        GameFuncs.PlayerScript = gameObject.GetComponent<PlayerScript>();
     }
 
     private void Start()
@@ -173,39 +180,48 @@ public class PlayerScript : MonoBehaviour
 
     public void ToggleNoclip()
     {
-        if (isNoclip == false)
-        {
-            isNoclip = true;
-            gameObject.layer = 12; // PlayerNoclip
-            Debug.Log("Noclip on");
-        }
-        else
-        {
-            isNoclip = false;
-            gameObject.layer = 6; // Player
-            Debug.Log("Noclip off");
-        }
+        isNoclip = !isNoclip;
+        gameObject.layer = isNoclip ? 12 : 6;
+        Debug.Log($"Noclip {(isNoclip ? "on" : "off")}");
     }
 
     private void ApplyGravity()
     {
         if (isGrounded && velocity.y < 0 && !isNoclip) // Gravity even when grounded
         {
-            velocity.y = -2f;
+            velocity.y = -4f;
         }
         if (!isNoclip)
-            velocity.y += gravity * gravityMultiplier * Time.deltaTime;
+            velocity.y += gravityEffect;
+
         if (allowMovement)
-            controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.fixedDeltaTime);
     }
 
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
+
+        if (inElevator && currentElevator != null)
+        {
+            controller.Move(move * speed * Time.fixedDeltaTime);
+            velocity.y = 0;
+            Vector3 elevatorMovement = currentElevator.Velocity * Time.fixedDeltaTime;
+            controller.Move(elevatorMovement);
+        }
+        else
+        {
+            ApplyGravity();
+        }
     }
 
     private void Update()
     {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        move = transform.right * x + transform.forward * z;
+        if (allowMovement && !inElevator)
+            controller.Move(move * speed * Time.deltaTime);
 
         if (isNoclip)
         {
@@ -224,14 +240,6 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-        if (allowMovement)
-            controller.Move(move * speed * Time.deltaTime);
-        
-
         if (!allowControl)
             return;
 
@@ -239,7 +247,19 @@ public class PlayerScript : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravity);
         }
-        ApplyGravity();
+
+        /*
+        if (inElevator)
+        {
+            controller.Move(currentElevator.Velocity);
+        }
+        else
+        {
+            ApplyGravity();
+        }
+        */
+        
+
         HandleInteract();
     }
 
@@ -256,9 +276,9 @@ public class PlayerScript : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             // Debug.DrawRay(ray.origin, ray.direction, Color.white, 5f);
 
-            if (Physics.Raycast(ray, out hit, 1.5f, layer.value))
+            if (Physics.Raycast(ray, out hit, INTERACT_DISTANCE, layer.value))
             {
-                if (hit.collider.gameObject.layer == 3)
+                if (hit.collider.gameObject.layer == 3) // Layer 3 - Interactable
                 {
                     useTrigger.SetActive(true);
                     useTrigger.transform.position = hit.point;

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using GM;
 using TMPro;
 using DG.Tweening;
+using System.Security.Cryptography;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -21,9 +22,7 @@ public class DialogueManager : MonoBehaviour
     
     public void SetDialogue(ScriptableMes mes)
     {
-        Debug.Log(mes);
         dialogue = mes;
-        
     }
 
     private void ResetText()

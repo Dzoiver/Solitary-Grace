@@ -13,7 +13,7 @@ public class Prison : MonoBehaviour
             return;
         }
 
-        if (Vector3.Distance(GameFuncs.PlayerScript.GetTransform().position, gameObject.transform.position) > 100f)
+        if (Vector3.Distance(GameFuncs.PlayerScript.transform.position, gameObject.transform.position) > 100f)
         {
             gameObject.SetActive(false);
         }

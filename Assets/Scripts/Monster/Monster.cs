@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GM;
 using UnityEngine.AI;
-using UnityEditor.UIElements;
-using System;
-using UnityEditor;
 
 public class Monster : MonoBehaviour
 {
@@ -128,14 +123,7 @@ public class Monster : MonoBehaviour
             if (currentPatrolWait > patrolWait)
             {
                 currentPatrolWait = 0f;
-                if (currentPatrolIndex + 1 < patrolPoints.Length)
-                {
-                    currentPatrolIndex++;
-                }
-                else
-                {
-                    currentPatrolIndex = 0;
-                }
+                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
             }
             currentPatrolWait += Time.deltaTime;
         }

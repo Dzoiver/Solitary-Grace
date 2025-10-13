@@ -4,31 +4,24 @@ using GM;
 using SolitaryAudio;
 using Zenject;
 
-public class DoorOpen : MonoBehaviour
+public class SimpleDoor : MonoBehaviour
 {
     Inventory inventory;
     [Inject] DialogueManager dManager;
-    [SerializeField] GameObject destinationPoint;
-    public bool Closed = false;
+    GameObject destinationPoint;
+    public bool ClosedRed = false;
+    public bool ClosedBlue = false;
     [SerializeField] ScriptableItem key;
     [SerializeField] ScriptableMes lines;
     [SerializeField] bool playLockedSound = true;
-
-    [SerializeField] GameObject destinationLeft;
-    [SerializeField] GameObject destinationRight;
-
+    [SerializeField] GameObject destinationBlue;
+    [SerializeField] GameObject destinationRed;
+    // Start is called before the first frame update
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
     }
 
-    public void DoorCanBeOpened(bool canOpen)
-    {
-        if (canOpen)
-            Closed = false;
-        else
-            Closed = true;
-    }
     private bool PlayerHasKey()
     {
         if (key == null)
@@ -45,21 +38,44 @@ public class DoorOpen : MonoBehaviour
         return false;
     }
 
+    public GameObject GetFurtherDestination()
+    {
+        if (Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, destinationRed.transform.position) >
+            Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, destinationBlue.transform.position))
+            return destinationRed;
+        else
+            return destinationBlue;
+    }
+
+    public bool CanOpen()
+    {
+        bool canOpen = true;
+        if (GetFurtherDestination() == destinationBlue && ClosedRed && !PlayerHasKey())
+        {
+            canOpen = false;
+        }
+        if (GetFurtherDestination() == destinationRed && ClosedBlue && !PlayerHasKey())
+        {
+            canOpen = false;
+        }
+
+        return canOpen;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "UseCube") // If a player presses E button on the door
         {
-            if (Closed)
+            if (!CanOpen())
             {
-                if (!PlayerHasKey())
-                {
-                    if (playLockedSound)
-                        AudioController.Play("doorOpen");
-                    dManager.SetDialogue(lines);
-                    dManager.PlayDialogue(0);
-                    return;
-                }
+                if (playLockedSound)
+                    AudioController.Play("doorOpen");
+                dManager.SetDialogue(lines);
+                dManager.PlayDialogue(0);
+                return;
             }
+
+            destinationPoint = GetFurtherDestination();
 
             GameFuncs.PlayerScript.SetControl(false);
             AudioController.Play("doorOpen");

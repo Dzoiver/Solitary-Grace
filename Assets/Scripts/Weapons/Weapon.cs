@@ -21,12 +21,6 @@ public abstract class Weapon : MonoBehaviour
 
     private bool reloading = false;
 
-    void Start()
-    {
-        Debug.Log("Start");
-        // canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString(); // не работает
-    }
-
     private void Shoot()
     {
         if (!GameFuncs.PlayerScript.IsControl()) // Can't shoot if menu is opened
@@ -36,7 +30,6 @@ public abstract class Weapon : MonoBehaviour
         {
             currentClip -= 1;
             canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
-            Debug.Log(weaponAnimator);
             weaponAnimator.Play(ShootAnimName, -1, 0f);
             SpawnBullets();
         }

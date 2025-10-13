@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using GM;
 using Unity.VisualScripting;
+using static UnityEngine.GraphicsBuffer;
 
 public class Elevator : MonoBehaviour
 {
@@ -21,22 +22,35 @@ public class Elevator : MonoBehaviour
     int currentFloor = 0;
     bool playerInElevator = false;
 
+    private Rigidbody rb;
+    private Vector3 startPosition;
+
+    private Vector3 lastPosition;
+    public Vector3 Velocity { get; private set; }
+
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        startPosition = transform.position;
+
         if (gameObject.transform.position.y == 0.25f)
             currentFloor = 1;
         else
             currentFloor = 2;
         if (platformToLift != null)
             initialPosition = platformToLift.transform.position;
+
+        lastPosition = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            GameFuncs.PlayerScript.gameObject.transform.SetParent(gameObject.transform);
+            // GameFuncs.PlayerScript.gameObject.transform.SetParent(gameObject.transform);
             playerInElevator = true;
+            GameFuncs.PlayerScript.inElevator = true;
+            GameFuncs.PlayerScript.currentElevator = this;
         }
     }
 
@@ -46,6 +60,8 @@ public class Elevator : MonoBehaviour
         {
             GameFuncs.PlayerScript.gameObject.transform.SetParent(null);
             playerInElevator = false;
+            GameFuncs.PlayerScript.inElevator = false;
+            GameFuncs.PlayerScript.currentElevator = null;
         }
     }
 
@@ -130,15 +146,49 @@ public class Elevator : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (moving)
         {
             destinationFloor.y = 0.25f + 6f * (currentFloor - 1);
-            transform.position = Vector3.MoveTowards(transform.position, destinationFloor, 1f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destinationFloor, 1f * Time.delta);
 
             if (transform.position == destinationFloor)
             {
                 moving = false;
             }
         }
+        */
+
+
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (moving)
+        {
+            destinationFloor.y = 0.25f + 6f * (currentFloor - 1);
+            //transform.position = Vector3.MoveTowards(transform.position, destinationFloor, 1f * Time.fixedDeltaTime);
+            Vector3 newPosition = Vector3.MoveTowards(
+            rb.position,
+            destinationFloor,
+            1f * Time.fixedDeltaTime
+        );
+            Velocity = (newPosition - rb.position) / Time.fixedDeltaTime;
+            rb.MovePosition(newPosition);
+
+            if (transform.position == destinationFloor)
+            {
+                moving = false;
+            }
+        }
+        else
+        {
+            Velocity = Vector3.zero;
+        }
+    }
+
+    private void LateUpdate()
+    {
     }
 }

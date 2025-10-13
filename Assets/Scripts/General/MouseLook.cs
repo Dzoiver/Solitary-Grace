@@ -1,6 +1,4 @@
-using DG.Tweening;
 using GM;
-using System.Threading;
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour
@@ -15,7 +13,7 @@ public class MouseLook : MonoBehaviour
     float xRotation = 0f;
     void Start()
     {
-        GameFuncs.mouseLook = gameObject.GetComponent<MouseLook>();
+        GameFuncs.mouseLook = this;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
