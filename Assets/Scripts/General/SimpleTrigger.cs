@@ -1,3 +1,4 @@
+using GM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,30 +11,27 @@ public class SimpleTrigger : MonoBehaviour
     [SerializeField] UnityEvent onPress;
     [SerializeField] private bool triggerOnce = false;
     [SerializeField] bool disableRendering = true;
+    public bool active = true;
+    BoxCollider collider;
     // Start is called before the first frame update
     void Start()
     {
+        collider = GetComponent<BoxCollider>();
         if (disableRendering)
             GetComponent<MeshRenderer>().enabled = false;
     }
 
-    IEnumerator TestCoroutine()
-    {
-        while (true)
-        {
-            yield return null;
-            Debug.Log(Time.deltaTime);
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+        if (!active)
+            return;
+
         if (other.CompareTag("Player"))
         {
             onEnter.Invoke();
             if (triggerOnce)
             {
-                gameObject.SetActive(false);
+                collider.enabled = false;
             }
         }
 
@@ -42,7 +40,7 @@ public class SimpleTrigger : MonoBehaviour
             onPress.Invoke();
             if (triggerOnce)
             {
-                gameObject.SetActive(false);
+                collider.enabled = false;
             }
         }
     }
@@ -51,5 +49,17 @@ public class SimpleTrigger : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetActiveTrigger() => active = true;
+
+    public void DisablePlayer() => GameFuncs.PlayerScript.SetControl(false);
+    IEnumerator TestCoroutine()
+    {
+        while (true)
+        {
+            yield return null;
+            Debug.Log(Time.deltaTime);
+        }
     }
 }

@@ -5,8 +5,13 @@ using GM;
 
 public class Prison : MonoBehaviour
 {
+    [SerializeField] bool hiddenIfPlayerFar = true;
     private void Start()
     {
+        if (!hiddenIfPlayerFar)
+        {
+            return;
+        }
         if (GameFuncs.PlayerScript == null)
         {
             gameObject.SetActive(false);
