@@ -102,7 +102,7 @@ public class PlayerScript : MonoBehaviour
     public void CameraRestore()
     {
         playerCam.transform.localPosition = playerCamStartPos;
-        playerCam.GetComponent<CameraReturnControls>().SwitchToPlayer(true);
+        playerCam.GetComponent<CameraReturnControls>().SwitchToPlayer();
     }
 
     public Vector3 GetCamera()

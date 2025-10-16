@@ -31,11 +31,26 @@ namespace GM
             PlayerScript.controller.enabled = true;
         }
 
-        static public void FadeIn()
+        static public void TeleportPlayer(Vector3 destinationVector, Quaternion rot)
         {
-            BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f);
+            PlayerScript.controller.enabled = false;
+            mouseLook.CenterView();
+            PlayerScript.gameObject.transform.position = destinationVector;
+            PlayerScript.gameObject.transform.rotation = rot;
+            PlayerScript.controller.enabled = true;
         }
 
+        static public void FadeIn(float time = 0.5f)
+        {
+            BlackImage.DOColor(new Color(0, 0, 0, 1), time);
+        }
+
+        static public void FadeOut(float time = 0.5f)
+        {
+            //BlackImage.color = new Color(1f, 1f, 1f);
+            BlackImage.DOColor(new Color(0, 0, 0, 1f), 0f);
+            BlackImage.DOColor(new Color(0, 0, 0, 0), time);
+        }
         static public void LowerObject(GameObject object1, Vector3 endValue)
         {
             

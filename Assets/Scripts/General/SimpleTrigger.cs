@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GM;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,9 +7,11 @@ using UnityEngine.Events;
 
 public class SimpleTrigger : MonoBehaviour
 {
-    [SerializeField] float delayBetweenEvents = 0f;
     [SerializeField] UnityEvent onEnter;
     [SerializeField] UnityEvent onPress;
+    [SerializeField] UnityEvent onFinish;
+    [SerializeField] float startDelay = 0f;
+    [SerializeField] float finishDelay = 0f;
     [SerializeField] private bool triggerOnce = false;
     [SerializeField] bool disableRendering = true;
     public bool active = true;
@@ -28,20 +31,20 @@ public class SimpleTrigger : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            onEnter.Invoke();
             if (triggerOnce)
             {
                 collider.enabled = false;
             }
+            StartCoroutine(OpeningCoroutine(onEnter, startDelay));
         }
 
         if (other.gameObject.name == "UseCube")
         {
-            onPress.Invoke();
             if (triggerOnce)
             {
                 collider.enabled = false;
             }
+            StartCoroutine(OpeningCoroutine(onPress, startDelay));
         }
     }
 
@@ -54,12 +57,28 @@ public class SimpleTrigger : MonoBehaviour
     public void SetActiveTrigger() => active = true;
 
     public void DisablePlayer() => GameFuncs.PlayerScript.SetControl(false);
-    IEnumerator TestCoroutine()
+
+    public void PlayerFaint()
     {
-        while (true)
-        {
-            yield return null;
-            Debug.Log(Time.deltaTime);
-        }
+        Camera.main.GetComponent<Animator>().enabled = true;
+        Camera.main.GetComponent<Animator>().Play("FallAnimation");
+    }
+
+    public void SilenceAudio(AudioSource source)
+    {
+        source.DOFade(0f, 6f);
+    }
+
+    IEnumerator OpeningCoroutine(UnityEvent startEvent, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        startEvent.Invoke();
+        StartCoroutine(FinishCoroutine(onFinish, finishDelay));
+    }
+
+    IEnumerator FinishCoroutine(UnityEvent finishEvent, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        finishEvent.Invoke();
     }
 }

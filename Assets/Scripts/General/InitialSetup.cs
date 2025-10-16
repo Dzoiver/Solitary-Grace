@@ -6,7 +6,7 @@ public class InitialSetup : MonoBehaviour
 {
     [SerializeField] Image blackImage;
 
-    void Start()
+    void Awake()
     {
         GameFuncs.BlackImage = blackImage;
     }

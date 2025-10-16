@@ -11,6 +11,7 @@ public class GetSomeSleep : MonoBehaviour
     [SerializeField] GameObject destinationPoint;
     [SerializeField] AudioSource sound;
     [SerializeField] GameObject prison;
+    [SerializeField] GameObject musicHome;
     private Sequence sequence;
     private BoxCollider boxcollider;
     private DaytimeOutside daytimeScript;
@@ -36,6 +37,7 @@ public class GetSomeSleep : MonoBehaviour
 
     private void GoToPrison()
     {
+        musicHome.SetActive(false);
         daytimeScript.SetDay(false);
         prison.SetActive(true);
         GameFuncs.TeleportPlayer(destinationPoint);

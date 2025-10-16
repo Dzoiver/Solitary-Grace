@@ -3649,7 +3649,7 @@ GameObject:
   - component: {fileID: 1489882793}
   m_Layer: 6
   m_Name: Main Camera (1)
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6492,13 +6492,14 @@ GameObject:
   - component: {fileID: 6571139211426620345}
   - component: {fileID: 6571139211426620346}
   - component: {fileID: 472942420}
+  - component: {fileID: 732401660}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6571139211426620344
 Transform:
   m_ObjectHideFlags: 0
@@ -6557,14 +6558,18 @@ MonoBehaviour:
     m_Bits: 8
   GroundCheck: {fileID: 6571139211166708972}
   _mouse: {fileID: 3855770500859337717}
+  gravityMultiplier: 1
+  gravityAllowed: 1
   allowMovement: 1
   allowControl: 1
+  inElevator: 0
   AllowJump: 0
   controller: {fileID: 6571139211426620345}
   playerCam: {fileID: 7313239355480887726}
   GroundMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 129
+  currentElevator: {fileID: 0}
 --- !u!65 &472942420
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6578,6 +6583,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &732401660
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6571139211426620347}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6571139212024969652
 GameObject:
   m_ObjectHideFlags: 0
@@ -6742,7 +6763,7 @@ GameObject:
   - component: {fileID: 1279571027560791395}
   - component: {fileID: 3855770500859337717}
   - component: {fileID: 2061252332}
-  - component: {fileID: 2061252331}
+  - component: {fileID: 1376200476}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6757,8 +6778,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7313239355480887726}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8369297e-13, y: 0.43749952, z: -9.9475875e-14}
+  m_LocalRotation: {x: -0, y: 0.0000008344649, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.43749952, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6833,6 +6854,7 @@ MonoBehaviour:
   PlayerBody: {fileID: 6571139211426620344}
   AllowMove: 1
   otherCamera: {fileID: 0}
+  preferenceSens: 1
 --- !u!95 &2061252332
 Animator:
   serializedVersion: 5
@@ -6854,7 +6876,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2061252331
+--- !u!114 &1376200476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6863,11 +6885,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7313239355480887726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 167d59fe101c29e40b0237895411a6ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ba7c6be95aafd04db7bcae6d6e01dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playWakeUp: 0
-  returnToPlayer: 1
 --- !u!1001 &7848412978238215570
 PrefabInstance:
   m_ObjectHideFlags: 0

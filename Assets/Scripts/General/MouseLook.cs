@@ -7,14 +7,21 @@ public class MouseLook : MonoBehaviour
     public bool AllowMove = true;
     [SerializeField] MouseLook otherCamera;
     public float preferenceSens = 1f;
+    Animator anim;
 
     private float MouseSensitivity = 2f;
 
     float xRotation = 0f;
     void Start()
     {
+        anim = GetComponent<Animator>();
         GameFuncs.mouseLook = this;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void DisableAnimator()
+    {
+        anim.enabled = false;
     }
 
     public void CenterView()

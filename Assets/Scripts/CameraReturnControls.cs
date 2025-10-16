@@ -8,15 +8,26 @@ public class CameraReturnControls : MonoBehaviour
     [SerializeField] private bool playWakeUp = true;
     [SerializeField] private bool returnToPlayer = false;
     Animator anim;
-    Vector3 playerStartPos;
+    Camera thisCamera;
+    Vector3 playerStartPos = new Vector3(17f, 6.51f, 2.542f);
     Vector3 cameraAngle;
 
     // Start is called before the first frame update
     void Start()
     {
+        thisCamera = GetComponent<Camera>();
         anim = GetComponent<Animator>();
         cameraAngle = GameFuncs.PlayerScript.GetCamera();
-        playerStartPos = GameFuncs.PlayerScript.transform.position;
+
+        if (playWakeUp)
+        {
+            anim.Play("WakeupAnim");
+            GameFuncs.FadeOut(1f);
+            GameFuncs.PlayerScript.SetControl(false);
+            anim.enabled = true;
+        }
+
+        /*
         if (returnToPlayer)
         {
             anim.enabled = false;
@@ -28,7 +39,7 @@ public class CameraReturnControls : MonoBehaviour
             anim.enabled = false;
             SwitchToPlayer();
             return;
-        }
+        */
     }
 
     public void PlayWakeUp()
@@ -36,8 +47,10 @@ public class CameraReturnControls : MonoBehaviour
         if (!playWakeUp)
             return;
         // Fade out
-        gameObject.SetActive(true);
-        GameFuncs.PlayerScript.gameObject.SetActive(false);
+        anim.enabled = true;
+        thisCamera.enabled = true;
+        GameFuncs.FadeOut(1f);
+        //GameFuncs.PlayerScript.gameObject.SetActive(false);
         anim.Play("WakeupAnim");
     }
 
@@ -45,12 +58,12 @@ public class CameraReturnControls : MonoBehaviour
     /// Switches animated camera to player camera
     /// </summary>
     /// <param name="leaveOn">Should it deactivate the animated camera</param>
-    public void SwitchToPlayer(bool leaveOn = false)
+    public void SwitchToPlayer()
     {
         anim.enabled = false;
-        gameObject.SetActive(leaveOn);
-        GameFuncs.PlayerScript.gameObject.transform.position = playerStartPos;
-        GameFuncs.PlayerScript.gameObject.SetActive(true);
+        thisCamera.enabled = false;
+        GameFuncs.TeleportPlayer(playerStartPos, Quaternion.Euler(0f, -90f, 0f));
+        //GameFuncs.PlayerScript.gameObject.SetActive(true);
         GameFuncs.PlayerScript.SetControl(true);
         GameFuncs.PlayerScript.SetCamera(cameraAngle);
     }
