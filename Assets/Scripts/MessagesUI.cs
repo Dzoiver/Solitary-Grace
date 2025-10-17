@@ -26,7 +26,7 @@ public class MessagesUI : MonoBehaviour
     {
         TextMeshProUGUI textmesh = FindFreeText();
         textmesh.color = Color.white;
-        textmesh.text = "You pick up " + itemName;
+        textmesh.text = "You picked up " + itemName;
 
         textmesh.DOFade(1f, 0.5f).OnComplete(() =>
         {

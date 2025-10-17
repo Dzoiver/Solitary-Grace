@@ -16,6 +16,7 @@ public class SimpleDoor : MonoBehaviour
     [SerializeField] bool playLockedSound = true;
     [SerializeField] GameObject destinationBlue;
     [SerializeField] GameObject destinationRed;
+    public string stringText = "";
     // Start is called before the first frame update
     private void Start()
     {
@@ -70,7 +71,10 @@ public class SimpleDoor : MonoBehaviour
             {
                 if (playLockedSound)
                     AudioController.Play("doorOpen");
-                dManager.SetDialogue(lines);
+                if (lines != null)
+                    dManager.SetDialogue(lines);
+                else
+                    dManager.SetDialogue(stringText);
                 dManager.PlayDialogue(0);
                 return;
             }

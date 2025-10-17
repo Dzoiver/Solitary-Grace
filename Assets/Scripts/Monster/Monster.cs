@@ -1,6 +1,8 @@
 using UnityEngine;
 using GM;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 public class Monster : MonoBehaviour
 {
@@ -25,19 +27,57 @@ public class Monster : MonoBehaviour
     [SerializeField] LayerMask layerMask;
 
     [SerializeField] private bool patrol = true;
-    [SerializeField] private GameObject[] patrolPoints;
+    private List<Transform> patrolPoints = new List<Transform>();
+    [SerializeField] private GameObject patrolParent;
     private int currentPatrolIndex = 0;
     [SerializeField] private float patrolWait = 1f;
     private float currentPatrolWait = 0f;
+
+    private Vector3 startPosition;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        startPosition = transform.position;
+        int i = 0;
+        foreach (Transform t in patrolParent.transform)
+        {
+            i++;
+            patrolPoints.Add(t);
+        }
         //rb = GetComponent<Rigidbody>();
     }
 
     private void Awake()
     {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!activeAI)
+            return;
+
+        if (PlayerTooClose())
+        {
+            agent.destination = GameFuncs.PlayerScript.transform.position;
+            DamagePlayer();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!activeAI)
+            return;
+
+        if (ChasingPlayer())
+        {
+            agent.destination = GameFuncs.PlayerScript.transform.position;
+        }
+        else
+        {
+            Patrol();
+        }
     }
 
     private bool PlayerTooClose()
@@ -105,6 +145,8 @@ public class Monster : MonoBehaviour
             currentPlayerSearchTime += Time.deltaTime;
             if (currentPlayerSearchTime > playerSearchTime)
             {
+                if (!patrol)
+                    agent.destination = startPosition;
                 chase = false;
                 currentPlayerSearchTime = 0f;
             }
@@ -114,16 +156,18 @@ public class Monster : MonoBehaviour
 
     private void Patrol()
     {
-        if (!patrol || patrolPoints.Length == 0)
+        if (!patrol)
+            return;
+        if (patrolPoints.Count == 0)
             return;
 
-        agent.destination = patrolPoints[currentPatrolIndex].transform.position;
+        agent.destination = patrolPoints[currentPatrolIndex].position;
         if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < 1.5f)
         {
             if (currentPatrolWait > patrolWait)
             {
                 currentPatrolWait = 0f;
-                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
             }
             currentPatrolWait += Time.deltaTime;
         }
@@ -140,31 +184,8 @@ public class Monster : MonoBehaviour
         return false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Activate()
     {
-        if (!activeAI)
-            return;
-
-        if (PlayerTooClose())
-        {
-            agent.destination = GameFuncs.PlayerScript.transform.position;
-            DamagePlayer();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (!activeAI)
-            return;
-
-        if (ChasingPlayer())
-        {
-            agent.destination = GameFuncs.PlayerScript.transform.position;
-        }
-        else
-        {
-            Patrol();
-        }
+        activeAI = true;
     }
 }

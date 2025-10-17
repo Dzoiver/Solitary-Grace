@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 126
+  m_StaticEditorFlags: 118
   m_IsActive: 1
 --- !u!4 &4553827120038454187
 Transform:
@@ -110,12 +110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4774275ec9354cd438c53ce37920e1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBetweenEvents: 0
   onEnter:
     m_PersistentCalls:
       m_Calls: []
   onPress:
     m_PersistentCalls:
       m_Calls: []
+  onFinish:
+    m_PersistentCalls:
+      m_Calls: []
+  startDelay: 0
+  finishDelay: 0
   triggerOnce: 1
   disableRendering: 1
+  active: 1

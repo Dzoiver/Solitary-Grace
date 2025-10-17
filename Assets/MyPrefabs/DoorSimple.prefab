@@ -192,12 +192,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e648be9f47d104fac0d139b70a5785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Closed: 0
+  ClosedRed: 0
+  ClosedBlue: 0
   key: {fileID: 0}
   lines: {fileID: 0}
   playLockedSound: 1
-  destinationLeft: {fileID: 1655899266}
-  destinationRight: {fileID: 160624781}
+  destinationBlue: {fileID: 0}
+  destinationRed: {fileID: 0}
+  stringText: 
 --- !u!1 &5526778209969959171
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 317463043485437148, guid: bcf142f8cdf414f408dc13336b63aa03, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 317463043485437149, guid: bcf142f8cdf414f408dc13336b63aa03, type: 3}
       propertyPath: m_RootOrder
@@ -688,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 317463043485437148, guid: bcf142f8cdf414f408dc13336b63aa03, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 317463043485437149, guid: bcf142f8cdf414f408dc13336b63aa03, type: 3}
       propertyPath: m_RootOrder

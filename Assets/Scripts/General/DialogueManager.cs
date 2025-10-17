@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     private bool isTextDisplayed = false;
     private Sequence sequence;
     private ScriptableMes dialogue;
+    string stringText = null;
     [SerializeField] TextMeshProUGUI text;
 
 
@@ -23,6 +24,11 @@ public class DialogueManager : MonoBehaviour
     public void SetDialogue(ScriptableMes mes)
     {
         dialogue = mes;
+    }
+
+    public void SetDialogue(string mes)
+    {
+        stringText = mes;
     }
 
     private void ResetText()
@@ -41,7 +47,10 @@ public class DialogueManager : MonoBehaviour
 
         sequence = DOTween.Sequence();
         isTextDisplayed = true;
-        text.text = dialogue.MessageText[dialogueID];
+        if (dialogue != null)
+            text.text = dialogue.MessageText[dialogueID];
+        if (stringText != null)
+            text.text = stringText;
         text.enabled = true;
         sequence.PrependInterval(3f).Append(text.DOFade(0, 0.5f));
         sequence.onComplete = ResetText;

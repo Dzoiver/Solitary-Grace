@@ -4,17 +4,19 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using GM;
+using UnityEngine.Events;
 
 public class GetSomeSleep : MonoBehaviour
 {
     [SerializeField] Image blackImage;
     [SerializeField] GameObject destinationPoint;
-    [SerializeField] AudioSource sound;
+    [SerializeField] AudioSource sound = null;
     [SerializeField] GameObject prison;
-    [SerializeField] GameObject musicHome;
+    [SerializeField] GameObject musicHome = null;
     private Sequence sequence;
     private BoxCollider boxcollider;
     private DaytimeOutside daytimeScript;
+    public UnityEvent onSleep;
 
     private void Awake()
     {
@@ -37,14 +39,18 @@ public class GetSomeSleep : MonoBehaviour
 
     private void GoToPrison()
     {
-        musicHome.SetActive(false);
+        onSleep.Invoke();
+        if (musicHome != null)
+            musicHome.SetActive(false);
         daytimeScript.SetDay(false);
         prison.SetActive(true);
         GameFuncs.TeleportPlayer(destinationPoint);
         blackImage.DOColor(new Color(0, 0, 0, 0), 0.5f);
-        sound.Play();
+        if (sound != null)
+            sound.Play();
+        Debug.Log("sleeping teleporting");
         GameFuncs.PlayerScript.SetControl(true);
-        this.enabled = false;
-        boxcollider.enabled = false;
+        
+        //boxcollider.enabled = false;
     }
 }
