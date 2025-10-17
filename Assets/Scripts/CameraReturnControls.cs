@@ -9,7 +9,7 @@ public class CameraReturnControls : MonoBehaviour
     [SerializeField] private bool returnToPlayer = false;
     Animator anim;
     Camera thisCamera;
-    Vector3 playerStartPos = new Vector3(17f, 6.51f, 2.542f);
+    Vector3 playerStartPos = new Vector3(17f, 6.51f, 2.542f); // Position in room after waking up
     Vector3 cameraAngle;
 
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class CameraReturnControls : MonoBehaviour
         thisCamera = GetComponent<Camera>();
         anim = GetComponent<Animator>();
         cameraAngle = GameFuncs.PlayerScript.GetCamera();
-
+        thisCamera.enabled = false;
         if (playWakeUp)
         {
             anim.Play("WakeupAnim");
@@ -26,38 +26,8 @@ public class CameraReturnControls : MonoBehaviour
             GameFuncs.PlayerScript.SetControl(false);
             anim.enabled = true;
         }
-
-        /*
-        if (returnToPlayer)
-        {
-            anim.enabled = false;
-            return;
-        }
-        if (!playWakeUp)
-        {
-            gameObject.SetActive(false);
-            anim.enabled = false;
-            SwitchToPlayer();
-            return;
-        */
     }
 
-    public void PlayWakeUp()
-    {
-        if (!playWakeUp)
-            return;
-        // Fade out
-        anim.enabled = true;
-        thisCamera.enabled = true;
-        GameFuncs.FadeOut(1f);
-        //GameFuncs.PlayerScript.gameObject.SetActive(false);
-        anim.Play("WakeupAnim");
-    }
-
-    /// <summary>
-    /// Switches animated camera to player camera
-    /// </summary>
-    /// <param name="leaveOn">Should it deactivate the animated camera</param>
     public void SwitchToPlayer()
     {
         anim.enabled = false;
@@ -68,9 +38,13 @@ public class CameraReturnControls : MonoBehaviour
         GameFuncs.PlayerScript.SetCamera(cameraAngle);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayWakeUp()
     {
-        
+        // Fade out
+        anim.enabled = true;
+        thisCamera.enabled = true;
+        GameFuncs.FadeOut(1f);
+        //GameFuncs.PlayerScript.gameObject.SetActive(false);
+        anim.Play("WakeupAnim");
     }
 }
