@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour
     private float currentAttackDelay = 0.3f;
     private float attackCoolDown = 2f;
     private float currentAttackCoolDown = 2f;
-    private float playerSearchTime = 5f;
+    [SerializeField] private float playerSearchTime = 5f;
     private float currentPlayerSearchTime = 0f;
     private bool chase = false;
     [SerializeField] LayerMask layerMask;
