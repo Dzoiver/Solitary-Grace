@@ -3,6 +3,7 @@ using DG.Tweening;
 using GM;
 using SolitaryAudio;
 using Zenject;
+using UnityEngine.Events;
 
 public class SimpleDoor : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class SimpleDoor : MonoBehaviour
     [SerializeField] bool playLockedSound = true;
     [SerializeField] GameObject destinationBlue;
     [SerializeField] GameObject destinationRed;
+    [SerializeField] UnityEvent onOpen;
     public string stringText = "";
     // Start is called before the first frame update
     private void Start()
@@ -83,6 +85,7 @@ public class SimpleDoor : MonoBehaviour
 
             GameFuncs.PlayerScript.SetControl(false);
             AudioController.Play("doorOpen");
+            onOpen.Invoke();
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
             {
                 AudioController.Play("doorClose");
