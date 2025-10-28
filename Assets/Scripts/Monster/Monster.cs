@@ -34,6 +34,7 @@ public class Monster : MonoBehaviour
     private float currentPatrolWait = 0f;
 
     private Vector3 startPosition;
+    public float allowedAngle = 45f;
     // Start is called before the first frame update
     void Start()
     {
@@ -133,10 +134,20 @@ public class Monster : MonoBehaviour
         Vector3 directionNormal = (GameFuncs.PlayerScript.gameObject.transform.position - transform.position).normalized;
         if (Physics.Raycast(transform.position, directionNormal, out RaycastHit hit, detectRadius, layerMask))
         {
-            if (hit.collider.CompareTag("Player"))
+            Vector3 directionToHit = (hit.point - transform.position).normalized;
+            float angleToTarget = Vector3.Angle(transform.forward, directionToHit);
+            Debug.Log(angleToTarget);
+            if (angleToTarget <= allowedAngle)
             {
-                chase = true;
-                return true;
+                // Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.green);
+
+                if (hit.collider.CompareTag("Player"))
+                {
+                    chase = true;
+                    return true;
+                }
+                // Object is within the allowed angle
+                // Debug.Log("Hit object " + hit.collider.name + " within allowed angle.");
             }
         }
 
