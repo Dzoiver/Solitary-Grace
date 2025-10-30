@@ -39,6 +39,23 @@ public class MessagesUI : MonoBehaviour
         });
     }
 
+    public void ShowMessage(string mesText)
+    {
+        TextMeshProUGUI textmesh = FindFreeText();
+        textmesh.color = Color.white;
+        textmesh.text = mesText;
+
+        textmesh.DOFade(1f, 0.5f).OnComplete(() =>
+        {
+            DOVirtual.DelayedCall(2f, () => {
+                textmesh.DOFade(0f, 1f).OnComplete(() =>
+                {
+                    textmesh.gameObject.SetActive(false);
+                });
+            });
+        });
+    }
+
     private TextMeshProUGUI FindFreeText()
     {
         Vector3 newPosition = new Vector3();

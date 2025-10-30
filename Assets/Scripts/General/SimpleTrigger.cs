@@ -2,6 +2,7 @@ using DG.Tweening;
 using GM;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,11 +15,22 @@ public class SimpleTrigger : MonoBehaviour
     [SerializeField] float finishDelay = 0f;
     [SerializeField] private bool triggerOnce = false;
     [SerializeField] bool disableRendering = true;
+
+    [SerializeField] bool checkItem = false;
+    [SerializeField] ScriptableItem checkItemScriptable;
+    Inventory inventory;
+    MessagesUI messageUI;
     public bool active = true;
     BoxCollider collider;
     // Start is called before the first frame update
     void Start()
     {
+        if (checkItem)
+        {
+            messageUI = FindObjectOfType<MessagesUI>();
+            inventory = FindObjectOfType<Inventory>();
+        }
+
         collider = GetComponent<BoxCollider>();
         if (disableRendering)
             GetComponent<MeshRenderer>().enabled = false;
@@ -29,6 +41,16 @@ public class SimpleTrigger : MonoBehaviour
         if (!active)
             return;
 
+        if (checkItemScriptable != null)
+        {
+            if (!inventory.Has(checkItemScriptable.id))
+            {
+                Debug.Log("ALOOO");
+                messageUI.ShowMessage("You need a valve");
+                return;
+            }
+        }
+            
         if (other.CompareTag("Player"))
         {
             if (triggerOnce)

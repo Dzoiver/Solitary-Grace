@@ -17,7 +17,8 @@ public class SimpleDoor : MonoBehaviour
     [SerializeField] bool playLockedSound = true;
     [SerializeField] GameObject destinationBlue;
     [SerializeField] GameObject destinationRed;
-    [SerializeField] UnityEvent onOpen;
+    [SerializeField] UnityEvent onOpenBlue;
+    [SerializeField] UnityEvent onOpenRed;
     public string stringText = "";
     // Start is called before the first frame update
     private void Start()
@@ -41,13 +42,25 @@ public class SimpleDoor : MonoBehaviour
         return false;
     }
 
+    public void Unlock()
+    {
+        ClosedBlue = false;
+        ClosedRed = false;
+    }
+
     public GameObject GetFurtherDestination()
     {
         if (Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, destinationRed.transform.position) >
             Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, destinationBlue.transform.position))
+        {
+            onOpenBlue.Invoke();
             return destinationRed;
+        }
         else
+        {
+            onOpenRed.Invoke();
             return destinationBlue;
+        }
     }
 
     public bool CanOpen()
@@ -85,7 +98,6 @@ public class SimpleDoor : MonoBehaviour
 
             GameFuncs.PlayerScript.SetControl(false);
             AudioController.Play("doorOpen");
-            onOpen.Invoke();
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
             {
                 AudioController.Play("doorClose");

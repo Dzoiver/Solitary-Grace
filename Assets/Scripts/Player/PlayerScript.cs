@@ -219,12 +219,23 @@ public class PlayerScript : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+
+
         move = transform.right * x + transform.forward * z;
         if (allowMovement && !inElevator)
             controller.Move(move * speed * Time.deltaTime);
 
         if (isNoclip)
         {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = 15f;
+            }
+            else
+            {
+                speed = BASE_SPEED;
+            }
+
             isGrounded = false;
 
             if (Input.GetKey(KeyCode.Space))

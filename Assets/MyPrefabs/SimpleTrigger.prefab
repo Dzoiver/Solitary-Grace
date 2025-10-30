@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4553827120038454185}
   - component: {fileID: 4553827120038454184}
   - component: {fileID: 4553827120038454189}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SimpleTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,4 +123,6 @@ MonoBehaviour:
   finishDelay: 0
   triggerOnce: 1
   disableRendering: 1
+  checkItem: 0
+  checkItemScriptable: {fileID: 0}
   active: 1

@@ -136,7 +136,6 @@ public class Monster : MonoBehaviour
         {
             Vector3 directionToHit = (hit.point - transform.position).normalized;
             float angleToTarget = Vector3.Angle(transform.forward, directionToHit);
-            Debug.Log(angleToTarget);
             if (angleToTarget <= allowedAngle)
             {
                 // Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.green);

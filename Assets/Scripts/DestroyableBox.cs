@@ -11,11 +11,13 @@ public class DestroyableBox : MonoBehaviour
         Nothing,
         HealthDrink,
         PistolAmmo,
-        ShotgunAmmo
+        ShotgunAmmo,
+        Valve,
     }
 
     [SerializeField] UnityEvent onBreak;
     [SerializeField] items item;
+    GameObject itemObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,23 +26,29 @@ public class DestroyableBox : MonoBehaviour
             case items.Nothing:
                 break;
 
+            case items.Valve:
+                itemObject = (GameObject)Instantiate(Resources.Load("Pickup/ValvePickup"), gameObject.transform.position, Quaternion.identity);
+                break;
             case items.HealthDrink:
-                var item = Instantiate(Resources.Load("Pickup/HealthDrink"), gameObject.transform.position, Quaternion.identity);
+                itemObject = (GameObject)Instantiate(Resources.Load("Pickup/HealthDrink"), gameObject.transform.position, Quaternion.identity);
                 break;
 
             case items.PistolAmmo:
-                Instantiate(Resources.Load("Pickup/PistolAmmo"), gameObject.transform.position, Quaternion.identity);
+                itemObject = (GameObject)Instantiate(Resources.Load("Pickup/PistolAmmo"), gameObject.transform.position, Quaternion.identity);
                 break;
             case items.ShotgunAmmo:
-                Instantiate(Resources.Load("Pickup/ShotgunAmmo"), gameObject.transform.position, Quaternion.identity);
+                itemObject = (GameObject)Instantiate(Resources.Load("Pickup/ShotgunAmmo"), gameObject.transform.position, Quaternion.identity);
                 break;
         }
-        
+        if (itemObject != null)
+            itemObject.SetActive(false);
     }
 
     public void DestroyBox()
     {
         onBreak.Invoke();
+        if (itemObject != null)
+            itemObject.SetActive(true);
         gameObject.SetActive(false);
     }
 
