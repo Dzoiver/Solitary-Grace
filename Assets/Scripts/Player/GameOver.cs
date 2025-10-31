@@ -44,12 +44,15 @@ public class GameOver : MonoBehaviour
         sequence = DOTween.Sequence();
         image.gameObject.SetActive(true);
         GameFuncs.PlayerScript.SetControl(false);
-        sequence.Append(image.DOColor(new Color(0, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = () =>
+        image.DOColor(new Color(0, 0, 0, 1), 1f);
+        /*
+        sequence.Append(image.DOColor(new Color(0, 0, 0, 1), 1f)).AppendInterval(2f).onComplete = () =>
         {
-            GameFuncs.PlayerScript.SetControl(true);
-            GameFuncs.PlayerScript.CameraRestore();
-            image.DOColor(new Color(0, 0, 0, 0), 0.5f);
-            GameFuncs.TeleportPlayer(destination);
+            //GameFuncs.PlayerScript.SetControl(true);
+            //GameFuncs.PlayerScript.CameraRestore();
+            //image.DOColor(new Color(0, 0, 0, 0), 0.5f);
+            //GameFuncs.TeleportPlayer(destination);
         };
+        */
     }
 }

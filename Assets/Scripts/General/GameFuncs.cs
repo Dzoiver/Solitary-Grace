@@ -14,6 +14,7 @@ namespace GM
         static public PlayerScript PlayerScript;
         static public MouseLook mouseLook;
         static public Image BlackImage;
+        static public bool fading = false;
         static public void LampsChangeColor(Light[] lights, Color endColor)
         {
             for (int i = 0; i < lights.Length; i++)

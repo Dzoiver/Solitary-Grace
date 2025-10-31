@@ -1,5 +1,6 @@
 using UnityEngine;
 using SolitaryAudio;
+using UnityEngine.Rendering;
 
 public class Switch : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Switch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.name != "UseCube")
+            return;
+
         if (livingRoomLight.enabled)
         {
             LightOff();

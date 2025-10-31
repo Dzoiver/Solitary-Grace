@@ -102,7 +102,7 @@ public class PlayerScript : MonoBehaviour
     public void CameraRestore()
     {
         playerCam.transform.localPosition = playerCamStartPos;
-        playerCam.GetComponent<CameraReturnControls>().SwitchToPlayer();
+        //playerCam.GetComponent<CameraReturnControls>().SwitchToPlayer();
     }
 
     public Vector3 GetCamera()
@@ -128,10 +128,7 @@ public class PlayerScript : MonoBehaviour
 
     public bool IsControl()
     {
-        if (allowControl)
-            return true;
-        else
-            return false;
+        return allowControl;
     }
 
     /// <summary>

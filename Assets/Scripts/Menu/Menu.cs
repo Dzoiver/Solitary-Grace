@@ -19,7 +19,6 @@ public class Menu : MonoBehaviour
     ContextMenuItem context;
     private ScriptableItem bufferItem;
     private GameObject bufferPickupObject;
-    private bool fading = false;
 
     private void Awake()
     {
@@ -37,7 +36,7 @@ public class Menu : MonoBehaviour
     public void OpenMenu()
     {
         inventory.DisplayItems();
-        fading = true;
+        GameFuncs.fading = true;
         GameFuncs.PlayerScript.SetControl(false);
         AudioController.Play("openMenu");
         Cursor.lockState = CursorLockMode.None;
@@ -47,7 +46,7 @@ public class Menu : MonoBehaviour
             // Fadein
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
             {
-                fading = false;
+                GameFuncs.fading = false;
             };
         };
     }
@@ -83,7 +82,7 @@ public class Menu : MonoBehaviour
     {
         context.gameObject.SetActive(false);
         confirmPanelItem.SetActive(false);
-        fading = true;
+        GameFuncs.fading = true;
         AudioController.Play("closeMenu");
         Cursor.lockState = CursorLockMode.Locked;
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
@@ -96,7 +95,7 @@ public class Menu : MonoBehaviour
             GameFuncs.PlayerScript.SetControl(true);
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
             {
-                fading = false;
+                GameFuncs.fading = false;
             };
         };
     }
@@ -104,7 +103,7 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fading)
+        if (GameFuncs.fading)
             return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -113,7 +112,7 @@ public class Menu : MonoBehaviour
             {
                 OpenMenu();
             }
-            else
+            else if (menuPanel.activeSelf)
             {
                 CloseMenu();
             }

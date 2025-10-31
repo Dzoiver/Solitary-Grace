@@ -32,15 +32,18 @@ public class CameraReturnControls : MonoBehaviour
     {
         anim.enabled = false;
         thisCamera.enabled = false;
-        GameFuncs.TeleportPlayer(playerStartPos, Quaternion.Euler(0f, -90f, 0f));
         //GameFuncs.PlayerScript.gameObject.SetActive(true);
+        GameFuncs.PlayerScript.GiveHP(100f);
+        GameFuncs.PlayerScript.CameraRestore();
         GameFuncs.PlayerScript.SetControl(true);
         GameFuncs.PlayerScript.SetCamera(cameraAngle);
+        
     }
 
     public void PlayWakeUp()
     {
         // Fade out
+        GameFuncs.TeleportPlayer(playerStartPos, Quaternion.Euler(0f, -90f, 0f));
         anim.enabled = true;
         thisCamera.enabled = true;
         GameFuncs.FadeOut(1f);

@@ -18,6 +18,7 @@ public class SimpleTrigger : MonoBehaviour
 
     [SerializeField] bool checkItem = false;
     [SerializeField] ScriptableItem checkItemScriptable;
+    [SerializeField] string noItemMessage = "It seems like something is missing";
     Inventory inventory;
     MessagesUI messageUI;
     public bool active = true;
@@ -40,18 +41,17 @@ public class SimpleTrigger : MonoBehaviour
     {
         if (!active)
             return;
-
+        Debug.Log("ahahaha");
         if (checkItemScriptable != null)
         {
             if (!inventory.Has(checkItemScriptable.id))
             {
-                Debug.Log("ALOOO");
-                messageUI.ShowMessage("You need a valve");
+                messageUI.ShowMessage(noItemMessage);
                 return;
             }
         }
             
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && onEnter.GetPersistentEventCount() > 0)
         {
             if (triggerOnce)
             {

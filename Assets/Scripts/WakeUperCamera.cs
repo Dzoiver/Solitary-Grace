@@ -7,9 +7,11 @@ public class WakeUperCamera : MonoBehaviour
 {
     CameraReturnControls wakeupObject;
     Animator anim;
+    GameOver gameover;
     // Start is called before the first frame update
     void Start()
     {
+        gameover = FindObjectOfType<GameOver>();
         anim = GetComponent<Animator>();
         wakeupObject = FindObjectOfType<CameraReturnControls>();
     }
@@ -22,7 +24,9 @@ public class WakeUperCamera : MonoBehaviour
 
     public void WakeUp()
     {
+        anim.enabled = false;
         wakeupObject.PlayWakeUp();
+        //gameover.DieFromMonster();
     }
 
     public void FadeIn()
