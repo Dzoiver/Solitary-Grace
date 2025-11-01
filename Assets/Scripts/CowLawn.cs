@@ -8,6 +8,11 @@ public class CowLawn : MonoBehaviour
 {
     [SerializeField] GameObject computer;
     [SerializeField] GameObject osCanvas;
+
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {

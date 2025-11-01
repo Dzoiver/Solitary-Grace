@@ -38,9 +38,8 @@ public class Computer : MonoBehaviour
     {
         currentTimeInputDelay += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Escape) && currentTimeInputDelay > TimeInputDelay)
+        if (Input.GetKeyDown(KeyCode.Escape) && currentTimeInputDelay > TimeInputDelay && osCanvas.activeSelf)
         {
-            Debug.Log("closed computer");
             StartCoroutine(DelayFunc());
         }
 
