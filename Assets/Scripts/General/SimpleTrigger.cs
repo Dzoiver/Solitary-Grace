@@ -41,7 +41,6 @@ public class SimpleTrigger : MonoBehaviour
     {
         if (!active)
             return;
-        Debug.Log("ahahaha");
         if (checkItemScriptable != null)
         {
             if (!inventory.Has(checkItemScriptable.id))
