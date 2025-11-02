@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MessageText:
   - Yo. Hungry too?
-  - Hehehe... You need that door to open, right?
-  - Search the body. He might have had something useful.
-  - It's in the toilet.
+  - That guy maybe has something useful. You can check him.
+  - He's in the toilet.
+  - I don't understand what happened but we are still trapped here.

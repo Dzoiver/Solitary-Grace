@@ -37,7 +37,7 @@ public class DaytimeOutside : MonoBehaviour
         }
         if (!interactable)
         {
-            Camera.main.clearFlags = CameraClearFlags.Nothing;
+            Camera.main.clearFlags = CameraClearFlags.SolidColor;
             RenderSettings.skybox = null;
             directionalLight.intensity = 0;
             RenderSettings.ambientLight = new Color(0f, 0f, 0f);

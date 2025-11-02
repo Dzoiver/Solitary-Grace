@@ -72,15 +72,13 @@ public class Inventory : MonoBehaviour
 
     private void AddItem(ScriptableItem scriptableItem)
     {
+        InventoryItem item;
         if (scriptableItem == null)
         {
-            scriptableItem.id = 999;
-            scriptableItem.name = "unknown";
-            scriptableItem.quantity = 1;
-            scriptableItem.maxQuantity = 1;
+            item = new InventoryItem(999, 1, "unknown", 1);
         }
-        InventoryItem item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite);
-
+        else
+            item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite);
         ItemsList.Add(item);
         // Debug.Log("item added: " + item.Name);
     }
@@ -91,7 +89,12 @@ public class Inventory : MonoBehaviour
         {
             objectItem.SetActive(!destroyOnPickup);
             AddItem(itemInfo);
-            mesUI.ShowPickup(itemInfo.name);
+            if (itemInfo == null)
+            {
+                mesUI.ShowPickup("Unknown");
+            }
+            else
+                mesUI.ShowPickup(itemInfo.name);
         }
         else
         {
