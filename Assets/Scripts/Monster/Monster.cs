@@ -39,7 +39,6 @@ public class Monster : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        startPosition = transform.position;
         int i = 0;
         foreach (Transform t in patrolParent.transform)
         {
@@ -51,6 +50,7 @@ public class Monster : MonoBehaviour
 
     private void Awake()
     {
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -113,6 +113,7 @@ public class Monster : MonoBehaviour
 
     public void GetDamage(float amount)
     {
+        chase = true;
         if (health - amount <= 0)
         {
             Death();
@@ -121,7 +122,6 @@ public class Monster : MonoBehaviour
         {
             health -= amount;
         }
-        Debug.Log("Current health: " + health);
     }
 
     private void Death()
@@ -197,5 +197,11 @@ public class Monster : MonoBehaviour
     public void Activate()
     {
         activeAI = true;
+    }
+
+    public void ResetMonster()
+    {
+        currentPatrolIndex = 0;
+        transform.position = startPosition;
     }
 }

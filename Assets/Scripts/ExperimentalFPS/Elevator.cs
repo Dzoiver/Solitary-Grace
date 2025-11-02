@@ -27,11 +27,11 @@ public class Elevator : MonoBehaviour
     private Vector3 startPosition;
 
     private Vector3 lastPosition;
+    [SerializeField] private Vector3 firstFloor = new Vector3(0,0,0);
     public Vector3 Velocity { get; private set; }
 
     private void Start()
     {
-        
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position;
         destinationFloor = startPosition;
@@ -104,12 +104,17 @@ public class Elevator : MonoBehaviour
 
     public void MoveToFloor(int floor)
     {
+        /*
         if (floor == currentFloor || moving)
             return;
         if (floor > currentFloor)
             destinationFloor.y += floorDistance * (floor - 1);
         else
             destinationFloor.y -= floorDistance * (floor);
+        */
+        if (floor == currentFloor || moving)
+            return;
+        destinationFloor.y = firstFloor.y + floor * floorDistance;
         currentFloor = floor;
         moving = true;
     }

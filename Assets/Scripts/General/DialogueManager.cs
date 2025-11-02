@@ -40,10 +40,13 @@ public class DialogueManager : MonoBehaviour
 
     public bool PlayDialogue(int dialogueID)
     {
-        if (dialogue == null || isTextDisplayed == true)
+        if (isTextDisplayed == true)
         {
             return true;
         }
+
+        if (dialogue == null && stringText == null)
+            return true;
 
         sequence = DOTween.Sequence();
         isTextDisplayed = true;
