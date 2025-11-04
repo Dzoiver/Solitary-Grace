@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 7e57d6bb6a6a1b74795062b56af48f40
+labels:
+- Material
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] LayerMask layer;
     [SerializeField] Transform GroundCheck;
     [SerializeField] MouseLook _mouse;
+    [SerializeField] FootSteps footsteps;
 
     private const float BASE_SPEED = 5f;
     private const float BASE_GRAVITY = -9.81f;
@@ -269,6 +270,16 @@ public class PlayerScript : MonoBehaviour
         
 
         HandleInteract();
+
+
+        RaycastHit hit2;
+        Vector3 rayOrigin2 = transform.position + Vector3.up * 0.1f;
+        if (Physics.Raycast(rayOrigin2, Vector3.down, out hit2, 2f))
+        {
+            // Successfully hit an object
+            footsteps.TryStep(hit2.collider.GetComponent<Material>(), Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z));
+        }
+        
     }
 
     private void LateUpdate()
