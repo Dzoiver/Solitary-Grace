@@ -17,10 +17,15 @@ public class DestroyableBox : MonoBehaviour
 
     [SerializeField] UnityEvent onBreak;
     [SerializeField] items item;
+    public AudioClip[] clips;
+    AudioSource audio;
     GameObject itemObject;
+    MeshRenderer mesh;
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
+        mesh = GetComponent<MeshRenderer>();
         switch (item)
         {
             case items.Nothing:
@@ -47,19 +52,15 @@ public class DestroyableBox : MonoBehaviour
     public void DestroyBox()
     {
         onBreak.Invoke();
+        PlayRandomSound();
         if (itemObject != null)
             itemObject.SetActive(true);
-        gameObject.SetActive(false);
+        mesh.enabled = false;
+        enabled = false;
     }
 
-    private void DropItem()
+    public void PlayRandomSound()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        audio.PlayOneShot(clips[Random.Range(0, clips.Length - 1)]);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Knife : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Knife : MonoBehaviour
     private float currentAttackDelay = 0f;
     [SerializeField] private KnifeHitbox hitbox;
     [SerializeField] private Animator knifeAnimator;
+    AudioSource audio;
 
     public float GetDamageValue()
     {
@@ -20,6 +22,16 @@ public class Knife : MonoBehaviour
     void Start()
     {
         
+    }
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        audio.PlayOneShot(Resources.Load<AudioClip>("Sounds/SwordEquip"));
     }
 
     private void Hit()
@@ -40,6 +52,11 @@ public class Knife : MonoBehaviour
             yield return new WaitForSeconds(attackDelay);
             hitbox.gameObject.SetActive(true);
         }
+    }
+
+    public void KnifeSound(AudioClip clip)
+    {
+        audio.PlayOneShot(clip);
     }
 
     // Update is called once per frame

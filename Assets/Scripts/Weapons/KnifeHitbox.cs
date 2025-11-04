@@ -5,6 +5,7 @@ using UnityEngine;
 public class KnifeHitbox : MonoBehaviour
 {
     [SerializeField] Knife knife;
+    AudioSource audio;
     private float hitboxLingerTime = 0.1f;
     private float currentHitboxLingerTime = 0f;
 
@@ -12,6 +13,7 @@ public class KnifeHitbox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
             other.gameObject.GetComponent<Monster>().GetDamage(knife.GetDamageValue());
         }
         
@@ -28,6 +30,7 @@ public class KnifeHitbox : MonoBehaviour
 
     private void Awake()
     {
+        audio = GetComponent<AudioSource>();
         gameObject.SetActive(false);
         GetComponent<MeshRenderer>().enabled = false;
     }

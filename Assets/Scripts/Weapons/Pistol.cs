@@ -29,6 +29,8 @@ public class Pistol : Weapon
     private float _coolDown = 0.3f;
     private float _currentCoolDown = 0f;
     Animator WeaponAnimator;
+    private string reloadSound = "Sounds/pistolReload";
+    private string shootSound = "Sounds/pistolShot";
 
     public override int clipAmmo { get => _clipAmmo; set => _clipAmmo = value; }
 
@@ -43,9 +45,12 @@ public class Pistol : Weapon
     public override float currentCoolDown { get => _currentCoolDown; set => _currentCoolDown = value; }
 
     public override Animator weaponAnimator { get => WeaponAnimator; set => WeaponAnimator = value; }
+    public override string ReloadSound { get => reloadSound; set => reloadSound = value; }
+    public override string ShootSound { get => shootSound; set => shootSound = value; }
 
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
         canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
         WeaponAnimator = GetComponent<Animator>();
         pManager = FindObjectOfType<ProjectilesManager>();

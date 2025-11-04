@@ -8,6 +8,7 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI canvasText;
+    [SerializeField] public AudioSource audio;
     public abstract int clipAmmo { get; set; }
     public abstract int currentClip { get; set; }
     public abstract int reserveAmmo { get; set; }
@@ -18,9 +19,28 @@ public abstract class Weapon : MonoBehaviour
     public abstract string ReloadAnimName { get; set; }
 
     public abstract string ShootAnimName { get; set; }
+    public abstract string ReloadSound { get; set; }
+    public abstract string ShootSound { get; set; }
 
     private bool reloading = false;
 
+    void Update()
+    {
+        currentCoolDown += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (currentCoolDown > coolDown && !reloading)
+            {
+                Shoot();
+                currentCoolDown = 0f;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            Reload();
+        }
+    }
     private void Shoot()
     {
         if (!GameFuncs.PlayerScript.IsControl()) // Can't shoot if menu is opened
@@ -28,6 +48,7 @@ public abstract class Weapon : MonoBehaviour
 
         if (currentClip > 0)
         {
+            audio.PlayOneShot(Resources.Load<AudioClip>(ShootSound));
             currentClip -= 1;
             canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
             weaponAnimator.Play(ShootAnimName, -1, 0f);
@@ -44,6 +65,7 @@ public abstract class Weapon : MonoBehaviour
 
         if (currentClip < clipAmmo && reserveAmmo > 0)
         {
+            audio.PlayOneShot(Resources.Load<AudioClip>(ReloadSound));
             reloading = true;
             weaponAnimator.Play(ReloadAnimName, -1, 0f);
         }
@@ -79,23 +101,5 @@ public abstract class Weapon : MonoBehaviour
     public void FinishShooting()
     {
 
-    }
-
-    void Update()
-    {
-        currentCoolDown += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if (currentCoolDown > coolDown && !reloading)
-            {
-                Shoot();
-                currentCoolDown = 0f;
-            }
-        }
-
-        if (Input.GetKey(KeyCode.R))
-        {
-            Reload();
-        }
     }
 }

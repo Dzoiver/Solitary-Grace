@@ -29,6 +29,8 @@ public class Shotgun : Weapon
     private int _maxAmmo = 49;
     private float _coolDown = 0.3f;
     private float _currentCoolDown = 0f;
+    private string reloadSound = "Sounds/ShotgunReload";
+    private string shootSound = "Sounds/ShotgunShoot";
 
     Animator _weaponAnimator;
     public override int clipAmmo { get => _clipAmmo; set => _clipAmmo = value; }
@@ -41,15 +43,20 @@ public class Shotgun : Weapon
 
     public override float currentCoolDown { get => _currentCoolDown; set => _currentCoolDown = value; }
 
+    public override string ReloadSound { get => reloadSound; set => reloadSound = value; }
+    public override string ShootSound { get => shootSound; set => shootSound = value; }
+
     public override Animator weaponAnimator { get => _weaponAnimator; set => _weaponAnimator = value; }
 
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
         canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
         _weaponAnimator = GetComponent<Animator>();
         pManager = FindObjectOfType<ProjectilesManager>();
-
     }
+
+    // ShotgunReload
     public override void SpawnBullets()
     {
         rotationBullet.x = Camera.main.transform.rotation.eulerAngles.x;
