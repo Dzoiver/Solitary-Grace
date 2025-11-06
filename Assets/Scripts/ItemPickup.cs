@@ -1,3 +1,5 @@
+using GM;
+using SolitaryAudio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +12,17 @@ public class ItemPickup : MonoBehaviour
     Inventory inventory;
     public ScriptableItem item;
     public UnityEvent onPickup;
+    MeshRenderer mesh;
+    AudioSource audio;
+    MeshCollider collider;
     [SerializeField] private bool destroyOnPickUp = true;
 
     private void Start()
     {
+        mesh = GetComponent<MeshRenderer>();
+        audio = GetComponent<AudioSource>();
         inventory = FindObjectOfType<Inventory>();
+        collider = GetComponent<MeshCollider>();
         // menu = FindObjectOfType<Menu>();
     }
 
@@ -22,8 +30,21 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.gameObject.name == "UseCube")
         {
-            inventory.TryPickup(gameObject, item, destroyOnPickUp);
-            onPickup.Invoke();
+            
+            if (inventory.TryPickup(item))
+            {
+                if (destroyOnPickUp)
+                    mesh.enabled = false;
+                enabled = false;
+                if (collider != null)
+                    collider.enabled = false;
+                AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/pickup"));
+                onPickup.Invoke();
+            }
+            else
+            {
+                AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/pickupError"));
+            }
         }
     }
 }

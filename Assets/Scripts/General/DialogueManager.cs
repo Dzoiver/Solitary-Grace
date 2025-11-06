@@ -60,4 +60,25 @@ public class DialogueManager : MonoBehaviour
 
         return true;
     }
+
+    public bool PlayDialogue()
+    {
+        if (isTextDisplayed == true)
+        {
+            return true;
+        }
+
+        if (stringText == null)
+            return true;
+
+        sequence = DOTween.Sequence();
+        isTextDisplayed = true;
+        if (stringText != null)
+            text.text = stringText;
+        text.enabled = true;
+        sequence.PrependInterval(3f).Append(text.DOFade(0, 0.5f));
+        sequence.onComplete = ResetText;
+
+        return true;
+    }
 }

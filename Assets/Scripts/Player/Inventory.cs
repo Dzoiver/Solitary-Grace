@@ -83,11 +83,10 @@ public class Inventory : MonoBehaviour
         // Debug.Log("item added: " + item.Name);
     }
 
-    public void TryPickup(GameObject objectItem, ScriptableItem itemInfo, bool destroyOnPickup)
+    public bool TryPickup(ScriptableItem itemInfo)
     {
         if (ItemsList.Count < capacity)
         {
-            objectItem.SetActive(!destroyOnPickup);
             AddItem(itemInfo);
             if (itemInfo == null)
             {
@@ -95,10 +94,12 @@ public class Inventory : MonoBehaviour
             }
             else
                 mesUI.ShowPickup(itemInfo.name);
+            return true;
         }
         else
         {
             mesUI.FullInventory();
+            return false;
         }
     }
 

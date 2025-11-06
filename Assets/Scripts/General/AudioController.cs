@@ -55,5 +55,10 @@ namespace SolitaryAudio
             }
             source.Play();
         }
+
+        static public void PlayOneShot(AudioClip clip)
+        {
+            source1.PlayOneShot(clip);
+        }
     }
 }

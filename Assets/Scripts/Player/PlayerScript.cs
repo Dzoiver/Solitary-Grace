@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     private const float BASE_GRAVITY = -9.81f;
     private const float GROUND_DISTANCE = 0.5f;
     private const float GROUNDED_VELOCITY_Y = -4f;
-    private const float INTERACT_DISTANCE = 1.5f;
+    private const float INTERACT_DISTANCE = 1.6f;
 
     private float speed = BASE_SPEED;
     private float gravity = BASE_GRAVITY;
@@ -299,9 +299,15 @@ public class PlayerScript : MonoBehaviour
             {
                 if (hit.collider.gameObject.layer == 3) // Layer 3 - Interactable
                 {
+                    Debug.Log("try");
                     useTrigger.SetActive(true);
                     useTrigger.transform.position = hit.point;
                 }
+            }
+            else // Try to use it if player's inside the trigger
+            {
+                useTrigger.SetActive(true);
+                useTrigger.transform.position = transform.position;
             }
         }
     }
