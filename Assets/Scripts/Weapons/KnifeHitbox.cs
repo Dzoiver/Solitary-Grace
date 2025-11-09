@@ -16,13 +16,12 @@ public class KnifeHitbox : MonoBehaviour
             knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
             other.gameObject.GetComponent<Monster>().GetDamage(knife.GetDamageValue());
         }
-        
-        if (other.gameObject.CompareTag("Tape"))
+        else if (other.gameObject.CompareTag("Tape"))
         {
+            knife.KnifeSound(Resources.Load<AudioClip>("Sounds/paper-rip-fast"));
             other.gameObject.GetComponent<Tape>().RemoveTape();
         }
-
-        if (other.gameObject.CompareTag("Box"))
+        else if (other.gameObject.CompareTag("Box"))
         {
             other.gameObject.GetComponent<DestroyableBox>().DestroyBox();
         }
@@ -33,6 +32,11 @@ public class KnifeHitbox : MonoBehaviour
         audio = GetComponent<AudioSource>();
         gameObject.SetActive(false);
         GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        //knife.KnifeSound(Resources.Load<AudioClip>("Sounds/air-whoosh"));
     }
 
     void Update()

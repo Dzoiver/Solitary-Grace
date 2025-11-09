@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 using Zenject;
 
 public class ItemPickup : MonoBehaviour
@@ -15,6 +16,7 @@ public class ItemPickup : MonoBehaviour
     MeshRenderer mesh;
     AudioSource audio;
     MeshCollider collider;
+    BoxCollider box;
     [SerializeField] private bool destroyOnPickUp = true;
 
     private void Start()
@@ -23,6 +25,7 @@ public class ItemPickup : MonoBehaviour
         audio = GetComponent<AudioSource>();
         inventory = FindObjectOfType<Inventory>();
         collider = GetComponent<MeshCollider>();
+        box = GetComponent<BoxCollider>();
         // menu = FindObjectOfType<Menu>();
     }
 

@@ -21,11 +21,15 @@ public class DestroyableBox : MonoBehaviour
     AudioSource audio;
     GameObject itemObject;
     MeshRenderer mesh;
+    MeshCollider meshCollider;
+    BoxCollider boxCollider;
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
         mesh = GetComponent<MeshRenderer>();
+        meshCollider = GetComponent<MeshCollider>();
+        boxCollider = GetComponent<BoxCollider>();
         switch (item)
         {
             case items.Nothing:
@@ -57,6 +61,8 @@ public class DestroyableBox : MonoBehaviour
             itemObject.SetActive(true);
         mesh.enabled = false;
         enabled = false;
+        meshCollider.enabled = false;
+        boxCollider.enabled = false;
     }
 
     public void PlayRandomSound()

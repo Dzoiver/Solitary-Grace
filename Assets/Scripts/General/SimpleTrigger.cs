@@ -41,17 +41,19 @@ public class SimpleTrigger : MonoBehaviour
     {
         if (!active)
             return;
-        if (checkItemScriptable != null)
-        {
-            if (!inventory.Has(checkItemScriptable.id))
-            {
-                messageUI.ShowMessage(noItemMessage);
-                return;
-            }
-        }
+
             
         if (other.CompareTag("Player") && onEnter.GetPersistentEventCount() > 0)
         {
+            if (checkItemScriptable != null)
+            {
+                if (!inventory.Has(checkItemScriptable.id))
+                {
+                    messageUI.ShowMessage(noItemMessage);
+                    return;
+                }
+            }
+
             if (triggerOnce)
             {
                 collider.enabled = false;
@@ -61,6 +63,15 @@ public class SimpleTrigger : MonoBehaviour
 
         if (other.gameObject.name == "UseCube")
         {
+            if (checkItemScriptable != null)
+            {
+                if (!inventory.Has(checkItemScriptable.id))
+                {
+                    messageUI.ShowMessage(noItemMessage);
+                    return;
+                }
+            }
+
             if (triggerOnce)
             {
                 collider.enabled = false;

@@ -17,11 +17,13 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject confirmPanelItem;
     Inventory inventory;
     ContextMenuItem context;
+    WeaponManager weapon;
     private ScriptableItem bufferItem;
     private GameObject bufferPickupObject;
 
     private void Awake()
     {
+        weapon = FindAnyObjectByType<WeaponManager>();
         context = FindObjectOfType<ContextMenuItem>();
     }
     // Start is called before the first frame update
@@ -35,6 +37,7 @@ public class Menu : MonoBehaviour
 
     public void OpenMenu()
     {
+        weapon.gameObject.SetActive(false);
         inventory.DisplayItems();
         GameFuncs.fading = true;
         GameFuncs.PlayerScript.SetControl(false);
@@ -87,6 +90,7 @@ public class Menu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
+            weapon.gameObject.SetActive(true);
             confirmPanel.SetActive(false);
             systemPanel.SetActive(false);
             menuPanel.SetActive(false);
