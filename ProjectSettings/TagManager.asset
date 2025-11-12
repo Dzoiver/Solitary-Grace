@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Box
   - Tape
+  - Boss
+  - Eye
   layers:
   - Default
   - TransparentFX

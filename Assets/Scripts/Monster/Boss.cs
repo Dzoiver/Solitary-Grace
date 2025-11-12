@@ -13,8 +13,8 @@ public class Boss : MonoBehaviour
     private float chaseSpeed = 2f;
     private float stopDistance = 2f;
 
-    private float health = 100f;
-    private float maxHealth = 100f;
+    private float health = 600f;
+    private float maxHealth = 1000f;
 
     private float attackDamage = 50f;
     private float attackDelay = 0.3f;
@@ -32,6 +32,9 @@ public class Boss : MonoBehaviour
     private int currentPatrolIndex = 0;
     [SerializeField] private float patrolWait = 1f;
     private float currentPatrolWait = 0f;
+    [SerializeField] Transform healSpot;
+    bool healing = false;
+    [SerializeField] BossDoorsController bossDoors;
 
     private Vector3 startPosition;
     public float allowedAngle = 45f;
@@ -64,6 +67,18 @@ public class Boss : MonoBehaviour
             agent.destination = GameFuncs.PlayerScript.transform.position;
             DamagePlayer();
         }
+
+        if (health < 300)
+        {
+            healing = true;
+            agent.destination = healSpot.position;
+            bossDoors.OpenDoors();
+        }
+
+        if (BossReachedHeal())
+        {
+            bossDoors.CloseDoors();
+        }
     }
 
     private void FixedUpdate()
@@ -81,8 +96,21 @@ public class Boss : MonoBehaviour
         }
     }
 
+    private bool BossReachedHeal()
+    {
+        if (Vector3.Distance(transform.position, healSpot.position) < 0.3f)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
     private bool PlayerTooClose()
     {
+        if (healing)
+            return false;
+
         if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < detectRadius / 4)
         {
             return true;
@@ -121,6 +149,7 @@ public class Boss : MonoBehaviour
         else
         {
             health -= amount;
+            Debug.Log(health);
         }
     }
 

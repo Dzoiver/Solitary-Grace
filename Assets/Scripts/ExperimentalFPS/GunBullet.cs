@@ -34,6 +34,11 @@ public class GunBullet : Projectile
             other.gameObject.GetComponent<Monster>().GetDamage(15f);
             gameObject.SetActive(false);
         }
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            other.gameObject.GetComponent<Boss>().GetDamage(15f);
+            gameObject.SetActive(false);
+        }
     }
 
     void Update()

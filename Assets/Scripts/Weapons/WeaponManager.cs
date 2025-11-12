@@ -9,6 +9,9 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject knife;
     [SerializeField] GameObject shotgun;
+    [SerializeField] ScriptableItem item1;
+    [SerializeField] ScriptableItem item2;
+    [SerializeField] ScriptableItem item3;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,13 @@ public class WeaponManager : MonoBehaviour
         pistol.SetActive(false);
         knife.SetActive(false);
         shotgun.SetActive(false);
+    }
+
+    public void GiveAllWeapons()
+    {
+        inventory.TryPickup(item1);
+        inventory.TryPickup(item2);
+        inventory.TryPickup(item3);
     }
 
     // Update is called once per frame

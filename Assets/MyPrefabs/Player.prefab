@@ -5680,7 +5680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1769373636
 Transform:
   m_ObjectHideFlags: 0
@@ -6805,6 +6805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6571139211426620346}
+  weapons: {fileID: 1275351089}
 --- !u!1 &5691854609005576906
 GameObject:
   m_ObjectHideFlags: 0
@@ -7156,6 +7157,9 @@ MonoBehaviour:
   pistol: {fileID: 811516380}
   knife: {fileID: 1769373635}
   shotgun: {fileID: 424609014}
+  item1: {fileID: 11400000, guid: d08453740a4ec524f965df7b963013ca, type: 2}
+  item2: {fileID: 11400000, guid: 1da93f4cb4b6bd64e9f10b4269de8966, type: 2}
+  item3: {fileID: 11400000, guid: 01c4bb145ae61764f9bbc99999af8279, type: 2}
 --- !u!1 &6703890647211263128
 GameObject:
   m_ObjectHideFlags: 0
