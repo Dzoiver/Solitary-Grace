@@ -7,6 +7,8 @@ public class BossDoorsController : MonoBehaviour
 {
     [SerializeField] DOTweenAnimation door1;
     [SerializeField] DOTweenAnimation door2;
+    bool opening = false;
+    bool closing = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,13 +23,25 @@ public class BossDoorsController : MonoBehaviour
 
     public void OpenDoors()
     {
+        if (opening)
+            return;
         door1.DOPlay();
         door2.DOPlay();
+        opening = true;
     }
 
     public void CloseDoors()
     {
-        door1.DORewind();
-        door2.DORewind();
+        if (closing)
+            return;
+        door1.DOPlayBackwards();
+        door2.DOPlayBackwards();
+    }
+
+    public void ResetDoors()
+    {
+        opening = false;
+        closing = false;
+        OpenDoors();
     }
 }

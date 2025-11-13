@@ -7,10 +7,13 @@ using UnityEngine;
 public class BossHealer : MonoBehaviour
 {
 
-    [SerializeField] GameObject[] bossEyes;
+    [SerializeField] BossEye[] bossEyes;
     bool healing = false;
     float currentEyeTime = 0f;
-    float eyeTime = 500f;
+    float eyeTime = 0.5f;
+    int spawnedEyes = 0;
+    int maxSpawnedEyes = 10;
+    int currentEyes;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,25 +26,46 @@ public class BossHealer : MonoBehaviour
         if (healing)
         {
             currentEyeTime += Time.deltaTime;
-            
+            PushEyes();
         }
     }
 
     public void StartHealing()
     {
-
+        healing = true;
     }
 
     public void StopHealing()
     {
-
+        healing = false;
     }
 
     public void PushEyes()
     {
         if (currentEyeTime > eyeTime)
         {
-            // bossEyes[Random.Range(0, bossEyes.Length - 1)]
+            spawnedEyes++;
+            currentEyeTime = 0f;
+            bossEyes[Random.Range(0, bossEyes.Length - 1)].OpenEye();
+            if (spawnedEyes > maxSpawnedEyes)
+            {
+                healing = false;
+            }
         }
+    }
+
+    public void AddEye()
+    {
+        currentEyes++;
+    }
+
+    public void DeleteEye()
+    {
+        currentEyes--;
+    }
+
+    public int GetCurrentEyes()
+    {
+        return currentEyes;
     }
 }

@@ -7,10 +7,16 @@ public class BossEye : MonoBehaviour
 {
     DOTweenAnimation eyeAnim;
     bool opened = false;
+    BossHealer healer;
+    MeshRenderer meshRenderer;
+    [SerializeField] Material eyeActiveMat;
+    [SerializeField] Material eyeDeadMat;
     // Start is called before the first frame update
     void Start()
     {
         eyeAnim = GetComponent<DOTweenAnimation>();
+        healer = FindObjectOfType<BossHealer>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -21,16 +27,21 @@ public class BossEye : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Bullet" && opened == true)
+        Debug.Log(other.tag);
+        if (other.CompareTag("Bullet") && opened == true)
         {
-            eyeAnim.DORewind();
+            eyeAnim.DOPlayBackwards();
             opened = false;
+            meshRenderer.material = eyeDeadMat;
+            healer.DeleteEye();
         }
     }
 
     public void OpenEye()
     {
+        healer.AddEye();
         opened = true;
         eyeAnim.DOPlay();
+        meshRenderer.material = eyeActiveMat;
     }
 }

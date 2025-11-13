@@ -9,6 +9,8 @@ TagManager:
   - Tape
   - Boss
   - Eye
+  - Bullet
+  - BossEye
   layers:
   - Default
   - TransparentFX

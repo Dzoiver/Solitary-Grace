@@ -35,6 +35,8 @@ public class Boss : MonoBehaviour
     [SerializeField] Transform healSpot;
     bool healing = false;
     [SerializeField] BossDoorsController bossDoors;
+    [SerializeField] BossHealer bossHealer;
+    float healSpeed = 1f;
 
     private Vector3 startPosition;
     public float allowedAngle = 45f;
@@ -62,7 +64,7 @@ public class Boss : MonoBehaviour
         if (!activeAI)
             return;
 
-        if (PlayerTooClose())
+        if (PlayerTooClose() && !healing)
         {
             agent.destination = GameFuncs.PlayerScript.transform.position;
             DamagePlayer();
@@ -78,6 +80,22 @@ public class Boss : MonoBehaviour
         if (BossReachedHeal())
         {
             bossDoors.CloseDoors();
+            bossHealer.StartHealing();
+        }
+
+        if (healing && health >= 800)
+        {
+            healing = false;
+            bossHealer.StopHealing();
+            bossDoors.OpenDoors();
+            agent.destination = GameFuncs.PlayerScript.transform.position;
+        }
+
+        if (healing)
+        {
+            //Debug.Log(health);
+            //Debug.Log(bossHealer.GetCurrentEyes() * healSpeed * Time.deltaTime);
+            health += bossHealer.GetCurrentEyes() * healSpeed * Time.deltaTime;
         }
     }
 
@@ -98,7 +116,7 @@ public class Boss : MonoBehaviour
 
     private bool BossReachedHeal()
     {
-        if (Vector3.Distance(transform.position, healSpot.position) < 0.3f)
+        if (Vector3.Distance(transform.position, healSpot.position) < 1.2f)
         {
             return true;
         }

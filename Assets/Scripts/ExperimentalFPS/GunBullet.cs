@@ -41,7 +41,7 @@ public class GunBullet : Projectile
         }
     }
 
-    void Update()
+        void Update()
     {
         if (launched)
         {
