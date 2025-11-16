@@ -11,7 +11,6 @@ public class BossEye : MonoBehaviour
     MeshRenderer meshRenderer;
     [SerializeField] Material eyeActiveMat;
     [SerializeField] Material eyeDeadMat;
-    // Start is called before the first frame update
     void Start()
     {
         eyeAnim = GetComponent<DOTweenAnimation>();
@@ -19,7 +18,6 @@ public class BossEye : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -27,13 +25,9 @@ public class BossEye : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.CompareTag("Bullet") && opened == true)
         {
-            eyeAnim.DOPlayBackwards();
-            opened = false;
-            meshRenderer.material = eyeDeadMat;
-            healer.DeleteEye();
+            CloseEye();
         }
     }
 
@@ -43,5 +37,13 @@ public class BossEye : MonoBehaviour
         opened = true;
         eyeAnim.DOPlay();
         meshRenderer.material = eyeActiveMat;
+    }
+
+    public void CloseEye()
+    {
+        eyeAnim.DOPlayBackwards();
+        opened = false;
+        meshRenderer.material = eyeDeadMat;
+        healer.DeleteEye();
     }
 }

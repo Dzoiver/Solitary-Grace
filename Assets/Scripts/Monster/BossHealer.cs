@@ -38,6 +38,10 @@ public class BossHealer : MonoBehaviour
     public void StopHealing()
     {
         healing = false;
+        foreach (BossEye eye in bossEyes)
+        {
+            eye.CloseEye();
+        }
     }
 
     public void PushEyes()

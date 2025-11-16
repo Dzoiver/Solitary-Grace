@@ -46,6 +46,11 @@ namespace GM
             BlackImage.DOColor(new Color(0, 0, 0, 1), time);
         }
 
+        static public void FadeInWhite(float time = 0.5f)
+        {
+            BlackImage.DOColor(new Color(1, 1, 1, 1), time);
+        }
+
         static public void FadeOut(float time = 0.5f)
         {
             //BlackImage.color = new Color(1f, 1f, 1f);

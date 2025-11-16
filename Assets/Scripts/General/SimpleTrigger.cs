@@ -42,7 +42,7 @@ public class SimpleTrigger : MonoBehaviour
         if (!active)
             return;
 
-            
+        Debug.Log("trigger activated");
         if (other.CompareTag("Player") && onEnter.GetPersistentEventCount() > 0)
         {
             if (checkItemScriptable != null)
@@ -80,13 +80,19 @@ public class SimpleTrigger : MonoBehaviour
         }
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
         
     }
 
-    public void SetActiveTrigger() => active = true;
+    public void SetActiveTrigger()
+    {
+        active = true;
+        collider.enabled = true;
+    }
 
     public void DisablePlayer() => GameFuncs.PlayerScript.SetControl(false);
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class Boss : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class Boss : MonoBehaviour
     bool healing = false;
     [SerializeField] BossDoorsController bossDoors;
     [SerializeField] BossHealer bossHealer;
-    float healSpeed = 1f;
+    float healSpeed = 2f;
+    public UnityEvent onKill;
 
     private Vector3 startPosition;
     public float allowedAngle = 45f;
@@ -87,7 +89,7 @@ public class Boss : MonoBehaviour
         {
             healing = false;
             bossHealer.StopHealing();
-            bossDoors.OpenDoors();
+            bossDoors.ResetDoors();
             agent.destination = GameFuncs.PlayerScript.transform.position;
         }
 
@@ -167,12 +169,12 @@ public class Boss : MonoBehaviour
         else
         {
             health -= amount;
-            Debug.Log(health);
         }
     }
 
     private void Death()
     {
+        onKill.Invoke();
         gameObject.SetActive(false);
     }
 

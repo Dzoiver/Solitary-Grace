@@ -42,6 +42,7 @@ public class BossDoorsController : MonoBehaviour
     {
         opening = false;
         closing = false;
-        OpenDoors();
+        door1.DOPlayForward();
+        door2.DOPlayForward();
     }
 }
