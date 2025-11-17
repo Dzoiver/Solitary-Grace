@@ -104,6 +104,7 @@ public class Computer : MonoBehaviour
 
     public void OpenGame()
     {
+        Debug.Log("Clicking");
         osCanvas.SetActive(false);
         GameFuncs.PlayerScript.gameObject.SetActive(false);
         gameCamera.SetActive(true);

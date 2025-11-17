@@ -20,4 +20,9 @@ public class ChatHistory : MonoBehaviour
     {
 
     }    
+
+    public void ClearChat()
+    {
+
+    }
 }

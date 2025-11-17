@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class StreamChannel : MonoBehaviour
 {
+    Chat chat;
+    public string name = "";
+    bool opened = false;
+
+    private void Awake()
+    {
+        chat = FindObjectOfType<Chat>();
+        gameObject.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +28,7 @@ public class StreamChannel : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
+
     }
 
     public void Open()

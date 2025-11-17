@@ -18,8 +18,15 @@ public class FollowList : MonoBehaviour
     }
     public void OpenStream(StreamChannel channel)
     {
+        if (currentChannel != null)
+            currentChannel.Close();
         channel.Open();
-        currentChannel.Close();
         currentChannel = channel;
+    }
+
+    public void CloseAll()
+    {
+        if (currentChannel != null)
+            currentChannel.Close();
     }
 }
