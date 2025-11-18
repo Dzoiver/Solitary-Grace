@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class StreamChannel : MonoBehaviour
 {
-    Chat chat;
+    public Chat chat;
     public string name = "";
+    public int viewers;
+    public string streamTitle;
     bool opened = false;
 
     private void Awake()
@@ -34,5 +36,6 @@ public class StreamChannel : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+        
     }
 }

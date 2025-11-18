@@ -31,4 +31,9 @@ public class Chat : MonoBehaviour
         inputField.text = "";
         history.AddMessage(inputField.text);
     }
+
+    public void ClearChat()
+    {
+        history.ClearChat();
+    }
 }
