@@ -30,9 +30,12 @@ public class Elevator : MonoBehaviour
     [SerializeField] private Vector3 firstFloor = new Vector3(0,0,0);
     public Vector3 Velocity { get; private set; }
 
+    AudioSource audio;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
         startPosition = transform.position;
         destinationFloor = startPosition;
 
@@ -89,6 +92,8 @@ public class Elevator : MonoBehaviour
             if (transform.position == destinationFloor)
             {
                 moving = false;
+                audio.enabled = false;
+                audio.volume = 0f;
             }
         }
         else
@@ -117,6 +122,9 @@ public class Elevator : MonoBehaviour
         destinationFloor.y = firstFloor.y + floor * floorDistance;
         currentFloor = floor;
         moving = true;
+        audio.enabled = true;
+        audio.Play();
+        audio.DOFade(0.2f, 2f);
     }
 
     public void RestorePosition()

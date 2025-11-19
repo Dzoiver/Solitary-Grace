@@ -18,18 +18,17 @@ public class Chat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SendMessageChat();
+        }
     }
 
     public void SendMessageChat()
     {
-        if (inputField.text.Contains("") || inputField.text.Contains(" "))
-        {
-            return;
-        }
 
+        history.AddMessage("You: " + inputField.text);
         inputField.text = "";
-        history.AddMessage(inputField.text);
     }
 
     public void ClearChat()

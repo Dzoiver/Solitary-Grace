@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,11 +9,14 @@ public class FollowList : MonoBehaviour
     StreamChannel currentChannel;
     [SerializeField] TextMeshProUGUI streamTitle;
     [SerializeField] TextMeshProUGUI viewerCount;
+    [SerializeField] GameObject chat;
     GameObject viewerCountParent;
+    Chat chatScript;
     // Start is called before the first frame update
     void Start()
     {
         viewerCountParent = viewerCount.transform.parent.gameObject;
+        chatScript = chat.GetComponent<Chat>();
     }
 
     // Update is called once per frame
@@ -29,8 +33,8 @@ public class FollowList : MonoBehaviour
         streamTitle.text = channel.streamTitle;
         viewerCountParent.SetActive(true);
         viewerCount.text = channel.viewers.ToString();
-
-        channel.chat.ClearChat();
+        chat.SetActive(true);
+        chatScript.ClearChat();
     }
 
     public void CloseAll()
@@ -38,5 +42,6 @@ public class FollowList : MonoBehaviour
         if (currentChannel != null)
             currentChannel.Close();
         viewerCountParent.SetActive(false);
+        chat.SetActive(false);
     }
 }
