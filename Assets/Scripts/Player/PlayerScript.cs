@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     private const float BASE_GRAVITY = -9.81f;
     private const float GROUND_DISTANCE = 0.5f;
     private const float GROUNDED_VELOCITY_Y = -4f;
-    private const float INTERACT_DISTANCE = 1.6f;
+    private const float INTERACT_DISTANCE = 1.7f;
 
     private float speed = BASE_SPEED;
     private float gravity = BASE_GRAVITY;
@@ -47,6 +47,7 @@ public class PlayerScript : MonoBehaviour
 
     private Animator cameraAnimator;
     private float gravityEffect;
+    WeaponManager weaponManager;
 
     public float GravityMultiplier
     {
@@ -63,6 +64,7 @@ public class PlayerScript : MonoBehaviour
         GameFuncs.PlayerScript = this;
         cameraAnimator = playerCam.GetComponent<Animator>();
         UpdateGravityCalculations();
+        weaponManager = FindObjectOfType<WeaponManager>();
     }
 
     private void UpdateGravityCalculations()

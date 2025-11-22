@@ -16,6 +16,7 @@ public class FattyTalk : MonoBehaviour
 
         dManager.SetDialogue(texts[index]);
         dManager.PlayDialogue();
-        index = (index++ < texts.Length - 1) ? index++ : index;
+        if (index < texts.Length - 1)
+            index++;
     }
 }

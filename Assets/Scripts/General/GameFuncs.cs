@@ -14,6 +14,7 @@ namespace GM
         static public PlayerScript PlayerScript;
         static public MouseLook mouseLook;
         static public Image BlackImage;
+        static public WeaponManager weaponManager;
         static public bool fading = false;
         static public void LampsChangeColor(Light[] lights, Color endColor)
         {
@@ -60,6 +61,11 @@ namespace GM
         static public void LowerObject(GameObject object1, Vector3 endValue)
         {
             
+        }
+
+        static public void DisableWeapons(bool newValue = false)
+        {
+            weaponManager.SetUsable(!newValue);
         }
     }
 }

@@ -23,6 +23,7 @@ public class SimpleTrigger : MonoBehaviour
     MessagesUI messageUI;
     public bool active = true;
     BoxCollider collider;
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -1,3 +1,4 @@
+using GM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,29 +13,20 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] ScriptableItem item1;
     [SerializeField] ScriptableItem item2;
     [SerializeField] ScriptableItem item3;
+    private bool canUseWeapon = true;
     // Start is called before the first frame update
     void Start()
     {
         inventory = FindObjectOfType<Inventory>();
-    }
-
-    private void HideAll()
-    {
-        pistol.SetActive(false);
-        knife.SetActive(false);
-        shotgun.SetActive(false);
-    }
-
-    public void GiveAllWeapons()
-    {
-        inventory.TryPickup(item1);
-        inventory.TryPickup(item2);
-        inventory.TryPickup(item3);
+        GameFuncs.weaponManager = this;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!canUseWeapon)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventory.Has((int)ItemNames.Knife))
         {
             if (knife.activeSelf)
@@ -73,5 +65,27 @@ public class WeaponManager : MonoBehaviour
                 shotgun.SetActive(true);
             }
         }
+    }
+
+    private void HideAll()
+    {
+        pistol.SetActive(false);
+        knife.SetActive(false);
+        shotgun.SetActive(false);
+    }
+
+    public void GiveAllWeapons()
+    {
+        inventory.TryPickup(item1);
+        inventory.TryPickup(item2);
+        inventory.TryPickup(item3);
+    }
+
+    public void SetUsable(bool newValue)
+    {
+        canUseWeapon = newValue;
+
+        if (!newValue)
+            HideAll();
     }
 }

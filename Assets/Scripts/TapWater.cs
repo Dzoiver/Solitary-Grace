@@ -9,10 +9,11 @@ public class TapWater : MonoBehaviour
     private void Awake()
     {
         gameObject.SetActive(false);
+        audio = GetComponent<AudioSource>();
     }
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -23,7 +24,10 @@ public class TapWater : MonoBehaviour
 
     public void ToggleTap()
     {
+
+        Debug.Log(gameObject.activeSelf);
         bool open = gameObject.activeSelf ? false : true;
+        Debug.Log(open);
         gameObject.SetActive(open);
         audio.enabled = open;
     }

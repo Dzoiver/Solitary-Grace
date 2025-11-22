@@ -15,9 +15,9 @@ namespace SolitaryAudio
             music = GetComponent<AudioSource>();
             piano = Resources.Load<AudioClip>("Sounds/Horror Elements/Save Room/SR_Piano_room");
         }
-        static public void PlayMusic(string audioName)
+        static public void PlayMusic(string audioName, float volume = 1f)
         {
-
+            music.volume = volume;
             switch (audioName)
             {
                 case "Piano":

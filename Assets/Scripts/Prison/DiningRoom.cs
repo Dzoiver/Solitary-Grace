@@ -10,7 +10,7 @@ public class DiningRoom : MonoBehaviour
     {
         if (firstTime)
         {
-            MusicController.PlayMusic("Piano");
+            MusicController.PlayMusic("Piano", 0.1f);
             firstTime = false;
         }
     }

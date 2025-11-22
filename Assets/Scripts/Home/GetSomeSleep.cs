@@ -50,7 +50,7 @@ public class GetSomeSleep : MonoBehaviour
             sound.Play();
         Debug.Log("sleeping teleporting");
         GameFuncs.PlayerScript.SetControl(true);
-        
+        GameFuncs.DisableWeapons(false);
         //boxcollider.enabled = false;
     }
 }

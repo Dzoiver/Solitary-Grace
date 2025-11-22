@@ -16,6 +16,7 @@ public class DoorOpen : MonoBehaviour
 
     [SerializeField] GameObject destinationLeft;
     [SerializeField] GameObject destinationRight;
+    public string lockedMessage = "The door is jammed";
 
     private void Start()
     {
@@ -56,6 +57,8 @@ public class DoorOpen : MonoBehaviour
                     if (playLockedSound)
                         AudioController.Play("doorOpen");
                     dManager.SetDialogue(lines);
+                    if (lines == null)
+                        dManager.SetDialogue(lockedMessage);
                     dManager.PlayDialogue(0);
                     return;
                 }
