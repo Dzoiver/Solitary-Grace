@@ -17,6 +17,7 @@ public class GetSomeSleep : MonoBehaviour
     private BoxCollider boxcollider;
     private DaytimeOutside daytimeScript;
     public UnityEvent onSleep;
+    public Checkpoint checkpoint;
 
     private void Awake()
     {
@@ -34,11 +35,14 @@ public class GetSomeSleep : MonoBehaviour
             sequence = DOTween.Sequence();
             GameFuncs.PlayerScript.SetControl(false);
             sequence.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = GoToPrison;
+            if (checkpoint != null)
+                checkpoint.OnTeleportInvoke();
         }
     }
 
     private void GoToPrison()
     {
+        Debug.Log("invoking onsleep");
         onSleep.Invoke();
         if (musicHome != null)
             musicHome.SetActive(false);
@@ -48,9 +52,13 @@ public class GetSomeSleep : MonoBehaviour
         blackImage.DOColor(new Color(0, 0, 0, 0), 0.5f);
         if (sound != null)
             sound.Play();
-        Debug.Log("sleeping teleporting");
         GameFuncs.PlayerScript.SetControl(true);
         GameFuncs.DisableWeapons(false);
         //boxcollider.enabled = false;
+    }
+
+    public void SetNewCheckpoint()
+    {
+
     }
 }

@@ -3,6 +3,7 @@ using DG.Tweening;
 using GM;
 using SolitaryAudio;
 using Zenject;
+using UnityEngine.Events;
 
 public class DoorOpen : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class DoorOpen : MonoBehaviour
     [SerializeField] GameObject destinationLeft;
     [SerializeField] GameObject destinationRight;
     public string lockedMessage = "The door is jammed";
+    public UnityEvent onEnter;
 
     private void Start()
     {
@@ -63,11 +65,11 @@ public class DoorOpen : MonoBehaviour
                     return;
                 }
             }
-
             GameFuncs.PlayerScript.SetControl(false);
             AudioController.Play("doorOpen");
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
             {
+                onEnter.Invoke();
                 AudioController.Play("doorClose");
                 GameFuncs.TeleportPlayer(destinationPoint);
                 GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein

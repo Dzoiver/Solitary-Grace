@@ -301,7 +301,6 @@ public class PlayerScript : MonoBehaviour
             {
                 if (hit.collider.gameObject.layer == 3) // Layer 3 - Interactable
                 {
-                    Debug.Log("try");
                     useTrigger.SetActive(true);
                     useTrigger.transform.position = hit.point;
                 }

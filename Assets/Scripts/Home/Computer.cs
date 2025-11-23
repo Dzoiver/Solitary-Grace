@@ -2,6 +2,7 @@ using GM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Computer : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Computer : MonoBehaviour
     float resetClicksTime = 0.3f;
     float currentTimeInputDelay = 0f;
     float TimeInputDelay = 0.2f;
+
+    public UnityEvent onTurnOn;
 
     private void Awake()
     {
@@ -87,6 +90,7 @@ public class Computer : MonoBehaviour
 
     public void TurnOn()
     {
+        onTurnOn.Invoke();
         Cursor.lockState = CursorLockMode.None;
         GameFuncs.PlayerScript.SetControl(false);
         osCanvas.SetActive(true);

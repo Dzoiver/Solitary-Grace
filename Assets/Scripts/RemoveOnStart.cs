@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RemoveOnStart : MonoBehaviour
 {
-
+    [SerializeField] bool isLight = false;
     private void Awake()
     {
         gameObject.SetActive(false);
@@ -19,5 +19,12 @@ public class RemoveOnStart : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ActivateLights()
+    {
+        Debug.Log(gameObject.name + " " + isLight);
+        if (isLight)
+            gameObject.SetActive(true);
     }
 }

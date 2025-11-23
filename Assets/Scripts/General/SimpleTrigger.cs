@@ -43,7 +43,6 @@ public class SimpleTrigger : MonoBehaviour
         if (!active)
             return;
 
-        Debug.Log("trigger activated");
         if (other.CompareTag("Player") && onEnter.GetPersistentEventCount() > 0)
         {
             if (checkItemScriptable != null)

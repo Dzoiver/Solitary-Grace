@@ -24,10 +24,7 @@ public class TapWater : MonoBehaviour
 
     public void ToggleTap()
     {
-
-        Debug.Log(gameObject.activeSelf);
         bool open = gameObject.activeSelf ? false : true;
-        Debug.Log(open);
         gameObject.SetActive(open);
         audio.enabled = open;
     }

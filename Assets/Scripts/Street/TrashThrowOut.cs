@@ -16,6 +16,7 @@ public class TrashThrowOut : MonoBehaviour
     {
         if (triggeredOnce)
             return;
+        zombie.gameObject.SetActive(true);
         triggeredOnce = true;
         source.DOFade(0f, 1f);
         house.SetActive(false);

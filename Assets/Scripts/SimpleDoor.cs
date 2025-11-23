@@ -19,6 +19,7 @@ public class SimpleDoor : MonoBehaviour
     [SerializeField] GameObject destinationRed;
     [SerializeField] UnityEvent onOpenBlue;
     [SerializeField] UnityEvent onOpenRed;
+    UnityEvent onOpen;
     public string stringText = "";
     // Start is called before the first frame update
     private void Start()
@@ -53,12 +54,12 @@ public class SimpleDoor : MonoBehaviour
         if (Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, destinationRed.transform.position) >
             Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, destinationBlue.transform.position))
         {
-            onOpenBlue.Invoke();
+            onOpen = onOpenBlue;
             return destinationRed;
         }
         else
         {
-            onOpenRed.Invoke();
+            onOpen = onOpenRed;
             return destinationBlue;
         }
     }
@@ -100,6 +101,7 @@ public class SimpleDoor : MonoBehaviour
             AudioController.Play("doorOpen");
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
             {
+                onOpen.Invoke();
                 AudioController.Play("doorClose");
                 GameFuncs.TeleportPlayer(destinationPoint);
                 GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein

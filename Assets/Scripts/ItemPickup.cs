@@ -37,10 +37,16 @@ public class ItemPickup : MonoBehaviour
             if (inventory.TryPickup(item))
             {
                 if (destroyOnPickUp)
-                    mesh.enabled = false;
+                {
+                    if (box != null)
+                        box.enabled = false;
+                    if (mesh != null)
+                        mesh.enabled = false;
+                }
                 enabled = false;
                 if (collider != null)
                     collider.enabled = false;
+                
                 AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/pickup"));
                 onPickup.Invoke();
             }
