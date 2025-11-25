@@ -42,6 +42,8 @@ public class ItemPickup : MonoBehaviour
                         box.enabled = false;
                     if (mesh != null)
                         mesh.enabled = false;
+                    else
+                        gameObject.SetActive(false);
                 }
                 enabled = false;
                 if (collider != null)

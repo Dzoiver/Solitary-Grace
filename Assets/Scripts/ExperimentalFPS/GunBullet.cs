@@ -23,8 +23,6 @@ public class GunBullet : Projectile
         transform.rotation = Quaternion.Euler(rotation);
         launched = true;
         gameObject.SetActive(true);
-
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,7 +39,14 @@ public class GunBullet : Projectile
         }
     }
 
-        void Update()
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name != "Player" &&
+            !collision.gameObject.name.Contains("Bullet"))
+            gameObject.SetActive(false);
+    }
+
+    void Update()
     {
         if (launched)
         {

@@ -66,15 +66,46 @@ public class Shotgun : Weapon
         var bullet3 = pManager.GetNewBullet();
         var bullet4 = pManager.GetNewBullet();
         var bullet5 = pManager.GetNewBullet();
-        bullet.transform.position = bulletStart.transform.position;
-        bullet.Launch(-transform.right, rotationBullet, true);
-        bullet2.transform.position = bulletStart.transform.position;
-        bullet2.Launch(-transform.right, rotationBullet, true);
-        bullet3.transform.position = bulletStart.transform.position;
-        bullet3.Launch(-transform.right, rotationBullet, true);
-        bullet4.transform.position = bulletStart.transform.position;
-        bullet4.Launch(-transform.right, rotationBullet, true);
-        bullet5.transform.position = bulletStart.transform.position;
-        bullet5.Launch(-transform.right, rotationBullet, true);
+
+        Transform bulletSpawnTransform = bulletStart.transform;
+
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            targetPoint = hit.point; // If the ray hits something, shoot at that point
+            Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
+
+            bullet.transform.position = bulletStart.transform.position;
+            bullet.Launch(bulletDirection, rotationBullet, true);
+            bullet2.transform.position = bulletStart.transform.position;
+            bullet2.Launch(bulletDirection, rotationBullet, true);
+            bullet3.transform.position = bulletStart.transform.position;
+            bullet3.Launch(bulletDirection, rotationBullet, true);
+            bullet4.transform.position = bulletStart.transform.position;
+            bullet4.Launch(bulletDirection, rotationBullet, true);
+            bullet5.transform.position = bulletStart.transform.position;
+            bullet5.Launch(bulletDirection, rotationBullet, true);
+        }
+        else
+        {
+
+            // If the ray doesn't hit anything, shoot a certain distance forward
+            targetPoint = ray.origin + ray.direction * 100f; // 100f is an example distance
+            Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
+
+            bullet.transform.position = bulletStart.transform.position;
+            bullet.Launch(bulletDirection, rotationBullet, true);
+            bullet2.transform.position = bulletStart.transform.position;
+            bullet2.Launch(bulletDirection, rotationBullet, true);
+            bullet3.transform.position = bulletStart.transform.position;
+            bullet3.Launch(bulletDirection, rotationBullet, true);
+            bullet4.transform.position = bulletStart.transform.position;
+            bullet4.Launch(bulletDirection, rotationBullet, true);
+            bullet5.transform.position = bulletStart.transform.position;
+            bullet5.Launch(bulletDirection, rotationBullet, true);
+        }
     }
 }

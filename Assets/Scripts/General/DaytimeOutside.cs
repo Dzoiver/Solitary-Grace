@@ -16,7 +16,6 @@ public class DaytimeOutside : MonoBehaviour
         set
         {
             _dayTime = value;
-            SetDay(_dayTime);
         }
     }
 
@@ -25,10 +24,11 @@ public class DaytimeOutside : MonoBehaviour
         SetDay(_dayTime);
     }
     // Start is called before the first frame update
-    public void SetDay(bool interactable)
+    public void SetDay(bool interactable = true)
     {
         if (interactable)
         {
+            dayTime = true;
             Camera.main.clearFlags = CameraClearFlags.Skybox;
             RenderSettings.skybox = skybox;
             directionalLight.gameObject.SetActive(true);
@@ -37,6 +37,7 @@ public class DaytimeOutside : MonoBehaviour
         }
         if (!interactable)
         {
+            dayTime = false;
             Camera.main.clearFlags = CameraClearFlags.SolidColor;
             RenderSettings.skybox = null;
             directionalLight.intensity = 0;

@@ -57,10 +57,30 @@ public class Pistol : Weapon
     }
     public override void SpawnBullets()
     {
+        
         rotationBullet.x = Camera.main.transform.rotation.eulerAngles.x;
         rotationBullet.y = GameFuncs.PlayerScript.transform.rotation.eulerAngles.y;
         var bullet = pManager.GetNewBullet();
         bullet.transform.position = bulletStart.transform.position;
-        bullet.Launch(-transform.right, rotationBullet);
+        Transform bulletSpawnTransform = bulletStart.transform;
+
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            targetPoint = hit.point; // If the ray hits something, shoot at that point
+            Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
+            bullet.Launch(bulletDirection, rotationBullet);
+        }
+        else
+        {
+
+            // If the ray doesn't hit anything, shoot a certain distance forward
+            targetPoint = ray.origin + ray.direction * 100f; // 100f is an example distance
+            Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
+            bullet.Launch(bulletDirection, rotationBullet);
+        }
     }
 }
