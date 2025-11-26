@@ -5,6 +5,7 @@ using DG.Tweening;
 using GM;
 using Unity.VisualScripting;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.Events;
 
 public class Elevator : MonoBehaviour
 {
@@ -31,6 +32,13 @@ public class Elevator : MonoBehaviour
     public Vector3 Velocity { get; private set; }
 
     AudioSource audio;
+    [SerializeField] DOTweenAnimation door1;
+    [SerializeField] DOTweenAnimation door2;
+    private bool doorsBusy = false;
+    private int nextFloor = 2;
+    public Vector3 horizontalTeleportPos;
+    private bool teleportedHorizontally;
+    [SerializeField] GameObject horizontalWall;
 
     private void Start()
     {
@@ -49,7 +57,7 @@ public class Elevator : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // GameFuncs.PlayerScript.gameObject.transform.SetParent(gameObject.transform);
+            //GameFuncs.PlayerScript.gameObject.transform.SetParent(gameObject.transform);
             playerInElevator = true;
             GameFuncs.PlayerScript.inElevator = true;
             GameFuncs.PlayerScript.currentElevator = this;
@@ -91,9 +99,7 @@ public class Elevator : MonoBehaviour
 
             if (transform.position == destinationFloor)
             {
-                moving = false;
-                audio.enabled = false;
-                audio.volume = 0f;
+                OnStop();
             }
         }
         else
@@ -117,18 +123,72 @@ public class Elevator : MonoBehaviour
         else
             destinationFloor.y -= floorDistance * (floor);
         */
+        if (floor == currentFloor)
+            OpenDoors();
+        
         if (floor == currentFloor || moving)
             return;
-        destinationFloor.y = firstFloor.y + floor * floorDistance;
-        currentFloor = floor;
+
+        nextFloor = floor;
+        StartCoroutine(OnDoorsClosed());
+    }
+
+    public void RestorePosition()
+    {
+        gameObject.transform.position = savedPosition;
+    }
+
+    public void OnStop()
+    {
+        moving = false;
+        audio.enabled = false;
+        audio.volume = 0f;
+        OpenDoors();
+    }
+
+    public void OpenDoors()
+    {
+        if (door1 == null)
+            return;
+        door1.DOPlayForward();
+        door2.DOPlayForward();
+    }
+
+    public void CloseDoors()
+    {
+        if (door1 == null)
+            return;
+        door1.DOPlayBackwards();
+        door2.DOPlayBackwards();
+    }
+
+    public void FreeDoors()
+    {
+
+    }
+
+    public IEnumerator OnDoorsClosed()
+    {
+        CloseDoors();
+        yield return new WaitForSeconds(1f);
+        destinationFloor.y = firstFloor.y + nextFloor * floorDistance;
+        currentFloor = nextFloor;
         moving = true;
         audio.enabled = true;
         audio.Play();
         audio.DOFade(0.2f, 2f);
     }
 
-    public void RestorePosition()
+    public void TeleportHorizontally()
     {
-        gameObject.transform.position = savedPosition;
+        if (teleportedHorizontally)
+            return;
+        teleportedHorizontally = true;
+        gameObject.transform.position = horizontalTeleportPos;
+        horizontalWall.SetActive(true);
+        door1.gameObject.SetActive(false);
+        door2.gameObject.SetActive(false);
+
+        GameFuncs.TeleportPlayer(gameObject);
     }
 }

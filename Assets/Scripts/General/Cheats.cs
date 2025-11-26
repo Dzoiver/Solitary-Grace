@@ -15,23 +15,23 @@ public class Cheats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             player.ToggleNoclip();
             
         }
 
-        if (Input.GetKeyUp(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F3))
         {
             weapons.GiveAllWeapons();
         }
 
-        if (Input.GetKeyUp(KeyCode.F4))
+        if (Input.GetKeyDown(KeyCode.F4))
         {
             daytimeManager.SetDay(!daytimeManager.dayTime);
         }
 
-        if (Input.GetKeyUp(KeyCode.F5))
+        if (Input.GetKeyDown(KeyCode.F5))
         {
             foreach (RemoveOnStart light in lights)
             {

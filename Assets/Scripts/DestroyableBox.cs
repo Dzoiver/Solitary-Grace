@@ -69,4 +69,12 @@ public class DestroyableBox : MonoBehaviour
     {
         audio.PlayOneShot(clips[Random.Range(0, clips.Length - 1)]);
     }
+
+    public void Restore()
+    {
+        mesh.enabled = true;
+        enabled = true;
+        meshCollider.enabled = true;
+        boxCollider.enabled = true;
+    }
 }

@@ -33,10 +33,12 @@ public class BossEye : MonoBehaviour
 
     public void OpenEye()
     {
-        healer.AddEye();
-        opened = true;
-        eyeAnim.DOPlay();
-        meshRenderer.material = eyeActiveMat;
+        if (!opened)
+        {
+            healer.AddEye();
+            opened = true;
+            eyeAnim.DOPlay();
+        }
     }
 
     public void CloseEye()

@@ -35,9 +35,12 @@ public class Boss : MonoBehaviour
     private float currentPatrolWait = 0f;
     [SerializeField] Transform healSpot;
     bool healing = false;
+    bool canKill = false;
+    bool Phase1Complete = false;
+
     [SerializeField] BossDoorsController bossDoors;
     [SerializeField] BossHealer bossHealer;
-    float healSpeed = 2f;
+    float healSpeed = 5f;
     public UnityEvent onKill;
 
     private Vector3 startPosition;
@@ -72,33 +75,36 @@ public class Boss : MonoBehaviour
             DamagePlayer();
         }
 
-        if (health < 300)
+        if (health < 300 && !Phase1Complete) // When low, goes to healing spot
         {
             healing = true;
             agent.destination = healSpot.position;
             bossDoors.OpenDoors();
         }
 
-        if (BossReachedHeal())
+        if (BossReachedHeal() && healing) // Boss has walked all the way to the heal spot
         {
             bossDoors.CloseDoors();
             bossHealer.StartHealing();
         }
 
-        if (healing && health >= 800)
+        if (healing && health >= 800) // Heal until 800 HP is restored
         {
-            healing = false;
-            bossHealer.StopHealing();
-            bossDoors.ResetDoors();
-            agent.destination = GameFuncs.PlayerScript.transform.position;
+            StopHealilng();
         }
 
-        if (healing)
+        if (healing) // Increase boss health for each eye
         {
             //Debug.Log(health);
             //Debug.Log(bossHealer.GetCurrentEyes() * healSpeed * Time.deltaTime);
             health += bossHealer.GetCurrentEyes() * healSpeed * Time.deltaTime;
         }
+
+        if (bossHealer.CantHealAnymore())
+        {
+            StopHealilng();
+        }
+
     }
 
     private void FixedUpdate()
@@ -114,6 +120,16 @@ public class Boss : MonoBehaviour
         {
             Patrol();
         }
+    }
+
+    private void StopHealilng()
+    {
+        bossHealer.StopHealing();
+        Phase1Complete = true;
+        canKill = true;
+        healing = false;
+        bossDoors.ResetDoors();
+        agent.destination = GameFuncs.PlayerScript.transform.position;
     }
 
     private bool BossReachedHeal()
@@ -174,6 +190,8 @@ public class Boss : MonoBehaviour
 
     private void Death()
     {
+        if (!canKill)
+            return;
         onKill.Invoke();
         gameObject.SetActive(false);
     }

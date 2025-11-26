@@ -41,7 +41,8 @@ public class GunBullet : Projectile
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name != "Player" &&
+        Debug.Log(collision.gameObject.name);
+        if (!collision.gameObject.name.Contains("Player") &&
             !collision.gameObject.name.Contains("Bullet"))
             gameObject.SetActive(false);
     }

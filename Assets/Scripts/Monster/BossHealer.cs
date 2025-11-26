@@ -9,10 +9,11 @@ public class BossHealer : MonoBehaviour
 
     [SerializeField] BossEye[] bossEyes;
     bool healing = false;
+    bool spawnEyes = false;
     float currentEyeTime = 0f;
     float eyeTime = 0.5f;
     int spawnedEyes = 0;
-    int maxSpawnedEyes = 10;
+    int maxSpawnedEyes = 15;
     int currentEyes;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,10 @@ public class BossHealer : MonoBehaviour
 
     public void StartHealing()
     {
+        if (healing)
+            return;
         healing = true;
+        spawnEyes = true;
     }
 
     public void StopHealing()
@@ -46,14 +50,17 @@ public class BossHealer : MonoBehaviour
 
     public void PushEyes()
     {
+        if (!spawnEyes)
+            return;
+
         if (currentEyeTime > eyeTime)
         {
             spawnedEyes++;
             currentEyeTime = 0f;
             bossEyes[Random.Range(0, bossEyes.Length - 1)].OpenEye();
-            if (spawnedEyes > maxSpawnedEyes)
+            if (spawnedEyes >= maxSpawnedEyes)
             {
-                healing = false;
+                spawnEyes = false;
             }
         }
     }
@@ -70,6 +77,20 @@ public class BossHealer : MonoBehaviour
 
     public int GetCurrentEyes()
     {
+        Debug.Log(currentEyes);
         return currentEyes;
+    }
+
+    public bool CantHealAnymore()
+    {
+        if (!healing)
+            return false;
+        if (!spawnEyes && currentEyes == 0)
+        {
+            StopHealing();
+            return true;
+        }
+        else
+            return false;
     }
 }

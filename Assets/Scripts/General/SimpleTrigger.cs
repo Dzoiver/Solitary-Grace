@@ -88,10 +88,10 @@ public class SimpleTrigger : MonoBehaviour
         
     }
 
-    public void SetActiveTrigger()
+    public void SetActiveTrigger(bool value = true)
     {
-        active = true;
-        collider.enabled = true;
+        active = value;
+        collider.enabled = value;
     }
 
     public void DisablePlayer() => GameFuncs.PlayerScript.SetControl(false);
