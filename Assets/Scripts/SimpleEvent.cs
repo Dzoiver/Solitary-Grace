@@ -7,6 +7,7 @@ public class SimpleEvent : MonoBehaviour
 {
     [SerializeField] string description;
     [SerializeField] UnityEvent onEvent;
+    [SerializeField] UnityEvent onEvent2;
     [SerializeField] float delay = 0f;
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,15 @@ public class SimpleEvent : MonoBehaviour
         StartCoroutine(WaitAndStart());
     }
 
+    public void StartEvent2()
+    {
+        onEvent2.Invoke();
+    }
+
     private IEnumerator WaitAndStart()
     {
         yield return new WaitForSeconds(delay);
         onEvent.Invoke();
+        
     }
 }

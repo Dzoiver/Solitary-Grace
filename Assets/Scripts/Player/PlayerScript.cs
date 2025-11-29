@@ -1,6 +1,7 @@
 using UnityEngine;
 using GM;
 using Zenject;
+using UnityEditor;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class PlayerScript : MonoBehaviour
     private Animator cameraAnimator;
     private float gravityEffect;
     WeaponManager weaponManager;
+    Menu menu;
 
     public float GravityMultiplier
     {
@@ -61,6 +63,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake()
     {
+        menu = FindObjectOfType<Menu>();
         GameFuncs.PlayerScript = this;
         cameraAnimator = playerCam.GetComponent<Animator>();
         UpdateGravityCalculations();
@@ -86,11 +89,19 @@ public class PlayerScript : MonoBehaviour
         {
             gameover.GetDamagedRedScreen();
         }
+
+        menu.ChangeHealth(health);
     }
 
     public void GiveHP(float amount)
     {
         health = Mathf.Min(maxHealth, health + amount);
+        menu.ChangeHealth(health);
+    }
+
+    public float GetHP()
+    {
+        return health;
     }
 
     public bool IsDead() => health <= 0;
@@ -100,6 +111,7 @@ public class PlayerScript : MonoBehaviour
         cameraAnimator.enabled = true;
         cameraAnimator.Play("Deathanim");
         gameover.DieFromMonster();
+        GameFuncs.DisableWeapons(true);
     }
 
     public void CameraRestore()
@@ -159,6 +171,7 @@ public class PlayerScript : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerCamStartPos = playerCam.transform.localPosition;
+        menu.ChangeHealth(health);
     }
 
     private void OnTriggerEnter(Collider other)

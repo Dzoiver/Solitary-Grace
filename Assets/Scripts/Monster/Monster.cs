@@ -3,6 +3,7 @@ using GM;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Monster : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Monster : MonoBehaviour
     private int currentPatrolIndex = 0;
     [SerializeField] private float patrolWait = 1f;
     private float currentPatrolWait = 0f;
+    private bool freeze = false;
 
     private Vector3 startPosition;
     public float allowedAngle = 45f;
@@ -172,7 +174,7 @@ public class Monster : MonoBehaviour
             return;
 
         agent.destination = patrolPoints[currentPatrolIndex].position;
-        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < 1.5f)
+        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < 1.6f)
         {
             if (currentPatrolWait > patrolWait)
             {
@@ -203,5 +205,15 @@ public class Monster : MonoBehaviour
     {
         currentPatrolIndex = 0;
         transform.position = startPosition;
+    }
+
+    public void SetFreeze(bool value)
+    {
+        freeze = value;
+    }
+
+    public bool GetFreeze()
+    {
+        return freeze;
     }
 }

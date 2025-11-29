@@ -33,6 +33,14 @@ namespace GM
             PlayerScript.controller.enabled = true;
         }
 
+        static public void TeleportRelatively(GameObject relativeObject, Vector3 relativeNewPos)
+        {
+            PlayerScript.controller.enabled = false;
+            Vector3 relativeVector = relativeObject.transform.position - PlayerScript.gameObject.transform.position;
+            PlayerScript.gameObject.transform.position = (relativeNewPos - relativeVector);
+            PlayerScript.controller.enabled = true;
+        }
+
         static public void TeleportPlayer(Vector3 destinationVector, Quaternion rot)
         {
             PlayerScript.controller.enabled = false;

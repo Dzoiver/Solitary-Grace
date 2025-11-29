@@ -39,6 +39,8 @@ public class Elevator : MonoBehaviour
     public Vector3 horizontalTeleportPos;
     private bool teleportedHorizontally;
     [SerializeField] GameObject horizontalWall;
+    public bool removeOnStart = false;
+    public float speed = 2f;
 
     private void Start()
     {
@@ -51,6 +53,12 @@ public class Elevator : MonoBehaviour
             initialPosition = platformToLift.transform.position;
 
         lastPosition = transform.position;
+    }
+
+    private void Awake()
+    {
+        if (removeOnStart)
+            gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,7 +100,7 @@ public class Elevator : MonoBehaviour
             Vector3 newPosition = Vector3.MoveTowards(
             rb.position,
             destinationFloor,
-            1f * Time.fixedDeltaTime
+            speed * Time.fixedDeltaTime
         );
             Velocity = (newPosition - rb.position) / Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
@@ -184,11 +192,10 @@ public class Elevator : MonoBehaviour
         if (teleportedHorizontally)
             return;
         teleportedHorizontally = true;
+        GameFuncs.TeleportRelatively(gameObject, horizontalTeleportPos);
         gameObject.transform.position = horizontalTeleportPos;
         horizontalWall.SetActive(true);
         door1.gameObject.SetActive(false);
         door2.gameObject.SetActive(false);
-
-        GameFuncs.TeleportPlayer(gameObject);
     }
 }

@@ -21,6 +21,7 @@ public class GameOver : MonoBehaviour
         text.DOFade(1, 3);
         sequence.Append(image.DOColor(new Color(1, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = () =>
         {
+            GameFuncs.DisableWeapons(true);
             text.DOFade(0, 0.5f);
             image.DOColor(new Color(0, 0, 0, 0), 0.5f);
             GameFuncs.TeleportPlayer(destination);

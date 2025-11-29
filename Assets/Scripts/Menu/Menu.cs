@@ -8,6 +8,8 @@ using UnityEngine.Events;
 using static UnityEditor.Progress;
 using Zenject;
 using UnityEditor.Rendering.LookDev;
+using TMPro;
+using UnityEditor;
 
 public class Menu : MonoBehaviour
 {
@@ -15,14 +17,17 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject systemPanel;
     [SerializeField] GameObject confirmPanel;
     [SerializeField] GameObject confirmPanelItem;
+    [SerializeField] TextMeshProUGUI healthText;
     Inventory inventory;
     ContextMenuItem context;
     WeaponManager weapon;
+    MonsterManager monsterManager;
     private ScriptableItem bufferItem;
     private GameObject bufferPickupObject;
 
     private void Awake()
     {
+        monsterManager = FindObjectOfType<MonsterManager>();
         weapon = FindAnyObjectByType<WeaponManager>();
         context = FindObjectOfType<ContextMenuItem>();
     }
@@ -37,7 +42,7 @@ public class Menu : MonoBehaviour
 
     public void OpenMenu()
     {
-        weapon.gameObject.SetActive(false);
+        weapon.enabled = false;
         inventory.DisplayItems();
         GameFuncs.fading = true;
         GameFuncs.PlayerScript.SetControl(false);
@@ -45,6 +50,7 @@ public class Menu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
+            monsterManager.FreezeMonsters();
             menuPanel.SetActive(true);
             // Fadein
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
@@ -90,7 +96,8 @@ public class Menu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
-            weapon.gameObject.SetActive(true);
+            monsterManager.UnfreezeMonsters();
+            weapon.enabled = true;
             confirmPanel.SetActive(false);
             systemPanel.SetActive(false);
             menuPanel.SetActive(false);
@@ -121,5 +128,10 @@ public class Menu : MonoBehaviour
                 CloseMenu();
             }
         }
+    }
+
+    public void ChangeHealth(float value)
+    {
+        healthText.text = "Health: " + value.ToString();
     }
 }

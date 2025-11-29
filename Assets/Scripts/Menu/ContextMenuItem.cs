@@ -37,18 +37,18 @@ public class ContextMenuItem : MonoBehaviour
                 inventory.DisplayItems();
                 gameObject.SetActive(false);
                 break;
-            case "Tom":
-                Console.WriteLine("Ваше имя - Tom");
-                break;
-            case "Sam":
-                Console.WriteLine("Ваше имя - Sam");
-                break;
             default:
                 break;
         }
     }
 
-
+    public void DropItem()
+    {
+        inventory.DeleteItem(currentItem.inventorySlotID, 99);
+        inventory.DisplayItems();
+        gameObject.SetActive(false);
+        
+    }
 
     // Update is called once per frame
     void Update()

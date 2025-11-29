@@ -48,4 +48,9 @@ public class KnifeHitbox : MonoBehaviour
             currentHitboxLingerTime = 0f;
         }
     }
+
+    public void GetHitInformation()
+    {
+
+    }
 }
