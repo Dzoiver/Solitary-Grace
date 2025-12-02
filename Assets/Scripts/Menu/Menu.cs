@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GM;
 using DG.Tweening;
 using SolitaryAudio;
-using UnityEngine.Events;
-using static UnityEditor.Progress;
-using Zenject;
-using UnityEditor.Rendering.LookDev;
 using TMPro;
-using UnityEditor;
 
 public class Menu : MonoBehaviour
 {

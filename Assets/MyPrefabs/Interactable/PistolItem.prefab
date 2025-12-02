@@ -714,6 +714,7 @@ MonoBehaviour:
     RefIds:
     - rid: 8165800300940886018
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &6635985535397397163
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -789,8 +790,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.90674424, y: 1.5044768, z: 2.2330432}
-  m_Center: {x: -0.1466181, y: 0.7102507, z: -0.8999791}
+  m_Size: {x: 2.01, y: 1.98, z: 2.55}
+  m_Center: {x: 0.19, y: 0.7102507, z: -0.8999791}
 --- !u!114 &6635985535397397168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,4 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 1da93f4cb4b6bd64e9f10b4269de8966, type: 2}
+  onPickup:
+    m_PersistentCalls:
+      m_Calls: []
   destroyOnPickUp: 1

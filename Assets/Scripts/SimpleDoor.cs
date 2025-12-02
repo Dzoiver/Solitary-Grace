@@ -83,30 +83,35 @@ public class SimpleDoor : MonoBehaviour
     {
         if (other.gameObject.name == "UseCube") // If a player presses E button on the door
         {
-            if (!CanOpen())
-            {
-                if (playLockedSound)
-                    AudioController.Play("doorOpen");
-                if (lines != null)
-                    dManager.SetDialogue(lines);
-                else
-                    dManager.SetDialogue(stringText);
-                dManager.PlayDialogue(0);
-                return;
-            }
-
-            destinationPoint = GetFurtherDestination();
-
-            GameFuncs.PlayerScript.SetControl(false);
-            AudioController.Play("doorOpen");
-            GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
-            {
-                onOpen.Invoke();
-                AudioController.Play("doorClose");
-                GameFuncs.TeleportPlayer(destinationPoint);
-                GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
-                GameFuncs.PlayerScript.SetControl(true);
-            };
+            TryOpen();
         }
+    }
+
+    public void TryOpen()
+    {
+        if (!CanOpen())
+        {
+            if (playLockedSound)
+                AudioController.Play("doorOpen");
+            if (lines != null)
+                dManager.SetDialogue(lines);
+            else
+                dManager.SetDialogue(stringText);
+            dManager.PlayDialogue(0);
+            return;
+        }
+
+        destinationPoint = GetFurtherDestination();
+
+        GameFuncs.PlayerScript.SetControl(false);
+        AudioController.Play("doorOpen");
+        GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
+        {
+            onOpen.Invoke();
+            AudioController.Play("doorClose");
+            GameFuncs.TeleportPlayer(destinationPoint);
+            GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
+            GameFuncs.PlayerScript.SetControl(true);
+        };
     }
 }

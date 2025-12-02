@@ -34,9 +34,12 @@ public class Monster : MonoBehaviour
     [SerializeField] private float patrolWait = 1f;
     private float currentPatrolWait = 0f;
     private bool freeze = false;
+    [SerializeField] bool randomizePatrol = false;
 
     private Vector3 startPosition;
+    private Quaternion startRotation;
     public float allowedAngle = 45f;
+    private AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,12 +50,14 @@ public class Monster : MonoBehaviour
             i++;
             patrolPoints.Add(t);
         }
+        audio = GetComponent<AudioSource>();
         //rb = GetComponent<Rigidbody>();
     }
 
     private void Awake()
     {
         startPosition = transform.position;
+        startRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -144,6 +149,7 @@ public class Monster : MonoBehaviour
 
                 if (hit.collider.CompareTag("Player"))
                 {
+                    PlayAwake();
                     chase = true;
                     return true;
                 }
@@ -179,7 +185,11 @@ public class Monster : MonoBehaviour
             if (currentPatrolWait > patrolWait)
             {
                 currentPatrolWait = 0f;
-                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
+
+                if (randomizePatrol)
+                    currentPatrolIndex = Random.Range(0, patrolPoints.Count - 1);
+                else
+                    currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
             }
             currentPatrolWait += Time.deltaTime;
         }
@@ -204,7 +214,10 @@ public class Monster : MonoBehaviour
     public void ResetMonster()
     {
         currentPatrolIndex = 0;
+        agent.destination = startPosition;
         transform.position = startPosition;
+        transform.rotation = startRotation;
+        chase = false;
     }
 
     public void SetFreeze(bool value)
@@ -215,5 +228,12 @@ public class Monster : MonoBehaviour
     public bool GetFreeze()
     {
         return freeze;
+    }
+
+    private void PlayAwake()
+    {
+        if (chase)
+            return;
+        audio.PlayOneShot(Resources.Load<AudioClip>("Sounds/monster/zombie-awake1"));
     }
 }

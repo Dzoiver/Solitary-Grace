@@ -56,9 +56,4 @@ public class GetSomeSleep : MonoBehaviour
         GameFuncs.DisableWeapons(false);
         //boxcollider.enabled = false;
     }
-
-    public void SetNewCheckpoint()
-    {
-
-    }
 }

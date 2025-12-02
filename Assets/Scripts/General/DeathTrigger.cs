@@ -1,7 +1,5 @@
 using GM;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Zenject;
 
 public class DeathTrigger : MonoBehaviour

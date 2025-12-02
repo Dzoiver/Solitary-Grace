@@ -5,14 +5,17 @@ using UnityEngine;
 public class RemoveOnStart : MonoBehaviour
 {
     [SerializeField] bool isLight = false;
+    [SerializeField] bool removeInStart = false;
     private void Awake()
     {
-        gameObject.SetActive(false);
+        if (!removeInStart)
+            gameObject.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (removeInStart)
+            gameObject.SetActive(false);
     }
 
     // Update is called once per frame

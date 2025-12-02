@@ -41,6 +41,12 @@ public class Elevator : MonoBehaviour
     [SerializeField] GameObject horizontalWall;
     public bool removeOnStart = false;
     public float speed = 2f;
+    [SerializeField] DOTweenAnimation outer1Floor0;
+    [SerializeField] DOTweenAnimation outer2Floor0;
+    [SerializeField] DOTweenAnimation outer1Floor1;
+    [SerializeField] DOTweenAnimation outer2Floor1;
+    [SerializeField] DOTweenAnimation outer1Floor2;
+    [SerializeField] DOTweenAnimation outer2Floor2;
 
     private void Start()
     {
@@ -132,7 +138,11 @@ public class Elevator : MonoBehaviour
             destinationFloor.y -= floorDistance * (floor);
         */
         if (floor == currentFloor)
+        {
             OpenDoors();
+            Debug.Log(currentFloor);
+            OpenOuterDoors(currentFloor);
+        }
         
         if (floor == currentFloor || moving)
             return;
@@ -152,6 +162,7 @@ public class Elevator : MonoBehaviour
         audio.enabled = false;
         audio.volume = 0f;
         OpenDoors();
+        OpenOuterDoors(currentFloor);
     }
 
     public void OpenDoors()
@@ -178,6 +189,7 @@ public class Elevator : MonoBehaviour
     public IEnumerator OnDoorsClosed()
     {
         CloseDoors();
+        CloseOuterDoors(currentFloor);
         yield return new WaitForSeconds(1f);
         destinationFloor.y = firstFloor.y + nextFloor * floorDistance;
         currentFloor = nextFloor;
@@ -197,5 +209,55 @@ public class Elevator : MonoBehaviour
         horizontalWall.SetActive(true);
         door1.gameObject.SetActive(false);
         door2.gameObject.SetActive(false);
+    }
+
+    public void OpenOuterDoors(int floor)
+    {
+        if (floor == 0)
+        {
+            if (outer1Floor0 == null || outer2Floor0 == null)
+                return;
+            outer1Floor0.DOPlayForward();
+            outer2Floor0.DOPlayForward();
+        }
+        if (floor == 1)
+        {
+            if (outer1Floor1 == null || outer2Floor1 == null)
+                return;
+            outer1Floor1.DOPlayForward();
+            outer2Floor1.DOPlayForward();
+        }
+        if (floor == 2)
+        {
+            if (outer1Floor2 == null || outer2Floor2 == null)
+                return;
+            outer1Floor2.DOPlayForward();
+            outer2Floor2.DOPlayForward();
+        }
+    }
+
+    public void CloseOuterDoors(int floor)
+    {
+        if (floor == 0)
+        {
+            if (outer1Floor0 == null || outer2Floor0 == null)
+                return;
+            outer1Floor0.DOPlayBackwards();
+            outer2Floor0.DOPlayBackwards();
+        }
+        if (floor == 1)
+        {
+            if (outer1Floor1 == null || outer2Floor1 == null)
+                return;
+            outer1Floor1.DOPlayBackwards();
+            outer2Floor1.DOPlayBackwards();
+        }
+        if (floor == 2)
+        {
+            if (outer1Floor2 == null || outer2Floor2 == null)
+                return;
+            outer1Floor2.DOPlayBackwards();
+            outer2Floor2.DOPlayBackwards();
+        }
     }
 }

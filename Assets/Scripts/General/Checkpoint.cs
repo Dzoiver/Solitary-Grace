@@ -10,11 +10,19 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] GameObject oldSpawn;
     [SerializeField] GameObject newSpawn;
     GetSomeSleep sleep;
+    GetSomeSleep[] sleeps;
     public UnityEvent onTeleport;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        sleep = FindObjectOfType<GetSomeSleep>();
+        sleeps = FindObjectsOfType<GetSomeSleep>();
+        foreach (GetSomeSleep sl in sleeps)
+        {
+            if (sl.gameObject.name == "GetSleep2")
+            {
+                Debug.Log("found good sleep");
+                sleep = sl;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +37,7 @@ public class Checkpoint : MonoBehaviour
 
     public void UpdateSpawn()
     {
+        Debug.Log("Updated checkpoint");
         sleep.checkpoint = this;
         oldSpawn.transform.position = newSpawn.transform.position;
         oldSpawn.transform.rotation = newSpawn.transform.rotation;
