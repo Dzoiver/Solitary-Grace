@@ -320,8 +320,8 @@ public class PlayerScript : MonoBehaviour
             }
             else // Try to use it if player's inside the trigger
             {
-                useTrigger.SetActive(true);
-                useTrigger.transform.position = transform.position;
+                //useTrigger.SetActive(true);
+                //useTrigger.transform.position = transform.position;
             }
         }
     }

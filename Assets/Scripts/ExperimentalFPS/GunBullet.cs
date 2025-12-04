@@ -29,12 +29,12 @@ public class GunBullet : Projectile
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Monster>().GetDamage(15f);
+            other.gameObject.GetComponent<Monster>().GetDamage(17f);
             gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("Boss"))
         {
-            other.gameObject.GetComponent<Boss>().GetDamage(15f);
+            other.gameObject.GetComponent<Boss>().GetDamage(17f);
             gameObject.SetActive(false);
         }
     }

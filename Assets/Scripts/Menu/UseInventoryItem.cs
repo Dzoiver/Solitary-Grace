@@ -22,7 +22,7 @@ public class UseInventoryItem : MonoBehaviour
         switch(item.name)
         {
             case "Health Drink":
-                GameFuncs.PlayerScript.GiveHP(30f);
+                GameFuncs.PlayerScript.GiveHP(100f);
                 context.gameObject.SetActive(false);
                 break;
             case "Tom":

@@ -102,7 +102,6 @@ public class SimpleDoor : MonoBehaviour
         }
 
         destinationPoint = GetFurtherDestination();
-
         GameFuncs.PlayerScript.SetControl(false);
         AudioController.Play("doorOpen");
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
