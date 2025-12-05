@@ -9,6 +9,7 @@ public class MenuNavigation : MonoBehaviour
 {
     [SerializeField] GameObject systemPanel;
     [SerializeField] Image blackImage;
+    [SerializeField] GameObject optionspanel;
     private bool fading = false;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class MenuNavigation : MonoBehaviour
     {
         if (!fading)
         {
+            optionspanel.SetActive(true);
             fading = true;
             AudioController.Play("menuButton");
             blackImage.DOFade(1f, 0.5f).onComplete = () => {

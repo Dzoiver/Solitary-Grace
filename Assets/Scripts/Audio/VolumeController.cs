@@ -16,9 +16,10 @@ public class VolumeController : MonoBehaviour
         // Optional: Load saved volume from PlayerPrefs on start
         if (PlayerPrefs.HasKey(MasterVolumeParam))
         {
+            Debug.Log("Setting the volume beforehand");
             float savedVolume = PlayerPrefs.GetFloat(MasterVolumeParam);
             volumeSlider.value = Mathf.Pow(10, savedVolume / 20); // Convert back from logarithmic
-            SetVolume();
+            //SetVolume();
         }
         else
         {
@@ -36,6 +37,7 @@ public class VolumeController : MonoBehaviour
         // Optional: Save volume to PlayerPrefs
         PlayerPrefs.SetFloat(MasterVolumeParam, volume);
         PlayerPrefs.Save();
+        Debug.Log(volume + " " + gameObject.name);
     }
     // Update is called once per frame
     void Update()

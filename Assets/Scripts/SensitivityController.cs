@@ -9,7 +9,7 @@ public class SensitivityController : MonoBehaviour
     MouseLook mouseScript;
     [SerializeField] Slider slider;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         mouseScript = FindObjectOfType<MouseLook>();
         if (PlayerPrefs.HasKey("MouseSensitivity"))
@@ -21,7 +21,8 @@ public class SensitivityController : MonoBehaviour
 
     public void SetSensitivity()
     {
-        mouseScript.preferenceSens = slider.value;
+        if (mouseScript != null)
+            mouseScript.preferenceSens = slider.value;
         PlayerPrefs.SetFloat("MouseSensitivity", slider.value);
         PlayerPrefs.Save();
     }

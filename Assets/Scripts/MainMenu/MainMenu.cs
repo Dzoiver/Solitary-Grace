@@ -17,6 +17,11 @@ public class MainMenu : MonoBehaviour
     {
         // gameObject.SetActive(true);
     }
+
+    private void Start()
+    {
+        OptionsPanel.SetActive(false);
+    }
     public void StartGame()
     {
         blackImageCanvas.sortingOrder = 1;

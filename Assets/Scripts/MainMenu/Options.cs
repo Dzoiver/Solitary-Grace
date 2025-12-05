@@ -18,6 +18,11 @@ public class Options : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        
+    }
+
     public void CloseOptions()
     {
         optionsPanel.SetActive(false);
