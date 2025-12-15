@@ -7,6 +7,11 @@ public class UseCube : MonoBehaviour
     [SerializeField] public PlayerScript pScript;
     private void OnTriggerEnter(Collider other)
     {
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
         gameObject.SetActive(false);
     }
 }

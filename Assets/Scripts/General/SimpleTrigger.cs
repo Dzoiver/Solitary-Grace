@@ -25,6 +25,11 @@ public class SimpleTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!active)
+        {
+            gameObject.layer = 2;
+        }
+
         if (checkItem)
         {
             messageUI = FindObjectOfType<MessagesUI>();
@@ -61,6 +66,7 @@ public class SimpleTrigger : MonoBehaviour
 
         if (other.gameObject.name == "UseCube")
         {
+            other.gameObject.SetActive(false);
             if (checkItemScriptable != null)
             {
                 if (!inventory.Has(checkItemScriptable.id))
@@ -89,6 +95,10 @@ public class SimpleTrigger : MonoBehaviour
     public void SetActiveTrigger(bool value = true)
     {
         active = value;
+        if (active)
+            gameObject.layer = 2;
+        else
+            gameObject.layer = 0;
         collider.enabled = value;
     }
 

@@ -20,6 +20,10 @@ public class DoorOpen : MonoBehaviour
     public string lockedMessage = "The door is jammed";
     public UnityEvent onEnter;
 
+    private string doorSound;
+    private string defaultOpen = "Sounds/door-14-open";
+    private string unlockOpen = "Sounds/key-lock-soundFixed";
+
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
@@ -41,6 +45,7 @@ public class DoorOpen : MonoBehaviour
         {
             if (item.Name == key.name)
             {
+                doorSound = unlockOpen;
                 return true;
             }
         }
@@ -50,8 +55,10 @@ public class DoorOpen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        doorSound = defaultOpen;
         if (other.gameObject.name == "UseCube") // If a player presses E button on the door
         {
+            //other.gameObject.SetActive(false);
             if (Closed)
             {
                 if (!PlayerHasKey())
@@ -66,7 +73,7 @@ public class DoorOpen : MonoBehaviour
                 }
             }
             GameFuncs.PlayerScript.SetControl(false);
-            AudioController.Play("doorOpen");
+            AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound));
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
             {
                 onEnter.Invoke();

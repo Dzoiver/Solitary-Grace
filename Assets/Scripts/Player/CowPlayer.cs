@@ -175,42 +175,6 @@ public class CowPlayer : MonoBehaviour
         velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
 
-    public void ToggleNoclip()
-    {
-        isNoclip = !isNoclip;
-        gameObject.layer = isNoclip ? 12 : 6;
-        Debug.Log($"Noclip {(isNoclip ? "on" : "off")}");
-    }
-
-    private void ApplyGravity()
-    {
-        if (isGrounded && velocity.y < 0 && !isNoclip) // Gravity even when grounded
-        {
-            velocity.y = -4f;
-        }
-        if (!isNoclip)
-            velocity.y += gravityEffect;
-
-        if (allowMovement)
-            controller.Move(velocity * Time.fixedDeltaTime);
-    }
-
-    private void FixedUpdate()
-    {
-
-        if (inElevator && currentElevator != null)
-        {
-            controller.Move(move * speed * Time.fixedDeltaTime);
-            velocity.y = 0;
-            Vector3 elevatorMovement = currentElevator.Velocity * Time.fixedDeltaTime;
-            controller.Move(elevatorMovement);
-        }
-        else
-        {
-            ApplyGravity();
-        }
-    }
-
     private void Update()
     {
         float x = Input.GetAxis("Horizontal");
@@ -218,42 +182,11 @@ public class CowPlayer : MonoBehaviour
 
 
         move = transform.right * x + transform.forward * z;
-        if (allowMovement && !inElevator)
+        if (allowMovement)
             controller.Move(move * speed * Time.deltaTime);
-
-        if (isNoclip)
-        {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                speed = 15f;
-            }
-            else
-            {
-                speed = BASE_SPEED;
-            }
-
-            isGrounded = false;
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                velocity.y = 10f;
-            }
-            else
-                velocity.y = 0f;
-
-            if (Input.GetKey(KeyCode.LeftControl))
-            {
-                velocity.y = -10f;
-            }
-        }
 
         if (!allowControl)
             return;
-
-        if (Input.GetButtonDown("Jump") && isGrounded && AllowJump)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravity);
-        }
 
         /*
         if (inElevator)

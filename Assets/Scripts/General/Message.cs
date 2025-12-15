@@ -1,11 +1,13 @@
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.Events;
 
 public class Message : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] string[] messageText;
+    public UnityEvent onTrigger;
 
     private Sequence sequence;
     private bool isTextDisplayed = false;
@@ -20,6 +22,7 @@ public class Message : MonoBehaviour
             text.enabled = true;
             sequence.PrependInterval(5f).Append(text.DOFade(0, 0.5f));
             sequence.onComplete = ResetText;
+            onTrigger.Invoke();
         }
     }
 

@@ -21,10 +21,14 @@ public class SimpleDoor : MonoBehaviour
     [SerializeField] UnityEvent onOpenRed;
     UnityEvent onOpen;
     public string stringText = "";
+    private string defaultOpen = "Sounds/door-14-open";
+    private string unlockOpen = "Sounds/key-lock-soundFixed";
+    private string doorSound;
     // Start is called before the first frame update
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
+        doorSound = defaultOpen;
     }
 
     private bool PlayerHasKey()
@@ -36,6 +40,7 @@ public class SimpleDoor : MonoBehaviour
         {
             if (item.Name == key.name)
             {
+                doorSound = unlockOpen;
                 return true;
             }
         }
@@ -83,12 +88,15 @@ public class SimpleDoor : MonoBehaviour
     {
         if (other.gameObject.name == "UseCube") // If a player presses E button on the door
         {
+            //other.gameObject.SetActive(false);
             TryOpen();
         }
     }
 
     public void TryOpen()
     {
+        doorSound = defaultOpen;
+
         if (!CanOpen())
         {
             if (playLockedSound)
@@ -103,7 +111,7 @@ public class SimpleDoor : MonoBehaviour
 
         destinationPoint = GetFurtherDestination();
         GameFuncs.PlayerScript.SetControl(false);
-        AudioController.Play("doorOpen");
+        AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound));
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
         {
             onOpen.Invoke();

@@ -12,6 +12,8 @@ public class CowBullet : MonoBehaviour
     Rigidbody rb;
     MeshRenderer mesh;
     [SerializeField] Camera cam;
+    Vector3 rotationY;
+    Quaternion bulletRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,6 @@ public class CowBullet : MonoBehaviour
         particles = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,7 +32,9 @@ public class CowBullet : MonoBehaviour
     }
     void Update()
     {
-
+        //bulletRotation = rb.rotation;
+        //bulletRotation.x = rb.velocity.y;
+        //rb.rotation = bulletRotation;
     }
 
     private void Explode()

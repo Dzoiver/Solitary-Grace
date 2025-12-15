@@ -13,7 +13,7 @@ public class FattyTalk : MonoBehaviour
     {
         if (other.gameObject.name != "UseCube" || dManager.IsDialoguePlayed())
             return;
-
+        //other.gameObject.SetActive(false);
         dManager.SetDialogue(texts[index]);
         dManager.PlayDialogue();
         if (index < texts.Length - 1)

@@ -33,7 +33,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.gameObject.name == "UseCube")
         {
-            
+            //other.gameObject.SetActive(false);
             if (inventory.TryPickup(item))
             {
                 if (destroyOnPickUp)

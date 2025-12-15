@@ -309,11 +309,13 @@ public class PlayerScript : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             // Debug.DrawRay(ray.origin, ray.direction, Color.white, 5f);
-
+            
             if (Physics.Raycast(ray, out hit, INTERACT_DISTANCE, layer.value))
             {
+                Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.gameObject.layer == 3) // Layer 3 - Interactable
                 {
+                    Debug.Log("it's interactable");
                     useTrigger.SetActive(true);
                     useTrigger.transform.position = hit.point;
                 }
