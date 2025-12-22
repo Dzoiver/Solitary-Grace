@@ -315,7 +315,6 @@ public class PlayerScript : MonoBehaviour
                 Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.gameObject.layer == 3) // Layer 3 - Interactable
                 {
-                    Debug.Log("it's interactable");
                     useTrigger.SetActive(true);
                     useTrigger.transform.position = hit.point;
                 }

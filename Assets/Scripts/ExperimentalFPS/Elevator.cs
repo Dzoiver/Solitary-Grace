@@ -48,6 +48,9 @@ public class Elevator : MonoBehaviour
     [SerializeField] DOTweenAnimation outer1Floor2;
     [SerializeField] DOTweenAnimation outer2Floor2;
 
+    [SerializeField] SimpleTrigger button1;
+    [SerializeField] SimpleTrigger button2;
+    [SerializeField] SimpleTrigger button3;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -147,6 +150,12 @@ public class Elevator : MonoBehaviour
         if (floor == currentFloor || moving)
             return;
 
+        if (button1 != null)
+            button1.active = false;
+        if (button2 != null)
+            button2.active = false;
+        if (button3 != null)
+            button3.active = false;
         nextFloor = floor;
         StartCoroutine(OnDoorsClosed());
     }
@@ -163,6 +172,13 @@ public class Elevator : MonoBehaviour
         audio.volume = 0f;
         OpenDoors();
         OpenOuterDoors(currentFloor);
+
+        if (button1 != null)
+        button1.active = true;
+        if (button2 != null)
+            button2.active = true;
+        if (button3 != null)
+            button3.active = true;
     }
 
     public void OpenDoors()
