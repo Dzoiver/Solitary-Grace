@@ -31,7 +31,8 @@ public class Elevator : MonoBehaviour
     [SerializeField] private Vector3 firstFloor = new Vector3(0,0,0);
     public Vector3 Velocity { get; private set; }
 
-    AudioSource audio;
+    [SerializeField] AudioSource audio;
+    [SerializeField] AudioSource audioDing;
     [SerializeField] DOTweenAnimation door1;
     [SerializeField] DOTweenAnimation door2;
     private bool doorsBusy = false;
@@ -40,6 +41,7 @@ public class Elevator : MonoBehaviour
     private bool teleportedHorizontally;
     [SerializeField] GameObject horizontalWall;
     public bool removeOnStart = false;
+    public bool ding = false;
     public float speed = 2f;
     [SerializeField] DOTweenAnimation outer1Floor0;
     [SerializeField] DOTweenAnimation outer2Floor0;
@@ -54,7 +56,6 @@ public class Elevator : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        audio = GetComponent<AudioSource>();
         startPosition = transform.position;
         destinationFloor = startPosition;
 
@@ -173,6 +174,9 @@ public class Elevator : MonoBehaviour
         OpenDoors();
         OpenOuterDoors(currentFloor);
 
+        if (ding)
+            audioDing.Play();
+
         if (button1 != null)
         button1.active = true;
         if (button2 != null)
@@ -225,6 +229,8 @@ public class Elevator : MonoBehaviour
         horizontalWall.SetActive(true);
         door1.gameObject.SetActive(false);
         door2.gameObject.SetActive(false);
+
+        Camera.main.DOShakePosition(20f, 0.1f, 10, 90f, true);
     }
 
     public void OpenOuterDoors(int floor)

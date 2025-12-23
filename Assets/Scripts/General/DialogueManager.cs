@@ -50,10 +50,34 @@ public class DialogueManager : MonoBehaviour
 
         sequence = DOTween.Sequence();
         isTextDisplayed = true;
+        Debug.Log("dialog = " + (dialogue == true));
+        text.enabled = true;
+
         if (dialogue != null)
+        {
             text.text = dialogue.MessageText[dialogueID];
-        if (stringText != null)
+        }
+        else if (stringText != null)
+        {
             text.text = stringText;
+        }
+        
+        sequence.PrependInterval(3f).Append(text.DOFade(0, 0.5f));
+        sequence.onComplete = ResetText;
+
+        return true;
+    }
+
+    public bool PlayDialogue(string line)
+    {
+        if (isTextDisplayed == true)
+        {
+            return true;
+        }
+
+        sequence = DOTween.Sequence();
+        isTextDisplayed = true;
+        text.text = line;
         text.enabled = true;
         sequence.PrependInterval(3f).Append(text.DOFade(0, 0.5f));
         sequence.onComplete = ResetText;

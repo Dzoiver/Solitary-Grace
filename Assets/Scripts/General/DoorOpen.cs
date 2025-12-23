@@ -84,4 +84,9 @@ public class DoorOpen : MonoBehaviour
             };
         }
     }
+
+    public void Unlock()
+    {
+        Closed = false;
+    }
 }

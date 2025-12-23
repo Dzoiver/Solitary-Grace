@@ -96,9 +96,9 @@ public class SimpleTrigger : MonoBehaviour
     {
         active = value;
         if (active)
-            gameObject.layer = 2;
+            gameObject.layer = 3;
         else
-            gameObject.layer = 0;
+            gameObject.layer = 2;
         collider.enabled = value;
     }
 

@@ -24,6 +24,8 @@ public class SimpleDoor : MonoBehaviour
     private string defaultOpen = "Sounds/door-14-open";
     private string unlockOpen = "Sounds/key-lock-soundFixed";
     private string doorSound;
+    private string ladderSoundName = "Sounds/metal-footsteps";
+    public bool ladder = false;
     // Start is called before the first frame update
     private void Start()
     {
@@ -96,6 +98,8 @@ public class SimpleDoor : MonoBehaviour
     public void TryOpen()
     {
         doorSound = defaultOpen;
+        if (ladder)
+            doorSound = ladderSoundName;
 
         if (!CanOpen())
         {
@@ -115,7 +119,8 @@ public class SimpleDoor : MonoBehaviour
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
         {
             onOpen.Invoke();
-            AudioController.Play("doorClose");
+            if (!ladder)
+                AudioController.Play("doorClose");
             GameFuncs.TeleportPlayer(destinationPoint);
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
             GameFuncs.PlayerScript.SetControl(true);
