@@ -216,7 +216,7 @@ public class Elevator : MonoBehaviour
         moving = true;
         audio.enabled = true;
         audio.Play();
-        audio.DOFade(0.2f, 2f);
+        audio.DOFade(0.4f, 2f);
     }
 
     public void TeleportHorizontally()
