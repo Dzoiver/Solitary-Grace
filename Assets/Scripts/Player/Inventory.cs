@@ -1,7 +1,9 @@
+using GM;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 enum ItemNames
 {
@@ -64,10 +66,18 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> ItemsList = new List<InventoryItem>();
     [SerializeField] InventorySlotUI[] uiSlots;
     MessagesUI mesUI;
+    WeaponManager weaponmanager;
 
     private void Start()
     {
         mesUI = FindObjectOfType<MessagesUI>();
+        
+    }
+
+    private void Awake()
+    {
+        weaponmanager = FindObjectOfType<WeaponManager>();
+        GameFuncs.inventory = this;
     }
 
     private void AddItem(ScriptableItem scriptableItem)
@@ -80,7 +90,11 @@ public class Inventory : MonoBehaviour
         else
             item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite);
         ItemsList.Add(item);
-        // Debug.Log("item added: " + item.Name);
+        DisplayItems();
+        if (item.Name == "Pistol Ammo")
+            weaponmanager.pistolScript.UpdateAmmoFromInventory();
+        if (item.Name == "Shotgun Ammo")
+            weaponmanager.shotgunScript.UpdateAmmoFromInventory();
     }
 
     public bool TryPickup(ScriptableItem itemInfo)
@@ -107,11 +121,86 @@ public class Inventory : MonoBehaviour
     {
         if (ItemsList[itemSlot].Quantity - deleteQuantity <= 0)
         {
+            ItemsList[itemSlot].Quantity = 0;
+            if (ItemsList[itemSlot].Name == "Pistol Ammo")
+                weaponmanager.pistolScript.UpdateAmmoFromInventory();
+            if (ItemsList[itemSlot].Name == "Shotgun Ammo")
+                weaponmanager.shotgunScript.UpdateAmmoFromInventory();
             ItemsList.RemoveAt(itemSlot);
+            DisplayItems();
             return;
         }
 
         ItemsList[itemSlot].Quantity -= deleteQuantity;
+
+        if (ItemsList[itemSlot].Name == "Pistol Ammo")
+            weaponmanager.pistolScript.UpdateAmmoFromInventory();
+        if (ItemsList[itemSlot].Name == "Shotgun Ammo")
+            weaponmanager.shotgunScript.UpdateAmmoFromInventory();
+    }
+
+    public void DecreaseCount(int demandCount, int itemID)
+    {
+        InventoryItem leastQuantity;
+        switch (itemID)
+        {
+            case 6: // If Pistol Ammo
+                
+                leastQuantity = LeastQuantityItem(6);
+                if (demandCount >= leastQuantity.Quantity) // If ammo needed is greater than 1 slot
+                {
+                    int reminder = demandCount - leastQuantity.Quantity;
+                    DeleteItem(leastQuantity.inventorySlotID, 999);
+                    InventoryItem leastQuantity2 = LeastQuantityItem(6);
+                    if (leastQuantity2 != null)
+                        DeleteItem(LeastQuantityItem(6).inventorySlotID, reminder);
+                }
+                else
+                {
+                    DeleteItem(leastQuantity.inventorySlotID, demandCount);
+                }
+                break;
+
+            case 7: // If Shotgun Ammo
+                leastQuantity = LeastQuantityItem(7);
+                if (demandCount >= leastQuantity.Quantity) // If ammo needed is greater than 1 slot
+                {
+                    int reminder = demandCount - leastQuantity.Quantity;
+                    Debug.Log("reminder: " + reminder);
+                    DeleteItem(leastQuantity.inventorySlotID, 999);
+                    Debug.Log("Looking for second pachka");
+                    InventoryItem leastQuantity2 = LeastQuantityItem(7);
+                    if (leastQuantity2 != null)
+                    {
+                        DeleteItem(LeastQuantityItem(7).inventorySlotID, reminder);
+                    }
+
+                }
+                else
+                {
+                    DeleteItem(leastQuantity.inventorySlotID, demandCount);
+                }
+                break;
+        }
+    }
+
+    public InventoryItem LeastQuantityItem(int givenID)
+    {
+        InventoryItem itemToReturn = null;
+        int leastQuantity = 999;
+        Debug.Log("Kenpachi");
+        foreach (InventoryItem it in ItemsList)
+        {
+            if (it.Id == givenID)
+            {
+                if (it.Quantity < leastQuantity)
+                {
+                    leastQuantity = it.Quantity;
+                    itemToReturn = it;
+                }
+            }
+        }
+        return itemToReturn;
     }
 
     public bool Has(int givenID)
@@ -124,6 +213,20 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public int ItemAmount(int givenID)
+    {
+        int sum = 0;
+        foreach (InventoryItem it in ItemsList)
+        {
+            if (it.Id == givenID)
+            {
+                sum += it.Quantity;
+            }
+        }
+
+        return sum;
     }
 
     public void DisplayItems()

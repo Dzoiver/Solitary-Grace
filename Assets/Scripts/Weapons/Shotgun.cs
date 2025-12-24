@@ -24,13 +24,14 @@ public class Shotgun : Weapon
     }
 
     private int _clipAmmo = 5;
-    private int _currentClip = 5;
-    private int _reserveAmmo = 49;
-    private int _maxAmmo = 49;
+    private int _currentClip = 0;
+    private int _reserveAmmo = 0;
+    private int _maxAmmo = 999;
     private float _coolDown = 0.3f;
     private float _currentCoolDown = 0f;
     private string reloadSound = "Sounds/ShotgunReload";
     private string shootSound = "Sounds/ShotgunShoot";
+    private string emptySound = "Sounds/drobo_click";
 
     Animator _weaponAnimator;
     public override int clipAmmo { get => _clipAmmo; set => _clipAmmo = value; }
@@ -45,6 +46,8 @@ public class Shotgun : Weapon
 
     public override string ReloadSound { get => reloadSound; set => reloadSound = value; }
     public override string ShootSound { get => shootSound; set => shootSound = value; }
+
+    public override string EmptySound { get => emptySound; set => emptySound = value; }
 
     public override Animator weaponAnimator { get => _weaponAnimator; set => _weaponAnimator = value; }
 
@@ -107,5 +110,11 @@ public class Shotgun : Weapon
             bullet5.transform.position = bulletStart.transform.position;
             bullet5.Launch(bulletDirection, rotationBullet, true);
         }
+    }
+
+    public void UpdateAmmoFromInventory()
+    {
+        reserveAmmo = GameFuncs.inventory.ItemAmount(7);
+        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
     }
 }

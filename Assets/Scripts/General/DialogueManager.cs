@@ -62,7 +62,7 @@ public class DialogueManager : MonoBehaviour
             text.text = stringText;
         }
         
-        sequence.PrependInterval(3f).Append(text.DOFade(0, 0.5f));
+        sequence.PrependInterval(3f).Append(text.DOFade(0, 0.1f));
         sequence.onComplete = ResetText;
 
         return true;

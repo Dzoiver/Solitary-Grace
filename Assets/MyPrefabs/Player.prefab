@@ -1997,6 +1997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasText: {fileID: 1025868735}
   audio: {fileID: 0}
+  inventory: {fileID: 0}
   bulletStart: {fileID: 272359585}
 --- !u!82 &793903115970293371
 AudioSource:
@@ -3710,6 +3711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasText: {fileID: 1869847655}
   audio: {fileID: 0}
+  inventory: {fileID: 0}
   bulletStart: {fileID: 540911397}
 --- !u!95 &1407845641
 Animator:
@@ -6475,6 +6477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasText: {fileID: 0}
   audio: {fileID: 0}
+  inventory: {fileID: 0}
   bulletStart: {fileID: 0}
 --- !u!95 &1773922723
 Animator:
@@ -7160,6 +7163,9 @@ MonoBehaviour:
   item1: {fileID: 11400000, guid: d08453740a4ec524f965df7b963013ca, type: 2}
   item2: {fileID: 11400000, guid: 1da93f4cb4b6bd64e9f10b4269de8966, type: 2}
   item3: {fileID: 11400000, guid: 01c4bb145ae61764f9bbc99999af8279, type: 2}
+  pistolScript: {fileID: 1140343670}
+  shotgunScript: {fileID: 1407845640}
+  canAttack: 1
 --- !u!1 &6703890647211263128
 GameObject:
   m_ObjectHideFlags: 0

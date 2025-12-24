@@ -53,6 +53,14 @@ public class DestroyableBox : MonoBehaviour
             itemObject.SetActive(false);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            DestroyBox();
+        }
+    }
+
     public void DestroyBox()
     {
         onBreak.Invoke();

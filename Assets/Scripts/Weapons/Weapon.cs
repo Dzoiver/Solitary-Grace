@@ -9,6 +9,7 @@ public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI canvasText;
     [SerializeField] public AudioSource audio;
+    public Inventory inventory;
     public abstract int clipAmmo { get; set; }
     public abstract int currentClip { get; set; }
     public abstract int reserveAmmo { get; set; }
@@ -22,7 +23,11 @@ public abstract class Weapon : MonoBehaviour
     public abstract string ReloadSound { get; set; }
     public abstract string ShootSound { get; set; }
 
+    public abstract string EmptySound { get; set; }
+
     private bool reloading = false;
+
+    private int weaponID = 6; // Pistol
 
     void Update()
     {
@@ -45,14 +50,17 @@ public abstract class Weapon : MonoBehaviour
     {
         if (!GameFuncs.PlayerScript.IsControl()) // Can't shoot if menu is opened
             return;
-
         if (currentClip > 0)
         {
             audio.PlayOneShot(Resources.Load<AudioClip>(ShootSound));
             currentClip -= 1;
-            canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
+            canvasText.text = currentClip.ToString() + " / " + GameFuncs.inventory.ItemAmount(weaponID).ToString();
             weaponAnimator.Play(ShootAnimName, -1, 0f);
             SpawnBullets();
+        }
+        else
+        {
+            audio.PlayOneShot(Resources.Load<AudioClip>(EmptySound));
         }
     }
 
@@ -63,38 +71,35 @@ public abstract class Weapon : MonoBehaviour
         if (reloading)
             return;
 
-        if (currentClip < clipAmmo && reserveAmmo > 0)
+        if (name == "Shotgun")
+            weaponID = 7;
+
+
+        if (currentClip < clipAmmo && GameFuncs.inventory.ItemAmount(weaponID) > 0)
         {
             audio.PlayOneShot(Resources.Load<AudioClip>(ReloadSound));
             reloading = true;
             weaponAnimator.Play(ReloadAnimName, -1, 0f);
         }
     }
-
-    public void AddAmmo(int value)
-    {
-        reserveAmmo += value;
-    }
-
-    public void RemoveAmmo(int value)
-    {
-        reserveAmmo -= value;
-    }
     
     public void FinishReloading()
     {
         int neededAmmo = clipAmmo - currentClip;
-        if (reserveAmmo >= neededAmmo) // Enough ammo to reload fully
+        int inventoryAmmo = GameFuncs.inventory.ItemAmount(weaponID);
+        if (inventoryAmmo >= neededAmmo) // Enough ammo to reload fully
         {
-            reserveAmmo -= neededAmmo;
+            //inventory.DeleteItem(6, neededAmmo);
+            GameFuncs.inventory.DecreaseCount(neededAmmo, weaponID);
             currentClip += neededAmmo;
         }
         else // not enough
         {
-            currentClip += reserveAmmo;
-            reserveAmmo = 0;
+            currentClip += inventoryAmmo;
+            GameFuncs.inventory.DecreaseCount(999, weaponID);
+            //inventory.DeleteItem(6, 9999);
         }
-        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
+        canvasText.text = currentClip.ToString() + " / " + GameFuncs.inventory.ItemAmount(weaponID).ToString();
         reloading = false;
     }
 

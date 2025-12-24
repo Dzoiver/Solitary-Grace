@@ -1,3 +1,4 @@
+using GM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,7 +65,7 @@ public class Knife : MonoBehaviour
     {
         currentAttackDelay += Time.deltaTime;
         currentAttackCoolDown += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && GameFuncs.weaponManager.canAttack)
         {
             StartCoroutine(HitWithDelay());
         }

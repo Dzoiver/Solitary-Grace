@@ -36,6 +36,7 @@ public class Menu : MonoBehaviour
     public void OpenMenu()
     {
         weapon.enabled = false;
+        weapon.canAttack = false;
         inventory.DisplayItems();
         GameFuncs.fading = true;
         GameFuncs.PlayerScript.SetControl(false);
@@ -91,6 +92,7 @@ public class Menu : MonoBehaviour
         {
             monsterManager.UnfreezeMonsters();
             weapon.enabled = true;
+            weapon.canAttack = true;
             confirmPanel.SetActive(false);
             systemPanel.SetActive(false);
             menuPanel.SetActive(false);

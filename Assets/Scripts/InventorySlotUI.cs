@@ -9,6 +9,7 @@ public class InventorySlotUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI itemname;
     [SerializeField] Sprite defaultSprite;
     [SerializeField] Image itemIcon;
+    [SerializeField] TextMeshProUGUI itemQuantity;
     ContextMenuItem context;
     
     public InventoryItem item = null;
@@ -24,11 +25,16 @@ public class InventorySlotUI : MonoBehaviour
         {
             item = null;
             itemIcon.enabled = false;
+            itemQuantity.text = "";
             return;
         }
         itemIcon.enabled = true;
         item = it;
         item.inventorySlotID = index;
+        if (it.MaxQuantity > 1)
+            itemQuantity.text = it.Quantity.ToString();
+        else
+            itemQuantity.text = "";
         if (item.ItemSprite == null)
         {
             itemIcon.sprite = defaultSprite;

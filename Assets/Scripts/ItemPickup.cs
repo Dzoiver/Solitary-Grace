@@ -18,6 +18,7 @@ public class ItemPickup : MonoBehaviour
     MeshCollider collider;
     BoxCollider box;
     [SerializeField] private bool destroyOnPickUp = true;
+    public bool disableObject1 = false;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.gameObject.name == "UseCube")
         {
+            other.gameObject.SetActive(false);
             //other.gameObject.SetActive(false);
             if (inventory.TryPickup(item))
             {
@@ -43,6 +45,9 @@ public class ItemPickup : MonoBehaviour
                     if (mesh != null)
                         mesh.enabled = false;
                     else
+                        gameObject.SetActive(false);
+
+                    if (disableObject1)
                         gameObject.SetActive(false);
                 }
                 enabled = false;

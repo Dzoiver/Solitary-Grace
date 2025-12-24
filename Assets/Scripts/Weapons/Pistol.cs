@@ -23,14 +23,15 @@ public class Pistol : Weapon
     }
 
     private int _clipAmmo = 7;
-    private int _currentClip = 7;
-    private int _reserveAmmo = 49;
-    private int _maxAmmo = 49;
+    private int _currentClip = 0;
+    private int _reserveAmmo = 0;
+    private int _maxAmmo = 999;
     private float _coolDown = 0.3f;
     private float _currentCoolDown = 0f;
     Animator WeaponAnimator;
     private string reloadSound = "Sounds/pistolReload";
     private string shootSound = "Sounds/pistolShot";
+    private string emptySound = "Sounds/pistol_click";
 
     public override int clipAmmo { get => _clipAmmo; set => _clipAmmo = value; }
 
@@ -48,6 +49,8 @@ public class Pistol : Weapon
     public override string ReloadSound { get => reloadSound; set => reloadSound = value; }
     public override string ShootSound { get => shootSound; set => shootSound = value; }
 
+    public override string EmptySound { get => emptySound; set => emptySound = value; }
+
     private void Start()
     {
         audio = GetComponent<AudioSource>();
@@ -55,6 +58,7 @@ public class Pistol : Weapon
         WeaponAnimator = GetComponent<Animator>();
         pManager = FindObjectOfType<ProjectilesManager>();
     }
+
     public override void SpawnBullets()
     {
         
@@ -82,5 +86,12 @@ public class Pistol : Weapon
             Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
             bullet.Launch(bulletDirection, rotationBullet);
         }
+    }
+
+    public void UpdateAmmoFromInventory()
+    {
+        Debug.Log(GameFuncs.inventory);
+        reserveAmmo = GameFuncs.inventory.ItemAmount(6);
+        canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
     }
 }

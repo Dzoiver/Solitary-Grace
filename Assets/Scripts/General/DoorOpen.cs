@@ -46,6 +46,7 @@ public class DoorOpen : MonoBehaviour
             if (item.Name == key.name)
             {
                 doorSound = unlockOpen;
+                Closed = false;
                 return true;
             }
         }

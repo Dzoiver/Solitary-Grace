@@ -10,6 +10,7 @@ namespace GM
         static public MouseLook mouseLook;
         static public Image BlackImage;
         static public WeaponManager weaponManager;
+        static public Inventory inventory;
         static public bool fading = false;
         static public void LampsChangeColor(Light[] lights, Color endColor)
         {

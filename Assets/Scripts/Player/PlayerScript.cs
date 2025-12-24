@@ -312,7 +312,6 @@ public class PlayerScript : MonoBehaviour
             
             if (Physics.Raycast(ray, out hit, INTERACT_DISTANCE, layer.value))
             {
-                Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.gameObject.layer == 3) // Layer 3 - Interactable
                 {
                     useTrigger.SetActive(true);

@@ -43,6 +43,8 @@ public class SimpleDoor : MonoBehaviour
             if (item.Name == key.name)
             {
                 doorSound = unlockOpen;
+                ClosedBlue = false;
+                ClosedRed = false;
                 return true;
             }
         }

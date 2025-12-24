@@ -19,7 +19,6 @@ public class Checkpoint : MonoBehaviour
         {
             if (sl.gameObject.name == "GetSleep2")
             {
-                Debug.Log("found good sleep");
                 sleep = sl;
             }
         }

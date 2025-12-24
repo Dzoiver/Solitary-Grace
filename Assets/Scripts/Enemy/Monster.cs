@@ -46,7 +46,6 @@ public class Monster : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Debug.Log(agent.updateRotation);
         agent.updateRotation = true;
         int i = 0;
         foreach (Transform t in patrolParent.transform)
