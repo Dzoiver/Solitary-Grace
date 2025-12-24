@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011386910128}
   - component: {fileID: 6490018325546237806}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4000013452778148}
   - component: {fileID: 33000010246961448}
   - component: {fileID: 23000014239191564}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

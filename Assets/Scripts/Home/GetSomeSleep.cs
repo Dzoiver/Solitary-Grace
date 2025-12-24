@@ -42,7 +42,6 @@ public class GetSomeSleep : MonoBehaviour
 
     private void GoToPrison()
     {
-        Debug.Log("invoking onsleep");
         onSleep.Invoke();
         if (musicHome != null)
             musicHome.SetActive(false);

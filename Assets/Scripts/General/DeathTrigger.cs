@@ -38,6 +38,7 @@ public class DeathTrigger : MonoBehaviour
             return;
         if (currentTime > activationTime)
         {
+            StopTimer();
             OnTriggerEnter(GameFuncs.PlayerScript.GetComponent<BoxCollider>());
             box.enabled = true;
         }

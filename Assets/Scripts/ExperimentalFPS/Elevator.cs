@@ -210,7 +210,7 @@ public class Elevator : MonoBehaviour
     {
         CloseDoors();
         CloseOuterDoors(currentFloor);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         destinationFloor.y = firstFloor.y + nextFloor * floorDistance;
         currentFloor = nextFloor;
         moving = true;
