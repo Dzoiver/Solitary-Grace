@@ -27,7 +27,6 @@ public class BoardPost : MonoBehaviour
 
     public void Publish()
     {
-        Debug.Log("published");
         currentUtcDateTime = DateTime.Now;
         gameObject.SetActive(true);
         dateText.text = currentUtcDateTime.ToString("yyyy-MM-dd HH:mm:ss");

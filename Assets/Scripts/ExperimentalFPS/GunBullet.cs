@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunBullet : Projectile
 {
-    float speed = 40f;
+    float speed = 80f;
     bool launched = false;
     Vector3 Direction;
     float timeAlive = 0f;
@@ -41,7 +41,6 @@ public class GunBullet : Projectile
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (!collision.gameObject.name.Contains("Player") &&
             !collision.gameObject.name.Contains("Bullet"))
             gameObject.SetActive(false);

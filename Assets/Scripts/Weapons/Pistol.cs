@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
+    [SerializeField] LayerMask layermask;
     ProjectilesManager pManager;
     Vector3 rotationBullet;
     [SerializeField] GameObject bulletStart;
@@ -67,12 +68,12 @@ public class Pistol : Weapon
         var bullet = pManager.GetNewBullet();
         bullet.transform.position = bulletStart.transform.position;
         Transform bulletSpawnTransform = bulletStart.transform;
-
+        
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         Vector3 targetPoint;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, 200f, layermask))
         {
             targetPoint = hit.point; // If the ray hits something, shoot at that point
             Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
@@ -80,7 +81,6 @@ public class Pistol : Weapon
         }
         else
         {
-
             // If the ray doesn't hit anything, shoot a certain distance forward
             targetPoint = ray.origin + ray.direction * 100f; // 100f is an example distance
             Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
@@ -90,7 +90,6 @@ public class Pistol : Weapon
 
     public void UpdateAmmoFromInventory()
     {
-        Debug.Log(GameFuncs.inventory);
         reserveAmmo = GameFuncs.inventory.ItemAmount(6);
         canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
     }

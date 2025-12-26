@@ -174,8 +174,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272359585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.237, y: 1.395, z: -0.495}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.306, y: 1.283, z: -0.025}
+  m_LocalScale: {x: 0.18682, y: 0.18682, z: 0.18682}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 811516381}
@@ -1998,6 +1998,9 @@ MonoBehaviour:
   canvasText: {fileID: 1025868735}
   audio: {fileID: 0}
   inventory: {fileID: 0}
+  layermask:
+    serializedVersion: 2
+    m_Bits: 385
   bulletStart: {fileID: 272359585}
 --- !u!82 &793903115970293371
 AudioSource:
@@ -3943,7 +3946,7 @@ GameObject:
   - component: {fileID: 1489882788}
   - component: {fileID: 1489882793}
   m_Layer: 6
-  m_Name: Main Camera (1)
+  m_Name: WeaponCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5475,7 +5478,7 @@ GameObject:
   - component: {fileID: 3200686816261730599}
   m_Layer: 14
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6478,6 +6481,9 @@ MonoBehaviour:
   canvasText: {fileID: 0}
   audio: {fileID: 0}
   inventory: {fileID: 0}
+  layermask:
+    serializedVersion: 2
+    m_Bits: 32768
   bulletStart: {fileID: 0}
 --- !u!95 &1773922723
 Animator:
@@ -7376,7 +7382,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2047
+    m_Bits: 34815
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

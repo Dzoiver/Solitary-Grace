@@ -230,7 +230,7 @@ public class Elevator : MonoBehaviour
         door1.gameObject.SetActive(false);
         door2.gameObject.SetActive(false);
 
-        Camera.main.DOShakePosition(15f, 0.1f, 10, 90f, false).OnComplete(() =>
+        Camera.main.DOShakePosition(13f, 0.1f, 10, 90f, false).OnComplete(() =>
         {
             Camera.main.DOShakePosition(5f, 0.05f, 5, 90f, true);
         });

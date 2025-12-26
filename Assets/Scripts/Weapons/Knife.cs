@@ -67,6 +67,7 @@ public class Knife : MonoBehaviour
         currentAttackCoolDown += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && GameFuncs.weaponManager.canAttack)
         {
+            Debug.Log(GameFuncs.weaponManager.canAttack);
             StartCoroutine(HitWithDelay());
         }
     }

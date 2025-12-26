@@ -166,9 +166,7 @@ public class Inventory : MonoBehaviour
                 if (demandCount >= leastQuantity.Quantity) // If ammo needed is greater than 1 slot
                 {
                     int reminder = demandCount - leastQuantity.Quantity;
-                    Debug.Log("reminder: " + reminder);
                     DeleteItem(leastQuantity.inventorySlotID, 999);
-                    Debug.Log("Looking for second pachka");
                     InventoryItem leastQuantity2 = LeastQuantityItem(7);
                     if (leastQuantity2 != null)
                     {
@@ -188,7 +186,6 @@ public class Inventory : MonoBehaviour
     {
         InventoryItem itemToReturn = null;
         int leastQuantity = 999;
-        Debug.Log("Kenpachi");
         foreach (InventoryItem it in ItemsList)
         {
             if (it.Id == givenID)

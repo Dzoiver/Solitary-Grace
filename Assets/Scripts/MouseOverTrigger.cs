@@ -27,7 +27,6 @@ public class MouseOverTrigger : MonoBehaviour
         float dist = Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, transform.position);
         if (dist < 5)
         {
-            print("object name");
             if (open == false)
             {
                 if (Input.GetKeyDown(KeyCode.E))

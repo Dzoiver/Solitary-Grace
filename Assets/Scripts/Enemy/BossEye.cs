@@ -25,7 +25,9 @@ public class BossEye : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet") && opened == true)
+        if (!opened)
+            return;
+        if (other.CompareTag("Bullet"))
         {
             CloseEye();
         }
