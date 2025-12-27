@@ -4,6 +4,7 @@ using UnityEngine.AI;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 using static UnityEngine.Rendering.DebugUI;
+using System.Collections;
 
 public class Monster : MonoBehaviour
 {
@@ -42,6 +43,15 @@ public class Monster : MonoBehaviour
     private float wakeAttackDelay = 1f;
     private float currentWakeAttackDelay = 0f;
     private AudioSource audio;
+    [SerializeField] private GameObject model;
+    [SerializeField] private AudioClip attackClip;
+    [SerializeField] private AudioClip alarm1Clip;
+    [SerializeField] private AudioClip alarm2Clip;
+    [SerializeField] private AudioClip alarm3Clip;
+    [SerializeField] private AudioClip painClip;
+    [SerializeField] private AudioClip pain2Clip;
+    [SerializeField] private AudioClip deathClip;
+    BoxCollider collider;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +64,7 @@ public class Monster : MonoBehaviour
             patrolPoints.Add(t);
         }
         audio = GetComponent<AudioSource>();
+        collider = GetComponent<BoxCollider>();
         //rb = GetComponent<Rigidbody>();
     }
 
@@ -71,7 +82,7 @@ public class Monster : MonoBehaviour
         currentAttackCoolDown += Time.deltaTime;
         if (PlayerTooClose())
         {
-            PlayAwake();
+            Alarm();
             chase = true;
             agent.destination = GameFuncs.PlayerScript.transform.position;
             DamagePlayer();
@@ -118,6 +129,7 @@ public class Monster : MonoBehaviour
         {
             if (currentAttackDelay >= attackDelay) // Moment damage is done
             {
+                audio.PlayOneShot(attackClip);
                 GameFuncs.PlayerScript.GetDamage(attackDamage);
                 currentAttackDelay = 0f;
                 currentAttackCoolDown = 0f;
@@ -130,19 +142,38 @@ public class Monster : MonoBehaviour
     public void GetDamage(float amount)
     {
         chase = true;
+
         if (health - amount <= 0)
         {
             Death();
         }
         else
         {
+            if (audio.clip == painClip || audio.clip == pain2Clip && audio.isPlaying)
+            {
+
+            }
+            else
+            {
+                // Random pain sound
+                int rnd = Random.Range(0, 1);
+                if (rnd == 0)
+                    audio.PlayOneShot(painClip);
+                else if (rnd == 1)
+                    audio.PlayOneShot(pain2Clip);
+                // end
+            }
+
             health -= amount;
         }
     }
 
     private void Death()
     {
-        gameObject.SetActive(false);
+        audio.PlayOneShot(deathClip);
+        enabled = false;
+        model.SetActive(false);
+        collider.enabled = false;
     }
 
     private bool ChasingPlayer()
@@ -158,7 +189,7 @@ public class Monster : MonoBehaviour
 
                 if (hit.collider.CompareTag("Player"))
                 {
-                    PlayAwake();
+                    Alarm();
                     chase = true;
                     return true;
                 }
@@ -228,7 +259,6 @@ public class Monster : MonoBehaviour
         transform.position = startPosition;
         transform.rotation = startRotation;
         chase = false;
-        
     }
 
     public void SetFreeze(bool value)
@@ -241,10 +271,18 @@ public class Monster : MonoBehaviour
         return freeze;
     }
 
-    private void PlayAwake()
+    public void Alarm()
     {
         if (chase)
             return;
-        audio.PlayOneShot(Resources.Load<AudioClip>("Sounds/monster/zombie-awake1"));
+        chase = true;
+        int rng = Random.Range(0, 2);
+
+        if (rng == 0)
+            audio.PlayOneShot(alarm1Clip);
+        else if (rng == 1)
+            audio.PlayOneShot(alarm2Clip);
+        else if (rng == 2)
+            audio.PlayOneShot(alarm3Clip);
     }
 }

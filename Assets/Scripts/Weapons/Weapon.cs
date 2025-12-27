@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public abstract class Weapon : MonoBehaviour
     private bool reloading = false;
 
     private int weaponID = 6; // Pistol
+    private float detectionRadius = 8f;
+    private LayerMask targetLayerMask;
 
     void Update()
     {
@@ -48,6 +51,12 @@ public abstract class Weapon : MonoBehaviour
     }
     private void Shoot()
     {
+        targetLayerMask = (1 << 8);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, targetLayerMask);
+        foreach (var hitCollider in hitColliders)
+        {
+            hitCollider.GetComponent<Monster>().Alarm();
+        }
         if (!GameFuncs.PlayerScript.IsControl()) // Can't shoot if menu is opened
             return;
         if (currentClip > 0)

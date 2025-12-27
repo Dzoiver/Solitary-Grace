@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3340732}
   - component: {fileID: 2358668}
   - component: {fileID: 6587386}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Stretcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

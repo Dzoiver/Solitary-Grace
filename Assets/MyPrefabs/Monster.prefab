@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAI: 1
-  detectRadius: 10
+  detectRadius: 12
   playerSearchTime: 5
   layerMask:
     serializedVersion: 2
@@ -157,7 +157,15 @@ MonoBehaviour:
   patrolParent: {fileID: 1647296568673729987}
   patrolWait: 2
   randomizePatrol: 0
-  allowedAngle: 45
+  allowedAngle: 50
+  model: {fileID: 7487620322814781698}
+  attackClip: {fileID: 8300000, guid: 18c9850436336454b9fffcafa9f7ed33, type: 3}
+  alarm1Clip: {fileID: 8300000, guid: 2506b0b6e30ffc9459dfdf6c525c3076, type: 3}
+  alarm2Clip: {fileID: 8300000, guid: 2ff1b581f1bec4c4cbcca83662b0f8b4, type: 3}
+  alarm3Clip: {fileID: 8300000, guid: 71d50d9ebe398ca40a52dbdb56cd35bf, type: 3}
+  painClip: {fileID: 8300000, guid: 5ab217186cdde14499584d1bde56a107, type: 3}
+  pain2Clip: {fileID: 8300000, guid: 24bb6b482af2720428a2984047ffabdb, type: 3}
+  deathClip: {fileID: 8300000, guid: 98275c986f43f0d42902cbb9b9b768d6, type: 3}
 --- !u!54 &4382986903114976147
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -187,7 +195,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 140
+  m_AngularSpeed: 360
   m_StoppingDistance: 1.6
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -216,8 +224,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2.65
-  MaxDistance: 17.08
+  MinDistance: 5.7585287
+  MaxDistance: 18.56
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -407,6 +415,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 7386234923825879168, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7386234923826168992, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -491,24 +503,3 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7386234923825879168, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
   m_PrefabInstance: {fileID: 101456904158916994}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4912191401849829986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7487620322814781698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2a869b0755f5224e808d14b44beb371, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endMove: {x: 20, y: -90, z: 12}
-  endRotate: {x: 0, y: -120, z: 0}
-  blackImage: {fileID: 0}
-  audio: {fileID: 0}
-  dp: {fileID: 0}
-  quakeWorld: {fileID: 0}
-  house: {fileID: 0}
-  roomexitDoor: {fileID: 0}
-  wakeupScript: {fileID: 0}

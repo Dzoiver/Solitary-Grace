@@ -18,6 +18,8 @@ public class ItemPickup : MonoBehaviour
     MeshCollider collider;
     BoxCollider box;
     [SerializeField] private bool destroyOnPickUp = true;
+    [SerializeField] AudioClip healthDrinkPickupClip;
+    [SerializeField] AudioClip defaultPickup;
     public bool disableObject1 = false;
 
     private void Start()
