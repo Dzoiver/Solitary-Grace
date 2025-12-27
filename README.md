@@ -1,16 +1,17 @@
 # Solitary-Grace
 Horror first person game. Just trying to finish the project little by little. Basically working for my own experience in developing a game. Inspired by Silent hill and Resident evil games.
-Currently working on the basic mechanics and the level blockout.
+More or less done with the level blockout.
+Continue to work on animations, effects, events and art.
 
 ### Synopsis:
-Explore your nightmares. Solve mystery of the place in your dreams but be cautious of things you fear the most. You'll wake up if you die in a dream. But is the reality truly safe?
+Explore your nightmare. Solve mystery of the place in your dream. You'll wake up if you die in a dream. But is the reality truly safe?
 
 ## Controls:
 E to interact
 
 Esc to open a menu/inventory
 
-Download demo (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.0.2-alpha)
+Download early in-develepment build (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.1-alpha)
 
 ## Screenshots:
 ![1](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/281a2de9-e203-4f4c-a5b4-aff6e8d123c0)
@@ -20,3 +21,4 @@ Download demo (Windows): [current release](https://github.com/Dzoiver/Solitary-G
 ![5](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/a4b82f86-8e1a-4f25-89bd-e3a322384535)
 ![6](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/86332a29-fabe-4700-9b67-8c7d6d7bfd44)
 ![7](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/148912c0-0757-4d1f-a971-3e1da93b197f)
+<img width="1777" height="884" alt="image" src="https://github.com/user-attachments/assets/894dbc3d-ba54-4f7f-a471-2ab7e8071597" />
