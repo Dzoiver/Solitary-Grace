@@ -10,6 +10,16 @@ public class GunBullet : Projectile
     float timeAlive = 0f;
     float timeToDie = 5f;
     float randomness = 0.1f;
+    AudioSource audio;
+    MeshRenderer mesh;
+    BoxCollider box;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+        mesh = GetComponent<MeshRenderer>();
+        box = GetComponent<BoxCollider>();
+    }
 
     public void Launch(Vector3 direction, Vector3 rotation, bool random = false)
     {
@@ -23,6 +33,9 @@ public class GunBullet : Projectile
         transform.rotation = Quaternion.Euler(rotation);
         launched = true;
         gameObject.SetActive(true);
+        mesh.enabled = true;
+        box.enabled = true;
+        enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,7 +56,14 @@ public class GunBullet : Projectile
     {
         if (!collision.gameObject.name.Contains("Player") &&
             !collision.gameObject.name.Contains("Bullet"))
-            gameObject.SetActive(false);
+        {
+            enabled = false;
+            mesh.enabled = false;
+            box.enabled = false;
+            if (collision.gameObject.layer == 0)
+                audio.Play();
+        }
+            
     }
 
     void Update()

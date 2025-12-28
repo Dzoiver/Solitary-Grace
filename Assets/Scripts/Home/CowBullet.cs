@@ -14,6 +14,8 @@ public class CowBullet : MonoBehaviour
     [SerializeField] Camera cam;
     Vector3 rotationY;
     Quaternion bulletRotation;
+    AudioSource audio;
+    [SerializeField] AudioClip explosionSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class CowBullet : MonoBehaviour
         particles = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
+        audio = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -42,6 +45,8 @@ public class CowBullet : MonoBehaviour
         rb.isKinematic = true;
         mesh.enabled = false;
         particles.Play();
+        audio.clip = explosionSound;
+        audio.Play();
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, targetLayerMask);
         foreach (var hitCollider in hitColliders)
         {

@@ -12,6 +12,12 @@ public class Checkpoint : MonoBehaviour
     GetSomeSleep sleep;
     GetSomeSleep[] sleeps;
     public UnityEvent onTeleport;
+    public ParticleSystem particle;
+    [SerializeField] Material notActiveMaterial;
+    [SerializeField] Material activeMaterial;
+    MeshRenderer meshrenderer;
+    public bool activated = false;
+    AudioSource audio;
     private void Awake()
     {
         sleeps = FindObjectsOfType<GetSomeSleep>();
@@ -22,6 +28,9 @@ public class Checkpoint : MonoBehaviour
                 sleep = sl;
             }
         }
+
+        meshrenderer = GetComponent<MeshRenderer>();
+        audio = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,8 +45,17 @@ public class Checkpoint : MonoBehaviour
 
     public void UpdateSpawn()
     {
-        Debug.Log("Updated checkpoint");
+        if (sleep.checkpoint != null)
+        {
+            sleep.checkpoint.activated = false;
+            sleep.checkpoint.particle.Stop();
+            sleep.checkpoint.meshrenderer.material = notActiveMaterial;
+        }
+        if (!activated)
+            audio.Play();
         sleep.checkpoint = this;
+        meshrenderer.material = activeMaterial;
+        particle.Play();
         oldSpawn.transform.position = newSpawn.transform.position;
         oldSpawn.transform.rotation = newSpawn.transform.rotation;
     }

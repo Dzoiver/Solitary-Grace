@@ -64,7 +64,7 @@ public class SimpleTrigger : MonoBehaviour
             StartCoroutine(OpeningCoroutine(onEnter, startDelay));
         }
 
-        if (other.gameObject.name == "UseCube")
+        if (other.gameObject.name == "UseCube" && gameObject.layer != 2)
         {
             other.gameObject.SetActive(false);
             if (checkItemScriptable != null)

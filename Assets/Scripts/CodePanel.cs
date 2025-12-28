@@ -18,12 +18,15 @@ public class CodePanel : MonoBehaviour
     Color wrongColor = new Color(1f, 0.5f, 0.5f, 1f);
     Color normalColor = new Color();
     Image image;
+    AudioSource audio;
+    [SerializeField] AudioClip wrongSound;
     // Start is called before the first frame update
     void Start()
     {
         inputField = GetComponent<TMP_InputField>();
         image = GetComponent<Image>();
         normalColor = image.color;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -76,6 +79,8 @@ public class CodePanel : MonoBehaviour
         else
         {
             Debug.Log("Incorrect");
+            audio.clip = wrongSound;
+            audio.Play();
             wrong = true;
             image.color = wrongColor;
             return false;

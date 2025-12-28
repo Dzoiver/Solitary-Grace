@@ -17,12 +17,15 @@ public class Menu : MonoBehaviour
     MonsterManager monsterManager;
     private ScriptableItem bufferItem;
     private GameObject bufferPickupObject;
+    AudioSource audio;
+    [SerializeField] AudioClip exitSound;
 
     private void Awake()
     {
         monsterManager = FindObjectOfType<MonsterManager>();
         weapon = FindAnyObjectByType<WeaponManager>();
         context = FindObjectOfType<ContextMenuItem>();
+        audio = GetComponent<AudioSource>();
     }
     // Start is called before the first frame update
     void Start()
@@ -88,6 +91,8 @@ public class Menu : MonoBehaviour
         GameFuncs.fading = true;
         AudioController.Play("closeMenu");
         Cursor.lockState = CursorLockMode.Locked;
+        audio.clip = exitSound;
+        audio.Play();
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
             monsterManager.UnfreezeMonsters();

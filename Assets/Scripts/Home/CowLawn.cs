@@ -13,6 +13,7 @@ public class CowLawn : MonoBehaviour
     public CowPlayer player;
     [SerializeField] GameObject gameoverPanel;
     [SerializeField] TextMeshProUGUI gameoverText;
+    AudioSource audio;
 
     int score = 0;
     int enemyCount = 3;
@@ -26,6 +27,7 @@ public class CowLawn : MonoBehaviour
     void Start()
     {
         gameoverPanel.SetActive(false);
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class CowLawn : MonoBehaviour
         }
         gameoverPanel.SetActive(true);
         player.SetControl(false);
+        audio.Play();
     }
 
     public void StartGame()
