@@ -1,4 +1,5 @@
 using GM;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,6 +33,7 @@ public class Shotgun : Weapon
     private string reloadSound = "Sounds/ShotgunReload";
     private string shootSound = "Sounds/ShotgunShoot";
     private string emptySound = "Sounds/drobo_click";
+    float randomness = 0.07f;
 
     Animator _weaponAnimator;
     public override int clipAmmo { get => _clipAmmo; set => _clipAmmo = value; }
@@ -55,8 +57,12 @@ public class Shotgun : Weapon
     {
         audio = GetComponent<AudioSource>();
         canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
-        _weaponAnimator = GetComponent<Animator>();
         pManager = FindObjectOfType<ProjectilesManager>();
+    }
+
+    private void Awake()
+    {
+        _weaponAnimator = GetComponent<Animator>();
     }
 
     // ShotgunReload
@@ -64,7 +70,6 @@ public class Shotgun : Weapon
     {
         rotationBullet.x = Camera.main.transform.rotation.eulerAngles.x;
         rotationBullet.y = GameFuncs.PlayerScript.transform.rotation.eulerAngles.y;
-        var bullet = pManager.GetNewBullet();
         var bullet2 = pManager.GetNewBullet();
         var bullet3 = pManager.GetNewBullet();
         var bullet4 = pManager.GetNewBullet();
@@ -72,43 +77,34 @@ public class Shotgun : Weapon
 
         Transform bulletSpawnTransform = bulletStart.transform;
 
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray;
         RaycastHit hit;
         Vector3 targetPoint;
+        Vector3 bulletDirection;
 
-        if (Physics.Raycast(ray, out hit))
+        for (int i = 0; i < 5; i++)
         {
-            targetPoint = hit.point; // If the ray hits something, shoot at that point
-            Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
+            ray = Camera.main.ViewportPointToRay(new Vector3(0.5f + UnityEngine.Random.Range(-randomness, randomness),
+            0.5f + UnityEngine.Random.Range(-randomness, randomness), 0));
 
-            bullet.transform.position = bulletStart.transform.position;
-            bullet.Launch(bulletDirection, rotationBullet, true);
-            bullet2.transform.position = bulletStart.transform.position;
-            bullet2.Launch(bulletDirection, rotationBullet, true);
-            bullet3.transform.position = bulletStart.transform.position;
-            bullet3.Launch(bulletDirection, rotationBullet, true);
-            bullet4.transform.position = bulletStart.transform.position;
-            bullet4.Launch(bulletDirection, rotationBullet, true);
-            bullet5.transform.position = bulletStart.transform.position;
-            bullet5.Launch(bulletDirection, rotationBullet, true);
-        }
-        else
-        {
+            if (Physics.Raycast(ray, out hit))
+            {
+                targetPoint = hit.point;
+                bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
 
-            // If the ray doesn't hit anything, shoot a certain distance forward
-            targetPoint = ray.origin + ray.direction * 100f; // 100f is an example distance
-            Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
+                var bullet = pManager.GetNewBullet();
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    hit.collider.gameObject.GetComponent<Monster>().GetDamage(bullet.Damage);
+                }
+                if (hit.collider.CompareTag("Boss"))
+                {
+                    hit.collider.gameObject.GetComponent<Boss>().GetDamage(bullet.Damage);
+                }
 
-            bullet.transform.position = bulletStart.transform.position;
-            bullet.Launch(bulletDirection, rotationBullet, true);
-            bullet2.transform.position = bulletStart.transform.position;
-            bullet2.Launch(bulletDirection, rotationBullet, true);
-            bullet3.transform.position = bulletStart.transform.position;
-            bullet3.Launch(bulletDirection, rotationBullet, true);
-            bullet4.transform.position = bulletStart.transform.position;
-            bullet4.Launch(bulletDirection, rotationBullet, true);
-            bullet5.transform.position = bulletStart.transform.position;
-            bullet5.Launch(bulletDirection, rotationBullet, true);
+                bullet.transform.position = bulletStart.transform.position;
+                bullet.Launch(bulletDirection, rotationBullet);
+            }
         }
     }
 

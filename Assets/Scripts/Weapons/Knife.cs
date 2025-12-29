@@ -33,6 +33,7 @@ public class Knife : MonoBehaviour
     private void OnEnable()
     {
         audio.PlayOneShot(Resources.Load<AudioClip>("Sounds/SwordEquip"));
+        knifeAnimator.Play("knifeidle");
     }
 
     private void Hit()

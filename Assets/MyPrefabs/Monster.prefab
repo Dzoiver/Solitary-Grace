@@ -166,6 +166,7 @@ MonoBehaviour:
   painClip: {fileID: 8300000, guid: 5ab217186cdde14499584d1bde56a107, type: 3}
   pain2Clip: {fileID: 8300000, guid: 24bb6b482af2720428a2984047ffabdb, type: 3}
   deathClip: {fileID: 8300000, guid: 98275c986f43f0d42902cbb9b9b768d6, type: 3}
+  circleColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!54 &4382986903114976147
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -216,7 +217,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 77cacdfd9df1a0a4a85bb8891a67d5eb, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.19
+  m_Volume: 0.203
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -224,10 +225,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 5.7585287
-  MaxDistance: 18.56
+  MinDistance: 7.6
+  MaxDistance: 22.05
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -235,28 +236,28 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.15515223
+      time: 0.31026557
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.2243342
+      outSlope: -3.2243342
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.30372888
-      value: 0.74629337
-      inSlope: -3.199715
-      outSlope: -3.199715
+      time: 0.6181508
+      value: 0.26953125
+      inSlope: -1.0091516
+      outSlope: -1.0091516
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.27390373
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0.3732173
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -1.1836452
-      outSlope: -1.1836452
+      inSlope: -0.3103897
+      outSlope: -0.3103897
       tangentMode: 0
       weightedMode: 0
       inWeight: 0

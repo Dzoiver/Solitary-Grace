@@ -5,5 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public string projName = "";
-    public float damage = 0f;
+    private float damage = 17f;
+
+    public float Damage { get => damage; set => damage = value; }
 }

@@ -16,7 +16,6 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] Material notActiveMaterial;
     [SerializeField] Material activeMaterial;
     MeshRenderer meshrenderer;
-    public bool activated = false;
     AudioSource audio;
     private void Awake()
     {
@@ -45,13 +44,15 @@ public class Checkpoint : MonoBehaviour
 
     public void UpdateSpawn()
     {
+        if (particle.isPlaying)
+            return;
+
         if (sleep.checkpoint != null)
         {
-            sleep.checkpoint.activated = false;
             sleep.checkpoint.particle.Stop();
             sleep.checkpoint.meshrenderer.material = notActiveMaterial;
         }
-        if (!activated)
+        if (!particle.isPlaying)
             audio.Play();
         sleep.checkpoint = this;
         meshrenderer.material = activeMaterial;

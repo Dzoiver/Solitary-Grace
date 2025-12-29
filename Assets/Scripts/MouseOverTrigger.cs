@@ -10,10 +10,14 @@ public class MouseOverTrigger : MonoBehaviour
     public UnityEvent onClick;
     private bool open = false;
     DOTweenAnimation anim;
+    [SerializeField] AudioClip openSound;
+    [SerializeField] AudioClip closeSound;
+    [SerializeField] AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<DOTweenAnimation>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,6 +35,8 @@ public class MouseOverTrigger : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    audio.clip = openSound;
+                    audio.Play();
                     open = true;
                     anim.DOPlayForward();
                 }
@@ -41,6 +47,8 @@ public class MouseOverTrigger : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        audio.clip = closeSound;
+                        audio.Play();
                         open = false;
                         anim.DOPlayBackwards();
                     }

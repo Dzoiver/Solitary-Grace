@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 using static UnityEngine.Rendering.DebugUI;
 using System.Collections;
+using static UnityEngine.GraphicsBuffer;
+using UnityEditor;
 
 public class Monster : MonoBehaviour
 {
@@ -52,6 +54,8 @@ public class Monster : MonoBehaviour
     [SerializeField] private AudioClip pain2Clip;
     [SerializeField] private AudioClip deathClip;
     BoxCollider collider;
+
+    public Color circleColor = Color.red;
     // Start is called before the first frame update
     void Start()
     {
@@ -105,13 +109,28 @@ public class Monster : MonoBehaviour
         }
     }
 
+    void OnDrawGizmosSelected()
+    {
+        // Draw the gizmo only when the object is selected
+        Gizmos.color = circleColor;
+
+        // Draw a wire sphere; in a 2D context, this looks like a circle
+        Gizmos.DrawWireSphere(transform.position, detectRadius);
+    }
+
     private bool PlayerTooClose()
     {
         if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < detectRadius / 4)
         {
-            return true;
+            Vector3 directionNormal = (GameFuncs.PlayerScript.gameObject.transform.position - transform.position).normalized;
+            if (Physics.Raycast(transform.position, directionNormal, out RaycastHit hit, detectRadius, layerMask))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    return true;
+                }
+            }
         }
-        
         return false;
     }
 

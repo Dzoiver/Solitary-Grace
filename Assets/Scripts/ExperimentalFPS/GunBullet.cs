@@ -7,18 +7,22 @@ public class GunBullet : Projectile
     float speed = 80f;
     bool launched = false;
     Vector3 Direction;
+    Vector3 move;
     float timeAlive = 0f;
     float timeToDie = 5f;
     float randomness = 0.1f;
     AudioSource audio;
     MeshRenderer mesh;
     BoxCollider box;
+    Rigidbody rb;
+    
 
     private void Awake()
     {
         audio = GetComponent<AudioSource>();
         mesh = GetComponent<MeshRenderer>();
         box = GetComponent<BoxCollider>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void Launch(Vector3 direction, Vector3 rotation, bool random = false)
@@ -42,35 +46,37 @@ public class GunBullet : Projectile
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Monster>().GetDamage(17f);
+            //other.gameObject.GetComponent<Monster>().GetDamage(damage);
             gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("Boss"))
         {
-            other.gameObject.GetComponent<Boss>().GetDamage(17f);
+            //other.gameObject.GetComponent<Boss>().GetDamage(damage);
             gameObject.SetActive(false);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.name.Contains("Player") &&
-            !collision.gameObject.name.Contains("Bullet"))
+        mesh.enabled = false;
+        box.enabled = false;
+        launched = false;
+        enabled = false;
+        
+        if (collision.gameObject.layer == 0)
         {
-            enabled = false;
-            mesh.enabled = false;
-            box.enabled = false;
-            if (collision.gameObject.layer == 0)
-                audio.Play();
-        }
-            
+            //audio.Play();
+        } 
     }
 
     void Update()
     {
         if (launched)
         {
-            transform.position += Direction * speed * Time.deltaTime;
+            move = rb.position;
+            move += Direction * speed * Time.deltaTime;
+            rb.MovePosition(move);
+            //transform.position += Direction * speed * Time.deltaTime;
             timeAlive += Time.deltaTime;
             if (timeAlive > timeToDie)
             {

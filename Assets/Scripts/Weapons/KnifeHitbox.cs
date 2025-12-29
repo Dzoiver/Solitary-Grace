@@ -25,6 +25,11 @@ public class KnifeHitbox : MonoBehaviour
         {
             other.gameObject.GetComponent<DestroyableBox>().DestroyBox();
         }
+        else if (other.gameObject.CompareTag("Boss"))
+        {
+            knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
+            other.gameObject.GetComponent<Boss>().GetDamage(knife.GetDamageValue());
+        }
     }
 
     private void Awake()

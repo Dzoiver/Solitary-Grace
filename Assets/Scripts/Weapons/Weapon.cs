@@ -49,13 +49,24 @@ public abstract class Weapon : MonoBehaviour
             Reload();
         }
     }
+
+    private void OnEnable()
+    {
+        if (name == "Shotgun")
+            weaponAnimator.Play("idleShotgun");
+        if (name == "PistolModel")
+            weaponAnimator.Play("idlePistol");
+        reloading = false;
+    }
+
     private void Shoot()
     {
         targetLayerMask = (1 << 8);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, targetLayerMask);
         foreach (var hitCollider in hitColliders)
         {
-            hitCollider.GetComponent<Monster>().Alarm();
+            if (hitCollider.gameObject.CompareTag("Enemy"))
+                hitCollider.GetComponent<Monster>().Alarm();
         }
         if (!GameFuncs.PlayerScript.IsControl()) // Can't shoot if menu is opened
             return;
@@ -115,5 +126,10 @@ public abstract class Weapon : MonoBehaviour
     public void FinishShooting()
     {
 
+    }
+
+    public bool IsReloading()
+    {
+        return reloading;
     }
 }

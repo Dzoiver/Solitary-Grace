@@ -20,7 +20,7 @@ public class BallEnemy : MonoBehaviour
         Projectile project = other.gameObject.GetComponent<Projectile>();
         if (project.projName == "Bullet")
         {
-            TakeDamage(project.damage);
+            TakeDamage(project.Damage);
         }
     }
 }

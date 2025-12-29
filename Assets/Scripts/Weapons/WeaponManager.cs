@@ -30,6 +30,9 @@ public class WeaponManager : MonoBehaviour
         if (!canUseWeapon)
             return;
 
+        //if (!pistolScript.IsReloading() || !shotgunScript.IsReloading())
+            //return;
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventory.Has((int)ItemNames.Knife))
         {
             if (knife.activeSelf)

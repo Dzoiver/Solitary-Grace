@@ -54,5 +54,6 @@ public class DeathTrigger : MonoBehaviour
     {
         startTimer = false;
         currentTime = 0f;
+        box.enabled = false;
     }
 }

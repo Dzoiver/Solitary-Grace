@@ -27,7 +27,7 @@ public class Pistol : Weapon
     private int _currentClip = 0;
     private int _reserveAmmo = 0;
     private int _maxAmmo = 999;
-    private float _coolDown = 0.3f;
+    private float _coolDown = 0.28f;
     private float _currentCoolDown = 0f;
     Animator WeaponAnimator;
     private string reloadSound = "Sounds/pistolReload";
@@ -56,13 +56,18 @@ public class Pistol : Weapon
     {
         audio = GetComponent<AudioSource>();
         canvasText.text = currentClip.ToString() + " / " + reserveAmmo.ToString();
-        WeaponAnimator = GetComponent<Animator>();
+        
         pManager = FindObjectOfType<ProjectilesManager>();
+    }
+
+    private void Awake()
+    {
+        WeaponAnimator = GetComponent<Animator>();
+        WeaponAnimator.keepAnimatorStateOnDisable = false;
     }
 
     public override void SpawnBullets()
     {
-        
         rotationBullet.x = Camera.main.transform.rotation.eulerAngles.x;
         rotationBullet.y = GameFuncs.PlayerScript.transform.rotation.eulerAngles.y;
         var bullet = pManager.GetNewBullet();
@@ -77,6 +82,15 @@ public class Pistol : Weapon
         {
             targetPoint = hit.point; // If the ray hits something, shoot at that point
             Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
+
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                hit.collider.gameObject.GetComponent<Monster>().GetDamage(bullet.Damage);
+            }
+            if (hit.collider.CompareTag("Boss"))
+            {
+                hit.collider.gameObject.GetComponent<Boss>().GetDamage(bullet.Damage);
+            }
             bullet.Launch(bulletDirection, rotationBullet);
         }
         else

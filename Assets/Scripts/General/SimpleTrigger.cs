@@ -9,6 +9,8 @@ public class SimpleTrigger : MonoBehaviour
     [SerializeField] UnityEvent onEnter;
     [SerializeField] UnityEvent onPress;
     [SerializeField] UnityEvent onFinish;
+    [SerializeField] UnityEvent onExit;
+
     [SerializeField] float startDelay = 0f;
     [SerializeField] float finishDelay = 0f;
     [SerializeField] private bool triggerOnce = false;
@@ -84,7 +86,18 @@ public class SimpleTrigger : MonoBehaviour
         }
     }
 
-    
+    private void OnTriggerExit(Collider other)
+    {
+        if (!active)
+            return;
+
+        if (other.CompareTag("Player") && onEnter.GetPersistentEventCount() > 0)
+        {
+            onExit.Invoke();
+        }
+    }
+
+
 
     // Update is called once per frame
     void Update()
