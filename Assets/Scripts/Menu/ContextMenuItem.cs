@@ -1,10 +1,14 @@
 ﻿using GM;
+using SolitaryAudio;
 using UnityEngine;
 
 public class ContextMenuItem : MonoBehaviour
 {
     public InventoryItem currentItem;
+    [SerializeField] GameObject dropOption;
     Inventory inventory;
+    [SerializeField] MusicAmbientController audioController;
+    [SerializeField] AudioClip healthDrinkSound;
     // Start is called before the first frame update
 
     private void Awake()
@@ -18,6 +22,10 @@ public class ContextMenuItem : MonoBehaviour
 
     public void CallContextMenu(InventoryItem item)
     {
+        if (item.KeyItem)
+            dropOption.SetActive(false);
+        else
+            dropOption.SetActive(true);
         currentItem = item;
         gameObject.SetActive(true);
         gameObject.transform.position = Input.mousePosition;
@@ -31,6 +39,8 @@ public class ContextMenuItem : MonoBehaviour
                 GameFuncs.PlayerScript.GiveHP(30f);
                 inventory.DeleteItem(currentItem.inventorySlotID, 1);
                 inventory.DisplayItems();
+                audioController.SoundVolume = 0.2f;
+                audioController.PlaySound(healthDrinkSound);
                 gameObject.SetActive(false);
                 break;
             default:

@@ -38,16 +38,16 @@ public class SimpleDoor : MonoBehaviour
         if (key == null)
             return false;
 
-        foreach (InventoryItem item in inventory.ItemsList)
+        int slot = 0;
+
+        if (inventory.Has(key.id, out slot))
         {
-            if (item.Name == key.name)
-            {
-                doorSound = unlockOpen;
-                
-                ClosedBlue = false;
-                ClosedRed = false;
-                return true;
-            }
+            doorSound = unlockOpen;
+
+            inventory.DeleteItem(slot, 1);
+            ClosedBlue = false;
+            ClosedRed = false;
+            return true;
         }
 
         return false;

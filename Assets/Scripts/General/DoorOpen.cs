@@ -41,16 +41,14 @@ public class DoorOpen : MonoBehaviour
         if (key == null)
             return false;
 
-        foreach (InventoryItem item in inventory.ItemsList)
+        int slot;
+        if (inventory.Has(key.id, out slot))
         {
-            if (item.Name == key.name)
-            {
-                doorSound = unlockOpen;
-                Closed = false;
-                return true;
-            }
+            inventory.DeleteItem(slot, 1);
+            doorSound = unlockOpen;
+            Closed = false;
+            return true;
         }
-
         return false;
     }
 

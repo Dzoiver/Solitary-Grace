@@ -23,6 +23,7 @@ public class InventoryItem
     private string name = "";
     private Sprite itemSprite;
     public int inventorySlotID;
+    bool keyItem = false;
 
     public Sprite ItemSprite
     {
@@ -50,13 +51,16 @@ public class InventoryItem
         get { return name; }
     }
 
-    public InventoryItem(int _id, int _maxQuantity = 1, string _name = "", int _quantity = 1, Sprite _itemSprite = null)
+    public bool KeyItem { get => keyItem; set => keyItem = value; }
+
+    public InventoryItem(int _id, int _maxQuantity = 1, string _name = "", int _quantity = 1, Sprite _itemSprite = null, bool _keyItem = false)
     {
         id = _id;
         maxQuantity = _maxQuantity;
         name = _name;
         quantity = _quantity;
         itemSprite = _itemSprite;
+        keyItem = _keyItem;
     }
 }
 
@@ -88,7 +92,7 @@ public class Inventory : MonoBehaviour
             item = new InventoryItem(999, 1, "unknown", 1);
         }
         else
-            item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite);
+            item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite, scriptableItem.keyitem);
         ItemsList.Add(item);
         DisplayItems();
         if (item.Name == "Pistol Ammo")
@@ -200,6 +204,21 @@ public class Inventory : MonoBehaviour
         return itemToReturn;
     }
 
+    public bool Has(int givenID, out int slot)
+    {
+        foreach (InventoryItem it in ItemsList)
+        {
+            if (it.Id == givenID)
+            {
+                slot = it.inventorySlotID;
+                return true;
+            }
+        }
+
+        slot = 0;
+        return false;
+    }
+
     public bool Has(int givenID)
     {
         foreach (InventoryItem it in ItemsList)
@@ -209,6 +228,7 @@ public class Inventory : MonoBehaviour
                 return true;
             }
         }
+
         return false;
     }
 

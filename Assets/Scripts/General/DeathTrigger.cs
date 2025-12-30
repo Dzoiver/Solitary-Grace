@@ -28,6 +28,7 @@ public class DeathTrigger : MonoBehaviour
         {
             source.Play(); // Scream sound
             // gameover.gameObject.SetActive(true);
+            //gameover.DieFromMonster();
             gameover.NormalDeath(other.gameObject.GetComponent<PlayerScript>());
         }
     }

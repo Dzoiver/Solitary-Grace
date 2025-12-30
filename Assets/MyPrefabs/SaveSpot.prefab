@@ -110,6 +110,9 @@ MonoBehaviour:
   onFinish:
     m_PersistentCalls:
       m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
   startDelay: 0
   finishDelay: 0
   triggerOnce: 0
@@ -4978,6 +4981,7 @@ GameObject:
   - component: {fileID: 9013653259924254133}
   - component: {fileID: 9013653259924254130}
   - component: {fileID: 2318940925765839417}
+  - component: {fileID: 8475115984105451054}
   m_Layer: 3
   m_Name: SaveSpot
   m_TagString: Untagged
@@ -5086,7 +5090,6 @@ MonoBehaviour:
   particle: {fileID: 5033144384895887927}
   notActiveMaterial: {fileID: 2100000, guid: 16908c74c6350d646a11ac08ab6e0388, type: 2}
   activeMaterial: {fileID: 2100000, guid: 4d3d18cf3b06f0a4c904b6cef35c7a0a, type: 2}
-  activated: 0
 --- !u!114 &9013653259924254133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5142,6 +5145,9 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   onFinish:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
     m_PersistentCalls:
       m_Calls: []
   startDelay: 0
@@ -5260,3 +5266,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &8475115984105451054
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9013653259924254140}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

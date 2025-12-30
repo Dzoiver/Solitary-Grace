@@ -23,7 +23,10 @@ public class SimpleTrigger : MonoBehaviour
     MessagesUI messageUI;
     public bool active = true;
     BoxCollider collider;
-    
+    private float bufferVolume = 1f;
+
+    public float BufferVolume { get => bufferVolume; set => bufferVolume = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +43,12 @@ public class SimpleTrigger : MonoBehaviour
 
         collider = GetComponent<BoxCollider>();
         if (disableRendering)
-            GetComponent<MeshRenderer>().enabled = false;
+        {
+            MeshRenderer mesh = GetComponent<MeshRenderer>();
+            if (mesh != null)
+                mesh.enabled = false;
+        }
+            
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,11 +60,16 @@ public class SimpleTrigger : MonoBehaviour
         {
             if (checkItemScriptable != null)
             {
-                if (!inventory.Has(checkItemScriptable.id))
+                if (!inventory.Has(checkItemScriptable.id, out var slot))
                 {
                     messageUI.ShowMessage(noItemMessage);
                     return;
                 }
+                else
+                {
+                    inventory.DeleteItem(slot, 1);
+                }
+
             }
 
             if (triggerOnce)
@@ -139,5 +152,19 @@ public class SimpleTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         finishEvent.Invoke();
+    }
+
+    public void FadeOutAudio(AudioSource audio)
+    {
+        if (audio.isPlaying)
+        {
+            audio.DOFade(0f, 1f).OnComplete(audio.Stop);
+        }
+    }
+
+    public void FadeInAudio(AudioSource audio)
+    {
+        audio.Play();
+        audio.DOFade(BufferVolume, 1f);
     }
 }

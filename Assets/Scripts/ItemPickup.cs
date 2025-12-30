@@ -56,7 +56,10 @@ public class ItemPickup : MonoBehaviour
                 if (collider != null)
                     collider.enabled = false;
                 
-                AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/pickup"));
+                if (item.name == "Health Drink")
+                    AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/bottle"), 0.05f);
+                else
+                    AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/pickup"));
                 onPickup.Invoke();
             }
             else

@@ -144,7 +144,6 @@ public class Elevator : MonoBehaviour
         if (floor == currentFloor)
         {
             OpenDoors();
-            Debug.Log(currentFloor);
             OpenOuterDoors(currentFloor);
         }
         

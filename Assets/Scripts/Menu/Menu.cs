@@ -19,6 +19,7 @@ public class Menu : MonoBehaviour
     private GameObject bufferPickupObject;
     AudioSource audio;
     [SerializeField] AudioClip exitSound;
+    [SerializeField] TextMeshProUGUI itemnameLabel;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class Menu : MonoBehaviour
 
     public void OpenMenu()
     {
+        itemnameLabel.text = "";
         weapon.enabled = false;
         weapon.canAttack = false;
         inventory.DisplayItems();
@@ -117,7 +119,7 @@ public class Menu : MonoBehaviour
         if (GameFuncs.fading)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (!menuPanel.activeSelf && GameFuncs.PlayerScript.IsControl())
             {

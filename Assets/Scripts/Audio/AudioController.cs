@@ -59,8 +59,7 @@ namespace SolitaryAudio
         static public void PlayOneShot(AudioClip clip, float newVolume = 1f)
         {
             float oldVolume = source1.volume;
-            source1.volume = newVolume;
-            source1.PlayOneShot(clip);
+            source1.PlayOneShot(clip, newVolume);
             source1.volume = oldVolume;
         }
     }

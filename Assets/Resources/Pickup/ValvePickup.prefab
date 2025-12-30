@@ -1927,7 +1927,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2698
+  m_VersionIndex: 2701
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2041,6 +2041,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   destroyOnPickUp: 1
+  healthDrinkPickupClip: {fileID: 0}
+  defaultPickup: {fileID: 0}
+  disableObject1: 0
 --- !u!65 &268157475610599065
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -5,13 +5,15 @@ using UnityEngine.UI;
 using DG.Tweening;
 using GM;
 using TMPro;
+using UnityEngine.Events;
 
 public class GameOver : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] GameObject destination;
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI text; // Text you died
     private Sequence sequence;
+    public UnityEvent onRespawn;
 
     public void NormalDeath(PlayerScript player)
     {
@@ -21,8 +23,9 @@ public class GameOver : MonoBehaviour
         text.DOFade(1, 3);
         sequence.Append(image.DOColor(new Color(1, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = () =>
         {
+            onRespawn.Invoke();
             GameFuncs.DisableWeapons(true);
-            text.DOFade(0, 0.5f);
+            text.DOFade(0, 0f);
             image.DOColor(new Color(0, 0, 0, 0), 0.5f);
             GameFuncs.TeleportPlayer(destination);
 

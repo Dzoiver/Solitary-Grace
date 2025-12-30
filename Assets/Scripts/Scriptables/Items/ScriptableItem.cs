@@ -10,4 +10,5 @@ public class ScriptableItem : ScriptableObject
     public int maxQuantity;
     public int quantity;
     public Sprite sprite;
+    public bool keyitem;
 }
