@@ -237,8 +237,9 @@ public class Monster : MonoBehaviour
             return;
         if (patrolPoints.Count == 0)
             return;
+
         agent.destination = patrolPoints[currentPatrolIndex].position;
-        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < 1.6f)
+        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) <= agent.stoppingDistance)
         {
             if (currentPatrolWait > patrolWait)
             {
@@ -256,7 +257,7 @@ public class Monster : MonoBehaviour
 
     private bool PlayerClose()
     {
-        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < stopDistance
+        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance
             && !GameFuncs.PlayerScript.IsDead())
         {
             return true;

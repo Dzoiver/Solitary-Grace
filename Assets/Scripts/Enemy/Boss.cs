@@ -134,7 +134,7 @@ public class Boss : MonoBehaviour
 
     private bool BossReachedHeal()
     {
-        if (Vector3.Distance(transform.position, healSpot.position) < 1.2f)
+        if (Vector3.Distance(transform.position, healSpot.position) < agent.stoppingDistance)
         {
             return true;
         }
@@ -239,7 +239,7 @@ public class Boss : MonoBehaviour
             return;
 
         agent.destination = patrolPoints[currentPatrolIndex].position;
-        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < 1.5f)
+        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < agent.stoppingDistance)
         {
             if (currentPatrolWait > patrolWait)
             {
@@ -253,7 +253,7 @@ public class Boss : MonoBehaviour
 
     private bool PlayerClose()
     {
-        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < stopDistance
+        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance
             && !GameFuncs.PlayerScript.IsDead())
         {
             return true;
