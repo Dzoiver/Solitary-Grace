@@ -14,9 +14,13 @@ public class GameOver : MonoBehaviour
     [SerializeField] TextMeshProUGUI text; // Text you died
     private Sequence sequence;
     public UnityEvent onRespawn;
+    private int deathCounter = 0;
+
+    public int DeathCounter { get => deathCounter; set => deathCounter = value; }
 
     public void NormalDeath(PlayerScript player)
     {
+        deathCounter++;
         sequence = DOTween.Sequence();
         player.SetControl(false);
         image.gameObject.SetActive(true);
@@ -45,6 +49,7 @@ public class GameOver : MonoBehaviour
 
     public void DieFromMonster()
     {
+        deathCounter++;
         sequence = DOTween.Sequence();
         image.gameObject.SetActive(true);
         GameFuncs.PlayerScript.SetControl(false);

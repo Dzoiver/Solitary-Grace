@@ -89,7 +89,7 @@ public class Inventory : MonoBehaviour
         InventoryItem item;
         if (scriptableItem == null)
         {
-            item = new InventoryItem(999, 1, "unknown", 1);
+            item = new InventoryItem(999, 1, "unknown", 1, null, false);
         }
         else
             item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite, scriptableItem.keyitem);

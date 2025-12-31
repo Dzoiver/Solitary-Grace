@@ -84,10 +84,14 @@ public class SimpleTrigger : MonoBehaviour
             other.gameObject.SetActive(false);
             if (checkItemScriptable != null)
             {
-                if (!inventory.Has(checkItemScriptable.id))
+                if (!inventory.Has(checkItemScriptable.id, out var slot))
                 {
                     messageUI.ShowMessage(noItemMessage);
                     return;
+                }
+                else
+                {
+                    inventory.DeleteItem(slot, 1);
                 }
             }
 

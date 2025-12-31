@@ -61,7 +61,8 @@ namespace SolitaryAudio
 
         public void StopAmbient()
         {
-            ambient.Stop();
+            ambient.DOFade(0f, 1f);
+            //ambient.Stop();
         }
 
         public void StopMusic()
@@ -75,6 +76,13 @@ namespace SolitaryAudio
             sounds.volume = soundVolume;
             sounds.clip = clip;
             sounds.Play();
+        }
+
+        public void PlayAmbientFade(AudioClip clip)
+        {
+            ambient.volume = ambientVolume;
+            ambient.clip = clip;
+            ambient.DOFade(1f, 1f);
         }
     }
 }
