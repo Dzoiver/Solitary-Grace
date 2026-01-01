@@ -18,6 +18,8 @@ public class GetSomeSleep : MonoBehaviour
     private DaytimeOutside daytimeScript;
     public UnityEvent onSleep;
     public Checkpoint checkpoint;
+    RaycastHit hit;
+    Ray ray;
 
     private void Awake()
     {
@@ -28,16 +30,26 @@ public class GetSomeSleep : MonoBehaviour
         boxcollider = GetComponent<BoxCollider>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnMouseOver()
     {
-        if (other.gameObject.name == "UseCube") // Player presses E
+        if (Input.GetKeyDown(KeyCode.E) && GameFuncs.PlayerScript.IsControl())
         {
-            sequence = DOTween.Sequence();
-            GameFuncs.PlayerScript.SetControl(false);
-            sequence.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = GoToPrison;
-            if (checkpoint != null)
-                checkpoint.OnTeleportInvoke();
-        }
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 1.8f))
+            {
+                if (hit.distance >= 1.8f)
+                {
+                    return;
+                }
+
+                sequence = DOTween.Sequence();
+                GameFuncs.PlayerScript.SetControl(false);
+                sequence.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = GoToPrison;
+                if (checkpoint != null)
+                    checkpoint.OnTeleportInvoke();
+            }
+        } 
     }
 
     private void GoToPrison()

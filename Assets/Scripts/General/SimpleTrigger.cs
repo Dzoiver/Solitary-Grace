@@ -24,6 +24,8 @@ public class SimpleTrigger : MonoBehaviour
     public bool active = true;
     BoxCollider collider;
     private float bufferVolume = 1f;
+    RaycastHit hit;
+    Ray ray;
 
     public float BufferVolume { get => bufferVolume; set => bufferVolume = value; }
 
@@ -49,6 +51,44 @@ public class SimpleTrigger : MonoBehaviour
                 mesh.enabled = false;
         }
             
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && GameFuncs.PlayerScript.IsControl())
+        {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
+            if (Physics.Raycast(ray, out hit, 1.8f))
+            {
+                if (hit.distance >= 1.8f)
+                {
+                    return;
+                }
+
+                if (gameObject.layer != 2)
+                {
+                    if (checkItemScriptable != null)
+                    {
+                        if (!inventory.Has(checkItemScriptable.id, out var slot))
+                        {
+                            messageUI.ShowMessage(noItemMessage);
+                            return;
+                        }
+                        else
+                        {
+                            inventory.DeleteItem(slot, 1);
+                        }
+                    }
+
+                    if (triggerOnce)
+                    {
+                        collider.enabled = false;
+                    }
+                    StartCoroutine(OpeningCoroutine(onPress, startDelay));
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -78,29 +118,6 @@ public class SimpleTrigger : MonoBehaviour
             }
             StartCoroutine(OpeningCoroutine(onEnter, startDelay));
         }
-
-        if (other.gameObject.name == "UseCube" && gameObject.layer != 2)
-        {
-            other.gameObject.SetActive(false);
-            if (checkItemScriptable != null)
-            {
-                if (!inventory.Has(checkItemScriptable.id, out var slot))
-                {
-                    messageUI.ShowMessage(noItemMessage);
-                    return;
-                }
-                else
-                {
-                    inventory.DeleteItem(slot, 1);
-                }
-            }
-
-            if (triggerOnce)
-            {
-                collider.enabled = false;
-            }
-            StartCoroutine(OpeningCoroutine(onPress, startDelay));
-        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -112,14 +129,6 @@ public class SimpleTrigger : MonoBehaviour
         {
             onExit.Invoke();
         }
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetActiveTrigger(bool value = true)

@@ -80,6 +80,8 @@ namespace SolitaryAudio
 
         public void PlayAmbientFade(AudioClip clip)
         {
+            if (ambient.isPlaying)
+                return;
             ambient.volume = ambientVolume;
             ambient.clip = clip;
             ambient.DOFade(1f, 1f);

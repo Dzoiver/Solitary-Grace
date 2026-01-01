@@ -7,6 +7,7 @@ public class TextShow : MonoBehaviour
     private Sequence sequence;
     private bool isTextDisplayed = false;
     private TextMeshProUGUI text;
+    public TextMeshProUGUI centerText;
 
     private void Start()
     {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using SolitaryAudio;
 using UnityEngine.Rendering;
+using GM;
 
 public class Switch : MonoBehaviour
 {
@@ -8,18 +9,31 @@ public class Switch : MonoBehaviour
     [SerializeField] GameObject lampOff;
     [SerializeField] GameObject lampOn;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.name != "UseCube")
-            return;
+    RaycastHit hit;
+    Ray ray;
 
-        if (livingRoomLight.enabled)
+    private void OnMouseOver()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && GameFuncs.PlayerScript.IsControl())
         {
-            LightOff();
-        }
-        else
-        {
-            LightOn();
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 1.8f))
+            {
+                if (hit.distance >= 1.8f)
+                {
+                    return;
+                }
+
+                if (livingRoomLight.enabled)
+                {
+                    LightOff();
+                }
+                else
+                {
+                    LightOn();
+                }
+
+            }
         }
     }
 

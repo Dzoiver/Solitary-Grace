@@ -284,7 +284,7 @@ public class PlayerScript : MonoBehaviour
         */
         
 
-        HandleInteract();
+        //HandleInteract();
 
 
         RaycastHit hit2;

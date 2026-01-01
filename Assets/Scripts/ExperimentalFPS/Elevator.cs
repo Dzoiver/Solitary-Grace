@@ -73,6 +73,7 @@ public class Elevator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        return;
         if (other.CompareTag("Player"))
         {
             //GameFuncs.PlayerScript.gameObject.transform.SetParent(gameObject.transform);
@@ -80,10 +81,12 @@ public class Elevator : MonoBehaviour
             GameFuncs.PlayerScript.inElevator = true;
             GameFuncs.PlayerScript.currentElevator = this;
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
+        return;
         if (other.CompareTag("Player"))
         {
             GameFuncs.PlayerScript.gameObject.transform.SetParent(null);
@@ -91,22 +94,16 @@ public class Elevator : MonoBehaviour
             GameFuncs.PlayerScript.inElevator = false;
             GameFuncs.PlayerScript.currentElevator = null;
         }
+        
     }
 
     private void Update()
     {
-    }
-
-    private void LateUpdate()
-    {
-    }
-
-    private void FixedUpdate()
-    {
-
         if (moving)
         {
-            //transform.position = Vector3.MoveTowards(transform.position, destinationFloor, 1f * Time.fixedDeltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destinationFloor, 1f * Time.deltaTime);
+            
+            /*
             Vector3 newPosition = Vector3.MoveTowards(
             rb.position,
             destinationFloor,
@@ -114,7 +111,7 @@ public class Elevator : MonoBehaviour
         );
             Velocity = (newPosition - rb.position) / Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
-
+            */
             if (transform.position == destinationFloor)
             {
                 OnStop();
@@ -124,6 +121,15 @@ public class Elevator : MonoBehaviour
         {
             Velocity = Vector3.zero;
         }
+    }
+
+    private void LateUpdate()
+    {
+    }
+
+    private void FixedUpdate()
+    {
+
     }
 
     public void SaveElevator()

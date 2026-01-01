@@ -39,6 +39,9 @@ public class Menu : MonoBehaviour
 
     public void OpenMenu()
     {
+        if (NPCDialogue.DialoguePlaying)
+            return;
+
         itemnameLabel.text = "";
         weapon.enabled = false;
         weapon.canAttack = false;

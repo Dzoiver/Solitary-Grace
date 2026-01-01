@@ -32,12 +32,13 @@ public class ItemPickup : MonoBehaviour
         // menu = FindObjectOfType<Menu>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnMouseOver()
     {
-        if (other.gameObject.name == "UseCube")
+        if (Input.GetKeyDown(KeyCode.E) && GameFuncs.PlayerScript.IsControl())
         {
-            other.gameObject.SetActive(false);
-            //other.gameObject.SetActive(false);
+            if (Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, transform.position) >= 2f)
+                return;
+
             if (inventory.TryPickup(item))
             {
                 if (destroyOnPickUp)
@@ -55,7 +56,7 @@ public class ItemPickup : MonoBehaviour
                 enabled = false;
                 if (collider != null)
                     collider.enabled = false;
-                
+
                 if (item.name == "Health Drink")
                     AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/bottle"), 0.05f);
                 else

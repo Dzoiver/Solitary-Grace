@@ -15,7 +15,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] ScriptableItem item3;
     public Pistol pistolScript;
     public Shotgun shotgunScript;
-    private bool canUseWeapon = true;
+    [SerializeField] bool canUseWeapon = true;
     public bool canAttack = true;
     // Start is called before the first frame update
     void Start()

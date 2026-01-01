@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +12,12 @@ namespace SojaExiles
 
 		public Animator pull_01;
 		public bool open;
-		public Transform Player;
+		private Transform Player;
 
 		void Start()
 		{
 			open = false;
+			Player = GameFuncs.PlayerScript.gameObject.transform;
 		}
 
 		void OnMouseOver()
@@ -24,7 +26,7 @@ namespace SojaExiles
 				if (Player)
 				{
 					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 10)
+					if (dist < 2f)
 					{
 						if (open == false)
 						{

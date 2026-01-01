@@ -23,7 +23,7 @@ namespace SojaExiles
 				if (Player)
 				{
 					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 15)
+					if (dist < 2f)
 					{
 						if (open == false)
 						{
@@ -53,7 +53,6 @@ namespace SojaExiles
 
 		IEnumerator opening()
 		{
-			print("you are opening the door");
 			openandclose1.Play("Opening 1");
 			open = true;
 			yield return new WaitForSeconds(.5f);
@@ -61,7 +60,6 @@ namespace SojaExiles
 
 		IEnumerator closing()
 		{
-			print("you are closing the door");
 			openandclose1.Play("Closing 1");
 			open = false;
 			yield return new WaitForSeconds(.5f);

@@ -37,7 +37,6 @@ public class CodePanel : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Debug.Log("Try enter code");
             if (wrong)
             {
                 Clear();
@@ -49,7 +48,6 @@ public class CodePanel : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Exit");
             Deactivate();
         }
     }
@@ -72,13 +70,11 @@ public class CodePanel : MonoBehaviour
     {
         if (inputField.text == code)
         {
-            Debug.Log("Correct");
             Solved();
             return true;
         }
         else
         {
-            Debug.Log("Incorrect");
             audio.clip = wrongSound;
             audio.Play();
             wrong = true;

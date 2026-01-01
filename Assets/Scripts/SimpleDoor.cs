@@ -26,11 +26,31 @@ public class SimpleDoor : MonoBehaviour
     private string doorSound;
     private string ladderSoundName = "Sounds/metal-footsteps";
     public bool ladder = false;
+    RaycastHit hit;
+    Ray ray;
     // Start is called before the first frame update
     private void Start()
     {
         inventory = FindObjectOfType<Inventory>();
         doorSound = defaultOpen;
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && GameFuncs.PlayerScript.IsControl())
+        {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 1.8f))
+            {
+                if (hit.distance >= 1.8f)
+                {
+                    return;
+                }
+
+
+                TryOpen();
+            }
+        }
     }
 
     private bool PlayerHasKey()
@@ -89,21 +109,12 @@ public class SimpleDoor : MonoBehaviour
         return canOpen;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "UseCube") // If a player presses E button on the door
-        {
-            //other.gameObject.SetActive(false);
-            TryOpen();
-        }
-    }
 
     public void TryOpen()
     {
         doorSound = defaultOpen;
         if (ladder)
             doorSound = ladderSoundName;
-
         if (!CanOpen())
         {
             if (playLockedSound)
