@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Prison.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 6217596e12821024daf8de3038c7c978, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: b74c3033caa930e478f4bce2a95b5618, type: 2}

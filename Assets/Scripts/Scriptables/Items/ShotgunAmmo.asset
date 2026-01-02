@@ -13,7 +13,19 @@ MonoBehaviour:
   m_Name: ShotgunAmmo
   m_EditorClassIdentifier: 
   id: 7
-  name: Shotgun Ammo
+  localizedName:
+    m_TableReference:
+      m_TableCollectionName: GUID:846ccb31d8771f1439567d8c1a989ad4
+    m_TableEntryReference:
+      m_KeyId: 81333852614656
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   maxQuantity: 10
   quantity: 10
   sprite: {fileID: 21300000, guid: 6b55816828534974e96cb5a83823e1ff, type: 3}
+  keyitem: 0
+  references:
+    version: 2
+    RefIds: []

@@ -13,7 +13,19 @@ MonoBehaviour:
   m_Name: Health Drink
   m_EditorClassIdentifier: 
   id: 2
-  name: Health Drink
+  localizedName:
+    m_TableReference:
+      m_TableCollectionName: GUID:846ccb31d8771f1439567d8c1a989ad4
+    m_TableEntryReference:
+      m_KeyId: 92251311353856
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   maxQuantity: 1
   quantity: 1
   sprite: {fileID: 21300000, guid: 2a755fd207fd4a047a322ebe8e431a49, type: 3}
+  keyitem: 0
+  references:
+    version: 2
+    RefIds: []

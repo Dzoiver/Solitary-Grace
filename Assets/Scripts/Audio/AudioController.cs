@@ -8,6 +8,8 @@ namespace SolitaryAudio
     public class AudioController : MonoBehaviour
     {
         // Sound Effects
+        static public AudioScriptable audioClips;
+        [SerializeField] AudioScriptable audioScriptable;
         static public AudioClip doorClose;
         static public AudioClip doorOpen;
         static public AudioClip switchSound;
@@ -19,6 +21,11 @@ namespace SolitaryAudio
 
         static private AudioSource source1;
         static private AudioSource source2;
+
+        private void Awake()
+        {
+            audioClips = audioScriptable;
+        }
 
 
         private void Start()

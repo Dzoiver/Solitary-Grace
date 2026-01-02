@@ -13,8 +13,19 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   id: 4
-  name: Pistol
+  localizedName:
+    m_TableReference:
+      m_TableCollectionName: GUID:846ccb31d8771f1439567d8c1a989ad4
+    m_TableEntryReference:
+      m_KeyId: 82816195145728
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   maxQuantity: 1
   quantity: 1
   sprite: {fileID: 21300000, guid: 2eaefceb64da0814eb723d54ed2d10b7, type: 3}
   keyitem: 1
+  references:
+    version: 2
+    RefIds: []

@@ -18,8 +18,7 @@ public class ItemPickup : MonoBehaviour
     MeshCollider collider;
     BoxCollider box;
     [SerializeField] private bool destroyOnPickUp = true;
-    [SerializeField] AudioClip healthDrinkPickupClip;
-    [SerializeField] AudioClip defaultPickup;
+    AudioClip defaultPickupSound;
     public bool disableObject1 = false;
 
     private void Start()
@@ -29,6 +28,12 @@ public class ItemPickup : MonoBehaviour
         inventory = FindObjectOfType<Inventory>();
         collider = GetComponent<MeshCollider>();
         box = GetComponent<BoxCollider>();
+        defaultPickupSound = AudioController.audioClips.pickupSound;
+        if (audio)
+        {
+            if (audio.clip != null)
+                defaultPickupSound = audio.clip;
+        }
         // menu = FindObjectOfType<Menu>();
     }
 
@@ -57,15 +62,14 @@ public class ItemPickup : MonoBehaviour
                 if (collider != null)
                     collider.enabled = false;
 
-                if (item.name == "Health Drink")
-                    AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/bottle"), 0.05f);
-                else
-                    AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/pickup"));
+                audio.clip = defaultPickupSound;
+                audio.Play();
                 onPickup.Invoke();
             }
             else
             {
-                AudioController.PlayOneShot(Resources.Load<AudioClip>("Sounds/pickupError"));
+                audio.clip = AudioController.audioClips.pickupErrorSound;
+                audio.Play();
             }
         }
     }

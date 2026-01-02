@@ -28,6 +28,7 @@ public class DialogueManager : MonoBehaviour
 
     public void SetDialogue(string mes)
     {
+        dialogue = null;
         stringText = mes;
     }
 
@@ -50,12 +51,11 @@ public class DialogueManager : MonoBehaviour
 
         sequence = DOTween.Sequence();
         isTextDisplayed = true;
-        Debug.Log("dialog = " + (dialogue == true));
         text.enabled = true;
 
         if (dialogue != null)
         {
-            text.text = dialogue.MessageText[dialogueID];
+            text.text = dialogue.MessageText;
         }
         else if (stringText != null)
         {

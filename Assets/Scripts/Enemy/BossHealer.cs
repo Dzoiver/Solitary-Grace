@@ -77,7 +77,7 @@ public class BossHealer : MonoBehaviour
 
     public int GetCurrentEyes()
     {
-        Debug.Log(currentEyes);
+        //Debug.Log(currentEyes);
         return currentEyes;
     }
 

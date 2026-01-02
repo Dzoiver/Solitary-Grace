@@ -23,13 +23,9 @@ public class CowPlayer : MonoBehaviour
     private float gravity = BASE_GRAVITY;
     public float gravityMultiplier = 1.0f;
     public bool gravityAllowed = true;
-    private float jumpHeight = 3f;
-    private float groundDistance = 0.5f;
     [SerializeField] private bool allowMovement = true;
     [SerializeField] private bool allowControl = true;
-    private bool isGrounded;
     private Vector3 velocity;
-    private bool isNoclip = false;
     public bool inElevator = false;
     public bool AllowJump = false;
 
@@ -46,7 +42,6 @@ public class CowPlayer : MonoBehaviour
     private float maxHealth = 100f;
 
     private Animator cameraAnimator;
-    private float gravityEffect;
 
     public float GravityMultiplier
     {
@@ -54,19 +49,12 @@ public class CowPlayer : MonoBehaviour
         set
         {
             gravityMultiplier = value;
-            UpdateGravityCalculations();
         }
     }
 
     private void Awake()
     {
         cameraAnimator = playerCam.GetComponent<Animator>();
-        UpdateGravityCalculations();
-    }
-
-    private void UpdateGravityCalculations()
-    {
-        gravityEffect = gravity * gravityMultiplier * Time.fixedDeltaTime;
     }
 
     public void GetDamage(float damage)

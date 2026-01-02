@@ -1,0 +1,281 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: EnglishLocale_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 846ccb31d8771f1439567d8c1a989ad4, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 216319438848
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8511021166592
+    m_Localized: 'Language:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8831528906752
+    m_Localized: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8939771310080
+    m_Localized: Sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12097121726464
+    m_Localized: Seems like we are still trapped here because of this psycho.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12332262797312
+    m_Localized: Some doors are closed, but you can find keys to open it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12691416854528
+    m_Localized: Try looking for the keys from that guy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16499177992192
+    m_Localized: Sorry if I scared you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16523471400960
+    m_Localized: Don't go there, it's dangerous.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16546632347648
+    m_Localized: You need to find something to defend yourself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16561056559104
+    m_Localized: Basement floor is flooded. But you can drain the water if you open
+      up the pipe.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17945063632896
+    m_Localized: No, i'm not going to jump.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18204770742272
+    m_Localized: I know how to stop all this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18217647255552
+    m_Localized: It hides behind the visiting room.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18248815128576
+    m_Localized: But it's not easy to get through.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18267374923776
+    m_Localized: There is a guardian in our way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18290066108416
+    m_Localized: I'll try to figure out how to deal with it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38523296329728
+    m_Localized: It got me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38545278676992
+    m_Localized: Take my heart and the Guardian will let you through.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38562311745536
+    m_Localized: Take my heart and the Guardian will let you through.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54893106999296
+    m_Localized: Please...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54995674509312
+    m_Localized: Help me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55009192751104
+    m_Localized: I'm in the hospital. Hurry...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55286239113216
+    m_Localized: Photo of my pet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62384867946496
+    m_Localized: I don't wanna sleep yet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73274824634368
+    m_Localized: 1st Floor Security Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79326299336704
+    m_Localized: "Shotgun\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81333852614656
+    m_Localized: Shotgun ammo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81373870469120
+    m_Localized: Valve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81689168883712
+    m_Localized: Artifact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81717811785728
+    m_Localized: Cameras key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81876956262400
+    m_Localized: Basement key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82688281456640
+    m_Localized: Hatch key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82713849933824
+    m_Localized: Heart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82792132423680
+    m_Localized: Knife
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82816195145728
+    m_Localized: Pistol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82831747624960
+    m_Localized: Pistol ammo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84122699870208
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84145458163712
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84179448803328
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87698142703616
+    m_Localized: Main menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86778625437696
+    m_Localized: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86807167676416
+    m_Localized: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86930119503872
+    m_Localized: Use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86995638726656
+    m_Localized: Inspect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87024969494528
+    m_Localized: Drop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87062974083072
+    m_Localized: System
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87176488726528
+    m_Localized: Are you sure you want to quit to main menu? All progress will be
+      lost.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87274769657856
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87329429827584
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89038700982272
+    m_Localized: Status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92251311353856
+    m_Localized: Health drink
+    m_Metadata:
+      m_Items: []
+  - m_Id: 110236826644480
+    m_Localized: What are the chances that you know where to apply this haha.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111558627995648
+    m_Localized: Used real photo as a reference
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111477656956928
+    m_Localized: Tried to use colors.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111153475006464
+    m_Localized: Maid.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111123800305664
+    m_Localized: LOVE TO EVERYONE SEEING THIS MESSAGE.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115188215099392
+    m_Localized: Hold Space to charge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 116191085768704
+    m_Localized: You need a 1st floor security key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 117897030840320
+    m_Localized: The door is jammed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 119377804701696
+    m_Localized: I feel like someone is inside
+    m_Metadata:
+      m_Items: []
+  - m_Id: 119645111889920
+    m_Localized: It seems like something is missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120823962972160
+    m_Localized: 'You picked up '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120826685075456
+    m_Localized: Inventory is full
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

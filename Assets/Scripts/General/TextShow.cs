@@ -27,7 +27,7 @@ public class TextShow : MonoBehaviour
         {
             sequence = DOTween.Sequence();
             isTextDisplayed = true;
-            text.text = mes.MessageText[0];
+            text.text = mes.MessageText;
             text.enabled = true;
 
             sequence.PrependInterval(3f).Append(text.DOFade(0, 0.5f));

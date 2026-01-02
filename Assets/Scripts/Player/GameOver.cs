@@ -56,7 +56,10 @@ public class GameOver : MonoBehaviour
         sequence = DOTween.Sequence();
         image.gameObject.SetActive(true);
         GameFuncs.PlayerScript.SetControl(false);
-        image.DOColor(new Color(0, 0, 0, 1), 1f);
+        image.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () =>
+        {
+            onRespawn.Invoke();
+        };
         /*
         sequence.Append(image.DOColor(new Color(0, 0, 0, 1), 1f)).AppendInterval(2f).onComplete = () =>
         {

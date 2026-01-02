@@ -30,6 +30,7 @@ public class DeathTrigger : MonoBehaviour
             // gameover.gameObject.SetActive(true);
             //gameover.DieFromMonster();
             gameover.NormalDeath(other.gameObject.GetComponent<PlayerScript>());
+            box.enabled = false;
         }
     }
 
@@ -40,7 +41,6 @@ public class DeathTrigger : MonoBehaviour
         if (currentTime > activationTime)
         {
             StopTimer();
-            OnTriggerEnter(GameFuncs.PlayerScript.GetComponent<BoxCollider>());
             box.enabled = true;
         }
         currentTime += Time.deltaTime;

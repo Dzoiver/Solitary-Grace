@@ -10,6 +10,8 @@ public class MessagesUI : MonoBehaviour
     Vector3 defaultTextPos;
     float elevateAmount = 50f;
     int freeText = 0;
+    [SerializeField] string pickupMes = "You picked up ";
+    [SerializeField] string inventoryFull = "Inventory is full";
 
     int textIndex = 0;
     // Start is called before the first frame update
@@ -26,7 +28,7 @@ public class MessagesUI : MonoBehaviour
     {
         TextMeshProUGUI textmesh = FindFreeText();
         textmesh.color = Color.white;
-        textmesh.text = "You picked up " + itemName;
+        textmesh.text = pickupMes + itemName;
 
         textmesh.DOFade(1f, 0.5f).OnComplete(() =>
         {

@@ -12,5 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5346dfb69ddf124da53e11ddb72393b, type: 3}
   m_Name: ClosedDoor
   m_EditorClassIdentifier: 
-  MessageText:
-  - It's locked. A key needed.
+  localizedMessageText:
+    m_TableReference:
+      m_TableCollectionName: GUID:846ccb31d8771f1439567d8c1a989ad4
+    m_TableEntryReference:
+      m_KeyId: 117897030840320
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []

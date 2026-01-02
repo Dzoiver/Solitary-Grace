@@ -1,0 +1,288 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: EnglishLocale Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: EnglishLocale
+  m_TableCollectionNameGuidString: 846ccb31d8771f1439567d8c1a989ad4
+  m_Entries:
+  - m_Id: 216319438848
+    m_Key: menu_back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8511021166592
+    m_Key: menu_lang
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8831528906752
+    m_Key: menu_sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8939771310080
+    m_Key: menu_sens
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12097121726464
+    m_Key: fatty1_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12332262797312
+    m_Key: fatty1_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12691416854528
+    m_Key: fatty1_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16499177992192
+    m_Key: Fatty2_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16523471400960
+    m_Key: Fatty2_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16546632347648
+    m_Key: Fatty2_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16561056559104
+    m_Key: Fatty2_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17945063632896
+    m_Key: Fatty 3_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18204770742272
+    m_Key: Fatty 3_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18217647255552
+    m_Key: Fatty 3_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18248815128576
+    m_Key: Fatty 3_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18267374923776
+    m_Key: Fatty 3_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18290066108416
+    m_Key: Fatty 3_6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38523296329728
+    m_Key: Fatty 4_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38545278676992
+    m_Key: Fatty 4_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38562311745536
+    m_Key: Fatty 4_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54893106999296
+    m_Key: Margaret1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54995674509312
+    m_Key: Margaret2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55009192751104
+    m_Key: Margaret3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55286239113216
+    m_Key: Photo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62384867946496
+    m_Key: Bed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73274824634368
+    m_Key: SecurityKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79326299336704
+    m_Key: shotgun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81333852614656
+    m_Key: shotgun_ammo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81373870469120
+    m_Key: valve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81689168883712
+    m_Key: bosskey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81717811785728
+    m_Key: camerakey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 81876956262400
+    m_Key: basementkey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82688281456640
+    m_Key: hatchkey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82713849933824
+    m_Key: heart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82792132423680
+    m_Key: knife
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82816195145728
+    m_Key: pistol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82831747624960
+    m_Key: pistol_ammo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84122699870208
+    m_Key: menu_start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84145458163712
+    m_Key: menu_options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84179448803328
+    m_Key: exit_options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86778625437696
+    m_Key: inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86807167676416
+    m_Key: inv_health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86930119503872
+    m_Key: inv_use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86995638726656
+    m_Key: inv_inspect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87024969494528
+    m_Key: inv_drop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87062974083072
+    m_Key: inv_sys
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87176488726528
+    m_Key: inv_confirmquit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87274769657856
+    m_Key: yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87329429827584
+    m_Key: no
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87698142703616
+    m_Key: inv_menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89038700982272
+    m_Key: Status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90308983697408
+    m_Key: menu_option
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92251311353856
+    m_Key: item_health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 110236826644480
+    m_Key: post_code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111123800305664
+    m_Key: post_love
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111153475006464
+    m_Key: post_maid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111477656956928
+    m_Key: post_colors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111558627995648
+    m_Key: post_pose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115188215099392
+    m_Key: cow_hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 116191085768704
+    m_Key: door_security
+    m_Metadata:
+      m_Items: []
+  - m_Id: 117897030840320
+    m_Key: door_jammed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 119377804701696
+    m_Key: someone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 119645111889920
+    m_Key: missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120823962972160
+    m_Key: pickup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120826685075456
+    m_Key: full
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1958644784029499417
+  references:
+    version: 2
+    RefIds:
+    - rid: 1958644784029499417
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1767364876936

@@ -90,7 +90,6 @@ public class WeaponManager : MonoBehaviour
     public void SetUsable(bool newValue)
     {
         canUseWeapon = newValue;
-
         if (!newValue)
             HideAll();
     }

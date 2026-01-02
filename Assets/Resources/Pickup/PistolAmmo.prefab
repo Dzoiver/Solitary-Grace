@@ -279,7 +279,7 @@ MonoBehaviour:
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
-  m_SelectedVertices: 00000000090000000500000001000000
+  m_SelectedVertices: 
 --- !u!114 &3246053354868687357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,8 +389,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   destroyOnPickUp: 1
-  healthDrinkPickupClip: {fileID: 0}
-  defaultPickup: {fileID: 0}
   disableObject1: 0
 --- !u!65 &3246053354868687345
 BoxCollider:
@@ -417,7 +415,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 77cacdfd9df1a0a4a85bb8891a67d5eb, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

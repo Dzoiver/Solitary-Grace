@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using System;
+using UnityEngine.Localization.Settings;
 
 public class InitialSetup : MonoBehaviour
 {
@@ -16,11 +17,16 @@ public class InitialSetup : MonoBehaviour
     int seconds;
     int milliseconds;
     TimeSpan timeSpan;
+    public int targetFPS = 300;
+    private static bool english = true;
+
+    public static bool English { get => english; set => english = value; }
 
     void Awake()
     {
         GameFuncs.BlackImage = blackImage;
         statistics = FindObjectOfType<GameStatistics>();
+        Application.targetFrameRate = targetFPS;
     }
 
     public void TheEnd()
@@ -41,5 +47,15 @@ public class InitialSetup : MonoBehaviour
         };
         
         GameFuncs.PlayerScript.SetControl(false);
+    }
+
+    public void LanguageRU()
+    {
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales.Find(loc => loc.Identifier.Code == "ru-RU");
+    }
+
+    public void LanguageEN()
+    {
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales.Find(loc => loc.Identifier.Code == "en-US");
     }
 }

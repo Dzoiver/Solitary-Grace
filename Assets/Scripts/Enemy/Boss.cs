@@ -44,10 +44,12 @@ public class Boss : MonoBehaviour
     public UnityEvent onKill;
 
     private Vector3 startPosition;
+    private Quaternion startRotation;
     public float allowedAngle = 45f;
     // Start is called before the first frame update
     void Start()
     {
+        startRotation = transform.rotation;
         agent = GetComponent<NavMeshAgent>();
         int i = 0;
         foreach (Transform t in patrolParent.transform)
@@ -134,7 +136,7 @@ public class Boss : MonoBehaviour
 
     private bool BossReachedHeal()
     {
-        if (Vector3.Distance(transform.position, healSpot.position) < agent.stoppingDistance)
+        if (Vector3.Distance(transform.position, healSpot.position) <= agent.stoppingDistance + 0.15f)
         {
             return true;
         }
@@ -268,7 +270,12 @@ public class Boss : MonoBehaviour
 
     public void ResetMonster()
     {
+        if (!gameObject.activeInHierarchy)
+            return;
         currentPatrolIndex = 0;
+        agent.destination = startPosition;
         transform.position = startPosition;
+        transform.rotation = startRotation;
+        chase = false;
     }
 }

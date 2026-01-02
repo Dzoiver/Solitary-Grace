@@ -2363,6 +2363,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   destroyOnPickUp: 1
+  disableObject1: 0
 --- !u!65 &2266906861754479494
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2386,9 +2387,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 77cacdfd9df1a0a4a85bb8891a67d5eb, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 45f780af11678614c9d72038252a2330, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0

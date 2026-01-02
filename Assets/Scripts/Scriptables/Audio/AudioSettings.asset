@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f1212fbd9cc474f8b55677b2135108, type: 3}
+  m_Name: AudioSettings
+  m_EditorClassIdentifier: 
+  pickupSound: {fileID: 8300000, guid: 4ef36940a79e7f943b5ffa1a30a81c1b, type: 3}
+  pickupErrorSound: {fileID: 8300000, guid: 0274da39f96f2e34d8033c61502ecc39, type: 3}

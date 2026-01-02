@@ -4,7 +4,6 @@ using GM;
 using SolitaryAudio;
 using Zenject;
 using UnityEngine.Events;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DoorOpen : MonoBehaviour
 {
