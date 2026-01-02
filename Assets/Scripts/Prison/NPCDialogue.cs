@@ -24,9 +24,12 @@ public class NPCDialogue : MonoBehaviour
     TextMeshProUGUI text;
     public UnityEvent onTrigger;
     public UnityEvent onLeave;
+    public UnityEvent onFinish;
+    [SerializeField] bool triggerOnce = false;
+    bool trigger = true;
 
     float currentTime = 0f;
-    float printNextTime = 0.05f;
+    [SerializeField] float printNextTime = 0.05f;
     int characterIndex = 0;
 
     bool printing = false;
@@ -96,7 +99,13 @@ public class NPCDialogue : MonoBehaviour
     private void PrintDialogue()
     {
         DialoguePlaying = true;
-        onTrigger.Invoke();
+        if (trigger)
+            onTrigger.Invoke();
+
+        if (triggerOnce)
+            trigger = false;
+
+
         enabled = true;
         print(textIndex);
         if (textIndex == messageGroups[groupIndex].messages.Length)
@@ -104,6 +113,7 @@ public class NPCDialogue : MonoBehaviour
             if (groupIndex < messageGroups.Count - 1)
             groupIndex++;
 
+            onFinish.Invoke();
             CloseText();
             return;
         }
