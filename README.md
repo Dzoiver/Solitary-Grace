@@ -9,7 +9,7 @@ Explore your nightmare. Solve mystery of the place in your dream. You'll wake up
 ## Controls:
 E to interact
 
-Esc to open a menu/inventory
+Tab to open a menu/inventory
 
 Download early in-develepment build (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.1-alpha)
 
