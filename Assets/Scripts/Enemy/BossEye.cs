@@ -16,6 +16,7 @@ public class BossEye : MonoBehaviour
         eyeAnim = GetComponent<DOTweenAnimation>();
         healer = FindObjectOfType<BossHealer>();
         meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material = eyeDeadMat;
     }
 
     void Update()
@@ -29,14 +30,16 @@ public class BossEye : MonoBehaviour
             return;
         if (other.CompareTag("Bullet"))
         {
+            opened = false;
             CloseEye();
         }
     }
 
     public void OpenEye()
     {
-        if (!opened)
+        if (!opened && !eyeAnim.tween.IsPlaying())
         {
+            meshRenderer.material = eyeActiveMat;
             healer.AddEye();
             opened = true;
             eyeAnim.DOPlay();

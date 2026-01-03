@@ -27,7 +27,6 @@ public class GameStatistics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(InitialSetup.English);
         gameTime += Time.deltaTime;
     }
 }

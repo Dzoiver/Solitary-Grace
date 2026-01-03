@@ -101,7 +101,7 @@ public class Elevator : MonoBehaviour
     {
         if (moving)
         {
-            transform.position = Vector3.MoveTowards(transform.position, destinationFloor, 1f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destinationFloor, speed * Time.deltaTime);
             
             /*
             Vector3 newPosition = Vector3.MoveTowards(

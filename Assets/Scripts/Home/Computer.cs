@@ -14,9 +14,9 @@ public class Computer : MonoBehaviour
     int imageBoardClicks = 0;
     int streamClicks = 0;
     float currentTime = 0f;
-    float resetClicksTime = 0.3f;
+    float resetClicksTime = 0.35f;
     float currentTimeInputDelay = 0f;
-    float TimeInputDelay = 0.2f;
+    float TimeInputDelay = 0.2f; // delay to not break control or something
 
     public UnityEvent onTurnOn;
 

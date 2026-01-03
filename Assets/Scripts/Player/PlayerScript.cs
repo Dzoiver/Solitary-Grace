@@ -61,6 +61,8 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public float Health { get => health; set => health = value; }
+
     private void Awake()
     {
         menu = FindObjectOfType<Menu>();
@@ -77,11 +79,11 @@ public class PlayerScript : MonoBehaviour
 
     public void GetDamage(float damage)
     {
-        if (health <= 0) return;
+        if (Health <= 0) return;
 
-        health = Mathf.Max(0, health - damage);
+        Health = Mathf.Max(0, Health - damage);
 
-        if (health <= 0)
+        if (Health <= 0)
         {
             Death();
         }
@@ -90,21 +92,21 @@ public class PlayerScript : MonoBehaviour
             gameover.GetDamagedRedScreen();
         }
 
-        menu.ChangeHealth(health);
+        //menu.ChangeHealth(Health);
     }
 
     public void GiveHP(float amount)
     {
-        health = Mathf.Min(maxHealth, health + amount);
-        menu.ChangeHealth(health);
+        Health = Mathf.Min(maxHealth, Health + amount);
+        //menu.ChangeHealth(Health);
     }
 
     public float GetHP()
     {
-        return health;
+        return Health;
     }
 
-    public bool IsDead() => health <= 0;
+    public bool IsDead() => Health <= 0;
 
     private void Death()
     {
@@ -171,7 +173,8 @@ public class PlayerScript : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerCamStartPos = playerCam.transform.localPosition;
-        menu.ChangeHealth(health);
+        print(Health);
+        menu.ChangeHealth(Health);
     }
 
     private void OnTriggerEnter(Collider other)

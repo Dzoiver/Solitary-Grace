@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en-US
   m_SharedData: {fileID: 11400000, guid: 846ccb31d8771f1439567d8c1a989ad4, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1958644801793163300
   m_TableData:
   - m_Id: 216319438848
     m_Localized: Back
@@ -301,6 +302,48 @@ MonoBehaviour:
     m_Localized: 'Congratulations! Your highest score is:'
     m_Metadata:
       m_Items: []
+  - m_Id: 310152266035200
+    m_Localized: Artifact is able to burn the flesh. It powers from the sun rays.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 310191029792768
+    m_Localized: In order to save artifact's power it needs to be stored in the water.
+      Sink it via the roof panel. Extraction can be done on the basement floor.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 314744139722752
+    m_Localized: It requires a key card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320039305916416
+    m_Localized: 'Health: {pHealth.Health}'
+    m_Metadata:
+      m_Items:
+      - rid: 1958644801793163300
+  - m_Id: 321793019916288
+    m_Localized: I'm too shy to speak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321814276648960
+    m_Localized: Moved to a new place! Roomtour stream
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321829439057920
+    m_Localized: we wait for you
+    m_Metadata:
+      m_Items:
+      - rid: 1958644801793163300
+  - m_Id: 357259735773184
+    m_Localized: '{title.Title}'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1958644801793163300
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 320039305916416
+        - id: 321829439057920

@@ -295,6 +295,38 @@ MonoBehaviour:
     m_Key: cow_nothigh
     m_Metadata:
       m_Items: []
+  - m_Id: 310152266035200
+    m_Key: monitor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 310191029792768
+    m_Key: monitor2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 314744139722752
+    m_Key: keycard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320039305916416
+    m_Key: healthLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321793019916288
+    m_Key: streamer_lukami
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321814276648960
+    m_Key: streamer_girl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321829439057920
+    m_Key: streamer_boss
+    m_Metadata:
+      m_Items: []
+  - m_Id: 357259735773184
+    m_Key: streamTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

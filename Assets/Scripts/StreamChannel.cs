@@ -11,12 +11,14 @@ public class StreamChannel : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        
+        //gameObject.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (gameObject.activeSelf)
+            gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,9 +30,7 @@ public class StreamChannel : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
-
     }
-
     public void Open()
     {
         gameObject.SetActive(true);

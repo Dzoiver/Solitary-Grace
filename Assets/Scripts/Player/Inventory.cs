@@ -94,10 +94,8 @@ public class Inventory : MonoBehaviour
             item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite, scriptableItem.keyitem);
         ItemsList.Add(item);
         DisplayItems();
-        if (item.Name == "Pistol Ammo")
-            weaponmanager.pistolScript.UpdateAmmoFromInventory();
-        if (item.Name == "Shotgun Ammo")
-            weaponmanager.shotgunScript.UpdateAmmoFromInventory();
+        weaponmanager.pistolScript.UpdateAmmoFromInventory();
+        weaponmanager.shotgunScript.UpdateAmmoFromInventory();
     }
 
     public bool TryPickup(ScriptableItem itemInfo)

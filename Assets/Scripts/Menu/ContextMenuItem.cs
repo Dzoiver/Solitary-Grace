@@ -33,9 +33,9 @@ public class ContextMenuItem : MonoBehaviour
 
     public void UseItem()
     {
-        switch (currentItem.Name)
+        switch (currentItem.Id)
         {
-            case "Health Drink":
+            case 2:
                 GameFuncs.PlayerScript.GiveHP(30f);
                 inventory.DeleteItem(currentItem.inventorySlotID, 1);
                 inventory.DisplayItems();

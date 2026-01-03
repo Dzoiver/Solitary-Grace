@@ -20,6 +20,7 @@ public class Menu : MonoBehaviour
     AudioSource audio;
     [SerializeField] AudioClip exitSound;
     [SerializeField] TextMeshProUGUI itemnameLabel;
+    string healthString;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class Menu : MonoBehaviour
         weapon = FindAnyObjectByType<WeaponManager>();
         context = FindObjectOfType<ContextMenuItem>();
         audio = GetComponent<AudioSource>();
+        healthString = healthText.text;
     }
     // Start is called before the first frame update
     void Start()
@@ -41,7 +43,6 @@ public class Menu : MonoBehaviour
     {
         if (NPCDialogue.DialoguePlaying)
             return;
-
         itemnameLabel.text = "";
         weapon.enabled = false;
         weapon.canAttack = false;
@@ -137,6 +138,6 @@ public class Menu : MonoBehaviour
 
     public void ChangeHealth(float value)
     {
-        healthText.text = "Health: " + value.ToString();
+        healthText.text = healthString + value.ToString();
     }
 }

@@ -12,9 +12,11 @@ public class BossHealer : MonoBehaviour
     bool spawnEyes = false;
     float currentEyeTime = 0f;
     float eyeTime = 0.5f;
-    int spawnedEyes = 0;
+    int spawnedEyes = 0; // All eyes that are tried to spawn
     int maxSpawnedEyes = 15;
-    int currentEyes;
+    int currentEyes; // Actual eyes
+    float max_healingTime = 10f;
+    float current_healingTime = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class BossHealer : MonoBehaviour
     {
         if (healing)
         {
+            current_healingTime += Time.deltaTime;
             currentEyeTime += Time.deltaTime;
             PushEyes();
         }
@@ -41,6 +44,8 @@ public class BossHealer : MonoBehaviour
 
     public void StopHealing()
     {
+        print("stop healing");
+        current_healingTime = 0f;
         healing = false;
         foreach (BossEye eye in bossEyes)
         {
@@ -83,14 +88,9 @@ public class BossHealer : MonoBehaviour
 
     public bool CantHealAnymore()
     {
-        if (!healing)
-            return false;
-        if (!spawnEyes && currentEyes == 0)
-        {
-            StopHealing();
+        if (current_healingTime > max_healingTime && spawnedEyes >= maxSpawnedEyes)
             return true;
-        }
-        else
-            return false;
+
+        return false;
     }
 }

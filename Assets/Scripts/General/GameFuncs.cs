@@ -69,8 +69,6 @@ namespace GM
 
         static public void DisableWeapons(bool newValue = false)
         {
-            print("enabling weapon");
-            print(newValue);
             weaponManager.SetUsable(!newValue);
         }
     }

@@ -11,8 +11,6 @@ public class Boss : MonoBehaviour
     private NavMeshAgent agent;
     private bool seePlayer = false;
     [SerializeField] private float detectRadius = 10f;
-    private float chaseSpeed = 2f;
-    private float stopDistance = 2f;
 
     private float health = 600f;
     private float maxHealth = 1000f;
@@ -40,7 +38,7 @@ public class Boss : MonoBehaviour
 
     [SerializeField] BossDoorsController bossDoors;
     [SerializeField] BossHealer bossHealer;
-    float healSpeed = 5f;
+    float healSpeed = 7f;
     public UnityEvent onKill;
 
     private Vector3 startPosition;
@@ -86,6 +84,7 @@ public class Boss : MonoBehaviour
 
         if (BossReachedHeal() && healing) // Boss has walked all the way to the heal spot
         {
+            canKill = true;
             bossDoors.CloseDoors();
             bossHealer.StartHealing();
         }
@@ -126,9 +125,9 @@ public class Boss : MonoBehaviour
 
     private void StopHealilng()
     {
+        print("fuck this i stop heal");
         bossHealer.StopHealing();
         Phase1Complete = true;
-        canKill = true;
         healing = false;
         bossDoors.ResetDoors();
         agent.destination = GameFuncs.PlayerScript.transform.position;
@@ -200,6 +199,8 @@ public class Boss : MonoBehaviour
 
     private bool ChasingPlayer()
     {
+        if (healing)
+            return false;
         Vector3 directionNormal = (GameFuncs.PlayerScript.gameObject.transform.position - transform.position).normalized;
         if (Physics.Raycast(transform.position, directionNormal, out RaycastHit hit, detectRadius, layerMask))
         {
