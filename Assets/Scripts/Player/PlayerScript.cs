@@ -98,7 +98,7 @@ public class PlayerScript : MonoBehaviour
     public void GiveHP(float amount)
     {
         Health = Mathf.Min(maxHealth, Health + amount);
-        //menu.ChangeHealth(Health);
+        menu.ChangeHealth(Health);
     }
 
     public float GetHP()

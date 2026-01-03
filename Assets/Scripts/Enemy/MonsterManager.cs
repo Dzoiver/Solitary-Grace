@@ -8,7 +8,7 @@ public class MonsterManager : MonoBehaviour
     Monster[] monstersFreezed;
     private void Awake()
     {
-        monsters = FindObjectsOfType<Monster>();
+        monsters = FindObjectsOfType<Monster>(true);
     }
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class MonsterManager : MonoBehaviour
         {
             if (monster.gameObject.activeSelf)
             {
-                monster.SetFreeze(true);
+                monster.Freeze = true;
                 monster.gameObject.SetActive(false);
             }
         }
@@ -38,9 +38,9 @@ public class MonsterManager : MonoBehaviour
     {
         foreach (Monster monster in monsters)
         {
-            if (monster.GetFreeze())
+            if (monster.Freeze)
             {
-                monster.SetFreeze(false);
+                monster.Freeze = false;
                 monster.gameObject.SetActive(true);
             }
         }

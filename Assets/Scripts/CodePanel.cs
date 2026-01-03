@@ -56,11 +56,13 @@ public class CodePanel : MonoBehaviour
     {
         activated = true;
         GameFuncs.PlayerScript.SetControl(false);
+        WeaponManager.canUseWeapon = false;
         inputField.ActivateInputField();
     }
 
     public void Deactivate()
     {
+        WeaponManager.canUseWeapon = true;
         activated = false;
         GameFuncs.PlayerScript.SetControl(true);
         inputField.DeactivateInputField();
@@ -94,7 +96,10 @@ public class CodePanel : MonoBehaviour
 
     public void OnValueChange()
     {
-        // sound
+        if (inputField.text == code)
+        {
+            Solved();
+        }
     }
 
     public void Clear()

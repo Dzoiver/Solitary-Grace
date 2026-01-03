@@ -15,6 +15,7 @@ public class GunBullet : Projectile
     MeshRenderer mesh;
     BoxCollider box;
     Rigidbody rb;
+    [SerializeField] Light bulletLight;
     
 
     private void Awake()
@@ -33,6 +34,7 @@ public class GunBullet : Projectile
             direction.y += Random.Range(-randomness, randomness);
             direction.z += Random.Range(-randomness, randomness);
         }
+        bulletLight.enabled = true;
         Direction = direction;
         transform.rotation = Quaternion.Euler(rotation);
         launched = true;
@@ -62,7 +64,9 @@ public class GunBullet : Projectile
         box.enabled = false;
         launched = false;
         enabled = false;
-        
+        bulletLight.enabled = false;
+
+
         if (collision.gameObject.layer == 0)
         {
             //audio.Play();

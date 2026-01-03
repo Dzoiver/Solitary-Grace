@@ -56,6 +56,9 @@ public class Monster : MonoBehaviour
     BoxCollider collider;
 
     public Color circleColor = Color.red;
+
+    public bool Freeze { get => freeze; set => freeze = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -279,16 +282,6 @@ public class Monster : MonoBehaviour
         transform.position = startPosition;
         transform.rotation = startRotation;
         chase = false;
-    }
-
-    public void SetFreeze(bool value)
-    {
-        freeze = value;
-    }
-
-    public bool GetFreeze()
-    {
-        return freeze;
     }
 
     public void Alarm()
