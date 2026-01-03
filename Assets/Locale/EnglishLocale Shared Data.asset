@@ -275,6 +275,26 @@ MonoBehaviour:
     m_Key: full
     m_Metadata:
       m_Items: []
+  - m_Id: 134643963965440
+    m_Key: locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 134851112251392
+    m_Key: locked_otherside
+    m_Metadata:
+      m_Items: []
+  - m_Id: 139480231358464
+    m_Key: home_door
+    m_Metadata:
+      m_Items: []
+  - m_Id: 140951660310528
+    m_Key: cow_over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 142408421781504
+    m_Key: cow_nothigh
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

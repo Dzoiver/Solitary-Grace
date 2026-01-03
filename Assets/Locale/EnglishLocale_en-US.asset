@@ -276,6 +276,31 @@ MonoBehaviour:
     m_Localized: Inventory is full
     m_Metadata:
       m_Items: []
+  - m_Id: 134643963965440
+    m_Localized: It's locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 134851112251392
+    m_Localized: Locked from the other side
+    m_Metadata:
+      m_Items: []
+  - m_Id: 139480231358464
+    m_Localized: I can't open my door! What?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 140951660310528
+    m_Localized: 'Congratulations!
+
+      You beat your highest score!
+
+      New
+      record is: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 142408421781504
+    m_Localized: 'Congratulations! Your highest score is:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

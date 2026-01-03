@@ -19,9 +19,22 @@ MonoBehaviour:
     m_Key: securitykey
     m_Metadata:
       m_Items: []
+  - m_Id: 61240196247552
+    m_Key: fontNormal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61667449024512
+    m_Key: fontChange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63704102383616
+    m_Key: MainMenu/CanvasMenu/MenuPanel/Exit/Text (TMP)
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - rid: 1958644788008058889
+    - rid: 1958644792246665222
   m_KeyGenerator:
     rid: 1958644788008058888
   references:
@@ -41,3 +54,21 @@ MonoBehaviour:
           - ru-RU
         m_TypeString: ScriptableItem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
+    - rid: 1958644792246665222
+      type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries:
+        - m_KeyId: 61240196247552
+          m_TableCodes:
+          - en-US
+          - ru-RU
+        - m_KeyId: 61667449024512
+          m_TableCodes:
+          - en-US
+          - ru-RU
+        - m_KeyId: 63704102383616
+          m_TableCodes:
+          - en-US
+          - ru-RU
+        m_TypeString: UnityEngine.Material, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null

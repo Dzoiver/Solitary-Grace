@@ -91,7 +91,7 @@ public class MessagesUI : MonoBehaviour
     {
         TextMeshProUGUI textmesh = FindFreeText();
         textmesh.color = Color.red;
-        textmesh.text = "Inventory is full";
+        textmesh.text = inventoryFull;
 
         textmesh.DOFade(1f, 0.5f).OnComplete(() =>
         {

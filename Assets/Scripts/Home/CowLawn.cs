@@ -14,6 +14,8 @@ public class CowLawn : MonoBehaviour
     [SerializeField] GameObject gameoverPanel;
     [SerializeField] TextMeshProUGUI gameoverText;
     AudioSource audio;
+    [SerializeField] string newscoreText = "Congratulations!\nYou beat your highest score!\nNew record is: ";
+    [SerializeField] string nothighscoreText = "Congratulations! Your highest score is: ";
 
     int score = 0;
     int enemyCount = 3;
@@ -63,11 +65,11 @@ public class CowLawn : MonoBehaviour
 
     private void GameOver()
     {
-        gameoverText.text = "Congratulations! Your highest score is: " + record.ToString();
+        gameoverText.text = nothighscoreText + record.ToString();
         if (score > record)
         {
             record = score;
-            gameoverText.text = "Congratulations!\nYou beat your highest score!\nNew record is: " + record.ToString();
+            gameoverText.text = newscoreText + record.ToString();
         }
         gameoverPanel.SetActive(true);
         player.SetControl(false);

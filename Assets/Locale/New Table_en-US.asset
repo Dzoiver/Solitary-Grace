@@ -22,6 +22,18 @@ MonoBehaviour:
     m_Localized: d786bca257d7abb4b9cebfbf94c954cf
     m_Metadata:
       m_Items: []
+  - m_Id: 61240196247552
+    m_Localized: 2e498d1c8094910479dc3e1b768306a4[LiberationSans SDF Material]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61667449024512
+    m_Localized: 2e498d1c8094910479dc3e1b768306a4[LiberationSans SDF Material]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63704102383616
+    m_Localized: 8f586378b4e144a9851e7b34d9b748ee[LiberationSans SDF Material]
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

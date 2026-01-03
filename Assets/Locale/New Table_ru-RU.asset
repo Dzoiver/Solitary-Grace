@@ -22,6 +22,18 @@ MonoBehaviour:
     m_Localized: bfddd25a23b1fce4cbd1686a26253906
     m_Metadata:
       m_Items: []
+  - m_Id: 61240196247552
+    m_Localized: dd597b1b83268f64ea88034722292d00[12379 SDF Material]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61667449024512
+    m_Localized: dd597b1b83268f64ea88034722292d00[12379 SDF Material]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63704102383616
+    m_Localized: 3dd02efd3b21de047859c5abed49a23a[SH SDF Material]
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
