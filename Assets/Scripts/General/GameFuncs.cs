@@ -23,9 +23,17 @@ namespace GM
         static public void TeleportPlayer(GameObject destination)
         {
             PlayerScript.controller.enabled = false;
-            mouseLook.CenterView();
             PlayerScript.gameObject.transform.position = destination.transform.position;
             PlayerScript.gameObject.transform.rotation = destination.transform.rotation;
+            mouseLook.CenterView();
+            PlayerScript.controller.enabled = true;
+        }
+
+        static public void TeleportPlayerNoRotate(GameObject destination)
+        {
+            PlayerScript.controller.enabled = false;
+            mouseLook.CenterView();
+            PlayerScript.gameObject.transform.position = destination.transform.position;
             PlayerScript.controller.enabled = true;
         }
 

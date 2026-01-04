@@ -1,15 +1,19 @@
+using DG.Tweening;
 using GM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class Computer : MonoBehaviour
 {
+    public static GameObject notificationBell;
     [SerializeField] GameObject osCanvas;
     [SerializeField] GameObject gameCamera;
-    [SerializeField] GameObject browserImage;
+    [SerializeField] ImageBoard browserImage;
     [SerializeField] GameObject browserStream;
+
     int gameClicks = 0;
     int imageBoardClicks = 0;
     int streamClicks = 0;
@@ -19,16 +23,20 @@ public class Computer : MonoBehaviour
     float TimeInputDelay = 0.2f; // delay to not break control or something
 
     public UnityEvent onTurnOn;
+    [SerializeField] Renderer notification;
 
     private void Awake()
     {
+        notificationBell = notification.gameObject;
         //gameObject.SetActive(false);
         osCanvas.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        notification.material.DOFade(0f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        notification.gameObject.SetActive(false);
+        browserImage.NotificationCount = 0;
     }
 
     private void OnEnable()
@@ -58,6 +66,13 @@ public class Computer : MonoBehaviour
             streamClicks = 0;
             currentTime = 0f;
         }
+
+        //FadingNotification();
+    }
+
+    public void FadingNotification()
+    {
+        
     }
 
     public void GameClick()
@@ -93,6 +108,7 @@ public class Computer : MonoBehaviour
         onTurnOn.Invoke();
         Cursor.lockState = CursorLockMode.None;
         GameFuncs.PlayerScript.SetControl(false);
+        notificationBell.SetActive(false);
         osCanvas.SetActive(true);
     }
 
@@ -103,7 +119,7 @@ public class Computer : MonoBehaviour
 
     public void OpenImageBoard()
     {
-        browserImage.SetActive(true);
+        browserImage.gameObject.SetActive(true);
     }
 
     public void OpenGame()

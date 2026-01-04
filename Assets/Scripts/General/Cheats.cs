@@ -1,5 +1,7 @@
+using GM;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -10,6 +12,7 @@ public class Cheats : MonoBehaviour
     RemoveOnStart[] lights;
     // public GameObject globalLight;
     DaytimeOutside daytimeManager;
+    SceneView lastActiveSceneView;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -38,12 +41,17 @@ public class Cheats : MonoBehaviour
                 light.ActivateLights();
             }
         }
-    }
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            GameFuncs.TeleportPlayerNoRotate(lastActiveSceneView.camera.gameObject);
+        }
+
+     }
 
     private void Awake()
     {
         daytimeManager = FindObjectOfType<DaytimeOutside>();
         lights = FindObjectsOfType<RemoveOnStart>();
-
+        lastActiveSceneView = SceneView.lastActiveSceneView;
     }
 }

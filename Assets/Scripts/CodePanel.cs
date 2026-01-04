@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class CodePanel : MonoBehaviour
 {
@@ -65,6 +66,7 @@ public class CodePanel : MonoBehaviour
         WeaponManager.canUseWeapon = true;
         activated = false;
         GameFuncs.PlayerScript.SetControl(true);
+        inputField.enabled = false;
         inputField.DeactivateInputField();
     }
 

@@ -32,7 +32,10 @@ public class Elevator : MonoBehaviour
     public Vector3 Velocity { get; private set; }
 
     [SerializeField] AudioSource audio;
-    [SerializeField] AudioSource audioDing;
+    [SerializeField] AudioSource audio2;
+    [SerializeField] AudioClip buttonClick;
+    [SerializeField] AudioClip elevatorArrive;
+    [SerializeField] AudioClip horElev;
     [SerializeField] DOTweenAnimation door1;
     [SerializeField] DOTweenAnimation door2;
     private bool doorsBusy = false;
@@ -137,7 +140,7 @@ public class Elevator : MonoBehaviour
         savedPosition = gameObject.transform.position;
     }
 
-    public void MoveToFloor(int floor)
+    public void MoveToFloor(int newFloor)
     {
         /*
         if (floor == currentFloor || moving)
@@ -147,23 +150,34 @@ public class Elevator : MonoBehaviour
         else
             destinationFloor.y -= floorDistance * (floor);
         */
-        if (floor == currentFloor)
+        print("moving to floor " + newFloor);
+        if (audio2)
         {
+            audio2.clip = buttonClick;
+            audio2.Play();
+        }
+        if (moving)
+            return;
+
+        if (newFloor == currentFloor)
+        {
+            print("opening doors ");
             OpenDoors();
             OpenOuterDoors(currentFloor);
         }
-        
-        if (floor == currentFloor || moving)
-            return;
-
-        if (button1 != null)
-            button1.active = false;
-        if (button2 != null)
-            button2.active = false;
-        if (button3 != null)
-            button3.active = false;
-        nextFloor = floor;
-        StartCoroutine(OnDoorsClosed());
+        else
+        {
+            nextFloor = newFloor;
+            StartCoroutine(OnDoorsClosed());
+        }
+            /*
+            if (button1 != null)
+                button1.active = false;
+            if (button2 != null)
+                button2.active = false;
+            if (button3 != null)
+                button3.active = false;
+            */
     }
 
     public void RestorePosition()
@@ -173,6 +187,7 @@ public class Elevator : MonoBehaviour
 
     public void OnStop()
     {
+        print("stopping");
         moving = false;
         audio.enabled = false;
         audio.volume = 0f;
@@ -180,7 +195,10 @@ public class Elevator : MonoBehaviour
         OpenOuterDoors(currentFloor);
 
         if (ding)
-            audioDing.Play();
+        {
+            audio2.clip = elevatorArrive;
+            audio2.Play();
+        }
 
         if (button1 != null)
         button1.active = true;
@@ -228,6 +246,10 @@ public class Elevator : MonoBehaviour
     {
         if (teleportedHorizontally)
             return;
+
+        audio2.clip = horElev;
+        audio2.enabled = true;
+        audio2.Play();
         teleportedHorizontally = true;
         GameFuncs.TeleportRelatively(gameObject, horizontalTeleportPos);
         gameObject.transform.position = horizontalTeleportPos;
@@ -235,9 +257,9 @@ public class Elevator : MonoBehaviour
         door1.gameObject.SetActive(false);
         door2.gameObject.SetActive(false);
 
-        Camera.main.DOShakePosition(13f, 0.1f, 10, 90f, false).OnComplete(() =>
+        Camera.main.DOShakePosition(11f, 0.1f, 10, 90f, false).OnComplete(() =>
         {
-            Camera.main.DOShakePosition(5f, 0.05f, 5, 90f, true);
+            Camera.main.DOShakePosition(4f, 0.05f, 5, 90f, true);
         });
     }
 

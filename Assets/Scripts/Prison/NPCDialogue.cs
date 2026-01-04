@@ -107,7 +107,6 @@ public class NPCDialogue : MonoBehaviour
 
 
         enabled = true;
-        print(textIndex);
         if (textIndex == messageGroups[groupIndex].messages.Length)
         {
             if (groupIndex < messageGroups.Count - 1)

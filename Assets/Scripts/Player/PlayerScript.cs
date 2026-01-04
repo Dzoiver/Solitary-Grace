@@ -173,7 +173,6 @@ public class PlayerScript : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerCamStartPos = playerCam.transform.localPosition;
-        print(Health);
         menu.ChangeHealth(Health);
     }
 
