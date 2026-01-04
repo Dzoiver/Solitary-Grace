@@ -11,7 +11,7 @@ E to interact
 
 Tab to open a menu/inventory
 
-Download early in-develepment build (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.1-alpha)
+Download early in-develepment build (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.2-alpha)
 
 ## Screenshots:
 ![1](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/281a2de9-e203-4f4c-a5b4-aff6e8d123c0)
