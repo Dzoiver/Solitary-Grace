@@ -34,6 +34,8 @@ public class ItemPickup : MonoBehaviour
             if (audio.clip != null)
                 defaultPickupSound = audio.clip;
         }
+
+        
         // menu = FindObjectOfType<Menu>();
     }
 
@@ -57,6 +59,8 @@ public class ItemPickup : MonoBehaviour
 
                     if (disableObject1)
                         gameObject.SetActive(false);
+
+                    transform.GetChild(0).gameObject.SetActive(false);
                 }
                 enabled = false;
                 if (collider != null)

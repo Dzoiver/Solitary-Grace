@@ -108,6 +108,7 @@ public class Computer : MonoBehaviour
         onTurnOn.Invoke();
         Cursor.lockState = CursorLockMode.None;
         GameFuncs.PlayerScript.SetControl(false);
+        browserImage.gameObject.SetActive(false);
         notificationBell.SetActive(false);
         osCanvas.SetActive(true);
     }

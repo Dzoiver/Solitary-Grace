@@ -170,14 +170,12 @@ public class Elevator : MonoBehaviour
             nextFloor = newFloor;
             StartCoroutine(OnDoorsClosed());
         }
-            /*
             if (button1 != null)
                 button1.active = false;
             if (button2 != null)
                 button2.active = false;
             if (button3 != null)
                 button3.active = false;
-            */
     }
 
     public void RestorePosition()
