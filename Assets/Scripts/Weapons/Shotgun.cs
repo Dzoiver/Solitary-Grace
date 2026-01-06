@@ -8,6 +8,7 @@ using UnityEngine;
 public class Shotgun : Weapon
 {
     ProjectilesManager pManager;
+    [SerializeField] ParticleSystem shotEffect;
     [SerializeField] GameObject bulletStart;
     Vector3 rotationBullet;
     string reloadAnimName = "shutgunReload";
@@ -68,6 +69,7 @@ public class Shotgun : Weapon
     // ShotgunReload
     public override void SpawnBullets()
     {
+        shotEffect.Play();
         rotationBullet.x = Camera.main.transform.rotation.eulerAngles.x;
         rotationBullet.y = GameFuncs.PlayerScript.transform.rotation.eulerAngles.y;
         var bullet2 = pManager.GetNewBullet();

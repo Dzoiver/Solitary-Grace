@@ -1,0 +1,7 @@
+INTEGRATIONS READ ME
+
+The integrations for popular particle packages from the Asset Store are listed and linked in the description of Projectile Factory
+
+https://assetstore.unity.com/packages/tools/particles-effects/projectile-factory-behavior-based-projectile-system-281692?aid=1100lxWw
+
+Install the particle package that they integrate, then the integration, and each one has its own demo scene.

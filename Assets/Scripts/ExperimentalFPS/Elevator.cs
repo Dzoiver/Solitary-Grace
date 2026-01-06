@@ -159,23 +159,25 @@ public class Elevator : MonoBehaviour
         if (moving)
             return;
 
+
         if (newFloor == currentFloor)
         {
             print("opening doors ");
-            OpenDoors();
+            OpenDoors(); // Animation
             OpenOuterDoors(currentFloor);
         }
         else
         {
             nextFloor = newFloor;
+            print("deactivate buttons");
+            if (button1 != null)
+                button1.SetActiveTrigger(false);
+            if (button2 != null)
+                button2.SetActiveTrigger(false);
+            if (button3 != null)
+                button3.SetActiveTrigger(false);
             StartCoroutine(OnDoorsClosed());
         }
-            if (button1 != null)
-                button1.active = false;
-            if (button2 != null)
-                button2.active = false;
-            if (button3 != null)
-                button3.active = false;
     }
 
     public void RestorePosition()
@@ -198,12 +200,13 @@ public class Elevator : MonoBehaviour
             audio2.Play();
         }
 
+        print("activating butons ");
         if (button1 != null)
-        button1.active = true;
+            button1.SetActiveTrigger(true);
         if (button2 != null)
-            button2.active = true;
+            button2.SetActiveTrigger(true);
         if (button3 != null)
-            button3.active = true;
+            button3.SetActiveTrigger(true);
     }
 
     public void OpenDoors()

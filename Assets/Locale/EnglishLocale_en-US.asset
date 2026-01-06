@@ -337,6 +337,10 @@ MonoBehaviour:
     m_Localized: '{title.Title}'
     m_Metadata:
       m_Items: []
+  - m_Id: 1097953748234240
+    m_Localized: 'This panel is used to retrieve the artifact. Make sure it''s '
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

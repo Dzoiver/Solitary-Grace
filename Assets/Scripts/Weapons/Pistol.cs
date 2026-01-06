@@ -9,6 +9,7 @@ public class Pistol : Weapon
     ProjectilesManager pManager;
     Vector3 rotationBullet;
     [SerializeField] GameObject bulletStart;
+    [SerializeField] ParticleSystem shootEffect;
     string reloadAnimName = "pistolReload2";
     public override string ReloadAnimName
     {
@@ -68,6 +69,7 @@ public class Pistol : Weapon
 
     public override void SpawnBullets()
     {
+        shootEffect.Play();
         rotationBullet.x = Camera.main.transform.rotation.eulerAngles.x;
         rotationBullet.y = GameFuncs.PlayerScript.transform.rotation.eulerAngles.y;
         var bullet = pManager.GetNewBullet();

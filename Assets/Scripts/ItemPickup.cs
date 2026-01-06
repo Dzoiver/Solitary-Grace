@@ -60,7 +60,8 @@ public class ItemPickup : MonoBehaviour
                     if (disableObject1)
                         gameObject.SetActive(false);
 
-                    transform.GetChild(0).gameObject.SetActive(false);
+                    if (transform.childCount > 0)
+                        transform.GetChild(0).gameObject.SetActive(false);
                 }
                 enabled = false;
                 if (collider != null)
