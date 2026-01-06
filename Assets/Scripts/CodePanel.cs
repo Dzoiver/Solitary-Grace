@@ -58,6 +58,7 @@ public class CodePanel : MonoBehaviour
         activated = true;
         GameFuncs.PlayerScript.SetControl(false);
         WeaponManager.canUseWeapon = false;
+        inputField.enabled = true;
         inputField.ActivateInputField();
     }
 

@@ -38,7 +38,7 @@ public class Boss : MonoBehaviour
 
     [SerializeField] BossDoorsController bossDoors;
     [SerializeField] BossHealer bossHealer;
-    float healSpeed = 7f;
+    float healSpeed = 10f;
     public UnityEvent onKill;
 
     private Vector3 startPosition;

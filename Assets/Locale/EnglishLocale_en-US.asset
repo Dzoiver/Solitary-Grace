@@ -338,7 +338,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1097953748234240
-    m_Localized: 'This panel is used to retrieve the artifact. Make sure it''s '
+    m_Localized: This panel is used to retrieve the artifact. Make sure it was lowered
+      on the roof.
     m_Metadata:
       m_Items: []
   references:

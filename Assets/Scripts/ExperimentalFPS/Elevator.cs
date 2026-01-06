@@ -150,7 +150,6 @@ public class Elevator : MonoBehaviour
         else
             destinationFloor.y -= floorDistance * (floor);
         */
-        print("moving to floor " + newFloor);
         if (audio2)
         {
             audio2.clip = buttonClick;
@@ -162,14 +161,12 @@ public class Elevator : MonoBehaviour
 
         if (newFloor == currentFloor)
         {
-            print("opening doors ");
             OpenDoors(); // Animation
             OpenOuterDoors(currentFloor);
         }
         else
         {
             nextFloor = newFloor;
-            print("deactivate buttons");
             if (button1 != null)
                 button1.SetActiveTrigger(false);
             if (button2 != null)
@@ -187,7 +184,6 @@ public class Elevator : MonoBehaviour
 
     public void OnStop()
     {
-        print("stopping");
         moving = false;
         audio.enabled = false;
         audio.volume = 0f;

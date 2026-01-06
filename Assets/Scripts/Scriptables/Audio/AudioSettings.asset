@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
   pickupSound: {fileID: 8300000, guid: 4ef36940a79e7f943b5ffa1a30a81c1b, type: 3}
+  pickupSoundSoundVolume: 1
   pickupErrorSound: {fileID: 8300000, guid: 0274da39f96f2e34d8033c61502ecc39, type: 3}
+  pickupErrorSoundVolume: 1

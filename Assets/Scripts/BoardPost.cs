@@ -27,7 +27,6 @@ public class BoardPost : MonoBehaviour
 
     public void Publish()
     {
-        print("published");
         imageBoard.NotificationCount++;
         Computer.notificationBell.SetActive(true);
         currentUtcDateTime = DateTime.Now;

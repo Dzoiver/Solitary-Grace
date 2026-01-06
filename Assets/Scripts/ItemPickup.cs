@@ -29,10 +29,13 @@ public class ItemPickup : MonoBehaviour
         collider = GetComponent<MeshCollider>();
         box = GetComponent<BoxCollider>();
         defaultPickupSound = AudioController.audioClips.pickupSound;
-        if (audio)
+        if (audio != null)
         {
             if (audio.clip != null)
+            {
                 defaultPickupSound = audio.clip;
+            }
+                
         }
 
         
@@ -48,20 +51,21 @@ public class ItemPickup : MonoBehaviour
 
             if (inventory.TryPickup(item))
             {
+
                 if (destroyOnPickUp)
                 {
                     if (box != null)
                         box.enabled = false;
                     if (mesh != null)
                         mesh.enabled = false;
-                    else
-                        gameObject.SetActive(false);
+
+                    if (transform.childCount > 0)
+                    {
+                        transform.GetChild(0).gameObject.SetActive(false);
+                    }
 
                     if (disableObject1)
                         gameObject.SetActive(false);
-
-                    if (transform.childCount > 0)
-                        transform.GetChild(0).gameObject.SetActive(false);
                 }
                 enabled = false;
                 if (collider != null)
@@ -73,6 +77,7 @@ public class ItemPickup : MonoBehaviour
             }
             else
             {
+                audio.volume = 0.2f;
                 audio.clip = AudioController.audioClips.pickupErrorSound;
                 audio.Play();
             }

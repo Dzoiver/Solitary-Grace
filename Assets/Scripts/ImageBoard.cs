@@ -20,8 +20,6 @@ public class ImageBoard : MonoBehaviour
             }
             else
                 notificationIcon.SetActive(false);
-
-            print(value);
             notificationCount = value;
         }
     }
