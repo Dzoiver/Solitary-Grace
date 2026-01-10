@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 176300140}
   - component: {fileID: 176300139}
   - component: {fileID: 176300141}
+  - component: {fileID: 3013195291983863508}
   m_Layer: 0
   m_Name: DestroyableObstacle
   m_TagString: Tape
@@ -413,3 +414,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbed9d8a3382bf438275a2189ee3b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3013195291983863508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4115845237930381950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0ad88238f7de14bb6952056e88df2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageText:
+  - Dense tape. I could cut it if i find something sharp.
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  centerText: 0

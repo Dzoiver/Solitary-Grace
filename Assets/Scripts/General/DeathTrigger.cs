@@ -9,7 +9,7 @@ public class DeathTrigger : MonoBehaviour
     public bool autoDelete = false;
     private bool startTimer = false;
     float currentTime = 0f;
-    float activationTime = 6f;
+    [SerializeField] float activationTime = 6f;
     BoxCollider box;
 
     private void Awake()

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 70389406275576198}
   - component: {fileID: 229869334}
   - component: {fileID: 1349780517558763038}
+  - component: {fileID: 5232792817409894522}
   m_Layer: 0
   m_Name: DestroyableBox
   m_TagString: Box
@@ -841,3 +842,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5232792817409894522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70389406275576221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0ad88238f7de14bb6952056e88df2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageText:
+  - I could break it if i had something to hit it.
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  centerText: 0
