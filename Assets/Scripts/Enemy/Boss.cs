@@ -84,13 +84,13 @@ public class Boss : MonoBehaviour
 
         if (BossReachedHeal() && healing) // Boss has walked all the way to the heal spot
         {
-            canKill = true;
             bossDoors.CloseDoors();
             bossHealer.StartHealing();
         }
 
         if (healing && health >= 800) // Heal until 800 HP is restored
         {
+            canKill = true;
             StopHealilng();
         }
 
