@@ -61,7 +61,6 @@ public class SimpleCharacterMotor : MonoBehaviour
             var x = Input.GetAxis("Horizontal");
             var z = Input.GetAxis("Vertical");
             var run = Input.GetKey(KeyCode.LeftShift);
-
             var translation = new Vector3(x, 0, z);
             speed = run ? runSpeed : walkSpeed;
             movement = transform.TransformDirection(translation * speed);
@@ -72,5 +71,7 @@ public class SimpleCharacterMotor : MonoBehaviour
         }
         finalMovement = Vector3.Lerp(finalMovement, movement, Time.deltaTime * movementAcceleration);
         controller.Move(finalMovement * Time.deltaTime);
+        if (movingPlatformTest.moving)
+            controller.Move(transform.up * Time.deltaTime * 4f);
     }
 }

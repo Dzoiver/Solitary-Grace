@@ -20,7 +20,7 @@ public class Elevator : MonoBehaviour
     bool isLifted = false;
     float delayTime = 2f;
     float currentTime = 2f;
-    bool moving = false;
+    public bool moving = false;
     bool playerInElevator = false;
     [SerializeField] float floorDistance = 6f;
 
@@ -46,6 +46,7 @@ public class Elevator : MonoBehaviour
     public bool removeOnStart = false;
     public bool ding = false;
     public float speed = 2f;
+    static public float goingUp = 1f;
     [SerializeField] DOTweenAnimation outer1Floor0;
     [SerializeField] DOTweenAnimation outer2Floor0;
     [SerializeField] DOTweenAnimation outer1Floor1;
@@ -76,7 +77,6 @@ public class Elevator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        return;
         if (other.CompareTag("Player"))
         {
             //GameFuncs.PlayerScript.gameObject.transform.SetParent(gameObject.transform);
@@ -89,10 +89,9 @@ public class Elevator : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        return;
         if (other.CompareTag("Player"))
         {
-            GameFuncs.PlayerScript.gameObject.transform.SetParent(null);
+            //GameFuncs.PlayerScript.gameObject.transform.SetParent(null);
             playerInElevator = false;
             GameFuncs.PlayerScript.inElevator = false;
             GameFuncs.PlayerScript.currentElevator = null;
@@ -142,6 +141,11 @@ public class Elevator : MonoBehaviour
 
     public void MoveToFloor(int newFloor)
     {
+        if (newFloor > currentFloor)
+            goingUp = 1f;
+        else
+            goingUp = -1f;
+
         /*
         if (floor == currentFloor || moving)
             return;
@@ -196,7 +200,6 @@ public class Elevator : MonoBehaviour
             audio2.Play();
         }
 
-        print("activating butons ");
         if (button1 != null)
             button1.SetActiveTrigger(true);
         if (button2 != null)

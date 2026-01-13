@@ -202,6 +202,9 @@ public class PlayerScript : MonoBehaviour
 
     private void ApplyGravity()
     {
+        if (inElevator)
+            return;
+
         if (isGrounded && velocity.y < 0 && !isNoclip) // Gravity even when grounded
         {
             velocity.y = -4f;
@@ -219,10 +222,10 @@ public class PlayerScript : MonoBehaviour
 
         if (inElevator && currentElevator != null)
         {
-            controller.Move(move * speed * Time.fixedDeltaTime);
-            velocity.y = 0;
-            Vector3 elevatorMovement = currentElevator.Velocity * Time.fixedDeltaTime;
-            controller.Move(elevatorMovement);
+            //controller.Move(move * speed * Time.fixedDeltaTime);
+            //velocity.y = 0;
+            //Vector3 elevatorMovement = currentElevator.Velocity * Time.fixedDeltaTime;
+            //controller.Move(elevatorMovement);
         }
         else
         {
@@ -235,10 +238,14 @@ public class PlayerScript : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-
         move = transform.right * x + transform.forward * z;
-        if (allowMovement && !inElevator)
+        if (allowMovement)
             controller.Move(move * speed * Time.deltaTime);
+
+        if (inElevator && currentElevator.moving)
+        {
+            controller.Move(transform.up * currentElevator.speed * Time.deltaTime * Elevator.goingUp);
+        }
 
         if (isNoclip)
         {
@@ -296,11 +303,6 @@ public class PlayerScript : MonoBehaviour
             // Successfully hit an object
             footsteps.TryStep(hit2.collider.GetComponent<Material>(), Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z));
         }
-        
-    }
-
-    private void LateUpdate()
-    {
         
     }
 

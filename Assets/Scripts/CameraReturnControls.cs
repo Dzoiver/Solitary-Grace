@@ -53,4 +53,9 @@ public class CameraReturnControls : MonoBehaviour
         //GameFuncs.PlayerScript.gameObject.SetActive(false);
         anim.Play("WakeupAnim");
     }
+
+    public void ChangeWakeUpStart(Transform trans)
+    {
+        playerStartPos = trans.position;
+    }
 }
