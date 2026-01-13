@@ -12,6 +12,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] GameObject destination;
     [SerializeField] TextMeshProUGUI text; // Text you died
+    public GameObject bloodstaines;
     private Sequence sequence;
     public UnityEvent onRespawn;
     GameStatistics stat;

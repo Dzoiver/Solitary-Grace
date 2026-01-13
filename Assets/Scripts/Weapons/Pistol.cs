@@ -82,15 +82,18 @@ public class Pistol : Weapon
 
         if (Physics.Raycast(ray, out hit, 200f, layermask))
         {
+
             targetPoint = hit.point; // If the ray hits something, shoot at that point
             Vector3 bulletDirection = (targetPoint - bulletSpawnTransform.position).normalized;
 
             if (hit.collider.CompareTag("Enemy"))
             {
+                //bullet.blood.transform.position = hit.point;
                 hit.collider.gameObject.GetComponent<Monster>().GetDamage(bullet.Damage);
             }
             if (hit.collider.CompareTag("Boss"))
             {
+                //bullet.blood.transform.position = hit.point;
                 hit.collider.gameObject.GetComponent<Boss>().GetDamage(bullet.Damage);
             }
             bullet.Launch(bulletDirection, rotationBullet);

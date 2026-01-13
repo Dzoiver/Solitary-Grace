@@ -92,11 +92,20 @@ public class PlayerScript : MonoBehaviour
             gameover.GetDamagedRedScreen();
         }
 
+        if (Health <= 35)
+        {
+            gameover.bloodstaines.SetActive(true);
+        }
+        else
+        {
+            gameover.bloodstaines.SetActive(false);
+        }
         //menu.ChangeHealth(Health);
     }
 
     public void GiveHP(float amount)
     {
+        gameover.bloodstaines.SetActive(false);
         Health = Mathf.Min(maxHealth, Health + amount);
         menu.ChangeHealth(Health);
     }

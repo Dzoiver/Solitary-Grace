@@ -7,9 +7,14 @@ public class SetOnFire : MonoBehaviour
     [SerializeField] Inventory inventory;
     [SerializeField] GameObject newRespawn;
     CameraReturnControls cameracontrols;
+    [SerializeField] GameObject room;
+    [SerializeField] GameObject deloadWhileInRoom;
+    [SerializeField] GameObject fire;
+    GameOver gameover;
 
     private void Awake()
     {
+        gameover = FindObjectOfType<GameOver>();
         CameraReturnControls[] scripts = FindObjectsOfType<CameraReturnControls>();
         print(scripts.Length);
         cameracontrols = FindObjectOfType<CameraReturnControls>();
@@ -31,7 +36,19 @@ public class SetOnFire : MonoBehaviour
         if (inventory.Has(11) && inventory.Has(12))
         {
             cameracontrols.ChangeWakeUpStart(newRespawn.transform);
-            print("changed");
+            gameover.onRespawn.AddListener(SetUpFireAndRoom);
         }
+    }
+
+    public void SetUpFireAndRoom()
+    {
+        fire.SetActive(true);
+        room.SetActive(true);
+        deloadWhileInRoom.SetActive(false);
+    }
+
+    public void UnsetUpFire()
+    {
+        gameover.onRespawn.RemoveListener(SetUpFireAndRoom);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class GunBullet : Projectile
 {
@@ -16,6 +17,7 @@ public class GunBullet : Projectile
     BoxCollider box;
     Rigidbody rb;
     [SerializeField] Light bulletLight;
+    public ParticleSystem blood;
     
 
     private void Awake()
@@ -34,27 +36,25 @@ public class GunBullet : Projectile
             direction.y += Random.Range(-randomness, randomness);
             direction.z += Random.Range(-randomness, randomness);
         }
-        bulletLight.enabled = true;
         Direction = direction;
         transform.rotation = Quaternion.Euler(rotation);
-        launched = true;
         gameObject.SetActive(true);
-        mesh.enabled = true;
-        box.enabled = true;
-        enabled = true;
+        EnableBullet();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            blood.Play();
             //other.gameObject.GetComponent<Monster>().GetDamage(damage);
-            gameObject.SetActive(false);
+            DisableBullet();
         }
         if (other.gameObject.CompareTag("Boss"))
         {
+            blood.Play();
             //other.gameObject.GetComponent<Boss>().GetDamage(damage);
-            gameObject.SetActive(false);
+            DisableBullet();
         }
     }
 
@@ -88,5 +88,23 @@ public class GunBullet : Projectile
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    private void DisableBullet()
+    {
+        mesh.enabled = false;
+        box.enabled = false;
+        launched = false;
+        enabled = false;
+        bulletLight.enabled = false;
+    }
+
+    private void EnableBullet()
+    {
+        mesh.enabled = true;
+        box.enabled = true;
+        launched = true;
+        enabled = true;
+        bulletLight.enabled = true;
     }
 }

@@ -36,7 +36,7 @@ public class ContextMenuItem : MonoBehaviour
         switch (currentItem.Id)
         {
             case 2:
-                GameFuncs.PlayerScript.GiveHP(30f);
+                GameFuncs.PlayerScript.GiveHP(35f);
                 inventory.DeleteItem(currentItem.inventorySlotID, 1);
                 inventory.DisplayItems();
                 audioController.SoundVolume = 0.2f;

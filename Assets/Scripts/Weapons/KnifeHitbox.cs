@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class KnifeHitbox : MonoBehaviour
 {
@@ -8,12 +9,15 @@ public class KnifeHitbox : MonoBehaviour
     AudioSource audio;
     private float hitboxLingerTime = 0.1f;
     private float currentHitboxLingerTime = 0f;
+    [SerializeField] ParticleSystem blood;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
             knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
+            blood.Stop();
+            blood.Play();
             other.gameObject.GetComponent<Monster>().GetDamage(knife.GetDamageValue());
         }
         else if (other.gameObject.CompareTag("Tape"))
@@ -27,6 +31,8 @@ public class KnifeHitbox : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Boss"))
         {
+            blood.Stop();
+            blood.Play();
             knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
             other.gameObject.GetComponent<Boss>().GetDamage(knife.GetDamageValue());
         }
