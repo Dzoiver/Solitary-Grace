@@ -21,6 +21,8 @@ public class CowLawn : MonoBehaviour
     int enemyCount = 3;
     int record = 0;
 
+    private int availableAmmo = 6;
+
     private void Awake()
     {
         gameObject.SetActive(false);

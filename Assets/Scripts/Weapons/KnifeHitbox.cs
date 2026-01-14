@@ -15,6 +15,7 @@ public class KnifeHitbox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            print("blood spills");
             knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
             blood.Stop();
             blood.Play();
@@ -31,6 +32,7 @@ public class KnifeHitbox : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Boss"))
         {
+            
             blood.Stop();
             blood.Play();
             knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
