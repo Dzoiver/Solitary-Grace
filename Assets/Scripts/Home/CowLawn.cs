@@ -11,7 +11,7 @@ public class CowLawn : MonoBehaviour
     [SerializeField] GameObject osCanvas;
     [SerializeField] TextMeshProUGUI scoreText;
     public CowPlayer player;
-    [SerializeField] GameObject gameoverPanel;
+    public GameObject gameoverPanel;
     [SerializeField] TextMeshProUGUI gameoverText;
     AudioSource audio;
     [SerializeField] string newscoreText = "Congratulations!\nYou beat your highest score!\nNew record is: ";
@@ -21,17 +21,30 @@ public class CowLawn : MonoBehaviour
     int enemyCount = 3;
     int record = 0;
 
-    private int availableAmmo = 6;
+    [SerializeField] GameObject enemiesParent;
+    EnemyCow[] enemies;
+
+    public int Score { get => score; set
+        {
+            score = value;
+            scoreText.text = "Score: " + Score.ToString();
+        } }
 
     private void Awake()
     {
         gameObject.SetActive(false);
+        enemies = enemiesParent.GetComponentsInChildren<EnemyCow>();
     }
     // Start is called before the first frame update
     void Start()
     {
         gameoverPanel.SetActive(false);
         audio = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -41,10 +54,16 @@ public class CowLawn : MonoBehaviour
         {
             StartCoroutine(DelayExit());
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RestartGame();
+        }
     }
 
     IEnumerator DelayExit()
     {
+        Cursor.lockState = CursorLockMode.None;
         osCanvas.SetActive(true);
         computer.SetActive(true);
         gameObject.SetActive(false);
@@ -54,8 +73,7 @@ public class CowLawn : MonoBehaviour
 
     public void UpdateScore(int newScore)
     {
-        score += newScore;
-        scoreText.text = "Score: " + score.ToString();
+        Score += newScore;
     }
 
     public void EnemyKill()
@@ -65,12 +83,14 @@ public class CowLawn : MonoBehaviour
             GameOver();
     }
 
-    private void GameOver()
+    public void GameOver()
     {
+        Cursor.lockState = CursorLockMode.None;
+        player.bazooka.enabled = false;
         gameoverText.text = nothighscoreText + record.ToString();
-        if (score > record)
+        if (Score > record)
         {
-            record = score;
+            record = Score;
             gameoverText.text = newscoreText + record.ToString();
         }
         gameoverPanel.SetActive(true);
@@ -78,8 +98,20 @@ public class CowLawn : MonoBehaviour
         audio.Play();
     }
 
-    public void StartGame()
+    public void RestartGame()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
+        player.SetControl(true);
+        player.AvailableAmmo = 4;
+        player.bazooka.enabled = true;
+        player.bazooka.ResetBazooka();
+        gameoverPanel.SetActive(false);
+        Score = 0;
+        enemyCount = 0;
+        foreach (EnemyCow cow in enemies)
+        {
+            enemyCount++;
+            cow.ResetCow();
+        }
     }
 }

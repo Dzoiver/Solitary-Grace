@@ -66,13 +66,6 @@ public class Computer : MonoBehaviour
             streamClicks = 0;
             currentTime = 0f;
         }
-
-        //FadingNotification();
-    }
-
-    public void FadingNotification()
-    {
-        
     }
 
     public void GameClick()

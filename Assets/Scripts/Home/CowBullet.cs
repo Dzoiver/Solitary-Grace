@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CowBullet : MonoBehaviour
 {
-    ParticleSystem particles;
+    [SerializeField] ParticleSystem particles;
     float detectionRadius = 5f;
     [SerializeField] LayerMask targetLayerMask;
     [SerializeField] CowBazooka cowBazooka;
     [SerializeField] CowPlayer player;
+    [SerializeField] float damage = 40;
     Rigidbody rb;
     MeshRenderer mesh;
     [SerializeField] Camera cam;
@@ -20,7 +21,6 @@ public class CowBullet : MonoBehaviour
     void Start()
     {
         mesh = GetComponent<MeshRenderer>();
-        particles = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         audio = GetComponent<AudioSource>();
@@ -47,6 +47,8 @@ public class CowBullet : MonoBehaviour
         particles.Play();
         audio.clip = explosionSound;
         audio.Play();
+        cam.transform.parent = player.transform;
+        cam.transform.localPosition = new Vector3(0, 5.42999983f, -4.80999994f);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, targetLayerMask);
         foreach (var hitCollider in hitColliders)
         {
@@ -54,14 +56,16 @@ public class CowBullet : MonoBehaviour
             {
                 float targetDistance = Vector3.Distance(transform.position, hitCollider.transform.position); // max  1*40 /5
                 float normalizedDistance = targetDistance / detectionRadius;
-                float damageToTarget = 40 - (normalizedDistance * 25);
+                float damageToTarget = damage - (normalizedDistance * 25);
                 hitCollider.gameObject.GetComponent<EnemyCow>().GetDamage(damageToTarget);
             }
         }
-        cam.transform.parent = player.transform;
-        cam.transform.localPosition = new Vector3(0, 5.42999983f, -4.80999994f);
         cowBazooka.ResetBazooka();
-        player.SetControl(true);
+        if (!player.cowlawn.gameoverPanel.activeSelf)
+            player.SetControl(true);
+
+        if (player.AvailableAmmo <= 0 && !player.cowlawn.gameoverPanel.activeSelf)
+            player.cowlawn.GameOver();
     }
 
     public void Launch(float speed)
@@ -71,5 +75,14 @@ public class CowBullet : MonoBehaviour
         
         Quaternion myRotation = Quaternion.Euler(0, player.transform.rotation.eulerAngles.x, 0);
         rb.AddForce( (player.transform.forward + Vector3.up) * speed);
+    }
+
+    public void ResetProjectile()
+    {
+        mesh.enabled = false;
+        rb.isKinematic = true;
+        particles.Stop();
+        cam.transform.parent = player.transform;
+        cam.transform.localPosition = new Vector3(0, 5.42999983f, -4.80999994f);
     }
 }

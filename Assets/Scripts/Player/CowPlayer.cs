@@ -1,7 +1,9 @@
 using GM;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Zenject;
 
 public class CowPlayer : MonoBehaviour
@@ -31,6 +33,7 @@ public class CowPlayer : MonoBehaviour
 
     [HideInInspector] public CharacterController controller;
     [SerializeField] GameObject playerCam;
+    public CowBazooka bazooka;
     Vector3 playerCamStartPos;
     public LayerMask GroundMask;
 
@@ -42,6 +45,10 @@ public class CowPlayer : MonoBehaviour
     private float maxHealth = 100f;
 
     private Animator cameraAnimator;
+    [SerializeField] TextMeshProUGUI ammoText;
+    public CowLawn cowlawn;
+
+    private int availableAmmo = 4;
 
     public float GravityMultiplier
     {
@@ -52,39 +59,15 @@ public class CowPlayer : MonoBehaviour
         }
     }
 
+    public int AvailableAmmo { get => availableAmmo; set
+        { 
+            availableAmmo = value;
+            ammoText.text = "Ammunition: " + value.ToString();
+        }}
+
     private void Awake()
     {
         cameraAnimator = playerCam.GetComponent<Animator>();
-    }
-
-    public void GetDamage(float damage)
-    {
-        if (health <= 0) return;
-
-        health = Mathf.Max(0, health - damage);
-
-        if (health <= 0)
-        {
-            Death();
-        }
-        else
-        {
-            gameover.GetDamagedRedScreen();
-        }
-    }
-
-    public void GiveHP(float amount)
-    {
-        health = Mathf.Min(maxHealth, health + amount);
-    }
-
-    public bool IsDead() => health <= 0;
-
-    private void Death()
-    {
-        cameraAnimator.enabled = true;
-        cameraAnimator.Play("Deathanim");
-        gameover.DieFromMonster();
     }
 
     public void CameraRestore()
@@ -104,14 +87,6 @@ public class CowPlayer : MonoBehaviour
     {
         playerCam.transform.rotation = Quaternion.Euler(angle);
         gameObject.transform.rotation = Quaternion.Euler(angle);
-    }
-
-    public void Warping(bool value)
-    {
-        if (value == true)
-            warpTool.SetActive(true);
-        else
-            warpTool.SetActive(false);
     }
 
     public bool IsControl()
@@ -142,25 +117,9 @@ public class CowPlayer : MonoBehaviour
 
     private void Start()
     {
+        AvailableAmmo = availableAmmo;
         controller = GetComponent<CharacterController>();
         playerCamStartPos = playerCam.transform.localPosition;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "GunCyllinder")
-        {
-            cyllinder.SetActive(true);
-        }
-        if (other.gameObject.name == "JumpPad")
-        {
-            LiftPlayer(8f);
-        }
-    }
-
-    private void LiftPlayer(float amount)
-    {
-        velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
 
     private void Update()
@@ -176,42 +135,5 @@ public class CowPlayer : MonoBehaviour
         if (!allowControl)
             return;
 
-        /*
-        if (inElevator)
-        {
-            controller.Move(currentElevator.Velocity);
-        }
-        else
-        {
-            ApplyGravity();
-        }
-        */
-
-
-        HandleInteract();
-    }
-
-    private void LateUpdate()
-    {
-
-    }
-
-    private void HandleInteract()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            // Debug.DrawRay(ray.origin, ray.direction, Color.white, 5f);
-
-            if (Physics.Raycast(ray, out hit, INTERACT_DISTANCE, layer.value))
-            {
-                if (hit.collider.gameObject.layer == 3) // Layer 3 - Interactable
-                {
-                    useTrigger.SetActive(true);
-                    useTrigger.transform.position = hit.point;
-                }
-            }
-        }
     }
 }

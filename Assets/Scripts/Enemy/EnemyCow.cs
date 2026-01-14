@@ -38,6 +38,9 @@ public class EnemyCow : MonoBehaviour
 
     public void GetDamage(float damage)
     {
+        if (!mesh.enabled)
+            return;
+
         int intDamage = (int)damage;
         text.text = intDamage.ToString();
         ShowDamageNumber();
@@ -71,6 +74,12 @@ public class EnemyCow : MonoBehaviour
             .AppendInterval(2f) // Wait for 2 seconds
             .Append(text.DOFade(0f, 2f)) // Then fade out over 2 seconds
             .OnComplete(() => text.gameObject.SetActive(false)); // Optional: hide the object when done
+    }
+
+    public void ResetCow()
+    {
+        mesh.enabled = true;
+        health = maxHealth;
     }
 
     IEnumerator DelayedFade()
