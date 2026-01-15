@@ -75,7 +75,7 @@ public class DestroyableBox : MonoBehaviour
 
     public void PlayRandomSound()
     {
-        audio.PlayOneShot(clips[Random.Range(0, clips.Length - 1)]);
+        audio.PlayOneShot(clips[Random.Range(0, clips.Length)]);
     }
 
     public void Restore()
