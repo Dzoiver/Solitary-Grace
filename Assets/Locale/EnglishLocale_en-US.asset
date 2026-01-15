@@ -342,6 +342,14 @@ MonoBehaviour:
       on the roof.
     m_Metadata:
       m_Items: []
+  - m_Id: 4501259178782720
+    m_Localized: Hand Light
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4519801043333120
+    m_Localized: The elevator doesn't seem to be working.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -10,9 +10,12 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject knife;
     [SerializeField] GameObject shotgun;
+    [SerializeField] GameObject handLight;
     [SerializeField] ScriptableItem item1;
     [SerializeField] ScriptableItem item2;
     [SerializeField] ScriptableItem item3;
+    [SerializeField] ScriptableItem item4;
+
     public Pistol pistolScript;
     public Shotgun shotgunScript;
     public static bool canUseWeapon = true;
@@ -71,6 +74,19 @@ public class WeaponManager : MonoBehaviour
                 shotgun.SetActive(true);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4) && inventory.Has(15))
+        {
+            if (handLight.activeSelf)
+            {
+                HideAll();
+            }
+            else
+            {
+                HideAll();
+                handLight.SetActive(true);
+            }
+        }
     }
 
     private void HideAll()
@@ -78,6 +94,7 @@ public class WeaponManager : MonoBehaviour
         pistol.SetActive(false);
         knife.SetActive(false);
         shotgun.SetActive(false);
+        handLight.SetActive(false);
     }
 
     public void GiveAllWeapons()
@@ -85,6 +102,7 @@ public class WeaponManager : MonoBehaviour
         inventory.TryPickup(item1);
         inventory.TryPickup(item2);
         inventory.TryPickup(item3);
+        inventory.TryPickup(item4);
     }
 
     public void SetUsable(bool newValue)

@@ -331,6 +331,14 @@ MonoBehaviour:
     m_Key: monitor3
     m_Metadata:
       m_Items: []
+  - m_Id: 4501259178782720
+    m_Key: handlight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4519801043333120
+    m_Key: elevatorOffline
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

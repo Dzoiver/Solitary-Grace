@@ -16,7 +16,6 @@ public class SetOnFire : MonoBehaviour
     {
         gameover = FindObjectOfType<GameOver>();
         CameraReturnControls[] scripts = FindObjectsOfType<CameraReturnControls>();
-        print(scripts.Length);
         cameracontrols = FindObjectOfType<CameraReturnControls>();
     }
     // Start is called before the first frame update
