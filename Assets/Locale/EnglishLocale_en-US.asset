@@ -354,6 +354,11 @@ MonoBehaviour:
     m_Localized: Dense tape. I could cut it if i find something sharp.
     m_Metadata:
       m_Items: []
+  - m_Id: 5036612851642368
+    m_Localized: Object D has no aggression. Does he deserve such treatment? A colleague
+      says he can just pretend to be good. Still, I don't think he's dangerous.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

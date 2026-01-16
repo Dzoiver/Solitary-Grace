@@ -343,6 +343,10 @@ MonoBehaviour:
     m_Key: tapecut
     m_Metadata:
       m_Items: []
+  - m_Id: 5036612851642368
+    m_Key: Note1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

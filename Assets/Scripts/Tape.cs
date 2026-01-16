@@ -7,20 +7,19 @@ public class Tape : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
     [SerializeField] GameObject[] tapes;
-    BoxCollider boxCollider;
-    MeshCollider meshCollider;
+    BoxCollider trigger;
+    [SerializeField] GameObject collider;
     // Start is called before the first frame update
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
-        meshCollider = GetComponent<MeshCollider>();
+        trigger = GetComponent<BoxCollider>();
     }
 
     public void RemoveTape()
     {
         particle.Play();
-        boxCollider.enabled = false;
-        meshCollider.enabled = false;
+        trigger.enabled = false;
+        collider.SetActive(false);
         foreach (GameObject tape in tapes)
         {
             tape.SetActive(false);

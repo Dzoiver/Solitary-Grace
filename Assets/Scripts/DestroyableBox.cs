@@ -17,18 +17,16 @@ public class DestroyableBox : MonoBehaviour
 
     [SerializeField] UnityEvent onBreak;
     [SerializeField] items item;
+    [SerializeField] GameObject boxVisual;
+    [SerializeField] ParticleSystem debris;
     public AudioClip[] clips;
     AudioSource audio;
     GameObject itemObject;
-    MeshRenderer mesh;
-    MeshCollider meshCollider;
     BoxCollider boxCollider;
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
-        mesh = GetComponent<MeshRenderer>();
-        meshCollider = GetComponent<MeshCollider>();
         boxCollider = GetComponent<BoxCollider>();
         switch (item)
         {
@@ -63,13 +61,13 @@ public class DestroyableBox : MonoBehaviour
 
     public void DestroyBox()
     {
+        boxVisual.SetActive(false);
         onBreak.Invoke();
+        debris.Play();
         PlayRandomSound();
         if (itemObject != null)
             itemObject.SetActive(true);
-        mesh.enabled = false;
         enabled = false;
-        meshCollider.enabled = false;
         boxCollider.enabled = false;
     }
 
@@ -80,9 +78,8 @@ public class DestroyableBox : MonoBehaviour
 
     public void Restore()
     {
-        mesh.enabled = true;
+        boxVisual.SetActive(true);
         enabled = true;
-        meshCollider.enabled = true;
         boxCollider.enabled = true;
     }
 }
