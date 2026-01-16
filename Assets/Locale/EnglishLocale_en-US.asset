@@ -350,6 +350,10 @@ MonoBehaviour:
     m_Localized: The elevator doesn't seem to be working.
     m_Metadata:
       m_Items: []
+  - m_Id: 4886388170600448
+    m_Localized: Dense tape. I could cut it if i find something sharp.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
