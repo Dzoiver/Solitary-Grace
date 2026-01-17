@@ -359,6 +359,10 @@ MonoBehaviour:
       says he can just pretend to be good. Still, I don't think he's dangerous.
     m_Metadata:
       m_Items: []
+  - m_Id: 5101652392849408
+    m_Localized: And something important fell out of my window.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
