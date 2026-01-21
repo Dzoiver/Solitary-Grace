@@ -363,6 +363,10 @@ MonoBehaviour:
     m_Localized: And something important fell out of my window.
     m_Metadata:
       m_Items: []
+  - m_Id: 6180917892919296
+    m_Localized: Nothing useful.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

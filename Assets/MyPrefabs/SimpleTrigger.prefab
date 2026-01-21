@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 54
+  m_StaticEditorFlags: 52
   m_IsActive: 1
 --- !u!4 &4553827120038454187
 Transform:
@@ -119,10 +119,14 @@ MonoBehaviour:
   onFinish:
     m_PersistentCalls:
       m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
   startDelay: 0
   finishDelay: 0
   triggerOnce: 1
   disableRendering: 1
   checkItem: 0
   checkItemScriptable: {fileID: 0}
+  noItemMessage: It seems like something is missing
   active: 1

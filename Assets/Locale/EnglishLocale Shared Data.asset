@@ -351,6 +351,10 @@ MonoBehaviour:
     m_Key: Note1_2
     m_Metadata:
       m_Items: []
+  - m_Id: 6180917892919296
+    m_Key: interactableObject1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

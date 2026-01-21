@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class MouseOverTrigger : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class MouseOverTrigger : MonoBehaviour
     [SerializeField] AudioClip openSound;
     [SerializeField] AudioClip closeSound;
     [SerializeField] AudioSource audio;
+    public bool repeat = true;
+    private bool triggered = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +31,13 @@ public class MouseOverTrigger : MonoBehaviour
 
     void OnMouseOver()
     {
+        if (!repeat && triggered)
+            return;
+
         float dist = Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, transform.position);
         if (dist < 5)
         {
+            triggered = true;
             if (open == false)
             {
                 if (Input.GetKeyDown(KeyCode.E))
