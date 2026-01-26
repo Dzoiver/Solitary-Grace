@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class Chat : MonoBehaviour
 {
+    [SerializeField] StreamsManager streamManager;
     [SerializeField] ChatHistory history;
     [SerializeField] TMP_InputField inputField;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -26,13 +26,15 @@ public class Chat : MonoBehaviour
 
     public void SendMessageChat()
     {
-
+        if (streamManager.currentChannel.name == "BathTub")
+            streamManager.acquire.Wave();
         history.AddMessage("You: " + inputField.text);
         inputField.text = "";
     }
 
     public void ClearChat()
     {
+        streamManager.acquire.Wave(false);
         history.ClearChat();
     }
 }

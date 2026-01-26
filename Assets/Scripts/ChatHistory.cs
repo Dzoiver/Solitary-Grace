@@ -6,6 +6,7 @@ using UnityEngine;
 public class ChatHistory : MonoBehaviour
 {
     int freeMessageIndex = 0;
+    Transform newTextTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +21,13 @@ public class ChatHistory : MonoBehaviour
 
     public void AddMessage(string newtext)
     {
-        TextMeshProUGUI textobj = transform.GetChild(freeMessageIndex).GetComponent<TextMeshProUGUI>();
+        newTextTransform = transform.GetChild(0);
+        newTextTransform.SetAsLastSibling();
+        TextMeshProUGUI textobj = newTextTransform.GetComponent<TextMeshProUGUI>();
         textobj.gameObject.SetActive(true);
         textobj.text = newtext;
-        freeMessageIndex = (freeMessageIndex + 1) % transform.childCount;
+        //freeMessageIndex = (freeMessageIndex + 1) % transform.childCount;
+
     }
 
     public void ClearChat()

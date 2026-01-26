@@ -117,6 +117,17 @@ public class Menu : MonoBehaviour
         };
     }
 
+    public void OpenChest()
+    {
+        OpenMenu();
+    }
+
+
+    public void CloseChest()
+    {
+        CloseMenu();
+    }
+
     // Update is called once per frame
     void Update()
     {

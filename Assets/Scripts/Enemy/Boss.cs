@@ -103,6 +103,7 @@ public class Boss : MonoBehaviour
 
         if (bossHealer.CantHealAnymore())
         {
+            canKill = true;
             StopHealilng();
         }
 

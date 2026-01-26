@@ -65,4 +65,20 @@ public class Checkpoint : MonoBehaviour
     {
         onTeleport.Invoke();
     }
+
+    public void SmoothTeleport(GameObject objectToTeleport)
+    {
+        UpdateSpawn();
+        GameFuncs.DisableWeapons(true);
+        StartCoroutine(CoroutineSmooth(objectToTeleport));
+    }
+
+    IEnumerator CoroutineSmooth(GameObject objectToTeleport)
+    {
+        float timetoFade = 0.3f;
+        GameFuncs.FadeIn(timetoFade);
+        yield return new WaitForSeconds(timetoFade);
+        GameFuncs.TeleportPlayer(objectToTeleport);
+        GameFuncs.FadeOut(timetoFade);
+    }
 }

@@ -8,10 +8,11 @@ using UnityEngine;
 public class StreamsManager : MonoBehaviour
 {
     private string title;
-    StreamChannel currentChannel;
+    public StreamChannel currentChannel;
     [SerializeField] TextMeshProUGUI streamTitle;
     [SerializeField] TextMeshProUGUI viewerCount;
     [SerializeField] GameObject chat;
+    public Acquire acquire;
     GameObject viewerCountParent;
     Chat chatScript;
 

@@ -355,6 +355,14 @@ MonoBehaviour:
     m_Key: interactableObject1
     m_Metadata:
       m_Items: []
+  - m_Id: 8376501697556480
+    m_Key: margaretbody
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8420848887443456
+    m_Key: waterLeak
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

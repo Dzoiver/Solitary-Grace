@@ -367,6 +367,14 @@ MonoBehaviour:
     m_Localized: Nothing useful.
     m_Metadata:
       m_Items: []
+  - m_Id: 8376501697556480
+    m_Localized: She's dead.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8420848887443456
+    m_Localized: The water floods the area, I need to get out quickly.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
