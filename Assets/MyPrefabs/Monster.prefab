@@ -166,6 +166,7 @@ MonoBehaviour:
   painClip: {fileID: 8300000, guid: 5ab217186cdde14499584d1bde56a107, type: 3}
   pain2Clip: {fileID: 8300000, guid: 24bb6b482af2720428a2984047ffabdb, type: 3}
   deathClip: {fileID: 8300000, guid: 98275c986f43f0d42902cbb9b9b768d6, type: 3}
+  animator: {fileID: 7487620322822167246}
   circleColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!54 &4382986903114976147
 Rigidbody:
@@ -506,5 +507,10 @@ Transform:
 --- !u!1 &7487620322814781698 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7386234923825879168, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
+  m_PrefabInstance: {fileID: 101456904158916994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7487620322822167246 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7386234923833142092, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
   m_PrefabInstance: {fileID: 101456904158916994}
   m_PrefabAsset: {fileID: 0}

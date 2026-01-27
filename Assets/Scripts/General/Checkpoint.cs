@@ -42,6 +42,26 @@ public class Checkpoint : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        /*
+        if (!particle.isPlaying)
+        {
+            return;
+        }
+        */
+        Vector3 direction = GameFuncs.PlayerScript.transform.position - transform.position;
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.deltaTime);
+        }
+        
+    }
+
     public void UpdateSpawn()
     {
         if (particle.isPlaying)
@@ -50,6 +70,7 @@ public class Checkpoint : MonoBehaviour
         if (sleep.checkpoint != null)
         {
             sleep.checkpoint.particle.Stop();
+            //sleep.checkpoint.gameObject.transform.parent.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             sleep.checkpoint.meshrenderer.material = notActiveMaterial;
         }
         if (!particle.isPlaying)

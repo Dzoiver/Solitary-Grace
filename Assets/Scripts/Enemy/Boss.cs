@@ -190,6 +190,7 @@ public class Boss : MonoBehaviour
             if (!canKill)
                 return;
             animator.SetBool("Dead", true);
+            agent.isStopped = true;
         }
         else
         {

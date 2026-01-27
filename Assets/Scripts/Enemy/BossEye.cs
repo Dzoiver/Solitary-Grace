@@ -11,12 +11,15 @@ public class BossEye : MonoBehaviour
     MeshRenderer meshRenderer;
     [SerializeField] Material eyeActiveMat;
     [SerializeField] Material eyeDeadMat;
+    [SerializeField] AudioClip[] glassSounds;
+    AudioSource audio;
     void Start()
     {
         eyeAnim = GetComponent<DOTweenAnimation>();
         healer = FindObjectOfType<BossHealer>();
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material = eyeDeadMat;
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -30,7 +33,6 @@ public class BossEye : MonoBehaviour
             return;
         if (other.CompareTag("Bullet"))
         {
-            opened = false;
             CloseEye();
         }
     }
@@ -48,6 +50,11 @@ public class BossEye : MonoBehaviour
 
     public void CloseEye()
     {
+        if (!opened)
+            return;
+        int rng = Random.Range(0, 1);
+
+        audio.PlayOneShot(glassSounds[rng]);
         eyeAnim.DOPlayBackwards();
         opened = false;
         meshRenderer.material = eyeDeadMat;

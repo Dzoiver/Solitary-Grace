@@ -54,6 +54,9 @@ public class Monster : MonoBehaviour
     [SerializeField] private AudioClip pain2Clip;
     [SerializeField] private AudioClip deathClip;
     BoxCollider collider;
+    Rigidbody rb;
+
+    [SerializeField] Animator animator;
 
     public Color circleColor = Color.red;
 
@@ -72,7 +75,7 @@ public class Monster : MonoBehaviour
         }
         audio = GetComponent<AudioSource>();
         collider = GetComponent<BoxCollider>();
-        //rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Awake()
@@ -94,6 +97,7 @@ public class Monster : MonoBehaviour
             agent.destination = GameFuncs.PlayerScript.transform.position;
             DamagePlayer();
         }
+        animator.SetFloat("Velocity", agent.velocity.magnitude);
     }
 
     private void FixedUpdate()
