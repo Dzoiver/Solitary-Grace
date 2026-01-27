@@ -492,6 +492,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.11323805
       objectReference: {fileID: 0}
+    - target: {fileID: 7386234923833142092, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 804c8864e095f5b47b7ec6d689ceafab, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
 --- !u!4 &7487620322814424354 stripped

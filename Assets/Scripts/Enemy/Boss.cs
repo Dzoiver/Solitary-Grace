@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour
     private float health = 600f;
     private float maxHealth = 1000f;
 
-    private float attackDamage = 50f;
+    private float attackDamage = 40f;
     private float attackDelay = 0.3f;
     private float currentAttackDelay = 0.3f;
     private float attackCoolDown = 2f;
@@ -44,9 +44,12 @@ public class Boss : MonoBehaviour
     private Vector3 startPosition;
     private Quaternion startRotation;
     public float allowedAngle = 45f;
+
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         startRotation = transform.rotation;
         agent = GetComponent<NavMeshAgent>();
         int i = 0;
@@ -69,7 +72,7 @@ public class Boss : MonoBehaviour
         if (!activeAI)
             return;
 
-        if (PlayerTooClose() && !healing)
+        if (PlayerClose() && !healing)
         {
             agent.destination = GameFuncs.PlayerScript.transform.position;
             DamagePlayer();
@@ -116,17 +119,17 @@ public class Boss : MonoBehaviour
 
         if (ChasingPlayer())
         {
+            animator.SetBool("Chase", true);
             agent.destination = GameFuncs.PlayerScript.transform.position;
         }
         else
         {
-            Patrol();
+            //Patrol();
         }
     }
 
     private void StopHealilng()
     {
-        print("fuck this i stop heal");
         bossHealer.StopHealing();
         Phase1Complete = true;
         healing = false;
@@ -144,33 +147,35 @@ public class Boss : MonoBehaviour
             return false;
     }
 
-    private bool PlayerTooClose()
+    private bool PlayerClose()
     {
         if (healing)
             return false;
 
-        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < detectRadius / 4)
+        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance
+            && !GameFuncs.PlayerScript.IsDead())
         {
+            animator.SetBool("PlayerClose", true);
             return true;
         }
-
+        animator.SetBool("PlayerClose", false);
         return false;
     }
 
     private void DamagePlayer()
     {
         currentAttackCoolDown += Time.deltaTime;
-
         if (!PlayerClose())
+        {
             return;
-
+        }
+        
         if (currentAttackCoolDown >= attackCoolDown) // Ready to strike player
         {
+            animator.SetBool("Idle", true);
             if (currentAttackDelay >= attackDelay) // Moment damage is done
             {
-                GameFuncs.PlayerScript.GetDamage(attackDamage);
-                currentAttackDelay = 0f;
-                currentAttackCoolDown = 0f;
+                
             }
 
             currentAttackDelay += Time.deltaTime;
@@ -182,7 +187,9 @@ public class Boss : MonoBehaviour
         chase = true;
         if (health - amount <= 0)
         {
-            Death();
+            if (!canKill)
+                return;
+            animator.SetBool("Dead", true);
         }
         else
         {
@@ -190,12 +197,17 @@ public class Boss : MonoBehaviour
         }
     }
 
-    private void Death()
+    public void Death()
     {
-        if (!canKill)
-            return;
         onKill.Invoke();
-        gameObject.SetActive(false);
+        enabled = false;
+    }
+
+    public void AnimationAttack()
+    {
+        GameFuncs.PlayerScript.GetDamage(attackDamage);
+        currentAttackDelay = 0f;
+        currentAttackCoolDown = 0f;
     }
 
     private bool ChasingPlayer()
@@ -254,16 +266,6 @@ public class Boss : MonoBehaviour
         }
     }
 
-
-    private bool PlayerClose()
-    {
-        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance
-            && !GameFuncs.PlayerScript.IsDead())
-        {
-            return true;
-        }
-        return false;
-    }
 
     public void Activate()
     {
