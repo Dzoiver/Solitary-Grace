@@ -135,12 +135,14 @@ public class Boss : MonoBehaviour
         healing = false;
         bossDoors.ResetDoors();
         agent.destination = GameFuncs.PlayerScript.transform.position;
+        animator.SetBool("Chase", true);
     }
 
     private bool BossReachedHeal()
     {
         if (Vector3.Distance(transform.position, healSpot.position) <= agent.stoppingDistance + 0.15f)
         {
+            animator.SetBool("Chase", false);
             return true;
         }
         else

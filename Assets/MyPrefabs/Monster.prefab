@@ -63,7 +63,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4382986903114976153}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1.9164, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -203,7 +203,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0.52
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!82 &200809516257324763
@@ -443,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7386234923826168992, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.49519932
+      value: -0.527
       objectReference: {fileID: 0}
     - target: {fileID: 7386234923826168992, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -509,6 +509,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7386234923825879168, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}
   m_PrefabInstance: {fileID: 101456904158916994}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &46666261498206297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7487620322814781698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25c572664d679b48867af78a6d2dff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 4382986903114976146}
 --- !u!95 &7487620322822167246 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7386234923833142092, guid: 95e6ef58b90ea9e46a843246af29bd1d, type: 3}

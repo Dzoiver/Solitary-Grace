@@ -66,7 +66,7 @@ public class Monster : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = true;
+        //agent.updateRotation = true;
         int i = 0;
         foreach (Transform t in patrolParent.transform)
         {
@@ -146,23 +146,39 @@ public class Monster : MonoBehaviour
         currentWakeAttackDelay += Time.deltaTime;
 
         if (!PlayerClose())
+        {
+            animator.SetBool("Attack", false);
             return;
-
+        }
+        
         if (currentWakeAttackDelay < wakeAttackDelay)
+        {
             return;
+        }
+        animator.SetBool("Attack", true);
 
         if (currentAttackCoolDown >= attackCoolDown) // Ready to strike player
         {
             if (currentAttackDelay >= attackDelay) // Moment damage is done
             {
-                audio.PlayOneShot(attackClip);
-                GameFuncs.PlayerScript.GetDamage(attackDamage);
-                currentAttackDelay = 0f;
-                currentAttackCoolDown = 0f;
+                //audio.PlayOneShot(attackClip);
+                //GameFuncs.PlayerScript.GetDamage(attackDamage);
             }
 
             currentAttackDelay += Time.deltaTime;
         }
+    }
+
+    public void AnimDamage()
+    {
+        audio.PlayOneShot(attackClip);
+        if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance)
+        {
+            GameFuncs.PlayerScript.GetDamage(attackDamage);
+        }
+        animator.SetBool("Attack", false);
+        currentAttackDelay = 0f;
+        currentAttackCoolDown = 0f;
     }
 
     public void GetDamage(float amount)
@@ -196,9 +212,15 @@ public class Monster : MonoBehaviour
 
     private void Death()
     {
+        agent.isStopped = true;
+        animator.SetBool("Dead", true);
         audio.PlayOneShot(deathClip);
         enabled = false;
-        model.SetActive(false);
+        //model.SetActive(false);
+    }
+
+    public void DisableCollider()
+    {
         collider.enabled = false;
     }
 
