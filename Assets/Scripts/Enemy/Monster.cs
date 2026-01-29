@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour
 
     private float attackDamage = 35f;
     private float attackDelay = 0.3f;
-    private float currentAttackDelay = 0.3f;
+    private float currentAttackDelay = 0.15f;
     private float attackCoolDown = 2f;
     private float currentAttackCoolDown = 0f;
     [SerializeField] private float playerSearchTime = 5f;
@@ -55,6 +55,7 @@ public class Monster : MonoBehaviour
     [SerializeField] private AudioClip deathClip;
     BoxCollider collider;
     Rigidbody rb;
+    [SerializeField] FootSteps footsteps;
 
     [SerializeField] Animator animator;
 
@@ -98,6 +99,21 @@ public class Monster : MonoBehaviour
             DamagePlayer();
         }
         animator.SetFloat("Velocity", agent.velocity.magnitude);
+
+        RaycastHit hit2;
+        Vector3 rayOrigin2 = transform.position + Vector3.up * 0.1f;
+        if (Physics.Raycast(rayOrigin2, Vector3.down, out hit2, 2f))
+        {
+            Terrain terrain = hit2.collider.GetComponent<Terrain>();
+            if (terrain != null)
+            {
+                //Debug.Log(agent.velocity.magnitude);
+                footsteps.TryStepTerrain(terrain, agent.velocity.magnitude);
+                return;
+            }
+            // Successfully hit an object
+            footsteps.TryStep(hit2.collider.gameObject, agent.velocity.magnitude);
+        }
     }
 
     private void FixedUpdate()
@@ -143,6 +159,8 @@ public class Monster : MonoBehaviour
 
     private void DamagePlayer()
     {
+        if (health < 0f)
+            return;
         currentWakeAttackDelay += Time.deltaTime;
 
         if (!PlayerClose())
@@ -155,10 +173,10 @@ public class Monster : MonoBehaviour
         {
             return;
         }
-        animator.SetBool("Attack", true);
 
         if (currentAttackCoolDown >= attackCoolDown) // Ready to strike player
         {
+            animator.SetBool("Attack", true);
             if (currentAttackDelay >= attackDelay) // Moment damage is done
             {
                 //audio.PlayOneShot(attackClip);
@@ -183,8 +201,11 @@ public class Monster : MonoBehaviour
 
     public void GetDamage(float amount)
     {
+        if (animator.GetBool("Dead"))
+        {
+            return;
+        }
         chase = true;
-
         if (health - amount <= 0)
         {
             Death();

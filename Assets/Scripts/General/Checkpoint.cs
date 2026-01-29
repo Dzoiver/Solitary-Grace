@@ -17,6 +17,7 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] Material activeMaterial;
     MeshRenderer meshrenderer;
     AudioSource audio;
+    [SerializeField] GameObject eyeModel;
     private void Awake()
     {
         sleeps = FindObjectsOfType<GetSomeSleep>();
@@ -50,14 +51,14 @@ public class Checkpoint : MonoBehaviour
             return;
         }
         */
-        Vector3 direction = GameFuncs.PlayerScript.transform.position - transform.position;
+        Vector3 direction = GameFuncs.PlayerScript.transform.position - eyeModel.transform.position;
         direction.y = 0;
 
         if (direction != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(direction);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.deltaTime);
+            eyeModel.transform.rotation = Quaternion.Slerp(eyeModel.transform.rotation, rotation, 5f * Time.deltaTime);
         }
         
     }

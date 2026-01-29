@@ -4,6 +4,7 @@ using GM;
 using SolitaryAudio;
 using Zenject;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class SimpleDoor : MonoBehaviour
 {
@@ -22,10 +23,11 @@ public class SimpleDoor : MonoBehaviour
     UnityEvent onOpen;
     public string stringText = "";
     private string defaultOpen = "Sounds/door-14-open";
-    private string unlockOpen = "Sounds/key-lock-soundFixed";
+    private string unlockOpen = "Sounds/keyUnlockLouder";
     private string doorSound;
     private string ladderSoundName = "Sounds/metal-footsteps";
     public bool ladder = false;
+    float volume = 1f;
     RaycastHit hit;
     Ray ray;
     // Start is called before the first frame update
@@ -56,12 +58,16 @@ public class SimpleDoor : MonoBehaviour
     private bool PlayerHasKey()
     {
         if (key == null)
+        {
+            volume = 0.5f;
             return false;
+        }
 
         int slot = 0;
 
         if (inventory.Has(key.id, out slot))
         {
+            volume = 0.5f;
             doorSound = unlockOpen;
 
             inventory.DeleteItem(slot, 1);
@@ -129,7 +135,7 @@ public class SimpleDoor : MonoBehaviour
 
         destinationPoint = GetFurtherDestination();
         GameFuncs.PlayerScript.SetControl(false);
-        AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound));
+        AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound), volume);
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
         {
             onOpen.Invoke();

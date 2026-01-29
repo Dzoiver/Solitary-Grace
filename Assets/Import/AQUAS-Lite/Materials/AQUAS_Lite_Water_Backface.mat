@@ -78,7 +78,7 @@ Material:
     - _Density: 0.24
     - _DepthTransparency: 0.2
     - _DetailNormalMapScale: 1
-    - _DistanceFade: 0.5
+    - _DistanceFade: 0.9
     - _Distortion: 0.686
     - _DstBlend: 0
     - _EnableCustomFog: 0
@@ -86,7 +86,7 @@ Material:
     - _EnableRealtimeReflections: 1
     - _EnableReflections: 1
     - _Fade: 2
-    - _FarTilingDistance: 1000
+    - _FarTilingDistance: 48.5
     - _FoamBlend: 0.2
     - _FoamContrast: 0.276
     - _FoamIntensity: 1.92
@@ -100,11 +100,11 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _LightWrapping: 2
-    - _MediumTilingDistance: 100
+    - _MediumTilingDistance: 23.7
     - _Metallic: 0
     - _Mode: 0
     - _NormalStrength: 1
-    - _NormalTiling: 0.25
+    - _NormalTiling: 0.36
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ProbeReflectionIntensity: 0.578
@@ -122,7 +122,7 @@ Material:
     - _UnderwaterMode: 0
     - _UnderwaterTranspDist: 13.56
     - _UnderwaterTranspFalloff: 0.78
-    - _WaveSpeed: 0.1
+    - _WaveSpeed: 0.07
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:

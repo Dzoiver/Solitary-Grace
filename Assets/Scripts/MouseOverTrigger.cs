@@ -14,6 +14,7 @@ public class MouseOverTrigger : MonoBehaviour
     [SerializeField] AudioClip openSound;
     [SerializeField] AudioClip closeSound;
     [SerializeField] AudioSource audio;
+    public float distance = 5f;
     public bool repeat = true;
     private bool triggered = false;
     // Start is called before the first frame update
@@ -35,7 +36,7 @@ public class MouseOverTrigger : MonoBehaviour
             return;
 
         float dist = Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, transform.position);
-        if (dist < 5)
+        if (dist < distance)
         {
             triggered = true;
             if (open == false)

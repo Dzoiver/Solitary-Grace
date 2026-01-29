@@ -5091,6 +5091,7 @@ MonoBehaviour:
   particle: {fileID: 5033144384895887927}
   notActiveMaterial: {fileID: 2100000, guid: 16908c74c6350d646a11ac08ab6e0388, type: 2}
   activeMaterial: {fileID: 2100000, guid: 4d3d18cf3b06f0a4c904b6cef35c7a0a, type: 2}
+  eyeModel: {fileID: 7788761380760940389}
 --- !u!114 &9013653259924254133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5416,5 +5417,10 @@ PrefabInstance:
 --- !u!4 &491170336363295504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7468495477032612717, guid: 64e2bb9b892e2f34ab90b60e5d58c506, type: 3}
+  m_PrefabInstance: {fileID: 7022679449988972669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7788761380760940389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 964523438621208344, guid: 64e2bb9b892e2f34ab90b60e5d58c506, type: 3}
   m_PrefabInstance: {fileID: 7022679449988972669}
   m_PrefabAsset: {fileID: 0}

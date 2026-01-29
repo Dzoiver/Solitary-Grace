@@ -21785,6 +21785,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 923f4935b9b41374780d7063afbf4c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grassClips:
+  - {fileID: 8300000, guid: 18f1ff003e8fbdb44aba8266f6e1d168, type: 3}
+  - {fileID: 8300000, guid: 59cd085e234f32e4daddd2e589174a96, type: 3}
+  - {fileID: 8300000, guid: 2f96d3d47551ed848be9307342dcd667, type: 3}
+  - {fileID: 8300000, guid: 4901040e735fd2547870b06a27124c49, type: 3}
+  - {fileID: 8300000, guid: 4dcd8f2dc477f5e4aa277ee503048ee8, type: 3}
+  - {fileID: 8300000, guid: 15b220b1b01e9d8469f3b754b8eb2a10, type: 3}
+  - {fileID: 8300000, guid: 79a7606463e6a0748b531715f315489d, type: 3}
+  - {fileID: 8300000, guid: aa859614ff9b2234e8547d93e1cd9e73, type: 3}
+  - {fileID: 8300000, guid: 7a1ca87fc8b38af43bd269e557438cf3, type: 3}
+  - {fileID: 8300000, guid: e85ebefcaa228bc42adb2554e5a428d4, type: 3}
+  - {fileID: 8300000, guid: 363fb6bde7237674c9ab1b4ea4db05a3, type: 3}
+  - {fileID: 8300000, guid: bd2e21727b290c94586e70231e309cbd, type: 3}
+  - {fileID: 8300000, guid: 7e30146df5f9bb84d9d63ed8211311b9, type: 3}
+  - {fileID: 8300000, guid: dc51086bc85dc5448b059b6487ce0e0b, type: 3}
+  - {fileID: 8300000, guid: bf247942e61355f4d9d1804c09c647ee, type: 3}
+  - {fileID: 8300000, guid: 50d72a013f13ce0488147b799a838890, type: 3}
+  - {fileID: 8300000, guid: a829296e83128554cba9da342d83d361, type: 3}
+  - {fileID: 8300000, guid: b224ea4077fd9804c825863a283d50a6, type: 3}
+  waterClip: {fileID: 8300000, guid: d47f0456f8708d745ae40f682a0a6cd4, type: 3}
+  defaultClips:
+  - {fileID: 8300000, guid: 8aeddd0b886c6f24c83d7b75d409d8fc, type: 3}
+  - {fileID: 8300000, guid: 2942de18f9bf5be49815b2d595c03a0c, type: 3}
+  - {fileID: 8300000, guid: 8fc47fb131c7a8241a94ee15d32e7ea6, type: 3}
+  woodClips:
+  - {fileID: 8300000, guid: 6eedee29486c88745801abe9d73d610e, type: 3}
+  - {fileID: 8300000, guid: 21e5d246176eaab499ef99a86a6bca70, type: 3}
+  - {fileID: 8300000, guid: 3db7219bb6060934097abec9551a47ab, type: 3}
+  metalClips:
+  - {fileID: 8300000, guid: 49b45ff300507364d82716c5e96db626, type: 3}
+  - {fileID: 8300000, guid: f22faf52dc23bea40acfedecfa17d684, type: 3}
+  - {fileID: 8300000, guid: ec47b1ed40910b04495b5e4201b5024b, type: 3}
+  - {fileID: 8300000, guid: 61d081a008f04f5468c16bdc2e5fec48, type: 3}
+  stepSpeed: 5
 --- !u!82 &4870350606257932846
 AudioSource:
   m_ObjectHideFlags: 0

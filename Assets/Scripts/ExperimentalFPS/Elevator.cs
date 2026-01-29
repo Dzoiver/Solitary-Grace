@@ -214,6 +214,7 @@ public class Elevator : MonoBehaviour
             return;
         door1.DOPlayForward();
         door2.DOPlayForward();
+        StartCoroutine(TimerCloseDoor());
     }
 
     public void CloseDoors()
@@ -227,6 +228,15 @@ public class Elevator : MonoBehaviour
     public void FreeDoors()
     {
 
+    }
+
+    public IEnumerator TimerCloseDoor()
+    {
+        yield return new WaitForSeconds(8f);
+        CloseDoors();
+        CloseOuterDoors(0);
+        CloseOuterDoors(1);
+        CloseOuterDoors(2);
     }
 
     public IEnumerator OnDoorsClosed()

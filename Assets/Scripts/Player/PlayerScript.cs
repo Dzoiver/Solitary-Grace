@@ -309,8 +309,14 @@ public class PlayerScript : MonoBehaviour
         Vector3 rayOrigin2 = transform.position + Vector3.up * 0.1f;
         if (Physics.Raycast(rayOrigin2, Vector3.down, out hit2, 2f))
         {
+            Terrain terrain = hit2.collider.GetComponent<Terrain>();
+            if (terrain != null)
+            {
+                footsteps.TryStepTerrain(terrain, Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z));
+                return;
+            }
             // Successfully hit an object
-            footsteps.TryStep(hit2.collider.GetComponent<Material>(), Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z));
+            footsteps.TryStep(hit2.collider.gameObject, Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z));
         }
         
     }

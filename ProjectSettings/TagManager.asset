@@ -11,6 +11,9 @@ TagManager:
   - Eye
   - Bullet
   - BossEye
+  - Water
+  - Wood
+  - Metal
   layers:
   - Default
   - TransparentFX

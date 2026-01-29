@@ -4,6 +4,7 @@ using GM;
 using SolitaryAudio;
 using Zenject;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class DoorOpen : MonoBehaviour
 {
@@ -19,12 +20,13 @@ public class DoorOpen : MonoBehaviour
     [SerializeField] GameObject destinationRight;
     public string lockedMessage = "The door is jammed";
     public UnityEvent onEnter;
+    float volume = 1f;
     RaycastHit hit;
     Ray ray;
 
     private string doorSound;
     private string defaultOpen = "Sounds/door-14-open";
-    private string unlockOpen = "Sounds/key-lock-soundFixed";
+    private string unlockOpen = "Sounds/keyUnlockLouder";
 
     private void Start()
     {
@@ -47,6 +49,7 @@ public class DoorOpen : MonoBehaviour
         if (inventory.Has(key.id, out slot))
         {
             inventory.DeleteItem(slot, 1);
+            volume = 1f;
             doorSound = unlockOpen;
             Closed = false;
             return true;
@@ -82,7 +85,7 @@ public class DoorOpen : MonoBehaviour
                     }
                 }
                 GameFuncs.PlayerScript.SetControl(false);
-                AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound));
+                AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound), volume);
                 GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
                 {
                     onEnter.Invoke();
