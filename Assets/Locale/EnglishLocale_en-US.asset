@@ -375,6 +375,29 @@ MonoBehaviour:
     m_Localized: The water floods the area, I need to get out quickly.
     m_Metadata:
       m_Items: []
+  - m_Id: 10143676577918976
+    m_Localized: Object G. Not human, feeds on living flesh, no signs of intelligence.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10148097210757120
+    m_Localized: The generator room flooded. Immediately afterward, it was discovered
+      that Object B was missing. Engineers were urgently called in to repair the
+      damage. It appears some generators were undamaged, but the situation remains
+      precarious.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10151691670564864
+    m_Localized: We are your eyes, we watch you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10151803318743040
+    m_Localized: Come here if you want us to take a closer look at you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10151863808995328
+    m_Localized: Touch us to wake up.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

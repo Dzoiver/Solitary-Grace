@@ -10,7 +10,10 @@ public class Message : MonoBehaviour
     TextMeshProUGUI text;
     [SerializeField] string[] messageText;
     public UnityEvent onTrigger;
+    public UnityEvent onFinish;
     [SerializeField] bool centerText = false;
+    AudioSource audio;
+    [SerializeField] AudioClip[] clips;
 
     TextShow textObject;
     private int textIndex = 0;
@@ -25,6 +28,8 @@ public class Message : MonoBehaviour
         else
             text = textObject.GetComponent<TextMeshProUGUI>();
         enabled = false;
+
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -80,9 +85,12 @@ public class Message : MonoBehaviour
 
     private void ShowText()
     {
+        if (clips.Length > 0)
+            PlayRandomClip();
         enabled = true;
         if (textIndex == messageText.Length)
         {
+            onFinish.Invoke();
             CloseText();
             return;
         }
@@ -91,5 +99,10 @@ public class Message : MonoBehaviour
         textIndex++;
         text.enabled = true;
         onTrigger.Invoke();
+    }
+
+    private void PlayRandomClip()
+    {
+        audio.PlayOneShot(clips[Random.Range(0, clips.Length)]);
     }
 }

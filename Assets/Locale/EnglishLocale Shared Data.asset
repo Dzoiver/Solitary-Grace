@@ -363,6 +363,26 @@ MonoBehaviour:
     m_Key: waterLeak
     m_Metadata:
       m_Items: []
+  - m_Id: 10143676577918976
+    m_Key: Note2_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10148097210757120
+    m_Key: Note3_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10151691670564864
+    m_Key: SaveHelp1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10151803318743040
+    m_Key: SaveHelp2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10151863808995328
+    m_Key: SaveHelp3
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
