@@ -355,8 +355,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5036612851642368
-    m_Localized: Object D has no aggression. Does he deserve such treatment? A colleague
-      says he can just pretend to be good. Still, I don't think he's dangerous.
+    m_Localized: Prisoner D has no aggression. Does he deserve such treatment? A
+      colleague says he can just pretend to be good. Still, I don't think he's dangerous.
     m_Metadata:
       m_Items: []
   - m_Id: 5101652392849408
@@ -381,7 +381,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10148097210757120
     m_Localized: The generator room flooded. Immediately afterward, it was discovered
-      that Object B was missing. Engineers were urgently called in to repair the
+      that Prisoner B was missing. Engineers were urgently called in to repair the
       damage. It appears some generators were undamaged, but the situation remains
       precarious.
     m_Metadata:
@@ -391,7 +391,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10151803318743040
-    m_Localized: Come here if you want us to take a closer look at you.
+    m_Localized: Come close if you want us to take a better look.
     m_Metadata:
       m_Items: []
   - m_Id: 10151863808995328

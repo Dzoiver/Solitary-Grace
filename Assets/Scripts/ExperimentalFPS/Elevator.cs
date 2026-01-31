@@ -57,6 +57,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] SimpleTrigger button1;
     [SerializeField] SimpleTrigger button2;
     [SerializeField] SimpleTrigger button3;
+    [SerializeField] CallButton[] callButtons;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -162,6 +163,14 @@ public class Elevator : MonoBehaviour
         if (moving)
             return;
 
+        if (callButtons.Length > 0) // Managing CallButtons
+        {
+            foreach (CallButton cb in callButtons)
+            {
+                cb.Deactivate();
+            }
+            callButtons[newFloor].Activate();
+        }
 
         if (newFloor == currentFloor)
         {

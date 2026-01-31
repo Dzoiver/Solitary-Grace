@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GM;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,25 @@ public class Checkpoint : MonoBehaviour
     MeshRenderer meshrenderer;
     AudioSource audio;
     [SerializeField] GameObject eyeModel;
+    [SerializeField] AudioSource music;
+    bool playMusic = false;
+
+    public bool PlayMusic { get => playMusic; set 
+            {
+            if (!value)
+            {
+                playMusic = false;
+                music.Pause();
+            }
+            else if (!playMusic)
+            {
+                playMusic = true;
+                music.Play();
+                music.DOFade(0.1f, 5f);
+            }
+             }
+    }
+
     private void Awake()
     {
         sleeps = FindObjectsOfType<GetSomeSleep>();
@@ -33,24 +53,8 @@ public class Checkpoint : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
-        /*
-        if (!particle.isPlaying)
-        {
-            return;
-        }
-        */
         Vector3 direction = GameFuncs.PlayerScript.transform.position - eyeModel.transform.position;
         direction.y = 0;
 
@@ -60,7 +64,14 @@ public class Checkpoint : MonoBehaviour
 
             eyeModel.transform.rotation = Quaternion.Slerp(eyeModel.transform.rotation, rotation, 5f * Time.deltaTime);
         }
-        
+
+        if (Mathf.Abs(GameFuncs.PlayerScript.transform.position.y - transform.position.y) < 1f
+            && particle.isPlaying)
+        {
+            PlayMusic = true;
+        }
+        else
+            PlayMusic = false;
     }
 
     public void UpdateSpawn()
