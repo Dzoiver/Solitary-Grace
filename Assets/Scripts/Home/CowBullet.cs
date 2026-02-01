@@ -11,16 +11,16 @@ public class CowBullet : MonoBehaviour
     [SerializeField] CowPlayer player;
     [SerializeField] float damage = 40;
     Rigidbody rb;
-    MeshRenderer mesh;
+    [SerializeField] GameObject bulletModel;
     [SerializeField] Camera cam;
     Vector3 rotationY;
     Quaternion bulletRotation;
     AudioSource audio;
     [SerializeField] AudioClip explosionSound;
+    float rotationSpeed = 5f;
     // Start is called before the first frame update
     void Start()
     {
-        mesh = GetComponent<MeshRenderer>();
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         audio = GetComponent<AudioSource>();
@@ -35,15 +35,13 @@ public class CowBullet : MonoBehaviour
     }
     void Update()
     {
-        //bulletRotation = rb.rotation;
-        //bulletRotation.x = rb.velocity.y;
-        //rb.rotation = bulletRotation;
+        bulletModel.transform.Rotate(45f * Time.deltaTime * cowBazooka.chargeValue, 0f, 0f, Space.Self); // cowBazooka.slider.maxValue / cowBazooka.chargeValue
     }
 
     private void Explode()
     {
         rb.isKinematic = true;
-        mesh.enabled = false;
+        bulletModel.SetActive(false);
         particles.Play();
         audio.clip = explosionSound;
         audio.Play();
@@ -70,7 +68,8 @@ public class CowBullet : MonoBehaviour
 
     public void Launch(float speed)
     {
-        mesh.enabled = true;
+        bulletModel.SetActive(true);
+        bulletModel.transform.rotation = Quaternion.Euler(90f, bulletModel.transform.rotation.eulerAngles.y, bulletModel.transform.rotation.eulerAngles.z);
         rb.isKinematic = false;
         
         Quaternion myRotation = Quaternion.Euler(0, player.transform.rotation.eulerAngles.x, 0);
@@ -79,7 +78,7 @@ public class CowBullet : MonoBehaviour
 
     public void ResetProjectile()
     {
-        mesh.enabled = false;
+        bulletModel.SetActive(false);
         rb.isKinematic = true;
         particles.Stop();
         cam.transform.parent = player.transform;

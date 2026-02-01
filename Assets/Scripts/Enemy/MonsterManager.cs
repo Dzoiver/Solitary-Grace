@@ -26,7 +26,7 @@ public class MonsterManager : MonoBehaviour
     {
         foreach (Monster monster in monsters)
         {
-            if (monster.gameObject.activeSelf)
+            if (monster.gameObject.activeSelf && !monster.IsDead)
             {
                 monster.Freeze = true;
                 monster.gameObject.SetActive(false);

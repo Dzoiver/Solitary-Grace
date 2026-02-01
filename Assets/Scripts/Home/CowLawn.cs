@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class CowLawn : MonoBehaviour
 {
     [SerializeField] GameObject computer;
     [SerializeField] GameObject osCanvas;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI recordText;
     public CowPlayer player;
     public GameObject gameoverPanel;
     [SerializeField] TextMeshProUGUI gameoverText;
@@ -23,12 +25,20 @@ public class CowLawn : MonoBehaviour
 
     [SerializeField] GameObject enemiesParent;
     EnemyCow[] enemies;
-
+    [SerializeField] GameObject directionalLight;
+    [SerializeField] Camera maincam;
+    [SerializeField] Camera wincam;
     public int Score { get => score; set
         {
             score = value;
             scoreText.text = "Score: " + Score.ToString();
         } }
+
+    public int Record { get => record; set
+        {
+            record = value;
+            recordText.text = "Record: " + record.ToString();
+             } }
 
     private void Awake()
     {
@@ -45,6 +55,7 @@ public class CowLawn : MonoBehaviour
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        directionalLight.SetActive(true);
     }
 
     // Update is called once per frame
@@ -87,15 +98,17 @@ public class CowLawn : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         player.bazooka.enabled = false;
-        gameoverText.text = nothighscoreText + record.ToString();
-        if (Score > record)
+        gameoverText.text = nothighscoreText + Record.ToString();
+        if (Score > Record)
         {
-            record = Score;
-            gameoverText.text = newscoreText + record.ToString();
+            Record = Score;
+            gameoverText.text = newscoreText + Record.ToString();
         }
         gameoverPanel.SetActive(true);
         player.SetControl(false);
         audio.Play();
+        wincam.enabled = true;
+        maincam.enabled = false;
     }
 
     public void RestartGame()
@@ -113,5 +126,7 @@ public class CowLawn : MonoBehaviour
             enemyCount++;
             cow.ResetCow();
         }
+        wincam.enabled = false;
+        maincam.enabled = true;
     }
 }

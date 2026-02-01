@@ -12,10 +12,8 @@ public class Monster : MonoBehaviour
 {
     [SerializeField] private bool activeAI = true;
     private NavMeshAgent agent;
-    private bool seePlayer = false;
     [SerializeField] private float detectRadius = 10f;
     private float chaseSpeed = 2f;
-    private float stopDistance = 2f;
 
     private float health = 100f;
     private float maxHealth = 100f;
@@ -58,16 +56,27 @@ public class Monster : MonoBehaviour
     [SerializeField] FootSteps footsteps;
 
     [SerializeField] Animator animator;
+    private bool isDead = false;
 
     public Color circleColor = Color.red;
 
     public bool Freeze { get => freeze; set => freeze = value; }
+    public bool IsDead { get
+        {
+            if (health > 0f)
+            {
+                isDead = false;
+                return isDead;
+            }
+            isDead = true;
+            return isDead;
+        }
+        set => isDead = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        //agent.updateRotation = true;
         int i = 0;
         foreach (Transform t in patrolParent.transform)
         {
@@ -85,7 +94,6 @@ public class Monster : MonoBehaviour
         startRotation = transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!activeAI)
@@ -134,10 +142,7 @@ public class Monster : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // Draw the gizmo only when the object is selected
         Gizmos.color = circleColor;
-
-        // Draw a wire sphere; in a 2D context, this looks like a circle
         Gizmos.DrawWireSphere(transform.position, detectRadius);
     }
 
@@ -159,7 +164,7 @@ public class Monster : MonoBehaviour
 
     private void DamagePlayer()
     {
-        if (health < 0f)
+        if (IsDead)
             return;
         currentWakeAttackDelay += Time.deltaTime;
 
@@ -206,15 +211,17 @@ public class Monster : MonoBehaviour
             return;
         }
         chase = true;
-        if (health - amount <= 0)
+
+        health -= amount;
+        if (health <= 0f)
         {
             Death();
         }
         else
         {
-            if (audio.clip == painClip || audio.clip == pain2Clip && audio.isPlaying)
+            if (false)
             {
-
+                
             }
             else
             {
@@ -226,18 +233,16 @@ public class Monster : MonoBehaviour
                     audio.PlayOneShot(pain2Clip);
                 // end
             }
-
-            health -= amount;
         }
     }
 
     private void Death()
     {
         agent.isStopped = true;
+        agent.enabled = false;
         animator.SetBool("Dead", true);
         audio.PlayOneShot(deathClip);
         enabled = false;
-        //model.SetActive(false);
     }
 
     public void DisableCollider()

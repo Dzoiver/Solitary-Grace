@@ -9,15 +9,18 @@ public class CowBazooka : MonoBehaviour
     [SerializeField] CowPlayer player;
     [SerializeField] Camera cam;
     Vector3 camStartPos;
-    Slider slider;
+    public Slider slider;
+    public float chargeValue = 0f;
     public float speed = 1f;
     bool charging = false;
     bool shoot = false;
+    AudioSource audio;
 
     void Start()
     {
         slider = GetComponent<Slider>();
         camStartPos = cam.transform.position;
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -29,12 +32,14 @@ public class CowBazooka : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && !shoot)
         {
+            audio.Play();
             slider.value += speed * Time.deltaTime;
             charging = true;
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && charging)
         {
+            chargeValue = 17f/slider.value;
             charging = false;
             shoot = true;
             bullet.transform.position = player.transform.position + Vector3.up * 2f;
