@@ -20,7 +20,9 @@ public class Checkpoint : MonoBehaviour
     AudioSource audio;
     [SerializeField] GameObject eyeModel;
     [SerializeField] AudioSource music;
+    static public UnityEvent onTeleportGlobal;
     bool playMusic = false;
+    bool fire = false;
 
     public bool PlayMusic { get => playMusic; set 
             {
@@ -51,6 +53,12 @@ public class Checkpoint : MonoBehaviour
 
         meshrenderer = GetComponent<MeshRenderer>();
         audio = GetComponent<AudioSource>();
+    }
+
+    public void UpdateNewSpawn(GameObject newpos)
+    {
+        newSpawn.transform.position = newpos.transform.position;
+        fire = true;
     }
 
     private void FixedUpdate()
@@ -90,6 +98,8 @@ public class Checkpoint : MonoBehaviour
         sleep.checkpoint = this;
         meshrenderer.material = activeMaterial;
         particle.Play();
+        if (fire)
+            return;
         oldSpawn.transform.position = newSpawn.transform.position;
         oldSpawn.transform.rotation = newSpawn.transform.rotation;
     }
@@ -101,6 +111,7 @@ public class Checkpoint : MonoBehaviour
 
     public void SmoothTeleport(GameObject objectToTeleport)
     {
+        //onTeleportGlobal.Invoke();
         UpdateSpawn();
         GameFuncs.DisableWeapons(true);
         StartCoroutine(CoroutineSmooth(objectToTeleport));

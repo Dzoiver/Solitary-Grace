@@ -50,6 +50,7 @@ public class PlayerScript : MonoBehaviour
     private float gravityEffect;
     WeaponManager weaponManager;
     Menu menu;
+    [SerializeField] AudioSource hurt;
 
     public float GravityMultiplier
     {
@@ -82,7 +83,7 @@ public class PlayerScript : MonoBehaviour
         if (Health <= 0) return;
 
         Health = Mathf.Max(0, Health - damage);
-
+        hurt.Play();
         if (Health <= 0)
         {
             Death();

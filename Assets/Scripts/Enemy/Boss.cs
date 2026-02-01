@@ -44,6 +44,10 @@ public class Boss : MonoBehaviour
     private Vector3 startPosition;
     private Quaternion startRotation;
     public float allowedAngle = 45f;
+    AudioSource audio;
+    [SerializeField] AudioClip deathClip;
+    [SerializeField] AudioClip hurtClip;
+    [SerializeField] AudioClip stepClip;
 
     Animator animator;
     // Start is called before the first frame update
@@ -58,6 +62,7 @@ public class Boss : MonoBehaviour
             i++;
             patrolPoints.Add(t);
         }
+        audio = GetComponent<AudioSource>();
         //rb = GetComponent<Rigidbody>();
     }
 
@@ -193,11 +198,18 @@ public class Boss : MonoBehaviour
                 return;
             animator.SetBool("Dead", true);
             agent.isStopped = true;
+            audio.PlayOneShot(deathClip, 0.4f);
         }
         else
         {
+            audio.PlayOneShot(hurtClip, 0.6f);
             health -= amount;
         }
+    }
+
+    public void Step()
+    {
+        //audio.PlayOneShot(stepClip, 0.7f);
     }
 
     public void Death()
@@ -282,7 +294,9 @@ public class Boss : MonoBehaviour
         currentPatrolIndex = 0;
         agent.destination = startPosition;
         transform.position = startPosition;
+        enabled = false;
         transform.rotation = startRotation;
+        Debug.Log("reset");
         chase = false;
     }
 }

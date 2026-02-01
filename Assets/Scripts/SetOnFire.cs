@@ -10,6 +10,8 @@ public class SetOnFire : MonoBehaviour
     [SerializeField] GameObject room;
     [SerializeField] GameObject deloadWhileInRoom;
     [SerializeField] GameObject fire;
+    [SerializeField] GetSomeSleep getsomesleep;
+    [SerializeField] GameObject wakeupdest;
     GameOver gameover;
 
     private void Awake()
@@ -17,6 +19,7 @@ public class SetOnFire : MonoBehaviour
         gameover = FindObjectOfType<GameOver>();
         CameraReturnControls[] scripts = FindObjectsOfType<CameraReturnControls>();
         cameracontrols = FindObjectOfType<CameraReturnControls>();
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -34,8 +37,12 @@ public class SetOnFire : MonoBehaviour
     {
         if (inventory.Has(11) && inventory.Has(12))
         {
+            //wakeupdest.transform.position = newRespawn.transform.position;
+            //Debug.Log(Checkpoint.onTeleportGlobal);
+            //Checkpoint.onTeleportGlobal.AddListener(SetUpFireAndRoom);
             cameracontrols.ChangeWakeUpStart(newRespawn.transform);
             gameover.onRespawn.AddListener(SetUpFireAndRoom);
+            
         }
     }
 
@@ -48,6 +55,9 @@ public class SetOnFire : MonoBehaviour
 
     public void UnsetUpFire()
     {
+        if (!room.activeSelf)
+            return;
         gameover.onRespawn.RemoveListener(SetUpFireAndRoom);
+        //Checkpoint.onTeleportGlobal.RemoveListener(SetUpFireAndRoom);
     }
 }

@@ -38,11 +38,11 @@ public class MouseOverTrigger : MonoBehaviour
         float dist = Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, transform.position);
         if (dist < distance)
         {
-            triggered = true;
             if (open == false)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    triggered = true;
                     audio.clip = openSound;
                     audio.Play();
                     open = true;
