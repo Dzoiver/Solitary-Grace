@@ -11,6 +11,7 @@ public class DeathTrigger : MonoBehaviour
     float currentTime = 0f;
     [SerializeField] float activationTime = 6f;
     BoxCollider box;
+    [SerializeField] Guardian guardian;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class DeathTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            guardian.KillPlayer();
             source.Play(); // Scream sound
             // gameover.gameObject.SetActive(true);
             //gameover.DieFromMonster();
