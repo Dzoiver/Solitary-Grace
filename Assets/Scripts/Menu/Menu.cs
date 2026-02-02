@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour
     [SerializeField] AudioClip exitSound;
     [SerializeField] TextMeshProUGUI itemnameLabel;
     string healthString;
+    [SerializeField] Chest chest;
 
     private void Awake()
     {
@@ -107,6 +108,7 @@ public class Menu : MonoBehaviour
             confirmPanel.SetActive(false);
             systemPanel.SetActive(false);
             menuPanel.SetActive(false);
+            chest.gameObject.SetActive(false);
 
             // Fadein
             GameFuncs.PlayerScript.SetControl(true);

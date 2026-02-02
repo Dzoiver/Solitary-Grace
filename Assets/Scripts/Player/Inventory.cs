@@ -61,6 +61,17 @@ public class InventoryItem
         itemSprite = _itemSprite;
         keyItem = _keyItem;
     }
+
+    public InventoryItem(InventoryItem other)
+    {
+        this.id = other.id;
+        this.maxQuantity = other.maxQuantity;
+        this.name = other.name;
+        this.quantity = other.quantity;
+        this.itemSprite = other.itemSprite;
+        this.keyItem = other.keyItem;
+        this.inventorySlotID = other.inventorySlotID;
+    }
 }
 
 public class Inventory : MonoBehaviour
@@ -98,6 +109,14 @@ public class Inventory : MonoBehaviour
         weaponmanager.shotgunScript.UpdateAmmoFromInventory();
     }
 
+    private void AddItem(InventoryItem item)
+    {
+        ItemsList.Add(item);
+        DisplayItems();
+        weaponmanager.pistolScript.UpdateAmmoFromInventory();
+        weaponmanager.shotgunScript.UpdateAmmoFromInventory();
+    }
+
     public bool TryPickup(ScriptableItem itemInfo)
     {
         if (ItemsList.Count < capacity)
@@ -118,6 +137,20 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public bool TryPickup(InventoryItem item)
+    {
+        if (ItemsList.Count < capacity)
+        {
+            AddItem(item);
+            return true;
+        }
+        else
+        {
+            mesUI.FullInventory();
+            return false;
+        }
+    }
+
     public void DeleteItem(int itemSlot, int deleteQuantity)
     {
         if (ItemsList[itemSlot].Quantity - deleteQuantity <= 0)
@@ -127,6 +160,7 @@ public class Inventory : MonoBehaviour
                 weaponmanager.pistolScript.UpdateAmmoFromInventory();
             if (ItemsList[itemSlot].Name == "Shotgun Ammo")
                 weaponmanager.shotgunScript.UpdateAmmoFromInventory();
+            Debug.Log("Inventory removes: " + ItemsList[itemSlot].Name + " slot: " + itemSlot);
             ItemsList.RemoveAt(itemSlot);
             DisplayItems();
             return;

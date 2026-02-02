@@ -3,6 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.Events;
 using GM;
+using Unity.VisualScripting;
 
 public class Message : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Message : MonoBehaviour
     private int textIndex = 0;
     RaycastHit hit;
     Ray ray;
+    float currentIconTime = 0f;
+    float iconTime = 0.5f;
 
     private void Awake()
     {
@@ -37,6 +40,23 @@ public class Message : MonoBehaviour
         if (Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, transform.position) >= 2f)
         {
             CloseText();
+        }
+
+        if (!text.enabled)
+            return;
+        if (textIndex < messageText.Length)
+        {
+            currentIconTime += Time.deltaTime;
+            if (currentIconTime > iconTime)
+            {
+                if (text.text.Contains("<sprite=1>"))
+                    text.text = text.text.Replace("<sprite=1>", "<sprite=0>");
+                else
+                {
+                    text.text = text.text.Replace("<sprite=0>", "<sprite=1>");
+                }
+                currentIconTime = 0f;
+            }
         }
     }
 
@@ -95,7 +115,7 @@ public class Message : MonoBehaviour
             return;
         }
 
-        text.text = messageText[textIndex];
+        text.text = messageText[textIndex] + "<sprite=1>";
         textIndex++;
         text.enabled = true;
         onTrigger.Invoke();

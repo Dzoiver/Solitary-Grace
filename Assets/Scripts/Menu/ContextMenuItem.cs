@@ -6,7 +6,7 @@ public class ContextMenuItem : MonoBehaviour
 {
     public InventoryItem currentItem;
     [SerializeField] GameObject dropOption;
-    Inventory inventory;
+    public Inventory inventory;
     [SerializeField] MusicAmbientController audioController;
     [SerializeField] AudioClip healthDrinkSound;
     // Start is called before the first frame update

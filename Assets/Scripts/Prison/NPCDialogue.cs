@@ -31,8 +31,11 @@ public class NPCDialogue : MonoBehaviour
     float currentTime = 0f;
     [SerializeField] float printNextTime = 0.05f;
     int characterIndex = 0;
+    public bool displayArrow = false;
 
     bool printing = false;
+    float currentIconTime = 0f;
+    float iconTime = 0.5f;
     RaycastHit hit;
     Ray ray;
 
@@ -77,9 +80,28 @@ public class NPCDialogue : MonoBehaviour
     private void FixedUpdate()
     {
         if (printing == false)
+        {
+            if (!displayArrow)
+                return;
+            if (textIndex < messageGroups[groupIndex].messages.Length)
+            {
+                currentIconTime += Time.fixedDeltaTime;
+                if (currentIconTime > iconTime)
+                {
+                    if (!text.text.Contains("<sprite=0>"))
+                        text.text = text.text + "<sprite=0>";
+                    else
+                    {
+                        text.text = text.text.Replace("<sprite=0>", "");
+                    }
+                    currentIconTime = 0f;
+                }
+            }
+            
             return;
+        }
 
-        currentTime += Time.deltaTime;
+        currentTime += Time.fixedDeltaTime;
 
         if (currentTime > printNextTime)
         {
@@ -89,6 +111,7 @@ public class NPCDialogue : MonoBehaviour
 
             if (characterIndex == messageGroups[groupIndex].messages[textIndex].Length)
             {
+                currentIconTime = 0.5f;
                 textIndex++;
                 printing = false;
                 return;
@@ -104,10 +127,10 @@ public class NPCDialogue : MonoBehaviour
 
         if (triggerOnce)
             trigger = false;
-
+        
 
         enabled = true;
-        if (textIndex == messageGroups[groupIndex].messages.Length)
+        if (textIndex == messageGroups[groupIndex].messages.Length) // If last message in the group
         {
             if (groupIndex < messageGroups.Count - 1)
             groupIndex++;

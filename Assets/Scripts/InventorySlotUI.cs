@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlotUI : MonoBehaviour
+public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] TextMeshProUGUI itemname;
     [SerializeField] Sprite defaultSprite;
     [SerializeField] Image itemIcon;
     [SerializeField] TextMeshProUGUI itemQuantity;
     ContextMenuItem context;
+    Chest chest;
     
     public InventoryItem item = null;
 
     private void Awake()
     {
+        chest = FindAnyObjectByType<Chest>(FindObjectsInactive.Include);
         context = FindObjectOfType<ContextMenuItem>();
     }
 
@@ -54,12 +57,30 @@ public class InventorySlotUI : MonoBehaviour
     public void TryOpenContext()
     {
         if (item != null)
-        context.CallContextMenu(item);
+        {
+            Debug.Log(item.inventorySlotID);
+            context.CallContextMenu(item);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            TryOpenContext();
+        }
+        else if (eventData.button == PointerEventData.InputButton.Left && chest.gameObject.activeSelf)
+        {
+            InventoryItem itemCopy = new InventoryItem(item);
+            context.inventory.DeleteItem(item.inventorySlotID, 99);
+            chest.AddItem(itemCopy);
+        }
     }
 }

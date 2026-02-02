@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 
 public class TextShow : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class TextShow : MonoBehaviour
     private bool isTextDisplayed = false;
     private TextMeshProUGUI text;
     public TextMeshProUGUI centerText;
+    [SerializeField] Image arrow;
 
     private void Start()
     {
@@ -25,6 +27,7 @@ public class TextShow : MonoBehaviour
     {
         if (!isTextDisplayed)
         {
+            arrow.gameObject.SetActive(true);
             sequence = DOTween.Sequence();
             isTextDisplayed = true;
             text.text = mes.MessageText;
