@@ -113,6 +113,9 @@ public class CowLawn : MonoBehaviour
 
     public void RestartGame()
     {
+        if (player.bazooka.Shoot)
+            return;
+
         Cursor.lockState = CursorLockMode.Locked;
         player.SetControl(true);
         player.AvailableAmmo = 4;

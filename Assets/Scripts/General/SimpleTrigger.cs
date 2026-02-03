@@ -116,6 +116,7 @@ public class SimpleTrigger : MonoBehaviour
             {
                 collider.enabled = false;
             }
+            Debug.Log("enter");
             StartCoroutine(OpeningCoroutine(onEnter, startDelay));
         }
     }
@@ -124,9 +125,9 @@ public class SimpleTrigger : MonoBehaviour
     {
         if (!active)
             return;
-
-        if (other.CompareTag("Player") && onEnter.GetPersistentEventCount() > 0)
+        if (other.CompareTag("Player") && onExit.GetPersistentEventCount() > 0)
         {
+            Debug.Log("exit");
             onExit.Invoke();
         }
     }

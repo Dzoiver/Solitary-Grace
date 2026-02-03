@@ -26,4 +26,9 @@ public class MonsterAnimScript : MonoBehaviour
     {
         monster.DisableCollider();
     }
+
+    public void Activate()
+    {
+        monster.ActiveAI = true;
+    }
 }

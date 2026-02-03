@@ -15,6 +15,11 @@ public class CowBazooka : MonoBehaviour
     bool charging = false;
     bool shoot = false;
     AudioSource audio;
+    float maxAdditionalSpeed = 55f;
+    float baseSpeed = 30f;
+
+    public bool Charging { get => charging; set => charging = value; }
+    public bool Shoot { get => shoot; set => shoot = value; }
 
     void Start()
     {
@@ -30,20 +35,23 @@ public class CowBazooka : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.Space) && !shoot)
+        if (Input.GetKey(KeyCode.Space) && !Shoot)
         {
             audio.Play();
             slider.value += speed * Time.deltaTime;
-            charging = true;
+            Charging = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && charging)
+        if (Input.GetKeyUp(KeyCode.Space) && Charging)
         {
             chargeValue = 17f/slider.value;
-            charging = false;
-            shoot = true;
+            Charging = false;
+            Shoot = true;
             bullet.transform.position = player.transform.position + Vector3.up * 2f;
-            bullet.Launch((slider.value / slider.maxValue) * (90 - 5));
+            //bullet.Launch((slider.value / slider.maxValue) * (90 - 5));
+            float t = slider.value / slider.maxValue;
+            float speed = Mathf.Pow(t, 1.3f) * maxAdditionalSpeed + baseSpeed;
+            bullet.Launch(speed);
             player.SetControl(false);
             cam.transform.parent = bullet.transform;
             player.AvailableAmmo--;
@@ -53,6 +61,6 @@ public class CowBazooka : MonoBehaviour
     public void ResetBazooka()
     {
         slider.value = 0f;
-        shoot = false;
+        Shoot = false;
     }
 }

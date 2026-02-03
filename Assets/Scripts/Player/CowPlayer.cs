@@ -125,6 +125,8 @@ public class CowPlayer : MonoBehaviour
 
     private void Update()
     {
+        if (bazooka.Charging)
+            return;
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 

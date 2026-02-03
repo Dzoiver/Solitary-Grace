@@ -2,9 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Chest : MonoBehaviour
 {
@@ -39,14 +37,15 @@ public class Chest : MonoBehaviour
         ChestItems.Add(item);
         chestItemsUI[item.inventorySlotID].ImageSprite = item.ItemSprite;
         chestItemsUI[item.inventorySlotID].ItemName.text = item.Name;
-        chestItemsUI[item.inventorySlotID].ItemQuantity.text = item.Quantity.ToString();
+        if (item.Quantity == 1)
+            chestItemsUI[item.inventorySlotID].ItemQuantity.text = "";
+        else
+            chestItemsUI[item.inventorySlotID].ItemQuantity.text = item.Quantity.ToString();
         chestItemsUI[item.inventorySlotID].item = item;
-        Debug.Log("The item is on slot: " + item.inventorySlotID);
     }
 
     public void TakeItem(int itemSlot)
     {
-        Debug.Log("itemslot is: " + itemSlot);
         inventory.TryPickup(ChestItems[itemSlot]);
         ChestItems.RemoveAt(itemSlot);
 
@@ -88,7 +87,10 @@ public class Chest : MonoBehaviour
             {
                 chestItemsUI[it.inventorySlotID].ImageSprite = it.ItemSprite;
                 chestItemsUI[it.inventorySlotID].ItemName.text = it.Name;
-                chestItemsUI[it.inventorySlotID].ItemQuantity.text = it.Quantity.ToString();
+                if (it.Quantity == 1)
+                    chestItemsUI[it.inventorySlotID].ItemQuantity.text = "";
+                else
+                    chestItemsUI[it.inventorySlotID].ItemQuantity.text = it.Quantity.ToString();
                 chestItemsUI[it.inventorySlotID].item = it;
             }
         }

@@ -58,6 +58,8 @@ public class Monster : MonoBehaviour
     [SerializeField] Animator animator;
     private bool isDead = false;
 
+    [SerializeField] private bool pretending = false;
+
     public Color circleColor = Color.red;
 
     public bool Freeze { get => freeze; set => freeze = value; }
@@ -73,6 +75,24 @@ public class Monster : MonoBehaviour
         }
         set => isDead = value; }
 
+    public bool Pretending { get => pretending; set
+        {
+            pretending = value;
+
+            if (pretending)
+            {
+                animator.SetBool("Pretending", true);
+                ActiveAI = false;
+            } 
+            else
+            {
+                animator.SetBool("Pretending", false);
+            }
+        }
+    }
+
+    public bool ActiveAI { get => activeAI; set => activeAI = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +106,9 @@ public class Monster : MonoBehaviour
         audio = GetComponent<AudioSource>();
         collider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
+
+        if (pretending)
+            Pretending = true;
     }
 
     private void Awake()
@@ -96,7 +119,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (!activeAI)
+        if (!ActiveAI)
             return;
         currentAttackCoolDown += Time.deltaTime;
         if (PlayerTooClose())
@@ -126,7 +149,7 @@ public class Monster : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!activeAI)
+        if (!ActiveAI)
             return;
 
         if (ChasingPlayer())
@@ -322,7 +345,7 @@ public class Monster : MonoBehaviour
 
     public void Activate()
     {
-        activeAI = true;
+        ActiveAI = true;
     }
 
     public void ResetMonster()

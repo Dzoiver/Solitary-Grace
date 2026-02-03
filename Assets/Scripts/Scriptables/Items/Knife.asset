@@ -24,7 +24,7 @@ MonoBehaviour:
     m_LocalVariables: []
   maxQuantity: 1
   quantity: 1
-  sprite: {fileID: 21300000, guid: 00f488e989ddb8c4dadec83fbb5e18d2, type: 3}
+  sprite: {fileID: 21300000, guid: 20074fcb3603279419a34107711e66d7, type: 3}
   keyitem: 1
   references:
     version: 2

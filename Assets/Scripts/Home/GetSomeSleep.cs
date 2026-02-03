@@ -55,8 +55,6 @@ public class GetSomeSleep : MonoBehaviour
     private void GoToPrison()
     {
         onSleep.Invoke();
-        if (musicHome != null)
-            musicHome.SetActive(false);
         daytimeScript.SetDay(false);
         prison.SetActive(true);
         GameFuncs.TeleportPlayer(destinationPoint);

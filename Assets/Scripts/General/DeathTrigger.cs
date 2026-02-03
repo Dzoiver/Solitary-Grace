@@ -27,7 +27,8 @@ public class DeathTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            guardian.KillPlayer();
+            if (guardian != null)
+                guardian.KillPlayer();
             source.Play(); // Scream sound
             // gameover.gameObject.SetActive(true);
             //gameover.DieFromMonster();

@@ -26,15 +26,19 @@ public class Checkpoint : MonoBehaviour
 
     public bool PlayMusic { get => playMusic; set 
             {
-            if (!value)
+            if (playMusic == value) return;
+
+            playMusic = value;
+            if (!playMusic)
             {
-                playMusic = false;
-                music.Pause();
+                music.DOFade(0f, 5f);
             }
-            else if (!playMusic)
+            else
             {
-                playMusic = true;
-                music.Play();
+                if (!music.isPlaying)
+                {
+                    music.Play();
+                }
                 music.DOFade(0.1f, 5f);
             }
              }
@@ -72,14 +76,6 @@ public class Checkpoint : MonoBehaviour
 
             eyeModel.transform.rotation = Quaternion.Slerp(eyeModel.transform.rotation, rotation, 5f * Time.deltaTime);
         }
-
-        if (Mathf.Abs(GameFuncs.PlayerScript.transform.position.y - transform.position.y) < 1f
-            && particle.isPlaying)
-        {
-            PlayMusic = true;
-        }
-        else
-            PlayMusic = false;
     }
 
     public void UpdateSpawn()
