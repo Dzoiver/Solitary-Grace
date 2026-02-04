@@ -37,11 +37,6 @@ public class Message : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, transform.position) >= 2f)
-        {
-            CloseText();
-        }
-
         if (!text.enabled)
             return;
         if (textIndex < messageText.Length)
@@ -58,6 +53,11 @@ public class Message : MonoBehaviour
                 currentIconTime = 0f;
             }
         }
+
+        if (Vector3.Distance(hit.point, GameFuncs.PlayerScript.transform.position) >= 1.8f)
+        {
+            CloseText();
+        }
     }
 
     private void OnMouseExit()
@@ -69,6 +69,7 @@ public class Message : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && !NPCDialogue.DialoguePlaying)
         {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             text.horizontalAlignment = HorizontalAlignmentOptions.Center;
             // If you switched to different text in the middle of the text progression, resets the progression
             if (!oldMessageScript)
@@ -76,11 +77,12 @@ public class Message : MonoBehaviour
                 oldMessageScript = this;
                 if (Physics.Raycast(ray, out hit, 1.8f))
                 {
-                    if (hit.distance >= 1.8f)
+                    
+                    if (hit.distance < 1.8f)
                     {
+                        ShowText();
                         return;
                     }
-                    ShowText();
                     return;
                 }
             }
@@ -88,10 +90,12 @@ public class Message : MonoBehaviour
             if (oldMessageScript != this)
                 textIndex = 0;
             oldMessageScript = this;
-
-            if (Vector3.Distance(GameFuncs.PlayerScript.gameObject.transform.position, transform.position) < 2f)
+            if (Physics.Raycast(ray, out hit, 1.8f))
             {
-                ShowText();
+                if (hit.distance <= 1.8f)
+                {
+                    ShowText();
+                }
             }
         }
     }

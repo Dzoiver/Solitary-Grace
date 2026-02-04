@@ -410,6 +410,10 @@ MonoBehaviour:
     m_Localized: A very dense wall of flesh prevents passage.
     m_Metadata:
       m_Items: []
+  - m_Id: 12055319155093504
+    m_Localized: Storage
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

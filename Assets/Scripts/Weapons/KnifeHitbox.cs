@@ -15,7 +15,6 @@ public class KnifeHitbox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            print("blood spills");
             knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
             blood.Stop();
             blood.Play();

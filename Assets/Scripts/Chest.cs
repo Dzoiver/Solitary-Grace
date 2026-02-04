@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Chest : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class Chest : MonoBehaviour
     int maxItems = 30;
     Menu menu;
     Inventory inventory;
+    [SerializeField] ScrollRect scrollview;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -100,6 +103,7 @@ public class Chest : MonoBehaviour
     {
         gameObject.SetActive(true);
         menu.OpenMenu();
+        scrollview.verticalNormalizedPosition = 1;
         //BuildChestList();
     }
 

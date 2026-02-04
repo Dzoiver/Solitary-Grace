@@ -395,6 +395,10 @@ MonoBehaviour:
     m_Key: MeatWall
     m_Metadata:
       m_Items: []
+  - m_Id: 12055319155093504
+    m_Key: Chest
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

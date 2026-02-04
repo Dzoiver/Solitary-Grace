@@ -889,9 +889,9 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: 
+            m_TableCollectionName: GUID:846ccb31d8771f1439567d8c1a989ad4
           m_TableEntryReference:
-            m_KeyId: 0
+            m_KeyId: 11880496663670784
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0

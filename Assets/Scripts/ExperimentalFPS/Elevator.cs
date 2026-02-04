@@ -143,11 +143,6 @@ public class Elevator : MonoBehaviour
 
     public void MoveToFloor(int newFloor)
     {
-        if (newFloor > currentFloor)
-            goingUp = 1f;
-        else
-            goingUp = -1f;
-
         /*
         if (floor == currentFloor || moving)
             return;
@@ -163,6 +158,10 @@ public class Elevator : MonoBehaviour
         }
         if (moving)
             return;
+        if (newFloor > currentFloor)
+            goingUp = 1f;
+        else
+            goingUp = -1f;
 
         if (callButtons.Length > 0) // Managing CallButtons
         {

@@ -16,6 +16,7 @@ public class SetOnFire : MonoBehaviour
     [SerializeField] DoorOpen door;
     GameObject startDestination;
     [SerializeField] GameObject blockSleep;
+    
     GameOver gameover;
 
     private void Awake()
@@ -46,6 +47,7 @@ public class SetOnFire : MonoBehaviour
             //Checkpoint.onTeleportGlobal.AddListener(SetUpFireAndRoom);
             //cameracontrols.ChangeWakeUpStart(newRespawn.transform);
             //gameover.onRespawn.AddListener(SetUpFireAndRoom);
+            Debug.Log("getting ready");
             door.destinationPoint = prisonDestination;
             door.onEnter.AddListener(SetUpFireAndRoom);
             blockSleep.SetActive(true);
@@ -68,5 +70,12 @@ public class SetOnFire : MonoBehaviour
         door.destinationPoint = startDestination;
         door.onEnter.RemoveListener(SetUpFireAndRoom);
         //gameover.onRespawn.RemoveListener(SetUpFireAndRoom);
+    }
+
+    public void DeloadFireThing()
+    {
+        fire.SetActive(true);
+        room.SetActive(true);
+        deloadWhileInRoom.SetActive(false);
     }
 }
