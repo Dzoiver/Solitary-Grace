@@ -202,7 +202,7 @@ public class Boss : MonoBehaviour
         }
         else
         {
-            audio.PlayOneShot(hurtClip, 0.6f);
+            audio.PlayOneShot(hurtClip, 1f);
             health -= amount;
         }
     }
@@ -262,26 +262,6 @@ public class Boss : MonoBehaviour
         return chase;
     }
 
-    private void Patrol()
-    {
-        if (!patrol)
-            return;
-        if (patrolPoints.Count == 0)
-            return;
-
-        agent.destination = patrolPoints[currentPatrolIndex].position;
-        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].transform.position) < agent.stoppingDistance)
-        {
-            if (currentPatrolWait > patrolWait)
-            {
-                currentPatrolWait = 0f;
-                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
-            }
-            currentPatrolWait += Time.deltaTime;
-        }
-    }
-
-
     public void Activate()
     {
         activeAI = true;
@@ -296,7 +276,6 @@ public class Boss : MonoBehaviour
         transform.position = startPosition;
         enabled = false;
         transform.rotation = startRotation;
-        Debug.Log("reset");
         chase = false;
     }
 }

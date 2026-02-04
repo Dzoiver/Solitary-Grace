@@ -58,6 +58,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] SimpleTrigger button2;
     [SerializeField] SimpleTrigger button3;
     [SerializeField] CallButton[] callButtons;
+    [SerializeField] bool doorsAutoClose = true;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -223,7 +224,10 @@ public class Elevator : MonoBehaviour
             return;
         door1.DOPlayForward();
         door2.DOPlayForward();
-        StartCoroutine(TimerCloseDoor());
+        if (doorsAutoClose)
+        {
+            StartCoroutine(TimerCloseDoor());
+        }
     }
 
     public void CloseDoors()

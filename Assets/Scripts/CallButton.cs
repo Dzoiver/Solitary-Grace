@@ -25,11 +25,13 @@ public class CallButton : MonoBehaviour
 
     public void Activate()
     {
+        if (meshRenderer.material)
         meshRenderer.material = activated;
     }
     public void Deactivate()
     {
-        meshRenderer.material = deactivated;
+        if (meshRenderer.material)
+            meshRenderer.material = deactivated;
     }
 
 }

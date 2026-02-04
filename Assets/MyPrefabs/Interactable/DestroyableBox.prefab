@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 229869334}
   - component: {fileID: 1349780517558763038}
   - component: {fileID: 5232792817409894522}
+  - component: {fileID: 3677648304878193822}
   m_Layer: 0
   m_Name: DestroyableBox
   m_TagString: Box
@@ -850,7 +851,52 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
+  onFinish:
+    m_PersistentCalls:
+      m_Calls: []
   centerText: 0
+  clips: []
+--- !u!114 &3677648304878193822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70389406275576221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 4868922358991683619
+  references:
+    version: 2
+    RefIds:
+    - rid: 4868922358991683619
+      type: {class: TrackedMonoBehaviourObject, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 5232792817409894522}
+        m_TrackedProperties:
+          items:
+          - rid: 4868922358991683620
+        m_UpdateType: 1
+        m_Changed:
+          m_PersistentCalls:
+            m_Calls: []
+    - rid: 4868922358991683620
+      type: {class: LocalizedStringProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          m_TableReference:
+            m_TableCollectionName: 
+          m_TableEntryReference:
+            m_KeyId: 0
+            m_Key: 
+          m_FallbackState: 0
+          m_WaitForCompletion: 0
+          m_LocalVariables: []
+        m_PropertyPath: messageText.Array.data[0]
 --- !u!1 &1668528297692438036
 GameObject:
   m_ObjectHideFlags: 0

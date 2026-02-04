@@ -383,6 +383,18 @@ MonoBehaviour:
     m_Key: SaveHelp3
     m_Metadata:
       m_Items: []
+  - m_Id: 11867573136437248
+    m_Key: Darkdoor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11880496663670784
+    m_Key: DestroyBox
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11884435828158464
+    m_Key: MeatWall
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

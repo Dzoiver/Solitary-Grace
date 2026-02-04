@@ -10,14 +10,11 @@ public class DoorOpen : MonoBehaviour
 {
     Inventory inventory;
     [Inject] DialogueManager dManager;
-    [SerializeField] GameObject destinationPoint;
+    public GameObject destinationPoint;
     public bool Closed = false;
     [SerializeField] ScriptableItem key;
     [SerializeField] ScriptableMes lines;
     [SerializeField] bool playLockedSound = true;
-
-    [SerializeField] GameObject destinationLeft;
-    [SerializeField] GameObject destinationRight;
     public string lockedMessage = "The door is jammed";
     public UnityEvent onEnter;
     float volume = 1f;

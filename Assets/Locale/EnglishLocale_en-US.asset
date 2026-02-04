@@ -398,6 +398,18 @@ MonoBehaviour:
     m_Localized: Touch us to wake up.
     m_Metadata:
       m_Items: []
+  - m_Id: 11867573136437248
+    m_Localized: It's dark inside.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11880496663670784
+    m_Localized: I could break it if i had something to hit it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11884435828158464
+    m_Localized: A very dense wall of flesh prevents passage.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

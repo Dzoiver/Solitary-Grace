@@ -56,24 +56,14 @@ public class Monster : MonoBehaviour
     [SerializeField] FootSteps footsteps;
 
     [SerializeField] Animator animator;
-    private bool isDead = false;
 
     [SerializeField] private bool pretending = false;
 
     public Color circleColor = Color.red;
 
     public bool Freeze { get => freeze; set => freeze = value; }
-    public bool IsDead { get
-        {
-            if (health > 0f)
-            {
-                isDead = false;
-                return isDead;
-            }
-            isDead = true;
-            return isDead;
-        }
-        set => isDead = value; }
+
+    public bool IsDead => health <= 0f;
 
     public bool Pretending { get => pretending; set
         {
@@ -131,6 +121,8 @@ public class Monster : MonoBehaviour
         }
         animator.SetFloat("Velocity", agent.velocity.magnitude);
 
+
+        // FootSteps
         RaycastHit hit2;
         Vector3 rayOrigin2 = transform.position + Vector3.up * 0.1f;
         if (Physics.Raycast(rayOrigin2, Vector3.down, out hit2, 2f))
@@ -151,15 +143,37 @@ public class Monster : MonoBehaviour
     {
         if (!ActiveAI)
             return;
+        
+        AnimatorStateInfo animInfo = animator.GetCurrentAnimatorStateInfo(0);
+        
+        if (animInfo.IsName("Attack") && animInfo.normalizedTime < 0.5f)
+        {
+            agent.isStopped = true;
+            return;
+        }
 
         if (ChasingPlayer())
         {
+            agent.isStopped = false;
             agent.destination = GameFuncs.PlayerScript.transform.position;
         }
         else
         {
             currentWakeAttackDelay = 0f;
             Patrol();
+        }
+
+        if (agent.isStopped && !IsDead)
+        {
+            Vector3 direction = GameFuncs.PlayerScript.transform.position - transform.position;
+            direction.y = 0;
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion rotation = Quaternion.LookRotation(direction);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.deltaTime);
+            }
         }
     }
 
@@ -205,6 +219,8 @@ public class Monster : MonoBehaviour
         if (currentAttackCoolDown >= attackCoolDown) // Ready to strike player
         {
             animator.SetBool("Attack", true);
+            agent.ResetPath();
+
             if (currentAttackDelay >= attackDelay) // Moment damage is done
             {
                 //audio.PlayOneShot(attackClip);
@@ -233,6 +249,7 @@ public class Monster : MonoBehaviour
         {
             return;
         }
+        Pretending = false;
         chase = true;
 
         health -= amount;
