@@ -1,7 +1,8 @@
+Release is scheduled on February 12th
+
 # Solitary-Grace
 Horror first person game. Just trying to finish the project little by little. Basically working for my own experience in developing a game. Inspired by Silent hill and Resident evil games.
-More or less done with the level blockout.
-Continue to work on animations, effects, events and art.
+Currently polishing the game.
 
 ### Synopsis:
 Explore your nightmare. Solve mystery of the place in your dream. You'll wake up if you die in a dream. But is the reality truly safe?
@@ -10,8 +11,6 @@ Explore your nightmare. Solve mystery of the place in your dream. You'll wake up
 E to interact
 
 Tab to open a menu/inventory
-
-Download early in-develepment build (Windows): [current release](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v0.2-alpha)
 
 ## Screenshots:
 ![1](https://github.com/Dzoiver/Solitary-Grace/assets/40641790/281a2de9-e203-4f4c-a5b4-aff6e8d123c0)
