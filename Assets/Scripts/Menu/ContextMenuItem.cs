@@ -9,12 +9,7 @@ public class ContextMenuItem : MonoBehaviour
     public Inventory inventory;
     [SerializeField] MusicAmbientController audioController;
     [SerializeField] AudioClip healthDrinkSound;
-    // Start is called before the first frame update
 
-    private void Awake()
-    {
-        inventory = FindObjectOfType<Inventory>();
-    }
     void Start()
     {
         gameObject.SetActive(false);

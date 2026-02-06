@@ -3,6 +3,7 @@ using GM;
 using DG.Tweening;
 using SolitaryAudio;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Menu : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Menu : MonoBehaviour
     [SerializeField] TextMeshProUGUI itemnameLabel;
     string healthString;
     [SerializeField] Chest chest;
+    [SerializeField] GameObject description;
 
     private void Awake()
     {
@@ -50,6 +52,7 @@ public class Menu : MonoBehaviour
         GameFuncs.PlayerScript.SetControl(false);
         AudioController.Play("openMenu");
         Cursor.lockState = CursorLockMode.None;
+        description.SetActive(false);
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
             monsterManager.FreezeMonsters();

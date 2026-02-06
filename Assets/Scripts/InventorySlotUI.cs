@@ -58,7 +58,6 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
     {
         if (item != null)
         {
-            Debug.Log(item.inventorySlotID);
             context.CallContextMenu(item);
         }
 

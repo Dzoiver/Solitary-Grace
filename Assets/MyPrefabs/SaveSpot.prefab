@@ -5109,7 +5109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oldSpawn: {fileID: 0}
-  newSpawn: {fileID: 9013653259539234498}
+  newSpawn: {fileID: 716968151}
   onTeleport:
     m_PersistentCalls:
       m_Calls: []

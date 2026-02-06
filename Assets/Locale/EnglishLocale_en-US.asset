@@ -313,7 +313,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 314744139722752
-    m_Localized: It requires a key card
+    m_Localized: It requires a key
     m_Metadata:
       m_Items: []
   - m_Id: 320039305916416
@@ -491,6 +491,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12553439391559680
     m_Localized: Press E to interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12678541995192320
+    m_Localized: Item description
     m_Metadata:
       m_Items: []
   references:

@@ -48,6 +48,8 @@ namespace SolitaryAudio
             }
             */
             music.volume = musicVolume;
+            if (music.clip == clip)
+                return;
             music.clip = clip;
             music.Play();
         }

@@ -68,6 +68,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] SimpleTrigger button3;
     [SerializeField] CallButton[] callButtons;
     [SerializeField] bool doorsAutoClose = true;
+    [SerializeField] GameObject wallOnMoving;
     float currentButtonColorTime = 0f;
     float buttonColorTime = 0.1f;
     private void Start()
@@ -185,7 +186,6 @@ public class Elevator : MonoBehaviour
             goingUp = 1f;
         else
             goingUp = -1f;
-
         if (callButtons.Length > 0) // Managing CallButtons
         {
             foreach (CallButton cb in callButtons)
@@ -202,6 +202,8 @@ public class Elevator : MonoBehaviour
         }
         else
         {
+            if (wallOnMoving != null)
+                wallOnMoving.SetActive(true);
             nextFloor = newFloor;
             if (button1 != null)
                 button1.SetActiveTrigger(false);
@@ -233,6 +235,8 @@ public class Elevator : MonoBehaviour
 
     public void OnStop()
     {
+        if (wallOnMoving != null)
+            wallOnMoving.SetActive(false);
         moving = false;
         audio.enabled = false;
         audio.volume = 0f;

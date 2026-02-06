@@ -475,6 +475,10 @@ MonoBehaviour:
     m_Key: tip2
     m_Metadata:
       m_Items: []
+  - m_Id: 12678541995192320
+    m_Key: item_details
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
