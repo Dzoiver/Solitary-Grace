@@ -160,7 +160,6 @@ public class Inventory : MonoBehaviour
                 weaponmanager.pistolScript.UpdateAmmoFromInventory();
             if (ItemsList[itemSlot].Name == "Shotgun Ammo")
                 weaponmanager.shotgunScript.UpdateAmmoFromInventory();
-            Debug.Log("Inventory removes: " + ItemsList[itemSlot].Name + " slot: " + itemSlot);
             ItemsList.RemoveAt(itemSlot);
             DisplayItems();
             return;

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class MessagesUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI[] textUI;
+    [SerializeField] TextMeshProUGUI tip;
+    bool firstTime = true;
     Vector3 defaultTextPos;
     float elevateAmount = 50f;
     int freeText = 0;
@@ -17,6 +20,7 @@ public class MessagesUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tip.DOFade(0f, 0f);
         defaultTextPos = textUI[0].gameObject.transform.position;
         foreach (TextMeshProUGUI t in textUI)
         {
@@ -26,6 +30,13 @@ public class MessagesUI : MonoBehaviour
 
     public void ShowPickup(string itemName)
     {
+        if (firstTime)
+        {
+            tip.DOFade(1f, 2f).OnComplete(() => {
+                tip.DOFade(0f, 1f).SetDelay(5f);
+            });
+        }
+        firstTime = false;
         TextMeshProUGUI textmesh = FindFreeText();
         textmesh.color = Color.white;
         textmesh.text = pickupMes + itemName;

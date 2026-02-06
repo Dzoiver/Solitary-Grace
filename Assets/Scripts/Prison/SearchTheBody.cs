@@ -31,7 +31,7 @@ public class SearchTheBody : MonoBehaviour
         other.GetComponent<UseCube>().pScript.SetControl(false);
 
         // Do you want to take the key card?
-        menu.ConfirmBox(key);
+        //menu.ConfirmBox(key);
 
         // Call dialogue window
 

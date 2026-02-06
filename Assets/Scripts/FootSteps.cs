@@ -12,7 +12,7 @@ public class FootSteps : MonoBehaviour
     AudioSource audio;
     float currentTime = 0f;
     float stepTime = 0.42f;
-    public float stepSpeed = 5f;
+    public float stepSpeed = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class FootSteps : MonoBehaviour
     {
         if (currentTime < stepTime || speed < stepSpeed)
             return;
-
+        
         float rng = Random.Range(0.75f, 1.25f);
         audio.pitch = rng;
 

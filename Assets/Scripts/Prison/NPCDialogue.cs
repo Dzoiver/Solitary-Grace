@@ -29,7 +29,7 @@ public class NPCDialogue : MonoBehaviour
     bool trigger = true;
 
     float currentTime = 0f;
-    [SerializeField] float printNextTime = 0.05f;
+    [SerializeField] float printNextTime = 0.04f;
     int characterIndex = 0;
     public bool displayArrow = false;
 

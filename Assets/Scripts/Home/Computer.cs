@@ -49,7 +49,7 @@ public class Computer : MonoBehaviour
     {
         currentTimeInputDelay += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape) && currentTimeInputDelay > TimeInputDelay && osCanvas.activeSelf)
+        if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape)) && currentTimeInputDelay > TimeInputDelay && osCanvas.activeSelf)
         {
             StartCoroutine(DelayFunc());
         }

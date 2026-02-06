@@ -15,8 +15,6 @@ public class Menu : MonoBehaviour
     ContextMenuItem context;
     WeaponManager weapon;
     MonsterManager monsterManager;
-    private ScriptableItem bufferItem;
-    private GameObject bufferPickupObject;
     AudioSource audio;
     [SerializeField] AudioClip exitSound;
     [SerializeField] TextMeshProUGUI itemnameLabel;
@@ -52,43 +50,19 @@ public class Menu : MonoBehaviour
         GameFuncs.PlayerScript.SetControl(false);
         AudioController.Play("openMenu");
         Cursor.lockState = CursorLockMode.None;
+        Debug.Log(Cursor.lockState);
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
             monsterManager.FreezeMonsters();
+            Debug.Log(Cursor.lockState);
             menuPanel.SetActive(true);
+            
             // Fadein
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
             {
                 GameFuncs.fading = false;
             };
         };
-    }
-
-    public void ConfirmBox(ScriptableItem item, GameObject itemToDisable = null)
-    {
-        if (itemToDisable != null)
-            bufferPickupObject = itemToDisable;
-        bufferItem = item; // Buffers item which player decides to take or not
-        OpenMenu();
-        confirmPanelItem.SetActive(true);
-        confirmPanelItem.GetComponent<ConfirmationBox>().ChangeItemName(item.name);
-    }
-
-    public void YesConfirm()
-    {
-        if (bufferPickupObject != null)
-        {
-            bufferPickupObject.SetActive(false);
-            bufferPickupObject = null;
-        }
-        //inventory.AddItem(bufferItem);
-        CloseMenu();
-    }
-
-    public void NoConfirm()
-    {
-
-        CloseMenu();
     }
 
     public void CloseMenu()

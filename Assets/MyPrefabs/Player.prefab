@@ -21090,7 +21090,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f22faf52dc23bea40acfedecfa17d684, type: 3}
   - {fileID: 8300000, guid: ec47b1ed40910b04495b5e4201b5024b, type: 3}
   - {fileID: 8300000, guid: 61d081a008f04f5468c16bdc2e5fec48, type: 3}
-  stepSpeed: 5
+  stepSpeed: 4
 --- !u!82 &4870350606257932846
 AudioSource:
   m_ObjectHideFlags: 0
