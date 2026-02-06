@@ -15,6 +15,16 @@ public class ScriptableItem : ScriptableObject
             return localizedName.GetLocalizedString();
         }
     }
+    public LocalizedString localizedDescription;
+    public string description
+    {
+        get
+        {
+            if (!localizedDescription.IsEmpty)
+            return localizedDescription.GetLocalizedString();
+            return "";
+        }
+    }
     public int maxQuantity;
     public int quantity;
     public Sprite sprite;

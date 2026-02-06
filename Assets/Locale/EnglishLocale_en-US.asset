@@ -121,7 +121,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 73274824634368
-    m_Localized: 1st Floor Security Key
+    m_Localized: Security Key
     m_Metadata:
       m_Items: []
   - m_Id: 79326299336704
@@ -145,7 +145,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 81876956262400
-    m_Localized: Basement key
+    m_Localized: Storage key
     m_Metadata:
       m_Items: []
   - m_Id: 82688281456640
@@ -303,7 +303,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 310152266035200
-    m_Localized: Artifact is able to burn the flesh. It powers from the sun rays.
+    m_Localized: Artifact is able to burn the demon flesh. It powers from the sun
+      rays.
     m_Metadata:
       m_Items: []
   - m_Id: 310191029792768
@@ -420,6 +421,76 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12277668613763072
     m_Localized: Can't go down, it's flooded.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12530599510454272
+    m_Localized: A regular pistol, 7 rounds in a clip. Press 2 to equip it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12535995323166720
+    m_Localized: Semi-automatic shotgun, 5 rounds in the magazine. Press 3 to equip
+      it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542888657596416
+    m_Localized: A device for controlling the passage of fluid through a pipe.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12543718685192192
+    m_Localized: Useless toy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542840049807360
+    m_Localized: A box for shotgun cartridges, 10 pieces inside.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542817912270848
+    m_Localized: 1st floor security room's key.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542791328772096
+    m_Localized: Pistol ammo, 14 bullets inside.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542766720790528
+    m_Localized: A sharp knife. Allows you to break boxes and cut tape. It's also
+      a good tool for self-defense.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542749301846016
+    m_Localized: Apparently, fresh flesh can distract the Guardian.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542728942694400
+    m_Localized: The key to the hatch from the flooded part of the prison.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542637104214016
+    m_Localized: The light distance isn't too big but it's better than nothing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12541130577326080
+    m_Localized: Key to the storage facilities.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12541098327322624
+    m_Localized: The key to the camera unit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12536015166418944
+    m_Localized: It emits heat and light. It reacts strangely to my skin.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12550844186931200
+    m_Localized: Health drink, gives 35 health points. Press G to quickly drink it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12553236567601152
+    m_Localized: Press Tab to open the inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12553439391559680
+    m_Localized: Press E to interact
     m_Metadata:
       m_Items: []
   references:

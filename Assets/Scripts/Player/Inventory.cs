@@ -23,6 +23,7 @@ public class InventoryItem
     private Sprite itemSprite;
     public int inventorySlotID;
     bool keyItem = false;
+    string description = "No description for this item.";
 
     public Sprite ItemSprite
     {
@@ -51,8 +52,9 @@ public class InventoryItem
     }
 
     public bool KeyItem { get => keyItem; set => keyItem = value; }
+    public string Description { get => description; set => description = value; }
 
-    public InventoryItem(int _id, int _maxQuantity = 1, string _name = "", int _quantity = 1, Sprite _itemSprite = null, bool _keyItem = false)
+    public InventoryItem(int _id, int _maxQuantity = 1, string _name = "", int _quantity = 1, Sprite _itemSprite = null, bool _keyItem = false, string _description = "No description for this item")
     {
         id = _id;
         maxQuantity = _maxQuantity;
@@ -60,6 +62,7 @@ public class InventoryItem
         quantity = _quantity;
         itemSprite = _itemSprite;
         keyItem = _keyItem;
+        description = _description;
     }
 
     public InventoryItem(InventoryItem other)
@@ -71,6 +74,7 @@ public class InventoryItem
         this.itemSprite = other.itemSprite;
         this.keyItem = other.keyItem;
         this.inventorySlotID = other.inventorySlotID;
+        description = other.description;
     }
 }
 
@@ -85,7 +89,6 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         mesUI = FindObjectOfType<MessagesUI>();
-        
     }
 
     private void Awake()
@@ -99,10 +102,10 @@ public class Inventory : MonoBehaviour
         InventoryItem item;
         if (scriptableItem == null)
         {
-            item = new InventoryItem(999, 1, "unknown", 1, null, false);
+            item = new InventoryItem(999, 1, "unknown", 1, null, false, "No description for this item");
         }
         else
-            item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite, scriptableItem.keyitem);
+            item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite, scriptableItem.keyitem, scriptableItem.description);
         ItemsList.Add(item);
         DisplayItems();
         weaponmanager.pistolScript.UpdateAmmoFromInventory();

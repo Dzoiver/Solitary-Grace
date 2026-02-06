@@ -407,6 +407,74 @@ MonoBehaviour:
     m_Key: HatchStop
     m_Metadata:
       m_Items: []
+  - m_Id: 12530599510454272
+    m_Key: description_pistol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12535995323166720
+    m_Key: description_shotgun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12536015166418944
+    m_Key: description_bosskey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12541098327322624
+    m_Key: description_camerakey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12541130577326080
+    m_Key: description_catacombkey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542637104214016
+    m_Key: description_handlight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542728942694400
+    m_Key: description_hatchkey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542749301846016
+    m_Key: description_heart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542766720790528
+    m_Key: description_knife
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542791328772096
+    m_Key: description_pistolammo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542817912270848
+    m_Key: description_securitykey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542840049807360
+    m_Key: description_shotgunammo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12542888657596416
+    m_Key: description_valve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12543718685192192
+    m_Key: description_power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12550844186931200
+    m_Key: description_health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12553236567601152
+    m_Key: tip1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12553439391559680
+    m_Key: tip2
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
