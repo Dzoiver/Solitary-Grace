@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class DoorKnocking : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class DoorKnocking : MonoBehaviour
     bool knockingStarted = false;
     [SerializeField] GameObject getsleep;
     AudioSource audio;
+    [SerializeField] UnityEvent onTry;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +48,9 @@ public class DoorKnocking : MonoBehaviour
     public void GetSleep()
     {
         if (knockingStarted)
+        {
+            onTry.Invoke();
             getsleep.SetActive(true);
+        }
     }
 }

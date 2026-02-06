@@ -75,7 +75,7 @@ public class WeaponManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4) && inventory.Has(15))
+        if (Input.GetKeyDown(KeyCode.F) && inventory.Has(15))
         {
             if (handLight.activeSelf)
             {

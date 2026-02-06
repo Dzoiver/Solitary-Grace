@@ -414,6 +414,14 @@ MonoBehaviour:
     m_Localized: Storage
     m_Metadata:
       m_Items: []
+  - m_Id: 12265864101670912
+    m_Localized: Nothing interesting.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12277668613763072
+    m_Localized: Can't go down, it's flooded.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

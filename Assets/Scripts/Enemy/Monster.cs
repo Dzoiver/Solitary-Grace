@@ -82,6 +82,7 @@ public class Monster : MonoBehaviour
     }
 
     public bool ActiveAI { get => activeAI; set => activeAI = value; }
+    public bool Patrol1 { get => patrol; set => patrol = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -233,6 +234,8 @@ public class Monster : MonoBehaviour
 
     public void AnimDamage()
     {
+        if (IsDead)
+            return;
         audio.PlayOneShot(attackClip);
         if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance)
         {
@@ -317,7 +320,7 @@ public class Monster : MonoBehaviour
             currentPlayerSearchTime += Time.deltaTime;
             if (currentPlayerSearchTime > playerSearchTime)
             {
-                if (!patrol)
+                if (!Patrol1)
                     agent.destination = startPosition;
                 chase = false;
                 currentPlayerSearchTime = 0f;
@@ -328,7 +331,7 @@ public class Monster : MonoBehaviour
 
     private void Patrol()
     {
-        if (!patrol)
+        if (!Patrol1)
             return;
         if (patrolPoints.Count == 0)
             return;

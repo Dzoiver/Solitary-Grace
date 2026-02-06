@@ -136,16 +136,13 @@ public class Menu : MonoBehaviour
         if (GameFuncs.fading)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
+        if (!menuPanel.activeSelf && GameFuncs.PlayerScript.IsControl() && Input.GetKeyDown(KeyCode.Tab))
         {
-            if (!menuPanel.activeSelf && GameFuncs.PlayerScript.IsControl())
-            {
-                OpenMenu();
-            }
-            else if (menuPanel.activeSelf)
-            {
-                CloseMenu();
-            }
+            OpenMenu();
+        }
+        else if (menuPanel.activeSelf && (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape)))
+        {
+            CloseMenu();
         }
     }
 

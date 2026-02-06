@@ -30,6 +30,15 @@ public class Elevator : MonoBehaviour
     private Vector3 lastPosition;
     [SerializeField] private Vector3 firstFloor = new Vector3(0,0,0);
     public Vector3 Velocity { get; private set; }
+    public bool TeleportedHorizontally { get => teleportedHorizontally; set { 
+            teleportedHorizontally = value;
+            if (teleportedHorizontally)
+                return;
+            foreach (CallButton cb in callButtons)
+            {
+                cb.Deactivate();
+            }
+        } }
 
     [SerializeField] AudioSource audio;
     [SerializeField] AudioSource audio2;
@@ -59,6 +68,8 @@ public class Elevator : MonoBehaviour
     [SerializeField] SimpleTrigger button3;
     [SerializeField] CallButton[] callButtons;
     [SerializeField] bool doorsAutoClose = true;
+    float currentButtonColorTime = 0f;
+    float buttonColorTime = 0.1f;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -106,7 +117,7 @@ public class Elevator : MonoBehaviour
         if (moving)
         {
             transform.position = Vector3.MoveTowards(transform.position, destinationFloor, speed * Time.deltaTime);
-            
+
             /*
             Vector3 newPosition = Vector3.MoveTowards(
             rb.position,
@@ -124,6 +135,18 @@ public class Elevator : MonoBehaviour
         else
         {
             Velocity = Vector3.zero;
+        }
+
+        if (TeleportedHorizontally)
+        {
+            currentButtonColorTime += Time.deltaTime;
+            if (currentButtonColorTime > buttonColorTime)
+            {
+                currentButtonColorTime = 0f;
+                callButtons[Random.Range(0, 3)].Activate();
+
+                callButtons[Random.Range(0, 3)].Deactivate();
+            }
         }
     }
 
@@ -188,6 +211,19 @@ public class Elevator : MonoBehaviour
                 button3.SetActiveTrigger(false);
             StartCoroutine(OnDoorsClosed());
         }
+    }
+
+    public void InstantTeleport_AndMoveTo(int floor)
+    {
+        nextFloor = 1;
+        destinationFloor.y = firstFloor.y + nextFloor * floorDistance;
+        transform.position = destinationFloor;
+        nextFloor = 2;
+        destinationFloor.y = firstFloor.y + nextFloor * floorDistance;
+        audio.enabled = true;
+        audio.Play();
+        audio.DOFade(0.4f, 2f);
+        moving = true;
     }
 
     public void RestorePosition()
@@ -266,13 +302,13 @@ public class Elevator : MonoBehaviour
 
     public void TeleportHorizontally()
     {
-        if (teleportedHorizontally)
+        if (TeleportedHorizontally)
             return;
 
         audio2.clip = horElev;
         audio2.enabled = true;
         audio2.Play();
-        teleportedHorizontally = true;
+        TeleportedHorizontally = true;
         GameFuncs.TeleportRelatively(gameObject, horizontalTeleportPos);
         gameObject.transform.position = horizontalTeleportPos;
         horizontalWall.SetActive(true);

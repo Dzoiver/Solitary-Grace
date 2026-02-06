@@ -399,6 +399,14 @@ MonoBehaviour:
     m_Key: Chest
     m_Metadata:
       m_Items: []
+  - m_Id: 12265864101670912
+    m_Key: NothingInteresting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12277668613763072
+    m_Key: HatchStop
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

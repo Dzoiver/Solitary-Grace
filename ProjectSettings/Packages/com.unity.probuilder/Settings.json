@@ -259,7 +259,7 @@
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize",
-                "value": "{\"m_Value\":{\"x\":-0.5,\"y\":0.5999999046325684,\"z\":-1.5}}"
+                "value": "{\"m_Value\":{\"x\":-1.6999969482421876,\"y\":1.6850218772888184,\"z\":1.100006103515625}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -284,7 +284,7 @@
             {
                 "type": "UnityEditor.StaticEditorFlags, UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "mesh.defaultStaticEditorFlags",
-                "value": "{\"m_Value\":0}"
+                "value": "{\"m_Value\":-1}"
             },
             {
                 "type": "UnityEngine.ProBuilder.ColliderType, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
