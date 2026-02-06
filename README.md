@@ -1,4 +1,4 @@
-Release is scheduled on February 12th
+# Release is scheduled on February 12th
 
 # Solitary-Grace
 Horror first person game. Just trying to finish the project little by little. Basically working for my own experience in developing a game. Inspired by Silent hill and Resident evil games.
