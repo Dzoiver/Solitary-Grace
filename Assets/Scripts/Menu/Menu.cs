@@ -50,7 +50,6 @@ public class Menu : MonoBehaviour
         GameFuncs.PlayerScript.SetControl(false);
         AudioController.Play("openMenu");
         Cursor.lockState = CursorLockMode.None;
-        Debug.Log(Cursor.lockState);
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
             monsterManager.FreezeMonsters();
