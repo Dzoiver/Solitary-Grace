@@ -51,6 +51,8 @@ public class BossHealer : MonoBehaviour
         {
             eye.CloseEye();
         }
+        spawnedEyes = 0;
+        currentEyes = 0;
     }
 
     public void PushEyes()
@@ -62,7 +64,7 @@ public class BossHealer : MonoBehaviour
         {
             spawnedEyes++;
             currentEyeTime = 0f;
-            bossEyes[Random.Range(0, bossEyes.Length - 1)].OpenEye();
+            bossEyes[Random.Range(0, bossEyes.Length)].OpenEye();
             if (spawnedEyes >= maxSpawnedEyes)
             {
                 spawnEyes = false;

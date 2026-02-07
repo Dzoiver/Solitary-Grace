@@ -36,7 +36,7 @@ public class EnemyCow : MonoBehaviour
     {
         health = maxHealth;
         textStartPos = text.transform.position;
-        currentPatrolIndex = Random.Range(0, patrolPoints.Length - 1);
+        currentPatrolIndex = Random.Range(0, patrolPoints.Length);
         agent.destination = patrolPoints[currentPatrolIndex].transform.position;
     }
 
@@ -110,7 +110,7 @@ public class EnemyCow : MonoBehaviour
             {
                 currentPatrolWait = 0f;
 
-                currentPatrolIndex = Random.Range(0, patrolPoints.Length - 1);
+                currentPatrolIndex = Random.Range(0, patrolPoints.Length);
                 agent.destination = patrolPoints[currentPatrolIndex].transform.position;
             }
             currentPatrolWait += Time.deltaTime;

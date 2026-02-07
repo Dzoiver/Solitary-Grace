@@ -9,7 +9,6 @@ public class Boss : MonoBehaviour
 {
     [SerializeField] private bool activeAI = true;
     private NavMeshAgent agent;
-    private bool seePlayer = false;
     [SerializeField] private float detectRadius = 10f;
 
     private float health = 600f;
@@ -24,13 +23,6 @@ public class Boss : MonoBehaviour
     private float currentPlayerSearchTime = 0f;
     private bool chase = false;
     [SerializeField] LayerMask layerMask;
-
-    [SerializeField] private bool patrol = true;
-    private List<Transform> patrolPoints = new List<Transform>();
-    [SerializeField] private GameObject patrolParent;
-    private int currentPatrolIndex = 0;
-    [SerializeField] private float patrolWait = 1f;
-    private float currentPatrolWait = 0f;
     [SerializeField] Transform healSpot;
     bool healing = false;
     bool canKill = false;
@@ -57,11 +49,6 @@ public class Boss : MonoBehaviour
         startRotation = transform.rotation;
         agent = GetComponent<NavMeshAgent>();
         int i = 0;
-        foreach (Transform t in patrolParent.transform)
-        {
-            i++;
-            patrolPoints.Add(t);
-        }
         audio = GetComponent<AudioSource>();
         //rb = GetComponent<Rigidbody>();
     }
@@ -79,10 +66,8 @@ public class Boss : MonoBehaviour
 
         if (PlayerClose() && !healing)
         {
-            agent.destination = GameFuncs.PlayerScript.transform.position;
-            DamagePlayer();
-        }
 
+        }
         if (health < 300 && !Phase1Complete) // When low, goes to healing spot
         {
             healing = true;
@@ -171,12 +156,13 @@ public class Boss : MonoBehaviour
 
     private void DamagePlayer()
     {
-        currentAttackCoolDown += Time.deltaTime;
+        return;
+        //currentAttackCoolDown += Time.deltaTime;
         if (!PlayerClose())
         {
             return;
         }
-        
+        return;
         if (currentAttackCoolDown >= attackCoolDown) // Ready to strike player
         {
             animator.SetBool("Idle", true);
@@ -253,8 +239,6 @@ public class Boss : MonoBehaviour
             currentPlayerSearchTime += Time.deltaTime;
             if (currentPlayerSearchTime > playerSearchTime)
             {
-                if (!patrol)
-                    agent.destination = startPosition;
                 chase = false;
                 currentPlayerSearchTime = 0f;
             }
@@ -271,7 +255,6 @@ public class Boss : MonoBehaviour
     {
         if (!gameObject.activeInHierarchy)
             return;
-        currentPatrolIndex = 0;
         agent.destination = startPosition;
         transform.position = startPosition;
         enabled = false;

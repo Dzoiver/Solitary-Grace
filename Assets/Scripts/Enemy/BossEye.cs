@@ -52,7 +52,7 @@ public class BossEye : MonoBehaviour
     {
         if (!opened)
             return;
-        int rng = Random.Range(0, 1);
+        int rng = Random.Range(0, 2);
 
         audio.PlayOneShot(glassSounds[rng]);
         eyeAnim.DOPlayBackwards();

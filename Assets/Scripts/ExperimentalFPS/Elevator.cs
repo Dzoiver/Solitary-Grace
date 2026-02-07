@@ -359,14 +359,14 @@ public class Elevator : MonoBehaviour
             outer1Floor0.DOPlayBackwards();
             outer2Floor0.DOPlayBackwards();
         }
-        if (floor == 1)
+        else if (floor == 1)
         {
             if (outer1Floor1 == null || outer2Floor1 == null)
                 return;
             outer1Floor1.DOPlayBackwards();
             outer2Floor1.DOPlayBackwards();
         }
-        if (floor == 2)
+        else if (floor == 2)
         {
             if (outer1Floor2 == null || outer2Floor2 == null)
                 return;

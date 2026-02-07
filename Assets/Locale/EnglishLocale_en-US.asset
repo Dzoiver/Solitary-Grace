@@ -497,6 +497,22 @@ MonoBehaviour:
     m_Localized: Item description
     m_Metadata:
       m_Items: []
+  - m_Id: 12965413350846464
+    m_Localized: The elveator isn't functioning.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12994974662832128
+    m_Localized: I can't go back, the ladder is broken.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13001856194490368
+    m_Localized: It can be opened from the other side.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13002815146602496
+    m_Localized: The door is broken
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

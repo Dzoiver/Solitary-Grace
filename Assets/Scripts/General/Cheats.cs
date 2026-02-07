@@ -11,7 +11,7 @@ public class Cheats : MonoBehaviour
     RemoveOnStart[] lights;
     // public GameObject globalLight;
     DaytimeOutside daytimeManager;
-    //SceneView lastActiveSceneView;
+    SceneView lastActiveSceneView;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -43,7 +43,7 @@ public class Cheats : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.F6))
         {
-            //GameFuncs.TeleportPlayerNoRotate(lastActiveSceneView.camera.gameObject);
+            GameFuncs.TeleportPlayerNoRotate(lastActiveSceneView.camera.gameObject);
         }
         
 
@@ -53,6 +53,6 @@ public class Cheats : MonoBehaviour
     {
         daytimeManager = FindObjectOfType<DaytimeOutside>();
         lights = FindObjectsOfType<RemoveOnStart>();
-        //lastActiveSceneView = SceneView.lastActiveSceneView;
+        lastActiveSceneView = SceneView.lastActiveSceneView;
     }
 }

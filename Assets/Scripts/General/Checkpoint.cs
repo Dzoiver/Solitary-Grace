@@ -74,7 +74,7 @@ public class Checkpoint : MonoBehaviour
         {
             Quaternion rotation = Quaternion.LookRotation(direction);
 
-            eyeModel.transform.rotation = Quaternion.Slerp(eyeModel.transform.rotation, rotation, 5f * Time.deltaTime);
+            eyeModel.transform.rotation = Quaternion.Slerp(eyeModel.transform.rotation, rotation, 5f * Time.fixedDeltaTime);
         }
     }
 

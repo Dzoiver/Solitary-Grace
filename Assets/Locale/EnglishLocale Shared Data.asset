@@ -479,6 +479,22 @@ MonoBehaviour:
     m_Key: item_details
     m_Metadata:
       m_Items: []
+  - m_Id: 12965413350846464
+    m_Key: elevatorFunctioning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12994974662832128
+    m_Key: Ladderback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13001856194490368
+    m_Key: otherSideHospital
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13002815146602496
+    m_Key: broken_door
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

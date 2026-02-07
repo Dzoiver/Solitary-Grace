@@ -7,6 +7,7 @@ using static UnityEngine.Rendering.DebugUI;
 using System.Collections;
 using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+using UnityEngine.Events;
 
 public class Monster : MonoBehaviour
 {
@@ -51,13 +52,14 @@ public class Monster : MonoBehaviour
     [SerializeField] private AudioClip painClip;
     [SerializeField] private AudioClip pain2Clip;
     [SerializeField] private AudioClip deathClip;
-    BoxCollider collider;
+    CapsuleCollider collider;
     Rigidbody rb;
     [SerializeField] FootSteps footsteps;
 
     [SerializeField] Animator animator;
 
     [SerializeField] private bool pretending = false;
+    [SerializeField] UnityEvent onKill;
 
     public Color circleColor = Color.red;
 
@@ -95,7 +97,7 @@ public class Monster : MonoBehaviour
             patrolPoints.Add(t);
         }
         audio = GetComponent<AudioSource>();
-        collider = GetComponent<BoxCollider>();
+        collider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
 
         if (pretending)
@@ -108,6 +110,21 @@ public class Monster : MonoBehaviour
         startRotation = transform.rotation;
     }
 
+    private void OnEnable()
+    {
+        if (IsDead)
+        {
+            animator.SetBool("Dead", true);
+            return;
+        }
+            
+
+        if (pretending)
+        {
+            Pretending = true;
+        }
+    }
+
     void Update()
     {
         if (!ActiveAI)
@@ -115,11 +132,24 @@ public class Monster : MonoBehaviour
         currentAttackCoolDown += Time.deltaTime;
         if (PlayerTooClose())
         {
+            agent.updateRotation = false;
+            Vector3 direction = GameFuncs.PlayerScript.transform.position - transform.position;
+            direction.y = 0;
+            if (direction != Vector3.zero)
+            {
+                Quaternion rotation = Quaternion.LookRotation(direction);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.fixedDeltaTime);
+            }
+
+
             Alarm();
             chase = true;
             agent.destination = GameFuncs.PlayerScript.transform.position;
             DamagePlayer();
         }
+        else
+            agent.updateRotation = true;
         animator.SetFloat("Velocity", agent.velocity.magnitude);
 
 
@@ -144,9 +174,10 @@ public class Monster : MonoBehaviour
     {
         if (!ActiveAI)
             return;
-        
+
         AnimatorStateInfo animInfo = animator.GetCurrentAnimatorStateInfo(0);
         
+
         if (animInfo.IsName("Attack") && animInfo.normalizedTime < 0.5f)
         {
             agent.isStopped = true;
@@ -155,26 +186,16 @@ public class Monster : MonoBehaviour
 
         if (ChasingPlayer())
         {
+            agent.updateRotation = true;
             agent.isStopped = false;
             agent.destination = GameFuncs.PlayerScript.transform.position;
+            
+
         }
         else
         {
             currentWakeAttackDelay = 0f;
             Patrol();
-        }
-
-        if (agent.isStopped && !IsDead)
-        {
-            Vector3 direction = GameFuncs.PlayerScript.transform.position - transform.position;
-            direction.y = 0;
-
-            if (direction != Vector3.zero)
-            {
-                Quaternion rotation = Quaternion.LookRotation(direction);
-
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.deltaTime);
-            }
         }
     }
 
@@ -269,7 +290,7 @@ public class Monster : MonoBehaviour
             else
             {
                 // Random pain sound
-                int rnd = Random.Range(0, 1);
+                int rnd = Random.Range(0, 2);
                 if (rnd == 0)
                     audio.PlayOneShot(painClip);
                 else if (rnd == 1)
@@ -281,6 +302,7 @@ public class Monster : MonoBehaviour
 
     private void Death()
     {
+        onKill.Invoke();
         agent.isStopped = true;
         agent.enabled = false;
         animator.SetBool("Dead", true);
@@ -344,7 +366,7 @@ public class Monster : MonoBehaviour
                 currentPatrolWait = 0f;
 
                 if (randomizePatrol)
-                    currentPatrolIndex = Random.Range(0, patrolPoints.Count - 1);
+                    currentPatrolIndex = Random.Range(0, patrolPoints.Count);
                 else
                     currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
             }
@@ -384,7 +406,7 @@ public class Monster : MonoBehaviour
         if (chase)
             return;
         chase = true;
-        int rng = Random.Range(0, 2);
+        int rng = Random.Range(0, 3);
 
         if (rng == 0)
             audio.PlayOneShot(alarm1Clip);
