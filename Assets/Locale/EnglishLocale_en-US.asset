@@ -60,8 +60,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 16561056559104
-    m_Localized: Basement floor is flooded. But you can drain the water if you open
-      up the pipe.
+    m_Localized: The basement is flooded, but I saw a huge pipe in that room, which
+      can most likely be opened from another place to drain the water.
     m_Metadata:
       m_Items: []
   - m_Id: 17945063632896
@@ -69,23 +69,25 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 18204770742272
-    m_Localized: I know how to stop all this.
+    m_Localized: I know how to stop this nightmare.
     m_Metadata:
       m_Items: []
   - m_Id: 18217647255552
-    m_Localized: It hides behind the visiting room.
+    m_Localized: That monster is hiding in the room opposite the dining room where
+      we met.
     m_Metadata:
       m_Items: []
   - m_Id: 18248815128576
-    m_Localized: But it's not easy to get through.
+    m_Localized: It's not so easy to get into the lair itself. There is a Guardian
+      in the way.
     m_Metadata:
       m_Items: []
   - m_Id: 18267374923776
-    m_Localized: There is a guardian in our way.
+    m_Localized: I'll try to figure out how to deal with it.
     m_Metadata:
       m_Items: []
   - m_Id: 18290066108416
-    m_Localized: I'll try to figure out how to deal with it.
+    m_Localized: We need to figure out how to deal with it.
     m_Metadata:
       m_Items: []
   - m_Id: 38523296329728
@@ -93,7 +95,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 38545278676992
-    m_Localized: Take my heart and the Guardian will let you through.
+    m_Localized: Cut out my heart and use it to distract the Guardian in that room
+      on the 1st floor.
     m_Metadata:
       m_Items: []
   - m_Id: 38562311745536
@@ -101,11 +104,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 54893106999296
-    m_Localized: Please...
+    m_Localized: ... Please... help me
     m_Metadata:
       m_Items: []
   - m_Id: 54995674509312
-    m_Localized: Help me.
+    m_Localized: I'm in the Hospital.. Hurry
     m_Metadata:
       m_Items: []
   - m_Id: 55009192751104
@@ -511,6 +514,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13002815146602496
     m_Localized: The door is broken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13339960080117760
+    m_Localized: Door to the Hospital, won't open.
     m_Metadata:
       m_Items: []
   references:

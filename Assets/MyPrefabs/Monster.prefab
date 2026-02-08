@@ -160,6 +160,7 @@ MonoBehaviour:
   onKill:
     m_PersistentCalls:
       m_Calls: []
+  hospitalSleep: 0
   circleColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!54 &4382986903114976147
 Rigidbody:

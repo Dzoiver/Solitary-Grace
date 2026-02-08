@@ -15,7 +15,8 @@ public class MouseLook : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        GameFuncs.mouseLook = this;
+        if (GameFuncs.mouseLook == null)
+            GameFuncs.mouseLook = this;
         Cursor.lockState = CursorLockMode.Locked;
     }
 

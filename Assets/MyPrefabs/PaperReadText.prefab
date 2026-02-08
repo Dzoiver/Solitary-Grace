@@ -304,4 +304,8 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
-  centerText: 0
+  onFinish:
+    m_PersistentCalls:
+      m_Calls: []
+  centerText: 1
+  clips: []

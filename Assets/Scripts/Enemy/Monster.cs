@@ -59,7 +59,8 @@ public class Monster : MonoBehaviour
     [SerializeField] Animator animator;
 
     [SerializeField] private bool pretending = false;
-    [SerializeField] UnityEvent onKill;
+    public UnityEvent onKill;
+    [SerializeField] bool hospitalSleep = false;
 
     public Color circleColor = Color.red;
 
@@ -89,6 +90,8 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (hospitalSleep)
+            animator.SetBool("Stretcher", true);
         agent = GetComponent<NavMeshAgent>();
         int i = 0;
         foreach (Transform t in patrolParent.transform)

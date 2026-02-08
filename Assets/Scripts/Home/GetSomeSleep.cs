@@ -18,8 +18,27 @@ public class GetSomeSleep : MonoBehaviour
     private DaytimeOutside daytimeScript;
     public UnityEvent onSleep;
     public Checkpoint checkpoint;
+    float fadeInTime = 3f;
+    float minFadeTime = 1f;
+    float blackScreenTime = 2f;
+
     RaycastHit hit;
     Ray ray;
+
+    public float FadeInTime { get => fadeInTime; set {
+            if (value < minFadeTime)
+                fadeInTime = minFadeTime;
+            else
+                fadeInTime = value;
+        } }
+
+    public float BlackScreenTime { get => blackScreenTime; set {
+            if (value < minFadeTime)
+                blackScreenTime = minFadeTime;
+            else
+                blackScreenTime = value;
+        }
+    }
 
     private void Awake()
     {
@@ -45,7 +64,7 @@ public class GetSomeSleep : MonoBehaviour
 
                 sequence = DOTween.Sequence();
                 GameFuncs.PlayerScript.SetControl(false);
-                sequence.Append(blackImage.DOColor(new Color(0, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = GoToPrison;
+                sequence.Append(blackImage.DOColor(new Color(0, 0, 0, 1), fadeInTime)).AppendInterval(BlackScreenTime).onComplete = GoToPrison;
                 if (checkpoint != null)
                     checkpoint.OnTeleportInvoke();
             }
@@ -54,6 +73,8 @@ public class GetSomeSleep : MonoBehaviour
 
     private void GoToPrison()
     {
+        fadeInTime -= 0.2f;
+        BlackScreenTime -= 0.2f;
         onSleep.Invoke();
         daytimeScript.SetDay(false);
         prison.SetActive(true);

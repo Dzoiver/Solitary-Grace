@@ -11,10 +11,10 @@ public class Boss : MonoBehaviour
     private NavMeshAgent agent;
     [SerializeField] private float detectRadius = 10f;
 
-    private float health = 600f;
+    public float health = 600f;
     private float maxHealth = 1000f;
 
-    private float attackDamage = 40f;
+    public float attackDamage = 40f;
     private float attackDelay = 0.3f;
     private float currentAttackDelay = 0.3f;
     private float attackCoolDown = 2f;
@@ -36,25 +36,33 @@ public class Boss : MonoBehaviour
     private Vector3 startPosition;
     private Quaternion startRotation;
     public float allowedAngle = 45f;
-    AudioSource audio;
+    public AudioSource audio;
     [SerializeField] AudioClip deathClip;
     [SerializeField] AudioClip hurtClip;
     [SerializeField] AudioClip stepClip;
+    public AudioClip spawnClip;
 
     Animator animator;
+    const float ATTACK_RANGE = 2.9f;
+
+    const float RANGE_ATTACK_TIME = 0f;
+    float currentRangeAttackTime = 10f;
+
+    public UnityEvent onAggro;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         startRotation = transform.rotation;
-        agent = GetComponent<NavMeshAgent>();
         int i = 0;
-        audio = GetComponent<AudioSource>();
+        
         //rb = GetComponent<Rigidbody>();
     }
 
     private void Awake()
     {
+        agent = GetComponent<NavMeshAgent>();
+        audio = GetComponent<AudioSource>();
         startPosition = transform.position;
     }
 
@@ -99,7 +107,21 @@ public class Boss : MonoBehaviour
             canKill = true;
             StopHealilng();
         }
+        animator.SetFloat("Speed", agent.speed);
+    }
 
+    private void OnEnable()
+    {
+        agent.updateRotation = false;
+        Vector3 direction = GameFuncs.PlayerScript.transform.position - transform.position;
+        direction.y = 0;
+        if (direction != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(direction);
+
+            transform.rotation = rotation;
+        }
+        agent.updateRotation = true;
     }
 
     private void FixedUpdate()
@@ -109,6 +131,7 @@ public class Boss : MonoBehaviour
 
         if (ChasingPlayer())
         {
+            onAggro.Invoke();
             animator.SetBool("Chase", true);
             agent.destination = GameFuncs.PlayerScript.transform.position;
         }
@@ -147,9 +170,20 @@ public class Boss : MonoBehaviour
         if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance
             && !GameFuncs.PlayerScript.IsDead())
         {
+            agent.updateRotation = false;
+            Vector3 direction = GameFuncs.PlayerScript.transform.position - transform.position;
+            direction.y = 0;
+            if (direction != Vector3.zero)
+            {
+                Quaternion rotation = Quaternion.LookRotation(direction);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.fixedDeltaTime);
+            }
+
             animator.SetBool("PlayerClose", true);
             return true;
         }
+        agent.updateRotation = true;
         animator.SetBool("PlayerClose", false);
         return false;
     }
@@ -177,6 +211,8 @@ public class Boss : MonoBehaviour
 
     public void GetDamage(float amount)
     {
+        enabled = true;
+        activeAI = true;
         chase = true;
         if (health - amount <= 0)
         {
@@ -206,7 +242,10 @@ public class Boss : MonoBehaviour
 
     public void AnimationAttack()
     {
-        GameFuncs.PlayerScript.GetDamage(attackDamage);
+        if (agent.remainingDistance <= ATTACK_RANGE)
+        {
+            GameFuncs.PlayerScript.GetDamage(attackDamage);
+        }
         currentAttackDelay = 0f;
         currentAttackCoolDown = 0f;
     }
@@ -218,19 +257,10 @@ public class Boss : MonoBehaviour
         Vector3 directionNormal = (GameFuncs.PlayerScript.gameObject.transform.position - transform.position).normalized;
         if (Physics.Raycast(transform.position, directionNormal, out RaycastHit hit, detectRadius, layerMask))
         {
-            Vector3 directionToHit = (hit.point - transform.position).normalized;
-            float angleToTarget = Vector3.Angle(transform.forward, directionToHit);
-            if (angleToTarget <= allowedAngle)
+            if (hit.collider.CompareTag("Player"))
             {
-                // Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.green);
-
-                if (hit.collider.CompareTag("Player"))
-                {
-                    chase = true;
-                    return true;
-                }
-                // Object is within the allowed angle
-                // Debug.Log("Hit object " + hit.collider.name + " within allowed angle.");
+                chase = true;
+                return true;
             }
         }
 

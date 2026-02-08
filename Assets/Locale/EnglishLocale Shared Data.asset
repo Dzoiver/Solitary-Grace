@@ -495,6 +495,10 @@ MonoBehaviour:
     m_Key: broken_door
     m_Metadata:
       m_Items: []
+  - m_Id: 13339960080117760
+    m_Key: HospitalDoor
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

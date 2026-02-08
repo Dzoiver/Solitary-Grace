@@ -235,8 +235,6 @@ public class Elevator : MonoBehaviour
 
     public void OnStop()
     {
-        if (wallOnMoving != null)
-            wallOnMoving.SetActive(false);
         moving = false;
         audio.enabled = false;
         audio.volume = 0f;
@@ -296,6 +294,8 @@ public class Elevator : MonoBehaviour
         CloseDoors();
         CloseOuterDoors(currentFloor);
         yield return new WaitForSeconds(1.5f);
+        if (wallOnMoving != null)
+            wallOnMoving.SetActive(false);
         destinationFloor.y = firstFloor.y + nextFloor * floorDistance;
         currentFloor = nextFloor;
         moving = true;

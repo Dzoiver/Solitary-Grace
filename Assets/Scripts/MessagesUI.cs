@@ -15,6 +15,7 @@ public class MessagesUI : MonoBehaviour
     int freeText = 0;
     [SerializeField] string pickupMes = "You picked up ";
     [SerializeField] string inventoryFull = "Inventory is full";
+    [SerializeField] string useMes = "You used ";
 
     int textIndex = 0;
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class MessagesUI : MonoBehaviour
         firstTime = false;
         TextMeshProUGUI textmesh = FindFreeText();
         textmesh.color = Color.white;
-        textmesh.text = pickupMes + itemName;
+        textmesh.text = pickupMes + " <color=green>" + itemName + "</color>";
 
         textmesh.DOFade(1f, 0.5f).OnComplete(() =>
         {
@@ -49,6 +50,24 @@ public class MessagesUI : MonoBehaviour
                 textmesh.gameObject.SetActive(false);
             });
         });
+        });
+    }
+
+    public void ShowUsage(string itemName)
+    {
+        firstTime = false;
+        TextMeshProUGUI textmesh = FindFreeText();
+        textmesh.color = Color.white;
+        textmesh.text = useMes + " <color=green>" + itemName + "</color>";
+
+        textmesh.DOFade(1f, 0.5f).OnComplete(() =>
+        {
+            DOVirtual.DelayedCall(2f, () => {
+                textmesh.DOFade(0f, 1f).OnComplete(() =>
+                {
+                    textmesh.gameObject.SetActive(false);
+                });
+            });
         });
     }
 

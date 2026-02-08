@@ -140,7 +140,7 @@ public class SimpleTrigger : MonoBehaviour
         collider.enabled = value;
     }
 
-    public void DisablePlayer() => GameFuncs.PlayerScript.SetControl(false);
+    public void PlayerControl(bool value = false) => GameFuncs.PlayerScript.SetControl(value);
 
     public void PlayerFaint()
     {
