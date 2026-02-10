@@ -1,5 +1,6 @@
 using DG.Tweening;
 using GM;
+using SolitaryAudio;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -102,6 +103,7 @@ public class Checkpoint : MonoBehaviour
 
     public void OnTeleportInvoke()
     {
+        MusicAmbientController.StopAll();
         onTeleport.Invoke();
     }
 

@@ -35,6 +35,7 @@ MonoBehaviour:
   quantity: 0
   sprite: {fileID: 0}
   keyitem: 0
+  usable: 0
   references:
     version: 2
     RefIds: []

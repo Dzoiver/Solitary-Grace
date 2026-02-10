@@ -4,28 +4,25 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using Unity.VisualScripting;
+using System.Linq;
+using System.Drawing;
+using Color = UnityEngine.Color;
 
 public class MessagesUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI[] textUI;
     [SerializeField] TextMeshProUGUI tip;
     bool firstTime = true;
-    Vector3 defaultTextPos;
-    float elevateAmount = 50f;
-    int freeText = 0;
     [SerializeField] string pickupMes = "You picked up ";
     [SerializeField] string inventoryFull = "Inventory is full";
     [SerializeField] string useMes = "You used ";
-
-    int textIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
         tip.DOFade(0f, 0f);
-        defaultTextPos = textUI[0].gameObject.transform.position;
         foreach (TextMeshProUGUI t in textUI)
         {
-            t.gameObject.SetActive(false);
+            t.color = new Color(1f, 1f, 1f, 0f);
         }
     }
 
@@ -47,7 +44,7 @@ public class MessagesUI : MonoBehaviour
         DOVirtual.DelayedCall(2f, () => {
             textmesh.DOFade(0f, 1f).OnComplete(() =>
             {
-                textmesh.gameObject.SetActive(false);
+                //textmesh.gameObject.SetActive(false);
             });
         });
         });
@@ -65,7 +62,7 @@ public class MessagesUI : MonoBehaviour
             DOVirtual.DelayedCall(2f, () => {
                 textmesh.DOFade(0f, 1f).OnComplete(() =>
                 {
-                    textmesh.gameObject.SetActive(false);
+                    //textmesh.gameObject.SetActive(false);
                 });
             });
         });
@@ -82,7 +79,7 @@ public class MessagesUI : MonoBehaviour
             DOVirtual.DelayedCall(2f, () => {
                 textmesh.DOFade(0f, 1f).OnComplete(() =>
                 {
-                    textmesh.gameObject.SetActive(false);
+                    //textmesh.gameObject.SetActive(false);
                 });
             });
         });
@@ -90,6 +87,13 @@ public class MessagesUI : MonoBehaviour
 
     private TextMeshProUGUI FindFreeText()
     {
+        TextMeshProUGUI text = textUI[0].transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>();
+
+        text.transform.SetAsLastSibling();
+        text.DOKill();
+        text.DOFade(1f, 0f);
+        return text;
+        /*
         Vector3 newPosition = new Vector3();
         float maxY = 0f;
         TextMeshProUGUI freeTextObj = null;
@@ -114,7 +118,7 @@ public class MessagesUI : MonoBehaviour
         freeTextObj.color = new Color(1f, 1f, 1f, 0f);
         freeTextObj.gameObject.SetActive(true);
         return freeTextObj;
-
+        */
     }
 
     public void FullInventory()
@@ -122,13 +126,12 @@ public class MessagesUI : MonoBehaviour
         TextMeshProUGUI textmesh = FindFreeText();
         textmesh.color = Color.red;
         textmesh.text = inventoryFull;
-
         textmesh.DOFade(1f, 0.5f).OnComplete(() =>
         {
             DOVirtual.DelayedCall(2f, () => {
                 textmesh.DOFade(0f, 1f).OnComplete(() =>
                 {
-                    textmesh.gameObject.SetActive(false);
+                    //textmesh.gameObject.SetActive(false);
                 });
             });
         });

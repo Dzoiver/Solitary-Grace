@@ -6,6 +6,7 @@ public class ContextMenuItem : MonoBehaviour
 {
     public InventoryItem currentItem;
     [SerializeField] GameObject dropOption;
+    [SerializeField] GameObject useOption;
     public Inventory inventory;
     [SerializeField] MusicAmbientController audioController;
     [SerializeField] AudioClip healthDrinkSound;
@@ -21,7 +22,17 @@ public class ContextMenuItem : MonoBehaviour
             dropOption.SetActive(false);
         else
             dropOption.SetActive(true);
-        currentItem = item;
+
+        if (item.Usable)
+        {
+            useOption.SetActive(true);
+        }
+        else
+        {
+            useOption.SetActive(false);
+        }
+
+            currentItem = item;
         gameObject.SetActive(true);
         gameObject.transform.position = Input.mousePosition;
     }

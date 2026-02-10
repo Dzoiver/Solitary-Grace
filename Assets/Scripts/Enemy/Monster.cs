@@ -75,7 +75,7 @@ public class Monster : MonoBehaviour
             if (pretending)
             {
                 animator.SetBool("Pretending", true);
-                ActiveAI = false;
+                //ActiveAI = false;
             } 
             else
             {
@@ -145,7 +145,7 @@ public class Monster : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.fixedDeltaTime);
             }
 
-
+            Pretending = false;
             Alarm();
             chase = true;
             agent.destination = GameFuncs.PlayerScript.transform.position;
@@ -192,8 +192,6 @@ public class Monster : MonoBehaviour
             agent.updateRotation = true;
             agent.isStopped = false;
             agent.destination = GameFuncs.PlayerScript.transform.position;
-            
-
         }
         else
         {
@@ -320,8 +318,10 @@ public class Monster : MonoBehaviour
 
     private bool ChasingPlayer()
     {
-        Vector3 directionNormal = (GameFuncs.PlayerScript.gameObject.transform.position - transform.position).normalized;
-        if (Physics.Raycast(transform.position, directionNormal, out RaycastHit hit, detectRadius, layerMask))
+        if (Pretending)
+            return false;
+        Vector3 directionToPlayer = (GameFuncs.PlayerScript.gameObject.transform.position - transform.position).normalized;
+        if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, detectRadius, layerMask))
         {
             Vector3 directionToHit = (hit.point - transform.position).normalized;
             float angleToTarget = Vector3.Angle(transform.forward, directionToHit);

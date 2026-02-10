@@ -41,17 +41,18 @@ public class BossBehindSpawner : MonoBehaviour
             Vector3 bossDirection = boss.transform.position - cameraPosition;
 
             float angleToTarget = Vector3.Angle(lookDirection, bossDirection.normalized);
-            if (angleToTarget < 68)
+            if (angleToTarget < 55f)
             {
                 onSpawn.Invoke();
                 boss.enabled = true;
+                enabled = false;
             }
         }
     }
 
     public void FindPlaceToSpawn()
     {
-        if (currentTrySpawn < 0.5f || boss.enabled)
+        if (currentTrySpawn < 0.5f || boss.gameObject.activeSelf)
             return;
         Vector3 guessSpawn;
         ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -67,7 +68,7 @@ public class BossBehindSpawner : MonoBehaviour
             //Debug.Log(child.name);
             //Vector3 spawnPointDirection = (hit.point - guessSpawn).normalized;
             float angleToTarget = Vector3.Angle(lookDirection, toSpawnPoint.normalized);
-            if (angleToTarget > 90)
+            if (angleToTarget > 70 && Vector3.Distance(GameFuncs.PlayerScript.transform.position, guessSpawn) > 4f)
             {
                 boss.transform.position = guessSpawn;
                 boss.gameObject.SetActive(true);

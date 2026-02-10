@@ -29,4 +29,5 @@ public class ScriptableItem : ScriptableObject
     public int quantity;
     public Sprite sprite;
     public bool keyitem;
+    public bool usable = true;
 }

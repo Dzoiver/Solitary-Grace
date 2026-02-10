@@ -520,6 +520,10 @@ MonoBehaviour:
     m_Localized: Door to the Hospital, won't open.
     m_Metadata:
       m_Items: []
+  - m_Id: 13715383754469376
+    m_Localized: You used
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

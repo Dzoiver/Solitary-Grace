@@ -20543,7 +20543,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 49151
+    m_Bits: 48127
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -21090,7 +21090,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f22faf52dc23bea40acfedecfa17d684, type: 3}
   - {fileID: 8300000, guid: ec47b1ed40910b04495b5e4201b5024b, type: 3}
   - {fileID: 8300000, guid: 61d081a008f04f5468c16bdc2e5fec48, type: 3}
-  stepSpeed: 4
+  stepSpeed: 3.9
 --- !u!82 &4870350606257932846
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21339,7 +21339,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 100351
+    m_Bits: 493567
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

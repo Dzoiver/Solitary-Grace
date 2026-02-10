@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 enum ItemNames
 {
@@ -24,6 +25,7 @@ public class InventoryItem
     public int inventorySlotID;
     bool keyItem = false;
     string description = "No description for this item.";
+    bool usable = true;
 
     public Sprite ItemSprite
     {
@@ -53,8 +55,9 @@ public class InventoryItem
 
     public bool KeyItem { get => keyItem; set => keyItem = value; }
     public string Description { get => description; set => description = value; }
+    public bool Usable { get => usable; set => usable = value; }
 
-    public InventoryItem(int _id, int _maxQuantity = 1, string _name = "", int _quantity = 1, Sprite _itemSprite = null, bool _keyItem = false, string _description = "No description for this item")
+    public InventoryItem(int _id, int _maxQuantity = 1, string _name = "", int _quantity = 1, Sprite _itemSprite = null, bool _keyItem = false, string _description = "No description for this item", bool _usable = true)
     {
         id = _id;
         maxQuantity = _maxQuantity;
@@ -63,6 +66,7 @@ public class InventoryItem
         itemSprite = _itemSprite;
         keyItem = _keyItem;
         description = _description;
+        usable = _usable;
     }
 
     public InventoryItem(InventoryItem other)
@@ -75,6 +79,7 @@ public class InventoryItem
         this.keyItem = other.keyItem;
         this.inventorySlotID = other.inventorySlotID;
         description = other.description;
+        usable = other.usable;
     }
 }
 
@@ -102,10 +107,10 @@ public class Inventory : MonoBehaviour
         InventoryItem item;
         if (scriptableItem == null)
         {
-            item = new InventoryItem(999, 1, "unknown", 1, null, false, "No description for this item");
+            item = new InventoryItem(999, 1, "unknown", 1, null, false, "No description for this item", true);
         }
         else
-            item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite, scriptableItem.keyitem, scriptableItem.description);
+            item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite, scriptableItem.keyitem, scriptableItem.description, scriptableItem.usable);
         ItemsList.Add(item);
         DisplayItems();
         weaponmanager.pistolScript.UpdateAmmoFromInventory();
@@ -159,12 +164,12 @@ public class Inventory : MonoBehaviour
         if (ItemsList[itemSlot].Quantity - deleteQuantity <= 0)
         {
             ItemsList[itemSlot].Quantity = 0;
-            if (ItemsList[itemSlot].Name == "Pistol Ammo")
+            if (ItemsList[itemSlot].Id == 6 || ItemsList[itemSlot].Id == 7)
                 weaponmanager.pistolScript.UpdateAmmoFromInventory();
-            if (ItemsList[itemSlot].Name == "Shotgun Ammo")
-                weaponmanager.shotgunScript.UpdateAmmoFromInventory();
+            else
+                mesUI.ShowUsage(ItemsList[itemSlot].Name);
 
-            mesUI.ShowUsage(ItemsList[itemSlot].Name);
+
             ItemsList.RemoveAt(itemSlot);
             DisplayItems();
             return;
@@ -172,9 +177,9 @@ public class Inventory : MonoBehaviour
 
         ItemsList[itemSlot].Quantity -= deleteQuantity;
 
-        if (ItemsList[itemSlot].Name == "Pistol Ammo")
+        if (ItemsList[itemSlot].Id == 6)
             weaponmanager.pistolScript.UpdateAmmoFromInventory();
-        if (ItemsList[itemSlot].Name == "Shotgun Ammo")
+        if (ItemsList[itemSlot].Id == 7)
             weaponmanager.shotgunScript.UpdateAmmoFromInventory();
     }
 

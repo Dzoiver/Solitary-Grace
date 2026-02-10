@@ -11,6 +11,7 @@ namespace SolitaryAudio
         [SerializeField] private AudioSource ambient;
         [SerializeField] private AudioSource sounds;
         private AudioClip piano;
+        static MusicAmbientController controller;
         private float ambientVolume = 1f;
         private float musicVolume = 1f;
         private float soundVolume = 1f;
@@ -22,7 +23,7 @@ namespace SolitaryAudio
         // Start is called before the first frame update
         void Start()
         {
-
+            controller = this;
         }
         public void PlayMusic(string audioName, float volume = 1f)
         {
@@ -87,6 +88,12 @@ namespace SolitaryAudio
             ambient.volume = ambientVolume;
             ambient.clip = clip;
             ambient.DOFade(1f, 1f);
+        }
+
+        static public void StopAll()
+        {
+            controller.StopMusic();
+            controller.StopAmbient();
         }
     }
 }

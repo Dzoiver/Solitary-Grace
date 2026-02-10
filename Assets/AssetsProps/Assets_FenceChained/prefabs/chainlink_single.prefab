@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000011065470460}
   - component: {fileID: 33000013787139626}
   - component: {fileID: 23000012348044720}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: chainlink_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4000012015980754}
   - component: {fileID: 33000013037877684}
   - component: {fileID: 23000010531826636}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: chainlink_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4000012378391202}
   - component: {fileID: 205000010092046266}
   - component: {fileID: 1710969406413636575}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: chainlink_single
   m_TagString: Untagged
   m_Icon: {fileID: 0}

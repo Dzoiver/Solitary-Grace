@@ -38,6 +38,7 @@ public class NPCDialogue : MonoBehaviour
     float iconTime = 0.5f;
     RaycastHit hit;
     Ray ray;
+    public bool Skippable = false;
 
     private void Awake()
     {
@@ -127,7 +128,11 @@ public class NPCDialogue : MonoBehaviour
 
         if (triggerOnce)
             trigger = false;
-        
+
+        if (!Skippable && printing)
+        {
+            return;
+        }
 
         enabled = true;
         if (textIndex == messageGroups[groupIndex].messages.Length) // If last message in the group
@@ -140,7 +145,7 @@ public class NPCDialogue : MonoBehaviour
             return;
         }
         characterIndex = 0;
-        if (printing)
+        if (printing) // Skipping dialogue
         {
             characterIndex = messageGroups[groupIndex].messages[textIndex].Length - 1;
         }

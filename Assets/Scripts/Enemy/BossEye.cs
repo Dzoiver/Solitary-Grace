@@ -7,12 +7,18 @@ public class BossEye : MonoBehaviour
 {
     DOTweenAnimation eyeAnim;
     bool opened = false;
+    bool killed = false;
     BossHealer healer;
     MeshRenderer meshRenderer;
+    [SerializeField] FleshWall fleshwall;
     [SerializeField] Material eyeActiveMat;
     [SerializeField] Material eyeDeadMat;
     [SerializeField] AudioClip[] glassSounds;
     AudioSource audio;
+
+    public bool Opened { get => opened; set => opened = value; }
+    public bool Killed { get => killed; set => killed = value; }
+
     void Start()
     {
         eyeAnim = GetComponent<DOTweenAnimation>();
@@ -22,42 +28,51 @@ public class BossEye : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (!opened)
+        if (!Opened)
             return;
         if (other.CompareTag("Bullet"))
         {
-            CloseEye();
+            KillEye();
         }
     }
 
     public void OpenEye()
     {
-        if (!opened && !eyeAnim.tween.IsPlaying())
+        if (!Opened)
         {
             meshRenderer.material = eyeActiveMat;
-            healer.AddEye();
-            opened = true;
-            eyeAnim.DOPlay();
+            Opened = true;
+            healer.closedEyes.Remove(this);
+            eyeAnim.DOPlayForward();
         }
     }
 
-    public void CloseEye()
+    public void KillEye()
     {
-        if (!opened)
+        if (!Opened)
             return;
-        int rng = Random.Range(0, 2);
 
+        int rng = Random.Range(0, 2);
         audio.PlayOneShot(glassSounds[rng]);
         eyeAnim.DOPlayBackwards();
-        opened = false;
+        Opened = false;
+        Killed = true;
         meshRenderer.material = eyeDeadMat;
-        healer.DeleteEye();
+        healer.aliveEyes.Remove(this);
+        healer.closedEyes.Remove(this);
+        fleshwall.Count++;
+    }
+
+    public void HideEye()
+    {
+        if (!Opened)
+            return;
+
+        healer.closedEyes.Add(this);
+        eyeAnim.DOPlayBackwards();
+        Opened = false;
+        meshRenderer.material = eyeDeadMat;
     }
 }

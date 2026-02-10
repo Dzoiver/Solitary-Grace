@@ -7,7 +7,6 @@ public class SetOnFire : MonoBehaviour
 {
     [SerializeField] Inventory inventory;
     [SerializeField] GameObject newRespawn;
-    CameraReturnControls cameracontrols;
     [SerializeField] GameObject room;
     [SerializeField] GameObject deloadWhileInRoom;
     [SerializeField] GameObject fire;
@@ -16,26 +15,15 @@ public class SetOnFire : MonoBehaviour
     [SerializeField] DoorOpen door;
     GameObject startDestination;
     [SerializeField] GameObject blockSleep;
-    
-    GameOver gameover;
 
     private void Awake()
     {
-        gameover = FindObjectOfType<GameOver>();
         CameraReturnControls[] scripts = FindObjectsOfType<CameraReturnControls>();
-        cameracontrols = FindObjectOfType<CameraReturnControls>();
-        
     }
     // Start is called before the first frame update
     void Start()
     {
         startDestination = door.destinationPoint;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void CheckBothItems()

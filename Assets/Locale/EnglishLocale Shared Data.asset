@@ -499,6 +499,10 @@ MonoBehaviour:
     m_Key: HospitalDoor
     m_Metadata:
       m_Items: []
+  - m_Id: 13715383754469376
+    m_Key: Used
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -13,8 +13,29 @@ MonoBehaviour:
   m_Name: SleepRights
   m_EditorClassIdentifier: 
   id: 14
-  name: SleepRights
+  localizedName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  localizedDescription:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   maxQuantity: 1
   quantity: 1
   sprite: {fileID: 21300000, guid: 4fd805b3cc27eb546a748fa2ab6a30f9, type: 3}
   keyitem: 1
+  usable: 0
+  references:
+    version: 2
+    RefIds: []

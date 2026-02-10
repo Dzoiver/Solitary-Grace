@@ -34,6 +34,7 @@ public class BossDoorsController : MonoBehaviour
     {
         if (closing)
             return;
+        closing = true;
         door1.DOPlayBackwards();
         door2.DOPlayBackwards();
     }

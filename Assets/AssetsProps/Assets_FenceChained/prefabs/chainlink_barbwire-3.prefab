@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000011410977192}
   - component: {fileID: 33000010784500842}
   - component: {fileID: 23000012688936090}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: chainlink_barbedwire-3_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4000011240085458}
   - component: {fileID: 205000013743736396}
   - component: {fileID: 5429228049713419431}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: chainlink_barbwire-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4000011534965500}
   - component: {fileID: 33000012654294030}
   - component: {fileID: 23000014099749656}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: chainlink_barbedwire-3_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

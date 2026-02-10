@@ -4,6 +4,7 @@ using DG.Tweening;
 using SolitaryAudio;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject confirmPanel;
     [SerializeField] GameObject confirmPanelItem;
     [SerializeField] TextMeshProUGUI healthText;
-    Inventory inventory;
+    public Inventory inventory;
     ContextMenuItem context;
     WeaponManager weapon;
     MonsterManager monsterManager;
@@ -22,6 +23,7 @@ public class Menu : MonoBehaviour
     string healthString;
     [SerializeField] Chest chest;
     [SerializeField] GameObject description;
+    [SerializeField] Image ownBlackScreen;
 
     private void Awake()
     {
@@ -56,11 +58,9 @@ public class Menu : MonoBehaviour
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
             monsterManager.FreezeMonsters();
-            Debug.Log(Cursor.lockState);
             menuPanel.SetActive(true);
-            
             // Fadein
-            GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
+            ownBlackScreen.DOColor(new Color(0, 0, 0, 0), 0.5f).onComplete = () =>
             {
                 GameFuncs.fading = false;
             };
@@ -76,7 +76,7 @@ public class Menu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         audio.clip = exitSound;
         audio.Play();
-        GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
+        ownBlackScreen.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
             monsterManager.UnfreezeMonsters();
             weapon.enabled = true;

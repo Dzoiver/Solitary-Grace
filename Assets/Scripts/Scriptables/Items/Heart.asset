@@ -35,6 +35,7 @@ MonoBehaviour:
   quantity: 1
   sprite: {fileID: 21300000, guid: fcc695f643a17a24e8e61eff6a747d12, type: 3}
   keyitem: 1
+  usable: 0
   references:
     version: 2
     RefIds: []

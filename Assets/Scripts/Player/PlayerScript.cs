@@ -286,6 +286,11 @@ public class PlayerScript : MonoBehaviour
         if (!allowControl)
             return;
 
+        if (Input.GetKey(KeyCode.G) && menu.inventory.Has(2, out var slot))
+        {
+            menu.inventory.DeleteItem(slot, 1);
+        }
+
         if (Input.GetButtonDown("Jump") && isGrounded && AllowJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravity);
@@ -310,8 +315,8 @@ public class PlayerScript : MonoBehaviour
         Vector3 rayOrigin2 = transform.position + Vector3.up * 0.1f;
         if (Physics.Raycast(rayOrigin2, Vector3.down, out hit2, 1.5f))
         {
-            Vector3 horizontalVelocity = new Vector3(controller.velocity.x, controller.velocity.y, controller.velocity.z);
-            float speed = horizontalVelocity.magnitude;
+            Vector3 velocity = new Vector3(controller.velocity.x, controller.velocity.y, controller.velocity.z);
+            float speed = velocity.magnitude;
             Terrain terrain = hit2.collider.GetComponent<Terrain>();
             if (terrain != null)
             {
