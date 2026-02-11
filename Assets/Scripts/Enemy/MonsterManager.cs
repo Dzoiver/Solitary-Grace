@@ -6,6 +6,7 @@ public class MonsterManager : MonoBehaviour
 {
     Monster[] monsters;
     Monster[] monstersFreezed;
+    [SerializeField] Boss boss;
     private void Awake()
     {
         monsters = FindObjectsOfType<Monster>(true);
@@ -32,6 +33,8 @@ public class MonsterManager : MonoBehaviour
                 monster.gameObject.SetActive(false);
             }
         }
+        if (boss.OnceWoke)
+            boss.gameObject.SetActive(false);
     }
 
     public void UnfreezeMonsters()
@@ -44,5 +47,7 @@ public class MonsterManager : MonoBehaviour
                 monster.gameObject.SetActive(true);
             }
         }
+        if (boss.OnceWoke)
+            boss.gameObject.SetActive(true);
     }
 }

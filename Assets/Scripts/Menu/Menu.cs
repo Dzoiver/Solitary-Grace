@@ -20,7 +20,7 @@ public class Menu : MonoBehaviour
     AudioSource audio;
     [SerializeField] AudioClip exitSound;
     [SerializeField] TextMeshProUGUI itemnameLabel;
-    string healthString;
+    public string healthString;
     [SerializeField] Chest chest;
     [SerializeField] GameObject description;
     [SerializeField] Image ownBlackScreen;
@@ -31,7 +31,6 @@ public class Menu : MonoBehaviour
         weapon = FindAnyObjectByType<WeaponManager>();
         context = FindObjectOfType<ContextMenuItem>();
         audio = GetComponent<AudioSource>();
-        healthString = healthText.text;
     }
     // Start is called before the first frame update
     void Start()
@@ -124,6 +123,6 @@ public class Menu : MonoBehaviour
 
     public void ChangeHealth(float value)
     {
-        healthText.text = healthString + value.ToString();
+        healthText.text = healthString + ": " + value.ToString();
     }
 }

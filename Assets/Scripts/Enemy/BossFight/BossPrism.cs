@@ -9,6 +9,7 @@ public class BossPrism : MonoBehaviour
     AudioSource audio;
     [SerializeField] AudioClip wallSound;
     [SerializeField] AudioClip playerHit;
+    [SerializeField] AudioClip launchClip;
     bool launched = false;
     float prismSpeed = 15f;
     float prismDamage = 15f;
@@ -67,6 +68,7 @@ public class BossPrism : MonoBehaviour
 
     public void Launch()
     {
+        audio.PlayOneShot(launchClip, 0.2f);
         launched = true;
         rb.constraints = RigidbodyConstraints.None;
     }
@@ -77,12 +79,12 @@ public class BossPrism : MonoBehaviour
         enabled = true;
         transform.position = newTransform.position;
         
-        transform.position = transform.position + Random.insideUnitSphere * 2f;
+        transform.position = transform.position + Random.insideUnitSphere * 1.9f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && enabled)
         {
             audio.PlayOneShot(playerHit);
             GameFuncs.PlayerScript.GetDamage(prismDamage);

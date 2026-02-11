@@ -2,6 +2,7 @@ using UnityEngine;
 using GM;
 using Zenject;
 using UnityEditor;
+using SolitaryAudio;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -50,7 +51,9 @@ public class PlayerScript : MonoBehaviour
     private float gravityEffect;
     WeaponManager weaponManager;
     Menu menu;
-    [SerializeField] AudioSource hurt;
+    [SerializeField] AudioClip hurt;
+    [SerializeField] AudioClip bubble;
+    AudioSource audio;
 
     public float GravityMultiplier
     {
@@ -66,6 +69,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake()
     {
+        audio = GetComponent<AudioSource>();
         menu = FindObjectOfType<Menu>();
         GameFuncs.PlayerScript = this;
         cameraAnimator = playerCam.GetComponent<Animator>();
@@ -83,7 +87,7 @@ public class PlayerScript : MonoBehaviour
         if (Health <= 0) return;
 
         Health = Mathf.Max(0, Health - damage);
-        hurt.Play();
+        audio.PlayOneShot(hurt, 0.2f);
         if (Health <= 0)
         {
             Death();
@@ -286,9 +290,10 @@ public class PlayerScript : MonoBehaviour
         if (!allowControl)
             return;
 
-        if (Input.GetKey(KeyCode.G) && menu.inventory.Has(2, out var slot))
+        if (Input.GetKeyDown(KeyCode.G) && menu.inventory.Has(2, out var slot))
         {
             menu.inventory.DeleteItem(slot, 1);
+            audio.PlayOneShot(bubble, 0.2f);
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded && AllowJump)

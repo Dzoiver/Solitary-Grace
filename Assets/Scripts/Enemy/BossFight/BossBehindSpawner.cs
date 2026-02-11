@@ -68,7 +68,7 @@ public class BossBehindSpawner : MonoBehaviour
             //Debug.Log(child.name);
             //Vector3 spawnPointDirection = (hit.point - guessSpawn).normalized;
             float angleToTarget = Vector3.Angle(lookDirection, toSpawnPoint.normalized);
-            if (angleToTarget > 70 && Vector3.Distance(GameFuncs.PlayerScript.transform.position, guessSpawn) > 4f)
+            if (angleToTarget > 65 && Vector3.Distance(GameFuncs.PlayerScript.transform.position, guessSpawn) > 4f)
             {
                 boss.transform.position = guessSpawn;
                 boss.gameObject.SetActive(true);

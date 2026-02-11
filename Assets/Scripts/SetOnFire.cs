@@ -14,7 +14,9 @@ public class SetOnFire : MonoBehaviour
     [SerializeField] GameObject prisonDestination;
     [SerializeField] DoorOpen door;
     GameObject startDestination;
-    [SerializeField] GameObject blockSleep;
+    [SerializeField] SimpleTrigger blockSleep;
+    bool item11Taken = false;
+    bool item12Taken = false;
 
     private void Awake()
     {
@@ -28,17 +30,23 @@ public class SetOnFire : MonoBehaviour
 
     public void CheckBothItems()
     {
-        if (inventory.Has(11) && inventory.Has(12))
+        if (inventory.Has(11))
+            item11Taken = true;
+
+        if (inventory.Has(12))
+            item12Taken = true;
+
+        if (item11Taken && item12Taken)
         {
             //wakeupdest.transform.position = newRespawn.transform.position;
             //Debug.Log(Checkpoint.onTeleportGlobal);
             //Checkpoint.onTeleportGlobal.AddListener(SetUpFireAndRoom);
             //cameracontrols.ChangeWakeUpStart(newRespawn.transform);
             //gameover.onRespawn.AddListener(SetUpFireAndRoom);
-            Debug.Log("getting ready");
             door.destinationPoint = prisonDestination;
             door.onEnter.AddListener(SetUpFireAndRoom);
-            blockSleep.SetActive(true);
+            blockSleep.SetActiveTrigger(true);
+            getsomesleep.gameObject.SetActive(false);
         }
     }
 
@@ -52,9 +60,8 @@ public class SetOnFire : MonoBehaviour
 
     public void UnsetUpFire()
     {
-        if (!room.activeSelf)
-            return;
-        blockSleep.SetActive(false);
+        getsomesleep.gameObject.SetActive(true);
+        blockSleep.SetActiveTrigger(false);
         door.destinationPoint = startDestination;
         door.onEnter.RemoveListener(SetUpFireAndRoom);
         //gameover.onRespawn.RemoveListener(SetUpFireAndRoom);

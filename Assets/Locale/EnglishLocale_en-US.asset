@@ -120,7 +120,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 62384867946496
-    m_Localized: I don't wanna sleep yet.
+    m_Localized: I dont wanna sleep yet.
     m_Metadata:
       m_Items: []
   - m_Id: 73274824634368
@@ -233,11 +233,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 110236826644480
-    m_Localized: What are the chances that you know where to apply this haha.
+    m_Localized: Sometimes it's so good to anonymously share something super secret.
+      Who cares if you can't get here anyway.
     m_Metadata:
       m_Items: []
   - m_Id: 111558627995648
-    m_Localized: Used real photo as a reference
+    m_Localized: Reposting.
     m_Metadata:
       m_Items: []
   - m_Id: 111477656956928
@@ -517,7 +518,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13339960080117760
-    m_Localized: Door to the Hospital, won't open.
+    m_Localized: Door to the Hospital, wont open.
     m_Metadata:
       m_Items: []
   - m_Id: 13715383754469376

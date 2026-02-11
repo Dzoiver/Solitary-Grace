@@ -13,9 +13,9 @@ public class BossHealer : MonoBehaviour
     public List<BossEye> aliveEyes = new List<BossEye>();
     public List<BossEye> closedEyes = new List<BossEye>();
     float currentEyeTime = 0f;
-    float eyeTime = 0.7f;
+    float eyeTime = 0.6f;
     int spawnedEyes = 0; // Spawned for this session
-    int maxSpawnedEyes = 15;
+    int maxSpawnedEyes = 22;
     float max_healingTime = 12f;
     float current_healingTime = 0f;
     // Start is called before the first frame update
@@ -79,9 +79,13 @@ public class BossHealer : MonoBehaviour
 
     public bool CantHealAnymore()
     {
-
         if (current_healingTime > max_healingTime || spawnedEyes >= maxSpawnedEyes || aliveEyes.Count <= 0)
         {
+            if (current_healingTime > max_healingTime)
+                Debug.Log("timeout");
+
+            if (spawnedEyes >= maxSpawnedEyes)
+                Debug.Log("max eyes");
             StopHealing();
             return true;
         }

@@ -20727,7 +20727,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 133
   currentElevator: {fileID: 0}
-  hurt: {fileID: 8816580241620476614}
+  hurt: {fileID: 8300000, guid: 0be349676a3718945b51610122c8fc48, type: 3}
+  bubble: {fileID: 8300000, guid: d4e50a3bd1968854085f55eeb0b9c926, type: 3}
 --- !u!65 &472942420
 BoxCollider:
   m_ObjectHideFlags: 0

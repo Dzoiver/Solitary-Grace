@@ -40,6 +40,7 @@ public class Boss : MonoBehaviour
     [SerializeField] AudioClip deathClip;
     [SerializeField] AudioClip hurtClip;
     [SerializeField] AudioClip stepClip;
+    [SerializeField] AudioClip castClip;
     int fleshWallCount = 0;
     public AudioClip spawnClip;
 
@@ -49,8 +50,10 @@ public class Boss : MonoBehaviour
     const float RANGE_ATTACK_TIME = 0f;
     const float HEAL_HEALTH = 800f;
     const float HEAL_RANGE = 300f;
-    float healSpeed = 250f;
+    float healSpeed = 32f;
     float currentRangeAttackTime = 10f;
+
+    public bool OnceWoke = false;
 
     public UnityEvent onAggro;
     [SerializeField] TextMeshProUGUI healthText;
@@ -79,17 +82,18 @@ public class Boss : MonoBehaviour
     [SerializeField] Transform prismSummonTransform;
 
     PlayerScript playerScript;
+    Vector3 healDestination = new Vector3();
 
     // Start is called before the first frame update
     void Start()
     {
         int i = 0;
+        playerScript = GameFuncs.PlayerScript;
         //rb = GetComponent<Rigidbody>();
     }
 
     private void Awake()
     {
-        playerScript = GameFuncs.PlayerScript;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         audio = GetComponent<AudioSource>();
@@ -114,9 +118,9 @@ public class Boss : MonoBehaviour
         DamagePlayer();
         if (bossHealer == null)
             return;
-
+        Debug.Log(agent.destination == healDestination);
         currentPrismTime += Time.deltaTime;
-        if (currentPrismTime > PRISM_COOLDOWN && Vector3.Distance(transform.position, playerScript.transform.position) > 3.5f && Vector3.Distance(transform.position, healSpot.position) > 5f)
+        if (currentPrismTime > PRISM_COOLDOWN && Vector3.Distance(transform.position, playerScript.transform.position) > 3.5f && Vector3.Distance(transform.position, healSpot.position) > 5f && agent.destination != healDestination)
         {
             agent.ResetPath();
             currentPrismTime = 0f;
@@ -154,7 +158,8 @@ public class Boss : MonoBehaviour
         {
             //Debug.Log(health);
             //Debug.Log(bossHealer.GetCurrentEyes() * healSpeed * Time.deltaTime);
-            Health += healSpeed / bossHealer.GetCurrentEyes() * Time.deltaTime;
+            float eyesMultiplier = Mathf.Pow(1 - bossHealer.GetCurrentEyes() / (float)26, 0.5f);
+            Health += healSpeed * eyesMultiplier * Time.deltaTime;
         }
         
     }
@@ -162,7 +167,7 @@ public class Boss : MonoBehaviour
     private void OnEnable()
     {
         agent.updateRotation = false;
-        Vector3 direction = GameFuncs.PlayerScript.transform.position - transform.position;
+        Vector3 direction = playerScript.transform.position - transform.position;
         direction.y = 0;
         if (direction != Vector3.zero)
         {
@@ -181,12 +186,13 @@ public class Boss : MonoBehaviour
         if (ChasingPlayer() && !animator.GetBool("Summon"))
         {
             onAggro.Invoke();
+            OnceWoke = true;
             animator.SetBool("Chase", true);
             AnimatorStateInfo animInfo = animator.GetCurrentAnimatorStateInfo(0);
 
             if (!animInfo.IsName("Attack"))
             {
-                agent.destination = GameFuncs.PlayerScript.transform.position;
+                agent.destination = playerScript.transform.position;
             }
                 
         }
@@ -200,8 +206,11 @@ public class Boss : MonoBehaviour
     {
         Healing = false;
         bossDoors.ResetDoors();
-        agent.destination = GameFuncs.PlayerScript.transform.position;
-        animator.SetBool("Chase", true);
+        if (!animator.GetBool("Summon"))
+        {
+            agent.destination = playerScript.transform.position;
+            animator.SetBool("Chase", true);
+        }
     }
 
     private bool BossReachedHeal()
@@ -222,7 +231,6 @@ public class Boss : MonoBehaviour
     {
         if (Healing)
             return false;
-        print("damaging player");
         if (Vector3.Distance(transform.position, playerScript.transform.position) <= agent.stoppingDistance + 0.5f
             && !playerScript.IsDead())
         {
@@ -266,6 +274,7 @@ public class Boss : MonoBehaviour
             if (Health < HEAL_RANGE && FleshWallCount <= 4) // When low, goes to healing spot
             {
                 agent.destination = healSpot.position;
+                healDestination = agent.destination;
                 bossDoors.OpenDoors();
                 bossHealer.enabled = true;
             }
@@ -298,6 +307,7 @@ public class Boss : MonoBehaviour
         if (Health < HEAL_RANGE && FleshWallCount <= 4) // When low, goes to healing spot
         {
             agent.destination = healSpot.position;
+            healDestination = agent.destination;
             bossDoors.OpenDoors();
             bossHealer.enabled = true;
         }
@@ -311,6 +321,7 @@ public class Boss : MonoBehaviour
 
     public void SummonPrism()
     {
+
         foreach (BossPrism p in prisms)
         {
             p.Summon(prismSummonTransform);
@@ -338,7 +349,6 @@ public class Boss : MonoBehaviour
     {
         if (Healing || Health < HEAL_RANGE || animator.GetCurrentAnimatorStateInfo(0).IsName("SummonPrism"))
         {
-            Debug.Log("dont chase");
             return false;
         }
             
@@ -382,5 +392,11 @@ public class Boss : MonoBehaviour
 
         enabled = false;
         chase = false;
+    }
+
+    public void ForceAggro()
+    {
+        if (gameObject.activeSelf)
+            agent.destination = playerScript.transform.position;
     }
 }
