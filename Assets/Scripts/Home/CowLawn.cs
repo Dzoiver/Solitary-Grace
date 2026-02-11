@@ -28,6 +28,10 @@ public class CowLawn : MonoBehaviour
     [SerializeField] GameObject directionalLight;
     [SerializeField] Camera maincam;
     [SerializeField] Camera wincam;
+
+    [SerializeField] AudioClip PBsound;
+    [SerializeField] AudioClip notPBsound;
+
     public int Score { get => score; set
         {
             score = value;
@@ -103,10 +107,15 @@ public class CowLawn : MonoBehaviour
         {
             Record = Score;
             gameoverText.text = newscoreText + Record.ToString();
+            audio.PlayOneShot(PBsound, 0.25f);
+        }
+        else
+        {
+            audio.PlayOneShot(notPBsound, 0.25f);
         }
         gameoverPanel.SetActive(true);
         player.SetControl(false);
-        audio.Play();
+        
         wincam.enabled = true;
         maincam.enabled = false;
     }

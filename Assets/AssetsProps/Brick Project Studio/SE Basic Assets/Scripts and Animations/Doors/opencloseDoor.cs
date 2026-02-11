@@ -11,8 +11,11 @@ namespace SojaExiles
 		public Animator openandclose;
 		public bool open;
 		public Transform Player;
+        [SerializeField] AudioSource audio;
+        [SerializeField] AudioClip openClip;
+        [SerializeField] AudioClip closeClip;
 
-		void Start()
+        void Start()
 		{
 			open = false;
 		}
@@ -29,7 +32,8 @@ namespace SojaExiles
 						{
 							if (Input.GetKeyDown(KeyCode.E))
 							{
-								StartCoroutine(opening());
+                                audio.PlayOneShot(openClip);
+                                StartCoroutine(opening());
 							}
 						}
 						else
@@ -38,7 +42,8 @@ namespace SojaExiles
 							{
 								if (Input.GetKeyDown(KeyCode.E))
 								{
-									StartCoroutine(closing());
+                                    audio.PlayOneShot(closeClip);
+                                    StartCoroutine(closing());
 								}
 							}
 

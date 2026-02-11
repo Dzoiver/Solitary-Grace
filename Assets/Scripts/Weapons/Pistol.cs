@@ -89,12 +89,12 @@ public class Pistol : Weapon
             if (hit.collider.CompareTag("Enemy"))
             {
                 //bullet.blood.transform.position = hit.point;
-                hit.collider.gameObject.GetComponent<Monster>().GetDamage(bullet.Damage);
+                hit.collider.gameObject.GetComponent<Monster>().GetDamage(Random.Range(bullet.MinDamage, bullet.MaxDamage));
             }
             if (hit.collider.CompareTag("Boss"))
             {
                 //bullet.blood.transform.position = hit.point;
-                hit.collider.gameObject.GetComponent<Boss>().GetDamage(bullet.Damage);
+                hit.collider.gameObject.GetComponent<Boss>().GetDamage(Random.Range(bullet.MinDamage, bullet.MaxDamage));
             }
             bullet.Launch(bulletDirection, rotationBullet);
         }

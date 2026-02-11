@@ -6,7 +6,8 @@ using UnityEngine.Pool;
 
 public class Knife : MonoBehaviour
 {
-    [SerializeField] private float damage = 20f;
+    public float minDamage = 10f;
+    public float maxDamage = 28f;
     [SerializeField] private float attackCoolDown = 0.7f;
     private float currentAttackCoolDown = 0f;
     private float attackDelay = 0.25f;
@@ -17,7 +18,7 @@ public class Knife : MonoBehaviour
 
     public float GetDamageValue()
     {
-        return damage;
+        return maxDamage;
     }
     // Start is called before the first frame update
     void Start()

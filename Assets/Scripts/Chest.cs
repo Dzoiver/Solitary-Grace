@@ -15,14 +15,16 @@ public class Chest : MonoBehaviour
     Menu menu;
     Inventory inventory;
     [SerializeField] ScrollRect scrollview;
-    AudioSource audio;
+    [SerializeField] AudioClip openClip;
+    public AudioClip closeClip;
+    [SerializeField] AudioClip moveItemClip;
+    public AudioSource audio;
     // Start is called before the first frame update
     private void Awake()
     {
         menu = FindObjectOfType<Menu>();
         inventory = FindObjectOfType<Inventory>();
         gameObject.SetActive(false);
-        audio = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -38,7 +40,7 @@ public class Chest : MonoBehaviour
     {
         if (ChestItems.Count >= maxItems)
             return;
-        audio.Play();
+        audio.PlayOneShot(moveItemClip, 0.566f);
         item.inventorySlotID = ChestItems.Count;
         ChestItems.Add(item);
         chestItemsUI[item.inventorySlotID].ImageSprite = item.ItemSprite;
@@ -54,7 +56,7 @@ public class Chest : MonoBehaviour
     {
         inventory.TryPickup(ChestItems[itemSlot]);
         ChestItems.RemoveAt(itemSlot);
-        audio.Play();
+        audio.PlayOneShot(moveItemClip, 0.566f);
         for (int i = 0; i < chestItemsUI.Length; i++)
         {
             if (chestItemsUI[i].item != null &&
@@ -104,6 +106,7 @@ public class Chest : MonoBehaviour
 
     public void OpenChest()
     {
+        audio.PlayOneShot(openClip, 0.1f);
         gameObject.SetActive(true);
         menu.OpenMenu();
         scrollview.verticalNormalizedPosition = 1;

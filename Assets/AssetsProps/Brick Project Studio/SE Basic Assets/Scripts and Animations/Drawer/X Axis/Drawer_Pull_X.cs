@@ -13,8 +13,11 @@ namespace SojaExiles
 		public Animator pull_01;
 		public bool open;
 		private Transform Player;
+        [SerializeField] AudioSource audio;
+        [SerializeField] AudioClip openClip;
+        [SerializeField] AudioClip closeClip;
 
-		void Start()
+        void Start()
 		{
 			open = false;
 			Player = GameFuncs.PlayerScript.gameObject.transform;
@@ -32,7 +35,8 @@ namespace SojaExiles
 						{
 							if (Input.GetKeyDown(KeyCode.E))
 							{
-								StartCoroutine(opening());
+                                audio.PlayOneShot(openClip);
+                                StartCoroutine(opening());
 							}
 						}
 						else
@@ -41,7 +45,8 @@ namespace SojaExiles
 							{
 								if (Input.GetKeyDown(KeyCode.E))
 								{
-									StartCoroutine(closing());
+                                    audio.PlayOneShot(closeClip);
+                                    StartCoroutine(closing());
 								}
 							}
 

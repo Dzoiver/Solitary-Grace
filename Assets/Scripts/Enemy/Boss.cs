@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using static Boss;
 
 public class Boss : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class Boss : MonoBehaviour
     private float health = 600f;
     private float maxHealth = 1000f;
 
-    public float attackDamage = 40f;
+    public float minDamage = 35f;
+    public float maxDamage = 45f;
     private float attackDelay = 0.3f;
     private float currentAttackDelay = 0.3f;
     private float attackCoolDown = 2f;
@@ -29,7 +31,7 @@ public class Boss : MonoBehaviour
     bool canKill = false;
     bool Phase1Complete = false;
 
-    [SerializeField] BossDoorsController bossDoors;
+    public BossDoorsController bossDoors;
     [SerializeField] BossHealer bossHealer;
     public UnityEvent onKill;
 
@@ -45,12 +47,12 @@ public class Boss : MonoBehaviour
     public AudioClip spawnClip;
 
     Animator animator;
-    const float ATTACK_RANGE = 2.9f;
+    const float ATTACK_RANGE = 2.68f;
 
     const float RANGE_ATTACK_TIME = 0f;
     const float HEAL_HEALTH = 800f;
-    const float HEAL_RANGE = 300f;
-    float healSpeed = 32f;
+    const float HEAL_RANGE = 130f;
+    float healSpeed = 60f;
     float currentRangeAttackTime = 10f;
 
     public bool OnceWoke = false;
@@ -75,7 +77,7 @@ public class Boss : MonoBehaviour
 
     public bool Healing { get => healing; set => healing = value; }
 
-    const float PRISM_COOLDOWN = 15f;
+    const float PRISM_COOLDOWN = 16f;
     float currentPrismTime = 0f;
 
     [SerializeField] BossPrism[] prisms;
@@ -83,17 +85,30 @@ public class Boss : MonoBehaviour
 
     PlayerScript playerScript;
     Vector3 healDestination = new Vector3();
+    public BossState bossState = BossState.attack;
+
+    public enum BossState
+    {
+        attack,
+        range,
+        cover,
+        healing,
+        afk
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         int i = 0;
-        playerScript = GameFuncs.PlayerScript;
+        if (playerScript == null)
+            playerScript = GameFuncs.PlayerScript;
         //rb = GetComponent<Rigidbody>();
     }
 
     private void Awake()
     {
+        if (playerScript == null)
+            playerScript = GameFuncs.PlayerScript;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         audio = GetComponent<AudioSource>();
@@ -106,6 +121,111 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(bossState);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
+        if (bossState == BossState.range)
+            return;
+
+        currentPrismTime += Time.deltaTime;
+
+        if (bossState == BossState.afk)
+            onAggro.Invoke();
+
+        if (bossState != BossState.healing)
+            bossState = BossState.attack;
+        if (bossHealer == null)
+        {
+            CorridorLogic();
+            return;
+        }
+
+        if (Health <= HEAL_RANGE && bossHealer.aliveEyes.Count > 0 && bossState != BossState.healing)
+        {
+            bossState = BossState.cover;
+        }
+
+        if (bossState == BossState.cover && Vector3.Distance(transform.position, healSpot.position) <= agent.stoppingDistance + 0.15f)
+        {
+            bossState = BossState.healing;
+        }
+
+        if (currentPrismTime > PRISM_COOLDOWN
+            && Vector3.Distance(transform.position, playerScript.transform.position) > 2.5f
+            && Vector3.Distance(transform.position, healSpot.position) > 5f
+            && bossState != BossState.cover
+            && bossState != BossState.healing)
+        {
+            bossState = BossState.range;
+        }
+
+        switch (bossState)
+        {
+            case BossState.attack:
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
+                    agent.destination = playerScript.transform.position;
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.6f)
+                    agent.destination = playerScript.transform.position;
+
+                if (Vector3.Distance(transform.position, playerScript.transform.position) <= agent.stoppingDistance + 0.5f
+            && !playerScript.IsDead())
+                {
+                    agent.updateRotation = false;
+                    Vector3 direction = playerScript.transform.position - transform.position;
+                    direction.y = 0;
+                    if (direction != Vector3.zero)
+                    {
+                        Quaternion rotation = Quaternion.LookRotation(direction);
+
+                        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.deltaTime);
+                    }
+
+                    animator.SetBool("PlayerClose", true);
+                }
+                else
+                {
+                    agent.updateRotation = true;
+                    animator.SetBool("PlayerClose", false);
+                }
+
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
+                {
+                    agent.updateRotation = false;
+                    Vector3 direction = playerScript.transform.position - transform.position;
+                    direction.y = 0;
+                    if (direction != Vector3.zero)
+                    {
+                        Quaternion rotation = Quaternion.LookRotation(direction);
+
+                        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.deltaTime);
+                    }
+                }
+                    break;
+
+            case BossState.range:
+                agent.ResetPath();
+                currentPrismTime = 0f;
+                animator.SetBool("Summon", true);
+                break;
+
+            case BossState.cover:
+                agent.updateRotation = true;
+                bossDoors.OpenDoors();
+                animator.SetBool("PlayerClose", false);
+                agent.destination = healSpot.position;
+                break;
+
+            case BossState.healing:
+                float eyesMultiplier = Mathf.Pow(1 - bossHealer.GetCurrentEyes() / (float)26, 0.5f);
+                Health += healSpeed * eyesMultiplier * Time.deltaTime;
+                bossDoors.CloseDoors();
+                break;
+            default:
+                // Code to execute if no case matches
+                break;
+        }
+
+        return;
+
         if (!activeAI)
             return;
         animator.SetFloat("Speed", agent.velocity.magnitude);
@@ -118,14 +238,8 @@ public class Boss : MonoBehaviour
         DamagePlayer();
         if (bossHealer == null)
             return;
-        Debug.Log(agent.destination == healDestination);
         currentPrismTime += Time.deltaTime;
-        if (currentPrismTime > PRISM_COOLDOWN && Vector3.Distance(transform.position, playerScript.transform.position) > 3.5f && Vector3.Distance(transform.position, healSpot.position) > 5f && agent.destination != healDestination)
-        {
-            agent.ResetPath();
-            currentPrismTime = 0f;
-            animator.SetBool("Summon", true);
-        }
+
 
         if (BossReachedHeal()) // Boss has walked all the way to the heal spot
         {
@@ -134,9 +248,9 @@ public class Boss : MonoBehaviour
             bossHealer.enabled = true;
         }
 
-        if (bossHealer.CantHealAnymore())
+        if (bossHealer.StopHealCheck())
         {
-            
+            print("Phase: Cant heal anymore");
             Healing = false;
             //Debug.Log("well i can't heal so i go to player");
             if (!animator.GetBool("Summon"))
@@ -148,6 +262,7 @@ public class Boss : MonoBehaviour
         
         if (Healing && Health >= HEAL_HEALTH1) // Heal until 800 HP is restored
         {
+            print("Phase: Restored Health");
             //canKill = true;
             Healing = false;
             bossHealer.StopHealing();
@@ -156,18 +271,58 @@ public class Boss : MonoBehaviour
 
         if (Healing && bossHealer.enabled) // Increase boss health for each eye
         {
+            print("Phase: Healing");
             //Debug.Log(health);
             //Debug.Log(bossHealer.GetCurrentEyes() * healSpeed * Time.deltaTime);
             float eyesMultiplier = Mathf.Pow(1 - bossHealer.GetCurrentEyes() / (float)26, 0.5f);
             Health += healSpeed * eyesMultiplier * Time.deltaTime;
         }
-        
+    }
+
+    public void CorridorLogic()
+    {
+        agent.destination = playerScript.transform.position;
+        if (Vector3.Distance(transform.position, playerScript.transform.position) <= agent.stoppingDistance + 0.5f
+    && !playerScript.IsDead())
+        {
+            agent.updateRotation = false;
+            Vector3 direction = playerScript.transform.position - transform.position;
+            direction.y = 0;
+            if (direction != Vector3.zero)
+            {
+                Quaternion rotation = Quaternion.LookRotation(direction);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.deltaTime);
+            }
+
+            animator.SetBool("PlayerClose", true);
+        }
+        else
+        {
+            Debug.Log("update rotation");
+            agent.updateRotation = true;
+            animator.SetBool("PlayerClose", false);
+        }
+    }
+
+    public void RangeAttack()
+    {
+        if (currentPrismTime > PRISM_COOLDOWN && Vector3.Distance(transform.position, playerScript.transform.position) > 3.5f && Vector3.Distance(transform.position, healSpot.position) > 5f && agent.destination != healDestination)
+        {
+            agent.ResetPath();
+            currentPrismTime = 0f;
+            animator.SetBool("Summon", true);
+        }
     }
 
     private void OnEnable()
     {
         agent.updateRotation = false;
-        Vector3 direction = playerScript.transform.position - transform.position;
+        Vector3 direction;
+        if (playerScript == null)
+            direction = GameFuncs.PlayerScript.transform.position - transform.position;
+        else
+            direction = playerScript.transform.position - transform.position;
         direction.y = 0;
         if (direction != Vector3.zero)
         {
@@ -180,6 +335,8 @@ public class Boss : MonoBehaviour
 
     private void FixedUpdate()
     {
+        return;
+
         if (!activeAI)
             return;
 
@@ -217,10 +374,12 @@ public class Boss : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, healSpot.position) <= agent.stoppingDistance + 0.15f && bossHealer.enabled)
         {
+            print("Phase: ReachedHeal");
             animator.Play("IDOL 2");
             agent.ResetPath();
             Healing = true;
-            animator.SetBool("Chase", false);
+            agent.updateRotation = true;
+            animator.SetBool("PlayerClose", false);
             return true;
         }
         else
@@ -229,8 +388,6 @@ public class Boss : MonoBehaviour
 
     private bool DamagePlayer()
     {
-        if (Healing)
-            return false;
         if (Vector3.Distance(transform.position, playerScript.transform.position) <= agent.stoppingDistance + 0.5f
             && !playerScript.IsDead())
         {
@@ -243,12 +400,15 @@ public class Boss : MonoBehaviour
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 5f * Time.deltaTime);
             }
-
+            Debug.Log("rotating");
             animator.SetBool("PlayerClose", true);
             return true;
         }
-        agent.updateRotation = true;
-        animator.SetBool("PlayerClose", false);
+        else
+        {
+            agent.updateRotation = true;
+            animator.SetBool("PlayerClose", false);
+        }
         return false;
     }
 
@@ -259,17 +419,19 @@ public class Boss : MonoBehaviour
         chase = true;
         if (Health - amount <= 0)
         {
-            if (!canKill)
-                return;
-            animator.SetBool("Dead", true);
-            agent.isStopped = true;
-            audio.PlayOneShot(deathClip, 0.4f);
+            Health = 0f;
+            if (FleshWallCount >= 4)
+            {
+                animator.SetBool("Dead", true);
+                agent.isStopped = true;
+                audio.PlayOneShot(deathClip, 0.4f);
+            }
         }
         else
         {
             audio.PlayOneShot(hurtClip, 1f);
             Health -= amount;
-
+            /*
             // Handle going to Heal spot
             if (Health < HEAL_RANGE && FleshWallCount <= 4) // When low, goes to healing spot
             {
@@ -278,6 +440,7 @@ public class Boss : MonoBehaviour
                 bossDoors.OpenDoors();
                 bossHealer.enabled = true;
             }
+            */
         }
     }
 
@@ -295,15 +458,19 @@ public class Boss : MonoBehaviour
     public void AnimationAttack()
     {
         agent.ResetPath();
-        if (agent.remainingDistance <= ATTACK_RANGE)
+        if (Vector3.Distance(playerScript.transform.position, transform.position) <= ATTACK_RANGE)
         {
-            playerScript.GetDamage(attackDamage);
+            playerScript.GetDamage(Random.Range(minDamage, maxDamage));
             if (playerScript.IsDead())
                 StartCoroutine(DelayReset());
         }
+        else
+        {
+            animator.SetBool("PlayerClose", false);
+        }
         currentAttackDelay = 0f;
         currentAttackCoolDown = 0f;
-
+        /*
         if (Health < HEAL_RANGE && FleshWallCount <= 4) // When low, goes to healing spot
         {
             agent.destination = healSpot.position;
@@ -311,10 +478,12 @@ public class Boss : MonoBehaviour
             bossDoors.OpenDoors();
             bossHealer.enabled = true;
         }
+        */
     }
 
     public void AnimationPrismFinish()
     {
+        bossState = BossState.attack;
         animator.SetBool("Summon", false);
         //agent.destination = GameFuncs.PlayerScript.transform.position;
     }
@@ -386,7 +555,9 @@ public class Boss : MonoBehaviour
     {
         if (!gameObject.activeInHierarchy)
             return;
+        animator.SetFloat("Speed", 0f);
         agent.ResetPath();
+        bossState = BossState.afk;
         transform.position = startPosition;
         transform.rotation = startRotation;
 

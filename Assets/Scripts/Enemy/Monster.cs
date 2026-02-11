@@ -19,7 +19,8 @@ public class Monster : MonoBehaviour
     private float health = 100f;
     private float maxHealth = 100f;
 
-    private float attackDamage = 35f;
+    private float minDamage = 25f;
+    private float maxDamage = 40f;
     private float attackDelay = 0.3f;
     private float currentAttackDelay = 0.15f;
     private float attackCoolDown = 2f;
@@ -261,7 +262,7 @@ public class Monster : MonoBehaviour
         audio.PlayOneShot(attackClip);
         if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance)
         {
-            GameFuncs.PlayerScript.GetDamage(attackDamage);
+            GameFuncs.PlayerScript.GetDamage(Random.Range(minDamage, maxDamage));
         }
         animator.SetBool("Attack", false);
         currentAttackDelay = 0f;

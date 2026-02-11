@@ -31,16 +31,19 @@ public class BossHealer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (boss.Healing)
+        if (boss.bossState == Boss.BossState.healing)
         {
             current_healingTime += Time.deltaTime;
             currentEyeTime += Time.deltaTime;
+
+            SpawnEyes();
+            StopHealCheck();
         }
     }
 
     public void SpawnEyes()
     {
-        if (!boss.Healing || aliveEyes.Count <= 0)
+        if (aliveEyes.Count <= 0)
             return;
 
         if (currentEyeTime > eyeTime)
@@ -54,13 +57,15 @@ public class BossHealer : MonoBehaviour
 
     public void StopHealing()
     {
-        enabled = false;
+        boss.bossDoors.OpenDoors();
+        boss.bossState = Boss.BossState.attack;
         current_healingTime = 0f;
         foreach (BossEye eye in aliveEyes)
         {
             eye.HideEye();
         }
         spawnedEyes = 0;
+
     }
 
     public int GetCurrentEyes()
@@ -77,7 +82,7 @@ public class BossHealer : MonoBehaviour
         closedEyes[rng].OpenEye();
     }
 
-    public bool CantHealAnymore()
+    public bool StopHealCheck()
     {
         if (current_healingTime > max_healingTime || spawnedEyes >= maxSpawnedEyes || aliveEyes.Count <= 0)
         {
@@ -86,6 +91,9 @@ public class BossHealer : MonoBehaviour
 
             if (spawnedEyes >= maxSpawnedEyes)
                 Debug.Log("max eyes");
+
+            if (boss.Health <= 301f)
+                boss.Health = 301f;
             StopHealing();
             return true;
         }

@@ -85,7 +85,7 @@ public class PlayerScript : MonoBehaviour
     public void GetDamage(float damage)
     {
         if (Health <= 0) return;
-
+        damage = Mathf.Floor(damage);
         Health = Mathf.Max(0, Health - damage);
         audio.PlayOneShot(hurt, 0.2f);
         if (Health <= 0)
@@ -292,6 +292,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G) && menu.inventory.Has(2, out var slot))
         {
+            GiveHP(35f);
             menu.inventory.DeleteItem(slot, 1);
             audio.PlayOneShot(bubble, 0.2f);
         }

@@ -18,7 +18,7 @@ public class KnifeHitbox : MonoBehaviour
             knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
             blood.Stop();
             blood.Play();
-            other.gameObject.GetComponent<Monster>().GetDamage(knife.GetDamageValue());
+            other.gameObject.GetComponent<Monster>().GetDamage(Random.Range(knife.minDamage, knife.maxDamage));
         }
         else if (other.gameObject.CompareTag("Tape"))
         {
@@ -35,7 +35,7 @@ public class KnifeHitbox : MonoBehaviour
             blood.Stop();
             blood.Play();
             knife.KnifeSound(Resources.Load<AudioClip>("Sounds/monsterHit"));
-            other.gameObject.GetComponent<Boss>().GetDamage(knife.GetDamageValue());
+            other.gameObject.GetComponent<Boss>().GetDamage(knife.maxDamage);
         }
     }
 

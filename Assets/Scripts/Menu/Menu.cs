@@ -75,6 +75,8 @@ public class Menu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         audio.clip = exitSound;
         audio.Play();
+        if (chest.gameObject.activeSelf)
+            chest.audio.PlayOneShot(chest.closeClip, 0.1f);
         ownBlackScreen.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
             monsterManager.UnfreezeMonsters();
@@ -123,6 +125,6 @@ public class Menu : MonoBehaviour
 
     public void ChangeHealth(float value)
     {
-        healthText.text = healthString + ": " + value.ToString();
+        healthText.text = healthString + ": " + Mathf.Floor(value).ToString();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using GM;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.AddressableAssets.Build;
 using UnityEngine;
 
 public class BossPrism : MonoBehaviour
@@ -12,7 +11,8 @@ public class BossPrism : MonoBehaviour
     [SerializeField] AudioClip launchClip;
     bool launched = false;
     float prismSpeed = 15f;
-    float prismDamage = 15f;
+    float minDamage = 10f;
+    float maxDamage = 20f;
     private float rotationSpeed = 3f;
     Rigidbody rb;
     // Start is called before the first frame update
@@ -87,7 +87,7 @@ public class BossPrism : MonoBehaviour
         if (other.CompareTag("Player") && enabled)
         {
             audio.PlayOneShot(playerHit);
-            GameFuncs.PlayerScript.GetDamage(prismDamage);
+            GameFuncs.PlayerScript.GetDamage(Random.Range(minDamage, maxDamage));
             enabled = false;
             launched = false;
             gameObject.SetActive(false);

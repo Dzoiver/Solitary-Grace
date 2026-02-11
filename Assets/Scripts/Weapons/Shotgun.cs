@@ -97,11 +97,11 @@ public class Shotgun : Weapon
                 var bullet = pManager.GetNewBullet();
                 if (hit.collider.CompareTag("Enemy"))
                 {
-                    hit.collider.gameObject.GetComponent<Monster>().GetDamage(bullet.Damage);
+                    hit.collider.gameObject.GetComponent<Monster>().GetDamage(bullet.MaxDamage);
                 }
                 if (hit.collider.CompareTag("Boss"))
                 {
-                    hit.collider.gameObject.GetComponent<Boss>().GetDamage(bullet.Damage);
+                    hit.collider.gameObject.GetComponent<Boss>().GetDamage(bullet.MaxDamage);
                 }
 
                 bullet.transform.position = bulletStart.transform.position;

@@ -40,7 +40,7 @@ ModelImporter:
       takeName: Take 001
       internalID: 0
       firstFrame: 600
-      lastFrame: 700
+      lastFrame: 658
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -60,7 +60,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3323263
+      - time: 0.49456033
         functionName: AnimationAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
