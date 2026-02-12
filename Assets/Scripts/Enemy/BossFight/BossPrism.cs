@@ -11,8 +11,8 @@ public class BossPrism : MonoBehaviour
     [SerializeField] AudioClip launchClip;
     bool launched = false;
     float prismSpeed = 15f;
-    float minDamage = 10f;
-    float maxDamage = 20f;
+    float minDamage = 9f;
+    float maxDamage = 14f;
     private float rotationSpeed = 3f;
     Rigidbody rb;
     // Start is called before the first frame update

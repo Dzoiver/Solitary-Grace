@@ -16,6 +16,7 @@ public class MessagesUI : MonoBehaviour
     [SerializeField] string pickupMes = "You picked up ";
     [SerializeField] string inventoryFull = "Inventory is full";
     [SerializeField] string useMes = "You used ";
+    [SerializeField] TextMeshProUGUI timerText;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,6 @@ public class MessagesUI : MonoBehaviour
             t.color = new Color(1f, 1f, 1f, 0f);
         }
     }
-
     public void ShowPickup(string itemName)
     {
         if (firstTime)

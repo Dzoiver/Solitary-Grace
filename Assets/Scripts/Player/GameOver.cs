@@ -36,7 +36,8 @@ public class GameOver : MonoBehaviour
             text.DOFade(0, 0f);
             image.DOColor(new Color(0, 0, 0, 0), 0.5f);
             GameFuncs.TeleportPlayer(destination);
-
+            player.currentElevator = null;
+            player.inElevator = false;
             player.SetControl(true);
         };
     }
@@ -57,6 +58,8 @@ public class GameOver : MonoBehaviour
         sequence = DOTween.Sequence();
         image.gameObject.SetActive(true);
         GameFuncs.PlayerScript.SetControl(false);
+        GameFuncs.PlayerScript.inElevator = false;
+        GameFuncs.PlayerScript.currentElevator = null;
         image.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () =>
         {
             onRespawn.Invoke();

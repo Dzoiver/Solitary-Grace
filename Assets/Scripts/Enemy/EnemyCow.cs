@@ -97,6 +97,12 @@ public class EnemyCow : MonoBehaviour
         agent.isStopped = false;
     }
 
+    private void OnEnable()
+    {
+        currentPatrolIndex = Random.Range(0, patrolPoints.Length);
+        agent.destination = patrolPoints[currentPatrolIndex].transform.position;
+    }
+
     private void Patrol()
     {
         if (!patrol)

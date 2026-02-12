@@ -12,11 +12,14 @@ public class SetOnFire : MonoBehaviour
     [SerializeField] GameObject fire;
     [SerializeField] GetSomeSleep getsomesleep;
     [SerializeField] GameObject prisonDestination;
+    [SerializeField] GameObject loadOnLeavingTheRoom;
     [SerializeField] DoorOpen door;
     GameObject startDestination;
     [SerializeField] SimpleTrigger blockSleep;
     bool item11Taken = false;
     bool item12Taken = false;
+    [SerializeField] GameOver gameover;
+    [SerializeField] GameObject objectsAfterFire;
 
     private void Awake()
     {
@@ -55,7 +58,6 @@ public class SetOnFire : MonoBehaviour
         fire.SetActive(true);
         room.SetActive(true);
         deloadWhileInRoom.SetActive(false);
-        
     }
 
     public void UnsetUpFire()
@@ -64,13 +66,21 @@ public class SetOnFire : MonoBehaviour
         blockSleep.SetActiveTrigger(false);
         door.destinationPoint = startDestination;
         door.onEnter.RemoveListener(SetUpFireAndRoom);
+        gameover.onRespawn.AddListener(DeloadFireThing);
         //gameover.onRespawn.RemoveListener(SetUpFireAndRoom);
+    }
+
+    public void ReturnObjects()
+    {
+        room.SetActive(false);
+        objectsAfterFire.SetActive(false);
+        loadOnLeavingTheRoom.SetActive(true);
     }
 
     public void DeloadFireThing()
     {
-        fire.SetActive(true);
-        room.SetActive(true);
-        deloadWhileInRoom.SetActive(false);
+        fire.SetActive(false);
+        room.SetActive(false);
+        deloadWhileInRoom.SetActive(true);
     }
 }

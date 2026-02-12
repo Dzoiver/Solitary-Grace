@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Checkpoint : MonoBehaviour
     static public UnityEvent onTeleportGlobal;
     bool playMusic = false;
     bool fire = false;
+    [Inject] GameOver gameover;
 
     public bool PlayMusic { get => playMusic; set 
             {
@@ -105,13 +107,16 @@ public class Checkpoint : MonoBehaviour
     {
         MusicAmbientController.StopAll();
         onTeleport.Invoke();
+        gameover.onRespawn.Invoke();
     }
 
     public void SmoothTeleport(GameObject objectToTeleport)
     {
+        GameFuncs.PlayerScript.SetControl(false);
         //onTeleportGlobal.Invoke();
         UpdateSpawn();
         GameFuncs.DisableWeapons(true);
+        gameover.onRespawn.Invoke();
         StartCoroutine(CoroutineSmooth(objectToTeleport));
     }
 
@@ -120,6 +125,7 @@ public class Checkpoint : MonoBehaviour
         float timetoFade = 0.3f;
         GameFuncs.FadeIn(timetoFade);
         yield return new WaitForSeconds(timetoFade);
+        GameFuncs.PlayerScript.SetControl(true);
         GameFuncs.TeleportPlayer(objectToTeleport);
         GameFuncs.FadeOut(timetoFade);
     }

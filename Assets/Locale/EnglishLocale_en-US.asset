@@ -470,7 +470,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12542637104214016
-    m_Localized: The light distance isn't too big but it's better than nothing.
+    m_Localized: The light distance isn't too big but it's better than nothing. Press
+      F to equip it.
     m_Metadata:
       m_Items: []
   - m_Id: 12541130577326080
@@ -523,6 +524,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13715383754469376
     m_Localized: You used
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14672963884593152
+    m_Localized: Display timer
     m_Metadata:
       m_Items: []
   references:

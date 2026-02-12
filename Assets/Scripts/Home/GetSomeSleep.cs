@@ -64,7 +64,7 @@ public class GetSomeSleep : MonoBehaviour
 
                 sequence = DOTween.Sequence();
                 GameFuncs.PlayerScript.SetControl(false);
-                sequence.Append(blackImage.DOColor(new Color(0, 0, 0, 1), fadeInTime)).AppendInterval(BlackScreenTime).onComplete = GoToPrison;
+                sequence.Append(blackImage.DOColor(new Color(0, 0, 0, 1), FadeInTime)).AppendInterval(BlackScreenTime).onComplete = GoToPrison;
                 if (checkpoint != null)
                     checkpoint.OnTeleportInvoke();
             }
@@ -73,7 +73,7 @@ public class GetSomeSleep : MonoBehaviour
 
     private void GoToPrison()
     {
-        fadeInTime -= 0.2f;
+        FadeInTime -= 0.2f;
         BlackScreenTime -= 0.2f;
         onSleep.Invoke();
         daytimeScript.SetDay(false);

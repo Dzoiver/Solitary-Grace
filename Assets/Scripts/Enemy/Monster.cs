@@ -121,9 +121,7 @@ public class Monster : MonoBehaviour
             animator.SetBool("Dead", true);
             return;
         }
-            
-
-        if (pretending)
+        else if (pretending)
         {
             Pretending = true;
         }
@@ -131,7 +129,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (!ActiveAI)
+        if (!ActiveAI || IsDead)
             return;
         currentAttackCoolDown += Time.deltaTime;
         if (PlayerTooClose())
@@ -176,7 +174,7 @@ public class Monster : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!ActiveAI)
+        if (!ActiveAI || IsDead)
             return;
 
         AnimatorStateInfo animInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -281,6 +279,7 @@ public class Monster : MonoBehaviour
         health -= amount;
         if (health <= 0f)
         {
+            health = 0f;
             Death();
         }
         else
@@ -309,7 +308,6 @@ public class Monster : MonoBehaviour
         agent.enabled = false;
         animator.SetBool("Dead", true);
         audio.PlayOneShot(deathClip);
-        enabled = false;
     }
 
     public void DisableCollider()

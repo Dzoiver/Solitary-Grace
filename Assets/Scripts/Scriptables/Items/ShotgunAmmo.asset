@@ -33,7 +33,7 @@ MonoBehaviour:
     m_LocalVariables: []
   maxQuantity: 10
   quantity: 10
-  sprite: {fileID: 21300000, guid: 6b55816828534974e96cb5a83823e1ff, type: 3}
+  sprite: {fileID: 21300000, guid: 0ed0e27279ba78a45bebb98b7da83592, type: 3}
   keyitem: 0
   usable: 0
   references:
