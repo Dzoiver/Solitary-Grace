@@ -5,6 +5,7 @@
 Буду рад, если вы пройдёте на стриме и позовёте меня или пришлёте мне запись!!
 
 # Скачать можно [тут](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v1.2)
+# Альтернативная ссылка на [гугл диск](https://drive.google.com/file/d/1-AiTLYYokSnrNbzy5pyV8pKYLBmc1jqc/view?usp=sharing)
 
 # Solitary-Grace
 Horror first person game. Just trying to finish the project little by little. Basically working for my own experience in developing a game. Inspired by Silent hill and Resident evil games.
