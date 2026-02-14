@@ -5,7 +5,7 @@
 Буду рад, если вы пройдёте на стриме и позовёте меня или пришлёте мне запись!!
 
 # Скачать можно [тут](https://github.com/Dzoiver/Solitary-Grace/releases/latest)
-# Альтернативная ссылка на [гугл диск](https://drive.google.com/file/d/1-AiTLYYokSnrNbzy5pyV8pKYLBmc1jqc/view?usp=sharing)
+# Альтернативная ссылка на [гугл диск](https://drive.google.com/file/d/1LImDey_azLSsDP2cFopMuX4tltLULCBZ/view?usp=sharing)
 
 # Solitary-Grace
 Horror first person game. Just trying to finish the project little by little. Basically working for my own experience in developing a game. Inspired by Silent hill and Resident evil games.
@@ -15,6 +15,7 @@ Currently polishing the game.
 Explore your nightmare. Solve mystery of the place in your dream. You'll wake up if you die in a dream. But is the reality truly safe?
 
 ## Controls:
+WASD to move
 E to interact
 
 Tab to open a menu/inventory
