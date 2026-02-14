@@ -16,7 +16,7 @@ public class Menu : MonoBehaviour
     public Inventory inventory;
     ContextMenuItem context;
     WeaponManager weapon;
-    MonsterManager monsterManager;
+    public MonsterManager monsterManager;
     AudioSource audio;
     [SerializeField] AudioClip exitSound;
     [SerializeField] TextMeshProUGUI itemnameLabel;

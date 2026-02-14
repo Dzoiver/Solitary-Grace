@@ -17,6 +17,9 @@ public class CowBullet : MonoBehaviour
     Quaternion bulletRotation;
     AudioSource audio;
     [SerializeField] AudioClip explosionSound;
+    float lifeTime = 5f;
+    float currentLifeTime = 0f;
+
     float rotationSpeed = 5f;
     // Start is called before the first frame update
     void Start()
@@ -35,11 +38,22 @@ public class CowBullet : MonoBehaviour
     }
     void Update()
     {
-        bulletModel.transform.Rotate(45f * Time.deltaTime * cowBazooka.chargeValue, 0f, 0f, Space.Self); // cowBazooka.slider.maxValue / cowBazooka.chargeValue
+        if (bulletModel.activeSelf)
+        {
+            currentLifeTime += Time.deltaTime;
+            bulletModel.transform.Rotate(45f * Time.deltaTime * cowBazooka.chargeValue, 0f, 0f, Space.Self); // cowBazooka.slider.maxValue / cowBazooka.chargeValue
+        }
+        if (currentLifeTime > lifeTime)
+        {
+            Explode();
+        }
+            
+        
     }
 
     private void Explode()
     {
+        currentLifeTime = 0f;
         rb.isKinematic = true;
         bulletModel.SetActive(false);
         particles.Play();
@@ -68,6 +82,7 @@ public class CowBullet : MonoBehaviour
 
     public void Launch(float speed)
     {
+        currentLifeTime = 0f;
         bulletModel.SetActive(true);
         bulletModel.transform.rotation = Quaternion.Euler(90f, bulletModel.transform.rotation.eulerAngles.y, bulletModel.transform.rotation.eulerAngles.z);
         rb.isKinematic = false;

@@ -118,7 +118,7 @@ public class Monster : MonoBehaviour
     {
         if (IsDead)
         {
-            animator.SetBool("Dead", true);
+            animator.Play("Death", 0, 1);
             return;
         }
         else if (pretending)
@@ -226,7 +226,6 @@ public class Monster : MonoBehaviour
         if (IsDead)
             return;
         currentWakeAttackDelay += Time.deltaTime;
-
         if (!PlayerClose())
         {
             animator.SetBool("Attack", false);
@@ -260,7 +259,7 @@ public class Monster : MonoBehaviour
         audio.PlayOneShot(attackClip);
         if (Vector3.Distance(transform.position, GameFuncs.PlayerScript.transform.position) < agent.stoppingDistance)
         {
-            GameFuncs.PlayerScript.GetDamage(Random.Range(minDamage, maxDamage));
+            GameFuncs.PlayerScript.Health -= Random.Range(minDamage, maxDamage);
         }
         animator.SetBool("Attack", false);
         currentAttackDelay = 0f;
@@ -405,7 +404,7 @@ public class Monster : MonoBehaviour
 
     public void Alarm()
     {
-        if (chase)
+        if (chase || Pretending)
             return;
         chase = true;
         int rng = Random.Range(0, 3);

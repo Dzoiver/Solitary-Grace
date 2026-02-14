@@ -71,6 +71,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] GameObject wallOnMoving;
     float currentButtonColorTime = 0f;
     float buttonColorTime = 0.1f;
+    private Coroutine autoClose;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -182,6 +183,10 @@ public class Elevator : MonoBehaviour
         }
         if (moving)
             return;
+
+        if (autoClose != null)
+            StopCoroutine(autoClose);
+
         if (newFloor > currentFloor)
             goingUp = 1f;
         else
@@ -263,7 +268,7 @@ public class Elevator : MonoBehaviour
         door2.DOPlayForward();
         if (doorsAutoClose)
         {
-            StartCoroutine(TimerCloseDoor());
+            autoClose = StartCoroutine(TimerCloseDoor());
         }
     }
 

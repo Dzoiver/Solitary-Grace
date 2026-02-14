@@ -106,8 +106,9 @@ public class Checkpoint : MonoBehaviour
     public void OnTeleportInvoke()
     {
         MusicAmbientController.StopAll();
-        onTeleport.Invoke();
+
         gameover.onRespawn.Invoke();
+        onTeleport.Invoke();
     }
 
     public void SmoothTeleport(GameObject objectToTeleport)

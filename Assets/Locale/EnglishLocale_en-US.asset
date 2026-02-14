@@ -365,7 +365,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5101652392849408
-    m_Localized: And something important fell out of my window.
+    m_Localized: And something important fell out of my window, I need to go down
+      and get it. If anyone needs it, I left the security key in the locker.
     m_Metadata:
       m_Items: []
   - m_Id: 6180917892919296
@@ -458,7 +459,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12542766720790528
     m_Localized: A sharp knife. Allows you to break boxes and cut tape. It's also
-      a good tool for self-defense.
+      a good tool for self-defense. Press 1 to equip it.
     m_Metadata:
       m_Items: []
   - m_Id: 12542749301846016
@@ -528,6 +529,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14672963884593152
     m_Localized: Display timer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15524136032186368
+    m_Localized: ffff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15624530943062016
+    m_Localized: Do it quickly before he starts growling.
     m_Metadata:
       m_Items: []
   references:

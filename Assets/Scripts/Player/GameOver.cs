@@ -57,12 +57,12 @@ public class GameOver : MonoBehaviour
         stat.Deaths++;
         sequence = DOTween.Sequence();
         image.gameObject.SetActive(true);
-        GameFuncs.PlayerScript.SetControl(false);
-        GameFuncs.PlayerScript.inElevator = false;
-        GameFuncs.PlayerScript.currentElevator = null;
         image.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () =>
         {
             onRespawn.Invoke();
+            GameFuncs.PlayerScript.SetControl(false);
+            GameFuncs.PlayerScript.inElevator = false;
+            GameFuncs.PlayerScript.currentElevator = null;
         };
         /*
         sequence.Append(image.DOColor(new Color(0, 0, 0, 1), 1f)).AppendInterval(2f).onComplete = () =>

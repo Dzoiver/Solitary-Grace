@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 public class SimpleDoor : MonoBehaviour
 {
     Inventory inventory;
+    MonsterManager mManager;
     [Inject] DialogueManager dManager;
     GameObject destinationPoint;
     public bool ClosedRed = false;
@@ -35,6 +36,7 @@ public class SimpleDoor : MonoBehaviour
     {
         inventory = FindObjectOfType<Inventory>();
         doorSound = defaultOpen;
+        mManager = FindObjectOfType<MonsterManager>();
     }
 
     private void OnMouseOver()
@@ -136,6 +138,7 @@ public class SimpleDoor : MonoBehaviour
         destinationPoint = GetFurtherDestination();
         GameFuncs.PlayerScript.SetControl(false);
         AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound), volume);
+        mManager.FreezeMonsters();
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
         {
             onOpen.Invoke();
@@ -144,6 +147,7 @@ public class SimpleDoor : MonoBehaviour
             GameFuncs.TeleportPlayer(destinationPoint);
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
             GameFuncs.PlayerScript.SetControl(true);
+            mManager.UnfreezeMonsters();
         };
     }
 }

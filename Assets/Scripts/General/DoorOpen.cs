@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 public class DoorOpen : MonoBehaviour
 {
     Inventory inventory;
+    MonsterManager mManager;
     [Inject] DialogueManager dManager;
     public GameObject destinationPoint;
     public bool Closed = false;
@@ -116,6 +117,7 @@ public class DoorOpen : MonoBehaviour
             }
             GameFuncs.PlayerScript.SetControl(false);
             AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound));
+            mManager.FreezeMonsters();
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
             {
                 onEnter.Invoke();
@@ -123,6 +125,7 @@ public class DoorOpen : MonoBehaviour
                 GameFuncs.TeleportPlayer(destinationPoint);
                 GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
                 GameFuncs.PlayerScript.SetControl(true);
+                mManager.UnfreezeMonsters();
             };
         }
     }

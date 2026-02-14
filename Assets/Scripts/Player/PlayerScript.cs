@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using GM;
 using Zenject;
 using UnityEditor;
@@ -65,7 +65,31 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public float Health { get => health; set => health = value; }
+    public float Health { get => health; set
+        {
+            value = Mathf.Floor(value);
+            
+            if (health > value)
+            {
+                gameover.GetDamagedRedScreen();
+                audio.PlayOneShot(hurt, 0.2f);
+            }
+            health = value;
+
+            if (health <= 0)
+            {
+                Death();
+            }    
+            if (health <= 35f)
+            {
+                gameover.bloodstaines.SetActive(true);
+            }
+            else
+            {
+                gameover.bloodstaines.SetActive(false);
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -84,26 +108,13 @@ public class PlayerScript : MonoBehaviour
 
     public void GetDamage(float damage)
     {
-        if (Health <= 0) return;
-        damage = Mathf.Floor(damage);
-        Health = Mathf.Max(0, Health - damage);
-        audio.PlayOneShot(hurt, 0.2f);
         if (Health <= 0)
         {
             Death();
         }
         else
         {
-            gameover.GetDamagedRedScreen();
-        }
-
-        if (Health <= 35)
-        {
-            gameover.bloodstaines.SetActive(true);
-        }
-        else
-        {
-            gameover.bloodstaines.SetActive(false);
+            
         }
         //menu.ChangeHealth(Health);
     }
@@ -115,15 +126,11 @@ public class PlayerScript : MonoBehaviour
         menu.ChangeHealth(Health);
     }
 
-    public float GetHP()
-    {
-        return Health;
-    }
-
     public bool IsDead() => Health <= 0;
 
     private void Death()
     {
+        menu.CloseMenu();
         cameraAnimator.enabled = true;
         cameraAnimator.Play("Deathanim");
         gameover.DieFromMonster();
@@ -332,6 +339,22 @@ public class PlayerScript : MonoBehaviour
             // Successfully hit an object
             footsteps.TryStep(hit2.collider.gameObject, speed);
         }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody rb = hit.collider.attachedRigidbody;
+
+        if (rb == null || rb.isKinematic)
+            return;
+
+        // Не толкаем вниз
+        if (hit.moveDirection.y < -0.3f)
+            return;
+
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        rb.AddForce(pushDir * 0.1f, ForceMode.Impulse);
     }
 
     private void HandleInteract()

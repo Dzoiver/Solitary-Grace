@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 8753967461625824924}
   - component: {fileID: 3028032778393790211}
   - component: {fileID: 6321116460077898851}
-  - component: {fileID: 3637420432697899055}
+  - component: {fileID: 3206136987928752091}
+  - component: {fileID: 6938701160926763955}
   m_Layer: 0
   m_Name: Mannequin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8753967461625824924
 Transform:
@@ -84,8 +85,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3637420432697899055
-BoxCollider:
+--- !u!54 &3206136987928752091
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158821468644136075}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &6938701160926763955
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,6 +111,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 48.584305, y: 173.23256, z: 42.671898}
+  m_Radius: 24.292152
+  m_Height: 173.23256
+  m_Direction: 1
   m_Center: {x: 0, y: 86.39312, z: 6.1055374}

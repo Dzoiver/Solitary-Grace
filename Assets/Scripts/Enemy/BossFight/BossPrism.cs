@@ -87,7 +87,7 @@ public class BossPrism : MonoBehaviour
         if (other.CompareTag("Player") && enabled)
         {
             audio.PlayOneShot(playerHit);
-            GameFuncs.PlayerScript.GetDamage(Random.Range(minDamage, maxDamage));
+            GameFuncs.PlayerScript.Health -= Random.Range(minDamage, maxDamage);
             enabled = false;
             launched = false;
             gameObject.SetActive(false);

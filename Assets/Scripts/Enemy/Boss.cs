@@ -165,7 +165,7 @@ public class Boss : MonoBehaviour
                     agent.destination = playerScript.transform.position;
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.6f)
                     agent.destination = playerScript.transform.position;
-
+                OnceWoke = true;
                 if (Vector3.Distance(transform.position, playerScript.transform.position) <= agent.stoppingDistance + 0.5f
             && !playerScript.IsDead())
                 {
@@ -460,7 +460,7 @@ public class Boss : MonoBehaviour
         agent.ResetPath();
         if (Vector3.Distance(playerScript.transform.position, transform.position) <= ATTACK_RANGE)
         {
-            playerScript.GetDamage(Random.Range(minDamage, maxDamage));
+            playerScript.Health -= Random.Range(minDamage, maxDamage);
             if (playerScript.IsDead())
                 StartCoroutine(DelayReset());
         }
