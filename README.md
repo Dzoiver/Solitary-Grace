@@ -4,7 +4,7 @@
 
 Буду рад, если вы пройдёте на стриме и позовёте меня или пришлёте мне запись!!
 
-# Скачать можно [тут](https://github.com/Dzoiver/Solitary-Grace/releases/tag/v1.2)
+# Скачать можно [тут](https://github.com/Dzoiver/Solitary-Grace/releases/latest)
 # Альтернативная ссылка на [гугл диск](https://drive.google.com/file/d/1-AiTLYYokSnrNbzy5pyV8pKYLBmc1jqc/view?usp=sharing)
 
 # Solitary-Grace
