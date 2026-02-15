@@ -166946,7 +166946,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -239606,7 +239606,7 @@ PrefabInstance:
       objectReference: {fileID: 1535207986}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_Pivot.y
@@ -239618,7 +239618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -239626,7 +239626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_AnchorMin.y
@@ -239634,11 +239634,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1776.292
+      value: 1600
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1000
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -239670,7 +239670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7883159519893578518, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_AnchoredPosition.y
