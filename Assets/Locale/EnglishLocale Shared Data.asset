@@ -519,6 +519,18 @@ MonoBehaviour:
     m_Key: DescriptionBoard
     m_Metadata:
       m_Items: []
+  - m_Id: 15998592747876352
+    m_Key: DisplayMode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15998805751410688
+    m_Key: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15999177656152064
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

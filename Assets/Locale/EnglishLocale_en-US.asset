@@ -544,6 +544,14 @@ MonoBehaviour:
       open the context menu in your inventory.
     m_Metadata:
       m_Items: []
+  - m_Id: 15998592747876352
+    m_Localized: Display Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15998805751410688
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

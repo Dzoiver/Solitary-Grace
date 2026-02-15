@@ -29,7 +29,8 @@ public class Options : MonoBehaviour
     {
         var allResolutions = Screen.resolutions;
         uniqueResolutions = new List<Resolution>();
-        resolutionDropdown.ClearOptions();
+        if (resolutionDropdown != null)
+            resolutionDropdown.ClearOptions();
         
         var resolutionSet = new HashSet<(int, int)>();
         for (var i = allResolutions.Length - 1; i >= 0; i--)
