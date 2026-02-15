@@ -15,8 +15,7 @@ Currently polishing the game.
 Explore your nightmare. Solve mystery of the place in your dream. You'll wake up if you die in a dream. But is the reality truly safe?
 
 ## Controls:
-WASD to move
-E to interact
+WASD to move, E to interact
 
 Tab to open a menu/inventory
 
