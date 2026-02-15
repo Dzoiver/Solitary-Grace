@@ -52,10 +52,15 @@ public class Menu : MonoBehaviour
         GameFuncs.fading = true;
         GameFuncs.PlayerScript.SetControl(false);
         AudioController.Play("openMenu");
-        Cursor.lockState = CursorLockMode.None;
         description.SetActive(false);
         GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 0.5f).onComplete = () => // Fadeout
         {
+            if (GameFuncs.PlayerScript.IsDead())
+            {
+                menuPanel.SetActive(false);
+                return;
+            }
+            Cursor.lockState = CursorLockMode.None;
             monsterManager.FreezeMonsters();
             menuPanel.SetActive(true);
             // Fadein
@@ -112,7 +117,7 @@ public class Menu : MonoBehaviour
     {
         if (GameFuncs.fading)
             return;
-
+        
         if (!menuPanel.activeSelf && GameFuncs.PlayerScript.IsControl() && Input.GetKeyDown(KeyCode.Tab))
         {
             OpenMenu();

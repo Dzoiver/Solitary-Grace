@@ -106,19 +106,6 @@ public class PlayerScript : MonoBehaviour
         gravityEffect = gravity * gravityMultiplier * Time.fixedDeltaTime;
     }
 
-    public void GetDamage(float damage)
-    {
-        if (Health <= 0)
-        {
-            Death();
-        }
-        else
-        {
-            
-        }
-        //menu.ChangeHealth(Health);
-    }
-
     public void GiveHP(float amount)
     {
         gameover.bloodstaines.SetActive(false);
@@ -130,7 +117,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Death()
     {
-        menu.CloseMenu();
+        GameFuncs.FadeOut(0f);
         cameraAnimator.enabled = true;
         cameraAnimator.Play("Deathanim");
         gameover.DieFromMonster();
@@ -154,14 +141,6 @@ public class PlayerScript : MonoBehaviour
     {
         playerCam.transform.rotation = Quaternion.Euler(angle);
         gameObject.transform.rotation = Quaternion.Euler(angle);
-    }
-
-    public void Warping(bool value)
-    {
-        if (value == true)
-            warpTool.SetActive(true);
-        else
-            warpTool.SetActive(false);
     }
 
     public bool IsControl()
@@ -195,23 +174,6 @@ public class PlayerScript : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerCamStartPos = playerCam.transform.localPosition;
         menu.ChangeHealth(Health);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "GunCyllinder")
-        {
-            cyllinder.SetActive(true);
-        }
-        if (other.gameObject.name == "JumpPad")
-        {
-            LiftPlayer(8f);
-        }
-    }
-
-    private void LiftPlayer(float amount)
-    {
-        velocity.y = Mathf.Sqrt(amount * -2f * gravity);
     }
 
     public void ToggleNoclip()
@@ -304,26 +266,6 @@ public class PlayerScript : MonoBehaviour
             audio.PlayOneShot(bubble, 0.2f);
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded && AllowJump)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravity);
-        }
-
-        /*
-        if (inElevator)
-        {
-            controller.Move(currentElevator.Velocity);
-        }
-        else
-        {
-            ApplyGravity();
-        }
-        */
-        
-
-        //HandleInteract();
-
-
         RaycastHit hit2;
         Vector3 rayOrigin2 = transform.position + Vector3.up * 0.1f;
         if (Physics.Raycast(rayOrigin2, Vector3.down, out hit2, 1.5f))
@@ -355,29 +297,5 @@ public class PlayerScript : MonoBehaviour
         Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
 
         rb.AddForce(pushDir * 0.1f, ForceMode.Impulse);
-    }
-
-    private void HandleInteract()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            // Debug.DrawRay(ray.origin, ray.direction, Color.white, 5f);
-            
-            if (Physics.Raycast(ray, out hit, INTERACT_DISTANCE, layer.value))
-            {
-                if (hit.collider.gameObject.layer == 3) // Layer 3 - Interactable
-                {
-                    useTrigger.SetActive(true);
-                    useTrigger.transform.position = hit.point;
-                }
-            }
-            else // Try to use it if player's inside the trigger
-            {
-                //useTrigger.SetActive(true);
-                //useTrigger.transform.position = transform.position;
-            }
-        }
     }
 }

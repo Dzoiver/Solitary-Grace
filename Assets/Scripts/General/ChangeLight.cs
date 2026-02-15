@@ -16,7 +16,6 @@ public class ChangeLight : MonoBehaviour
     {
         RenderSettings.ambientLight = Color.white;
         RenderSettings.skybox = skyboxDefault;
-        player.Warping(true);
         gameObject.SetActive(false);
     }
 }

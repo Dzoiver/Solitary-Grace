@@ -36,6 +36,7 @@ public class CameraReturnControls : MonoBehaviour
         thisCamera.enabled = false;
         //GameFuncs.PlayerScript.gameObject.SetActive(true);
         //GameFuncs.PlayerScript.Health = 100f;
+        GameFuncs.fading = false;
         GameFuncs.PlayerScript.CameraRestore();
         GameFuncs.PlayerScript.SetControl(true);
         GameFuncs.PlayerScript.SetCamera(cameraAngle);

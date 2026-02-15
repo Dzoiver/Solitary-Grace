@@ -31,7 +31,7 @@ public class BossHealer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (boss.bossState == Boss.BossState.healing)
+        if (boss.bossState == Boss.BossState.Healing)
         {
             current_healingTime += Time.deltaTime;
             currentEyeTime += Time.deltaTime;
@@ -58,7 +58,7 @@ public class BossHealer : MonoBehaviour
     public void StopHealing()
     {
         boss.bossDoors.OpenDoors();
-        boss.bossState = Boss.BossState.attack;
+        boss.bossState = Boss.BossState.Attack;
         current_healingTime = 0f;
         foreach (BossEye eye in aliveEyes)
         {

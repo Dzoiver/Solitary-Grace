@@ -12,6 +12,7 @@ public class DeathTrigger : MonoBehaviour
     [SerializeField] float activationTime = 6f;
     BoxCollider box;
     [SerializeField] Guardian guardian;
+    public bool triggerOnce = false;
 
     private void Awake()
     {
@@ -33,7 +34,8 @@ public class DeathTrigger : MonoBehaviour
             // gameover.gameObject.SetActive(true);
             //gameover.DieFromMonster();
             gameover.NormalDeath(other.gameObject.GetComponent<PlayerScript>());
-            box.enabled = false;
+            if (triggerOnce)
+                box.enabled = false;
         }
     }
 

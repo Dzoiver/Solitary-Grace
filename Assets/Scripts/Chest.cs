@@ -54,9 +54,15 @@ public class Chest : MonoBehaviour
 
     public void TakeItem(int itemSlot)
     {
+        audio.PlayOneShot(moveItemClip, 0.566f);
+        if (!inventory.TryPickup(ChestItems[itemSlot]))
+        {
+            return;
+        }
+
         inventory.TryPickup(ChestItems[itemSlot]);
         ChestItems.RemoveAt(itemSlot);
-        audio.PlayOneShot(moveItemClip, 0.566f);
+        
         for (int i = 0; i < chestItemsUI.Length; i++)
         {
             if (chestItemsUI[i].item != null &&

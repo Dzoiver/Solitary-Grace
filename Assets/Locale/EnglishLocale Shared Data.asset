@@ -515,6 +515,10 @@ MonoBehaviour:
     m_Key: Fatty 4_4
     m_Metadata:
       m_Items: []
+  - m_Id: 15954533035585536
+    m_Key: DescriptionBoard
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

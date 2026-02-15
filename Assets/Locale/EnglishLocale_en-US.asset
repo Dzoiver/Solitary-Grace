@@ -258,7 +258,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 116191085768704
-    m_Localized: You need a 1st floor security key
+    m_Localized: You need a security key
     m_Metadata:
       m_Items: []
   - m_Id: 117897030840320
@@ -537,6 +537,11 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 15624530943062016
     m_Localized: Do it quickly before he starts growling.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15954533035585536
+    m_Localized: It is useful to read item description sometimes. Right-click to
+      open the context menu in your inventory.
     m_Metadata:
       m_Items: []
   references:

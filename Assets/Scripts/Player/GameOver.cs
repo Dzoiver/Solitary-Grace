@@ -31,6 +31,7 @@ public class GameOver : MonoBehaviour
         text.DOFade(1, 3);
         sequence.Append(image.DOColor(new Color(1, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = () =>
         {
+            player.Health = 100f;
             onRespawn.Invoke();
             GameFuncs.DisableWeapons(true);
             text.DOFade(0, 0f);
@@ -55,12 +56,12 @@ public class GameOver : MonoBehaviour
     public void DieFromMonster()
     {
         stat.Deaths++;
+        GameFuncs.PlayerScript.SetControl(false);
         sequence = DOTween.Sequence();
         image.gameObject.SetActive(true);
         image.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () =>
         {
             onRespawn.Invoke();
-            GameFuncs.PlayerScript.SetControl(false);
             GameFuncs.PlayerScript.inElevator = false;
             GameFuncs.PlayerScript.currentElevator = null;
         };
