@@ -4,6 +4,8 @@ using UnityEngine;
 using GM;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.Localization;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Options : MonoBehaviour
@@ -14,7 +16,12 @@ public class Options : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown displayModeDropdown;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
-    
+
+    [Header("Display Mode Localize Keys")]
+    [SerializeField] private LocalizedString fullscreenKey;
+    [SerializeField] private LocalizedString windowedKey;
+    [SerializeField] private LocalizedString borderlessKey;
+
     private List<Resolution> uniqueResolutions;
 
     private void Awake()
@@ -27,11 +34,16 @@ public class Options : MonoBehaviour
 
     private void Start()
     {
+        if (resolutionDropdown == null || displayModeDropdown == null)
+        {
+            return;
+        }
+
         var allResolutions = Screen.resolutions;
         uniqueResolutions = new List<Resolution>();
-        if (resolutionDropdown != null)
-            resolutionDropdown.ClearOptions();
-        
+
+        resolutionDropdown.ClearOptions();
+
         var resolutionSet = new HashSet<(int, int)>();
         for (var i = allResolutions.Length - 1; i >= 0; i--)
         {
@@ -48,20 +60,27 @@ public class Options : MonoBehaviour
             var option = $"{uniqueResolutions[i].width}x{uniqueResolutions[i].height}";
             options.Add(option);
         }
-        
+
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = PlayerPrefs.GetInt("ResolutionIndex", currentResolutionIndex);
         resolutionDropdown.RefreshShownValue();
 
         displayModeDropdown.ClearOptions();
-        var displayOptions = new List<string> { "Полноэкранный", "В окне", "В окне без рамки" };
+
+        var displayOptions = new List<string>
+        {
+            fullscreenKey.GetLocalizedString(),
+            windowedKey.GetLocalizedString(),
+            borderlessKey.GetLocalizedString()
+        };
+
         displayModeDropdown.AddOptions(displayOptions);
         displayModeDropdown.value = PlayerPrefs.GetInt("DisplayModeIndex", 0);
         displayModeDropdown.RefreshShownValue();
 
         resolutionDropdown.onValueChanged.AddListener(SetResolution);
         displayModeDropdown.onValueChanged.AddListener(SetDisplayMode);
-        
+
         ApplyGraphicsSettings();
     }
 
@@ -93,7 +112,7 @@ public class Options : MonoBehaviour
 
         Screen.SetResolution(resolution.width, resolution.height, screenMode);
     }
-    
+
     private int GetCurrentResolutionIndex()
     {
         for (var i = 0; i < uniqueResolutions.Count; i++)
@@ -103,9 +122,9 @@ public class Options : MonoBehaviour
                 return i;
             }
         }
+
         return uniqueResolutions.Count > 0 ? uniqueResolutions.Count - 1 : 0;
     }
-
 
     public void CloseOptions()
     {
