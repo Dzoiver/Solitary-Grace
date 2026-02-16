@@ -543,6 +543,18 @@ MonoBehaviour:
     m_Key: ShotgunPickup
     m_Metadata:
       m_Items: []
+  - m_Id: 16328697781202944
+    m_Key: Fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16328719771938816
+    m_Key: Windowed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16328721642598400
+    m_Key: Borderless
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

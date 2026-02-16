@@ -120977,7 +120977,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Version 1.34
+  m_text: Version 1.34b
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -239840,6 +239840,30 @@ PrefabInstance:
       propertyPath: menuPanel
       value: 
       objectReference: {fileID: 1616094270}
+    - target: {fileID: 7883159519893578539, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
+      propertyPath: windowedKey.m_TableEntryReference.m_KeyId
+      value: 16328719771938816
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883159519893578539, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
+      propertyPath: borderlessKey.m_TableEntryReference.m_KeyId
+      value: 16328721642598400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883159519893578539, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
+      propertyPath: fullscreenKey.m_TableEntryReference.m_KeyId
+      value: 16328697781202944
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883159519893578539, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
+      propertyPath: windowedKey.m_TableReference.m_TableCollectionName
+      value: GUID:846ccb31d8771f1439567d8c1a989ad4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883159519893578539, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
+      propertyPath: borderlessKey.m_TableReference.m_TableCollectionName
+      value: GUID:846ccb31d8771f1439567d8c1a989ad4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883159519893578539, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
+      propertyPath: fullscreenKey.m_TableReference.m_TableCollectionName
+      value: GUID:846ccb31d8771f1439567d8c1a989ad4
+      objectReference: {fileID: 0}
     - target: {fileID: 7883159519994999782, guid: f7b83e81ca8040f4d949e7fefb04037f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

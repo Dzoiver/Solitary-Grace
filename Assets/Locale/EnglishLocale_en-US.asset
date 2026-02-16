@@ -568,6 +568,18 @@ MonoBehaviour:
     m_Localized: It does look suspicious, but I have to get the shotgun.
     m_Metadata:
       m_Items: []
+  - m_Id: 16328697781202944
+    m_Localized: Fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16328721642598400
+    m_Localized: Borderless windowed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16328719771938816
+    m_Localized: Windowed
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
