@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class CowBullet : MonoBehaviour
     [SerializeField] LayerMask targetLayerMask;
     [SerializeField] CowBazooka cowBazooka;
     [SerializeField] CowPlayer player;
-    [SerializeField] float damage = 40;
+    [SerializeField] float damage = 35;
     Rigidbody rb;
     [SerializeField] GameObject bulletModel;
     [SerializeField] Camera cam;
@@ -19,6 +19,7 @@ public class CowBullet : MonoBehaviour
     [SerializeField] AudioClip explosionSound;
     float lifeTime = 5f;
     float currentLifeTime = 0f;
+    public Color circleColor = Color.red;
 
     float rotationSpeed = 5f;
     // Start is called before the first frame update
@@ -27,6 +28,12 @@ public class CowBullet : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         audio = GetComponent<AudioSource>();
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = circleColor;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,16 +67,23 @@ public class CowBullet : MonoBehaviour
         audio.clip = explosionSound;
         audio.Play();
         cam.transform.parent = player.transform;
-        cam.transform.localPosition = new Vector3(0, 5.42999983f, -4.80999994f);
+        cam.transform.localPosition = new Vector3(0, 3.42999983f, -4.80999994f);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, targetLayerMask);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.gameObject.CompareTag("Enemy"))
             {
-                float targetDistance = Vector3.Distance(transform.position, hitCollider.transform.position); // max  1*40 /5
-                float normalizedDistance = targetDistance / detectionRadius;
-                float damageToTarget = damage - (normalizedDistance * 25);
-                hitCollider.gameObject.GetComponent<EnemyCow>().GetDamage(damageToTarget);
+                float targetDistance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                if (targetDistance < 2.3f)
+                    hitCollider.gameObject.GetComponent<EnemyCow>().GetDamage(35f);
+                else
+                {
+                    Debug.Log(targetDistance);
+                    float normalizedDistance = Mathf.Clamp01(targetDistance / detectionRadius);
+                    float damageMultiplier = 1 - (normalizedDistance * normalizedDistance * 0.5f);
+                    float damageToTarget = damage * Mathf.Max(0.2f, damageMultiplier);
+                    hitCollider.gameObject.GetComponent<EnemyCow>().GetDamage(damageToTarget);
+                }
             }
         }
         cowBazooka.ResetBazooka();

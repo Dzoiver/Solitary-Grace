@@ -111,6 +111,7 @@ public class Inventory : MonoBehaviour
         }
         else
             item = new InventoryItem(scriptableItem.id, scriptableItem.maxQuantity, scriptableItem.name, scriptableItem.quantity, scriptableItem.sprite, scriptableItem.keyitem, scriptableItem.description, scriptableItem.usable);
+
         ItemsList.Add(item);
         DisplayItems();
         weaponmanager.pistolScript.UpdateAmmoFromInventory();
@@ -119,14 +120,42 @@ public class Inventory : MonoBehaviour
 
     private void AddItem(InventoryItem item)
     {
-        ItemsList.Add(item);
+        if (true)
+        {
+            ItemsList.Add(item);
+        }
         DisplayItems();
         weaponmanager.pistolScript.UpdateAmmoFromInventory();
         weaponmanager.shotgunScript.UpdateAmmoFromInventory();
     }
 
+    public bool HasReadyToBeFilledItem(ScriptableItem item)
+    {
+        if (Has(item.id, out var slot, out var i))
+        {
+            if (i.Quantity + item.quantity <= item.maxQuantity)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasReadyToBeFilledItem(InventoryItem item)
+    {
+        if (Has(item.Id, out var slot, out var i))
+        {
+            if (i.Quantity + item.Quantity <= item.MaxQuantity)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool TryPickup(ScriptableItem itemInfo)
     {
+        //InventoryItem inInventoryUnfilled = HasReadyToBeFilledItem(itemInfo);
         if (ItemsList.Count < capacity)
         {
             AddItem(itemInfo);
@@ -242,6 +271,37 @@ public class Inventory : MonoBehaviour
             }
         }
         return itemToReturn;
+    }
+
+    public void CombineItems(InventoryItem newItem)
+    {
+        foreach (InventoryItem it in ItemsList)
+        {
+            if (it.Id == newItem.Id)
+            {
+                if (it.Quantity + newItem.Quantity <= newItem.MaxQuantity)
+                {
+                    it.Quantity += newItem.Quantity;
+                }
+            }
+        }
+    }
+
+    public bool Has(int givenID, out int slot, out InventoryItem item)
+    {
+        foreach (InventoryItem it in ItemsList)
+        {
+            if (it.Id == givenID)
+            {
+                slot = it.inventorySlotID;
+                item = it;
+                return true;
+            }
+        }
+
+        slot = 0;
+        item = null;
+        return false;
     }
 
     public bool Has(int givenID, out int slot)

@@ -68,7 +68,10 @@ public class PlayerScript : MonoBehaviour
     public float Health { get => health; set
         {
             value = Mathf.Floor(value);
-            
+
+            if (health <= 0 && value < health)
+                return;
+
             if (health > value)
             {
                 gameover.GetDamagedRedScreen();
@@ -80,7 +83,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Death();
             }    
-            if (health <= 35f)
+            if (health <= 40f)
             {
                 gameover.bloodstaines.SetActive(true);
             }

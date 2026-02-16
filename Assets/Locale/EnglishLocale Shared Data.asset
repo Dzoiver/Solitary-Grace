@@ -528,7 +528,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 15999177656152064
-    m_Key: New Entry
+    m_Key: pistolClip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16208805845315584
+    m_Key: pistolClipDecsription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16272568418086912
+    m_Key: 2ndElevatorB
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16274059316998144
+    m_Key: ShotgunPickup
     m_Metadata:
       m_Items: []
   m_Metadata:

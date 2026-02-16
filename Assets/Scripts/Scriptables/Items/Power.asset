@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52b0e7d16eb99441a2c171302778d2b, type: 3}
   m_Name: Power
   m_EditorClassIdentifier: 
-  id: 15
+  id: 16
   localizedName:
     m_TableReference:
       m_TableCollectionName: 

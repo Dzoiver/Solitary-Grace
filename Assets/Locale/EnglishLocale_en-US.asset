@@ -552,6 +552,22 @@ MonoBehaviour:
     m_Localized: Resolution
     m_Metadata:
       m_Items: []
+  - m_Id: 15999177656152064
+    m_Localized: Pistol clip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16208805845315584
+    m_Localized: Pistol magazine, 7 rounds capacity.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16272568418086912
+    m_Localized: Basement floor is unavailable.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16274059316998144
+    m_Localized: It does look suspicious, but I have to get the shotgun.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

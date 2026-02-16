@@ -28,6 +28,7 @@ public class DoorOpen : MonoBehaviour
 
     private void Start()
     {
+        mManager = FindObjectOfType<MonsterManager>();
         inventory = FindObjectOfType<Inventory>();
     }
 
@@ -84,9 +85,11 @@ public class DoorOpen : MonoBehaviour
                 }
                 GameFuncs.PlayerScript.SetControl(false);
                 AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound), volume);
+                mManager.FreezeMonsters();
                 GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
                 {
                     onEnter.Invoke();
+                    mManager.UnfreezeMonsters();
                     AudioController.Play("doorClose");
                     GameFuncs.TeleportPlayer(destinationPoint);
                     GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
@@ -98,6 +101,7 @@ public class DoorOpen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        /*
         doorSound = defaultOpen;
         if (other.gameObject.name == "UseCube") // If a player presses E button on the door
         {
@@ -117,7 +121,7 @@ public class DoorOpen : MonoBehaviour
             }
             GameFuncs.PlayerScript.SetControl(false);
             AudioController.PlayOneShot(Resources.Load<AudioClip>(doorSound));
-            mManager.FreezeMonsters();
+            
             GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () => // Fadeout
             {
                 onEnter.Invoke();
@@ -125,9 +129,10 @@ public class DoorOpen : MonoBehaviour
                 GameFuncs.TeleportPlayer(destinationPoint);
                 GameFuncs.BlackImage.DOColor(new Color(0, 0, 0, 0), 1f); // Fadein
                 GameFuncs.PlayerScript.SetControl(true);
-                mManager.UnfreezeMonsters();
+                
             };
         }
+        */
     }
 
     public void Unlock()

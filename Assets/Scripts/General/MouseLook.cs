@@ -8,7 +8,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField] MouseLook otherCamera;
     public float preferenceSens = 1f;
     Animator anim;
-
+    [SerializeField] bool allowY = true;
     private float MouseSensitivity = 2f;
 
     float xRotation = 0f;
@@ -41,9 +41,12 @@ public class MouseLook : MonoBehaviour
             return;
         float mouseX = Input.GetAxis(xAxis) * MouseSensitivity * preferenceSens;
         float mouseY = Input.GetAxis(yAxis) * MouseSensitivity * preferenceSens;
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Y rotation
+        if (allowY)
+        {
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Y rotation
+        }
 
         PlayerBody.Rotate(Vector3.up * mouseX); // X rotation
     }

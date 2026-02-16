@@ -80,7 +80,7 @@ public class EnemyCow : MonoBehaviour
         text.gameObject.SetActive(true);
 
         text.DOColor(new Color(1f, 1f, 1f, 1f), 0f);
-        text.transform.position = new Vector3(text.transform.position.x, textStartPos.y, text.transform.position.z);
+        text.transform.position = new Vector3(transform.position.x, textStartPos.y, transform.position.z);
 
         currentDamageSequence = DOTween.Sequence();
 
