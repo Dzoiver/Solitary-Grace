@@ -78,8 +78,10 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
         else if (eventData.button == PointerEventData.InputButton.Left && chest.gameObject.activeSelf)
         {
             InventoryItem itemCopy = new InventoryItem(item);
-            context.inventory.DeleteItem(item.inventorySlotID, 99);
-            chest.AddItem(itemCopy);
+            if (chest.AddItem(itemCopy))
+            {
+                context.inventory.DeleteItem(item.inventorySlotID, 99);
+            }
         }
     }
 }

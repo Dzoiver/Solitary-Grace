@@ -36,11 +36,11 @@ public class Chest : MonoBehaviour
 
     }
 
-    public void AddItem(InventoryItem item)
+    public bool AddItem(InventoryItem item)
     {
-        if (ChestItems.Count >= maxItems)
-            return;
         audio.PlayOneShot(moveItemClip, 0.566f);
+        if (ChestItems.Count >= maxItems)
+            return false;
         item.inventorySlotID = ChestItems.Count;
         ChestItems.Add(item);
         chestItemsUI[item.inventorySlotID].ImageSprite = item.ItemSprite;
@@ -50,6 +50,8 @@ public class Chest : MonoBehaviour
         else
             chestItemsUI[item.inventorySlotID].ItemQuantity.text = item.Quantity.ToString();
         chestItemsUI[item.inventorySlotID].item = item;
+
+        return true;
     }
 
     public void TakeItem(int itemSlot)
@@ -59,8 +61,6 @@ public class Chest : MonoBehaviour
         {
             return;
         }
-
-        inventory.TryPickup(ChestItems[itemSlot]);
         ChestItems.RemoveAt(itemSlot);
         
         for (int i = 0; i < chestItemsUI.Length; i++)

@@ -307,8 +307,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 310152266035200
-    m_Localized: Artifact is able to burn the demon flesh. It powers from the sun
-      rays.
+    m_Localized: An artifact obtained through experiments on prisoners. It is capable
+      of manipulating demon flesh cells. It is charged by the sun's rays.
     m_Metadata:
       m_Items: []
   - m_Id: 310191029792768
@@ -370,7 +370,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6180917892919296
-    m_Localized: Nothing useful.
+    m_Localized: It's empty.
     m_Metadata:
       m_Items: []
   - m_Id: 8376501697556480
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11884435828158464
-    m_Localized: A very dense wall of flesh prevents passage.
+    m_Localized: A very dense wall of demon flesh prevents passage.
     m_Metadata:
       m_Items: []
   - m_Id: 12055319155093504
@@ -463,7 +463,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12542749301846016
-    m_Localized: Apparently, fresh flesh can distract the Guardian.
+    m_Localized: Apparently, they can distract the Guardian who guards the entrance
+      to Prisoner Z's lair on the first floor.
     m_Metadata:
       m_Items: []
   - m_Id: 12542728942694400
@@ -578,6 +579,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 16328719771938816
     m_Localized: Windowed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16609224497082368
+    m_Localized: This is a terrible disaster, why is no one coming to help? I can't
+      leave the prison, all the exits are locked. I tried to use the phone, but I
+      couldn't reach anyone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16611864790478848
+    m_Localized: I've sealed off the entrance to the hospital and barricaded myself
+      in one of the wards. When is someone finally going to come? I'm going to die
+      here.
     m_Metadata:
       m_Items: []
   references:

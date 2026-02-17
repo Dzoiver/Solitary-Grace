@@ -9,7 +9,8 @@ using UnityEngine.Events;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] Image image;
+    [SerializeField] Image fadeImage;
+    [SerializeField] Image redScreenImage;
     [SerializeField] GameObject destination;
     [SerializeField] TextMeshProUGUI text; // Text you died
     public GameObject bloodstaines;
@@ -19,6 +20,7 @@ public class GameOver : MonoBehaviour
 
     private void Awake()
     {
+        redScreenImage.DOColor(new Color(0, 0, 0, 0), 0f);
         stat = FindAnyObjectByType<GameStatistics>();
     }
 
@@ -27,15 +29,15 @@ public class GameOver : MonoBehaviour
         stat.Deaths++;
         sequence = DOTween.Sequence();
         player.SetControl(false);
-        image.gameObject.SetActive(true);
+        fadeImage.gameObject.SetActive(true);
         text.DOFade(1, 3);
-        sequence.Append(image.DOColor(new Color(1, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = () =>
+        sequence.Append(fadeImage.DOColor(new Color(1, 0, 0, 1), 3f)).AppendInterval(2f).onComplete = () =>
         {
             player.Health = 100f;
             onRespawn.Invoke();
             GameFuncs.DisableWeapons(true);
             text.DOFade(0, 0f);
-            image.DOColor(new Color(0, 0, 0, 0), 0.5f);
+            fadeImage.DOColor(new Color(0, 0, 0, 0), 0.5f);
             GameFuncs.TeleportPlayer(destination);
             player.currentElevator = null;
             player.inElevator = false;
@@ -46,10 +48,10 @@ public class GameOver : MonoBehaviour
     public void GetDamagedRedScreen()
     {
         sequence = DOTween.Sequence();
-        image.gameObject.SetActive(true);
-        sequence.Append(image.DOColor(new Color(1, 0, 0, 0.25f), 0.25f)).AppendInterval(0.25f).onComplete = () =>
+        redScreenImage.gameObject.SetActive(true);
+        sequence.Append(redScreenImage.DOColor(new Color(1, 0, 0, 0.25f), 0.25f)).AppendInterval(0.25f).onComplete = () =>
         {
-            image.DOColor(new Color(0, 0, 0, 0), 0.25f);
+            redScreenImage.DOColor(new Color(0, 0, 0, 0), 0.25f);
         };
     }
 
@@ -58,8 +60,8 @@ public class GameOver : MonoBehaviour
         stat.Deaths++;
         GameFuncs.PlayerScript.SetControl(false);
         sequence = DOTween.Sequence();
-        image.gameObject.SetActive(true);
-        image.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () =>
+        fadeImage.gameObject.SetActive(true);
+        fadeImage.DOColor(new Color(0, 0, 0, 1), 1f).onComplete = () =>
         {
             onRespawn.Invoke();
             GameFuncs.PlayerScript.inElevator = false;

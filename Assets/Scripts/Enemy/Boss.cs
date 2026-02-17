@@ -140,7 +140,6 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(bossState);
         animator.SetFloat("Speed", agent.velocity.magnitude);
         if (bossState == BossState.Range)
             return;
